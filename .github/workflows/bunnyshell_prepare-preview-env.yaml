@@ -11,7 +11,7 @@ on:
 jobs:
     deploy:
         name: Deploy Environment
-        uses: bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@v1
+        uses: bunnyshell/workflows/.github/workflows/prepare-configuration.yaml@v2
         with:
             bunnyshell-yaml-path: .bunnyshell/templates/preview/bunnyshell.yaml
             allowed-users: ${{ vars.BUNNYSHELL_ALLOWED_USERS }}
