@@ -81,15 +81,3 @@ Add on the top of the file:
 
     parameters:
         sylius.security.shop_regex: "^(?:/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++)?"
-
-So the file should look like this:
-
-.. code-block:: yaml
-
-    # config/packages/security.yaml
-
-    parameters:
-        sylius.security.shop_regex: "^(?:/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++)?"
-
-    security:
-    # rest of the file
