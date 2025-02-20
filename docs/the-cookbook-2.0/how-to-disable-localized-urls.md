@@ -70,14 +70,3 @@ With:
         product_grid:
             include_all_descendants: true
         locale_switcher: storage
-
-**3.** Adjust Sylius' security shop regex in the ``config/packages/security.yaml``
-
-Add on the top of the file:
-
-.. code-block:: yaml
-
-    # config/packages/security.yaml
-
-    parameters:
-        sylius.security.shop_regex: "^(?:/(?!%sylius_admin.path_name%|api/.*|api$|media/.*)[^/]++)?"
