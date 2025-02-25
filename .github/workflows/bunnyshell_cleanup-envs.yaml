@@ -7,7 +7,7 @@ on:
 jobs:
   cleanup:
     name: Cleanup Bunnyshell Environments
-    uses: bunnyshell/workflows/.github/workflows/cleanup-envs.yaml@v1
+    uses: bunnyshell/workflows/.github/workflows/cleanup-envs.yaml@v2
     with:
       project-id: ${{ vars.BUNNYSHELL_PROJECT_ID }}
       include-not-found: true

@@ -76,7 +76,7 @@ jobs:
   deploy:
     name: Deploy Environment
     needs: load-artifact
-    uses: bunnyshell/workflows/.github/workflows/deploy-env.yaml@v1
+    uses: bunnyshell/workflows/.github/workflows/deploy-env.yaml@v2
     concurrency: bns-deploy-${{ needs.load-artifact.outputs.prNumber }}
     if: ${{ github.event.workflow_run.conclusion == 'success' && needs.load-artifact.outputs.skip-deployment == 'false' }}
     with:
