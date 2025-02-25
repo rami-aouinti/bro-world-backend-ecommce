@@ -50,7 +50,7 @@ With:
 
 **2.** Customise SyliusShopBundle to use storage-based locale switching in the ``config/packages/sylius_shop.yaml``.
 
-Replace :
+Replace:
 
 .. code-block:: yaml
 
