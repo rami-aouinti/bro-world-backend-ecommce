@@ -1,5 +1,11 @@
 # CHANGELOG FOR `1.14.X`
 
+## v1.14.3 (2025-02-26)
+
+#### Details
+
+- [#17626](https://github.com/Sylius/Sylius/issues/17626) Update release cycle after 1.12 EOL ([@CoderMaggie](https://github.com/CoderMaggie))
+
 ## v1.14.2 (2025-01-13)
 
 #### Details
