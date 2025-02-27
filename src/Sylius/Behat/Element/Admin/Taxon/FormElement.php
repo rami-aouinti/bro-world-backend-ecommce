@@ -23,7 +23,7 @@ use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     use ChecksCodeImmutability;
     use SpecifiesItsField;

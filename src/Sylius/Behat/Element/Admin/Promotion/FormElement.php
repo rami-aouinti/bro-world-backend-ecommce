@@ -20,7 +20,7 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Behat\Service\TabsHelper;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     public function __construct(
         Session $session,

@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class PricingElement extends Element implements PricingElementInterface
+class PricingElement extends Element implements PricingElementInterface
 {
     public function getPriceForChannel(string $channelCode): string
     {

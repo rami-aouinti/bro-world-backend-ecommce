@@ -18,7 +18,7 @@ use FriendsOfBehat\SymfonyExtension\Mink\MinkParameters;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     public function __construct(
         Session $session,

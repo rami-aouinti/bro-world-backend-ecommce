@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Admin\Product;
 use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\DriverHelper;
 
-final class TranslationsFormElement extends BaseFormElement implements TranslationsFormElementInterface
+class TranslationsFormElement extends BaseFormElement implements TranslationsFormElementInterface
 {
     public function nameItIn(string $name, string $localeCode): void
     {

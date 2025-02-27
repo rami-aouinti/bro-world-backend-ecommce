@@ -16,7 +16,7 @@ namespace Sylius\Behat\Element\Product\ShowPage;
 use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class VariantsElement extends Element implements VariantsElementInterface
+class VariantsElement extends Element implements VariantsElementInterface
 {
     public function countVariantsOnPage(): int
     {

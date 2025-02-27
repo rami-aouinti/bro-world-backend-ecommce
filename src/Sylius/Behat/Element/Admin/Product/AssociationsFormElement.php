@@ -20,7 +20,7 @@ use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
-final class AssociationsFormElement extends BaseFormElement implements AssociationsFormElementInterface
+class AssociationsFormElement extends BaseFormElement implements AssociationsFormElementInterface
 {
     public function __construct(
         Session $session,

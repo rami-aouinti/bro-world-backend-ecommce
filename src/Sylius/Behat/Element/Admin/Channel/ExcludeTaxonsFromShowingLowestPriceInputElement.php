@@ -19,7 +19,7 @@ use Sylius\Behat\Element\Admin\Crud\FormElement as BaseFormElement;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
+class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement implements ExcludeTaxonsFromShowingLowestPriceInputElementInterface
 {
     public function __construct(
         Session $session,

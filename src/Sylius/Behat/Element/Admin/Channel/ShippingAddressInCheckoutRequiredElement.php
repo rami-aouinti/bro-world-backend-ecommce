@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 use Webmozart\Assert\Assert;
 
-final class ShippingAddressInCheckoutRequiredElement extends Element implements ShippingAddressInCheckoutRequiredElementInterface
+class ShippingAddressInCheckoutRequiredElement extends Element implements ShippingAddressInCheckoutRequiredElementInterface
 {
     private const ADDRESS_TYPE_BILLING = 'billing';
 

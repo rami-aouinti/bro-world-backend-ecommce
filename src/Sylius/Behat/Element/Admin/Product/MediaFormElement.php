@@ -21,7 +21,7 @@ use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class MediaFormElement extends BaseFormElement implements MediaFormElementInterface
+class MediaFormElement extends BaseFormElement implements MediaFormElementInterface
 {
     public function __construct(
         Session $session,
