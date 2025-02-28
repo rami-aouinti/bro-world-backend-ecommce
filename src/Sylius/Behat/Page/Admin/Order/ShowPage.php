@@ -27,7 +27,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly TableAccessorInterface $tableAccessor,
+        protected readonly TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
