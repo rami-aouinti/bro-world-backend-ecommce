@@ -117,7 +117,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
         throw new UnexpectedPageException($message);
     }
 
-    private function waitForElement(int $timeout, string $elementName): void
+    protected function waitForElement(int $timeout, string $elementName): void
     {
         $this->getDocument()->waitFor($timeout, fn () => $this->hasElement($elementName));
     }

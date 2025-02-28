@@ -88,7 +88,7 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
         ]);
     }
 
-    private function waitForElementToBeReady(): void
+    protected function waitForElementToBeReady(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getDocument()->waitFor(1, fn (): bool => $this->isOpen());

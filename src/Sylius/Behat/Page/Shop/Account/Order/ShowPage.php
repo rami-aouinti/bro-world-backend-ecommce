@@ -25,7 +25,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private TableAccessorInterface $tableAccessor,
+        protected TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -177,7 +177,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ]);
     }
 
-    private function hasAddress(
+    protected function hasAddress(
         string $elementText,
         string $customerName,
         string $street,
