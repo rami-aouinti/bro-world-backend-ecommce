@@ -44,7 +44,7 @@ class AssociationsElement extends Element implements AssociationsElementInterfac
         ]);
     }
 
-    private function getAssociatedProducts(NodeElement $associations, string $name): array
+    protected function getAssociatedProducts(NodeElement $associations, string $name): array
     {
         return $associations->findAll(
             'css',

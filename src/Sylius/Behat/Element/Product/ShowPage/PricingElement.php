@@ -91,7 +91,7 @@ class PricingElement extends Element implements PricingElementInterface
         ]);
     }
 
-    private function getAppliedPromotionsForChannel(string $channelCode): array
+    protected function getAppliedPromotionsForChannel(string $channelCode): array
     {
         /** @var NodeElement $channelPriceRow */
         $channelPriceRow = $this->getChannelPriceRow($channelCode);
@@ -99,7 +99,7 @@ class PricingElement extends Element implements PricingElementInterface
         return $channelPriceRow->findAll('css', '[data-test-applied-promotion]');
     }
 
-    private function getChannelPriceRow(string $channelCode): ?NodeElement
+    protected function getChannelPriceRow(string $channelCode): ?NodeElement
     {
         try {
             return $this->getElement('price_row', ['%channel_code%' => $channelCode]);

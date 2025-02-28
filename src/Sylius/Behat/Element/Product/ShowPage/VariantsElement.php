@@ -83,7 +83,7 @@ class VariantsElement extends Element implements VariantsElementInterface
         ]);
     }
 
-    private function hasProductWithGivenNameCodePriceAndCurrentStock(
+    protected function hasProductWithGivenNameCodePriceAndCurrentStock(
         NodeElement $variant,
         string $name,
         string $code,
