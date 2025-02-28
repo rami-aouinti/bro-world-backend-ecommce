@@ -114,7 +114,7 @@ class RegisterElement extends Element implements RegisterElementInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters): NodeElement
+    protected function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
