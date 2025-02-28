@@ -23,7 +23,7 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -143,7 +143,7 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
         ]);
     }
 
-    private function selectAttributeToBeAdded(string $attributeName): void
+    protected function selectAttributeToBeAdded(string $attributeName): void
     {
         $this->autocompleteHelper->selectByName(
             $this->getDriver(),
@@ -152,7 +152,7 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
         );
     }
 
-    private function clickTabIfItsNotActive(): void
+    protected function clickTabIfItsNotActive(): void
     {
         $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
         if (!$attributesTab->hasClass('active')) {
@@ -160,7 +160,7 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
         }
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
@@ -169,7 +169,7 @@ class AttributesFormElement extends BaseFormElement implements AttributesFormEle
         $this->getElement('side_navigation_tab', ['%name%' => 'attributes'])->click();
     }
 
-    private function changeAttributeTab(string $attributeName): void
+    protected function changeAttributeTab(string $attributeName): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

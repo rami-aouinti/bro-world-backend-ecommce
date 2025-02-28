@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class FilterElement extends Element implements FilterElementInterface
 {
-    private const BOOLEAN_FILTER_TRUE = 'Yes';
+    protected const BOOLEAN_FILTER_TRUE = 'Yes';
 
     public function chooseChannel(ChannelInterface $channel): void
     {

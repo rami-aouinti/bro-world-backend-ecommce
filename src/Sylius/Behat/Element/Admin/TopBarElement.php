@@ -27,7 +27,7 @@ class TopBarElement extends Element implements TopBarElementInterface
         return $this->getAvatarImagePath() === '';
     }
 
-    private function getAvatarImagePath(): string
+    protected function getAvatarImagePath(): string
     {
         $userAvatar = $this->getElement('user_avatar');
 

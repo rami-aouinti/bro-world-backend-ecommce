@@ -60,7 +60,7 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
         ]);
     }
 
-    private function changeChannelTab(string $channelCode): void
+    protected function changeChannelTab(string $channelCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
@@ -69,7 +69,7 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
         $this->getElement('channel_tab', ['%channel_code%' => $channelCode])->click();
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

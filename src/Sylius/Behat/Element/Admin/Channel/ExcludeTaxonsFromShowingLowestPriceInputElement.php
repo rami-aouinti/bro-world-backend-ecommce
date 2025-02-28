@@ -24,7 +24,7 @@ class ExcludeTaxonsFromShowingLowestPriceInputElement extends BaseFormElement im
     public function __construct(
         Session $session,
         array|MinkParameters $minkParameters,
-        private AutocompleteHelperInterface $autocompleteHelper,
+        protected AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }

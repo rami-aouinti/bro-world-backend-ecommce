@@ -170,7 +170,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
         );
     }
 
-    private function selectCalculatorConfigurationChannelTab(string $channelCode): void
+    protected function selectCalculatorConfigurationChannelTab(string $channelCode): void
     {
         if (!DriverHelper::isJavascript($this->getDriver())) {
             throw new \RuntimeException('This method can be used only with JavaScript enabled');

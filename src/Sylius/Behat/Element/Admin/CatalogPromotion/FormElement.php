@@ -24,7 +24,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }

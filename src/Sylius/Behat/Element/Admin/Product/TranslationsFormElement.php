@@ -87,7 +87,7 @@ class TranslationsFormElement extends BaseFormElement implements TranslationsFor
         );
     }
 
-    private function expandTranslationAccordion(string $localeCode): void
+    protected function expandTranslationAccordion(string $localeCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
@@ -102,7 +102,7 @@ class TranslationsFormElement extends BaseFormElement implements TranslationsFor
         $translationAccordion->click();
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

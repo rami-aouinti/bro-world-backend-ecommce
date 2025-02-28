@@ -26,7 +26,7 @@ class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElement
     public function __construct(
         Session $session,
         array|MinkParameters $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -138,7 +138,7 @@ class TaxonomyFormElement extends BaseFormElement implements TaxonomyFormElement
         );
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

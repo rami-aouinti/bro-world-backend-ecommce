@@ -26,7 +26,7 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -213,7 +213,7 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
         );
     }
 
-    private function getFirstImageSubform(): NodeElement
+    protected function getFirstImageSubform(): NodeElement
     {
         $images = $this->getElement('images');
         $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
@@ -221,7 +221,7 @@ class MediaFormElement extends BaseFormElement implements MediaFormElementInterf
         return reset($imageSubforms);
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

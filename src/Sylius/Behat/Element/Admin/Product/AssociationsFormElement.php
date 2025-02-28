@@ -25,7 +25,7 @@ class AssociationsFormElement extends BaseFormElement implements AssociationsFor
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -76,7 +76,7 @@ class AssociationsFormElement extends BaseFormElement implements AssociationsFor
         );
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

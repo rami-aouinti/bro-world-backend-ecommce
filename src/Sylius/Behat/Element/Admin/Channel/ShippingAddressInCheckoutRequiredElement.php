@@ -19,9 +19,9 @@ use Webmozart\Assert\Assert;
 
 class ShippingAddressInCheckoutRequiredElement extends Element implements ShippingAddressInCheckoutRequiredElementInterface
 {
-    private const ADDRESS_TYPE_BILLING = 'billing';
+    protected const ADDRESS_TYPE_BILLING = 'billing';
 
-    private const ADDRESS_TYPE_SHIPPING = 'shipping';
+    protected const ADDRESS_TYPE_SHIPPING = 'shipping';
 
     public function requireShippingAddressInCheckout(): void
     {
@@ -61,7 +61,7 @@ class ShippingAddressInCheckoutRequiredElement extends Element implements Shippi
         ]);
     }
 
-    private function getChoiceForAddressType(string $type): NodeElement
+    protected function getChoiceForAddressType(string $type): NodeElement
     {
         $choices = $this->getChoices();
         Assert::keyExists($choices, $type);
@@ -70,7 +70,7 @@ class ShippingAddressInCheckoutRequiredElement extends Element implements Shippi
     }
 
     /** @return array<string, NodeElement> */
-    private function getChoices(): array
+    protected function getChoices(): array
     {
         $element = $this->getElement('shipping_address_in_checkout_required');
         $labelsElements = $element->findAll('css', 'label');
