@@ -72,7 +72,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function checkInvalidCredentialsValidation(): bool
     {
         /** @var NodeElement $validationElement */
-        $validationElement = $this->getDocument()->waitFor(3, function (): ?NodeElement {
+        $validationElement = $this->getDocument()->waitFor(3, function (): NodeElement {
             try {
                 $validationElement = $this->getElement('login_validation_error');
             } catch (ElementNotFoundException) {
@@ -87,8 +87,9 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
+        try {
+            $foundElement = $this->getFieldElement($element);
+        } catch(ElementNotFoundException) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
@@ -371,9 +372,9 @@ class AddressPage extends ShopPage implements AddressPageInterface
         }
     }
 
-    protected function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element, array $parameters = []): NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }

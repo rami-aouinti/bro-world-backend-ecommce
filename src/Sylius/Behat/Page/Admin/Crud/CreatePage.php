@@ -113,7 +113,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @throws ElementNotFoundException
      */
-    protected function getFieldElement(string $element, array $parameters = []): ?NodeElement
+    protected function getFieldElement(string $element, array $parameters = []): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

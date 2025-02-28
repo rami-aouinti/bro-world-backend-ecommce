@@ -439,7 +439,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    protected function getRowWithItem(string $itemName): ?NodeElement
+    protected function getRowWithItem(string $itemName): NodeElement
     {
         return $this->getElement('item', ['%name%' => $itemName]);
     }

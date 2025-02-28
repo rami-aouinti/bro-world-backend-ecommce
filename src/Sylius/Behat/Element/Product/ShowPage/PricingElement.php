@@ -99,7 +99,7 @@ class PricingElement extends Element implements PricingElementInterface
         return $channelPriceRow->findAll('css', '[data-test-applied-promotion]');
     }
 
-    protected function getChannelPriceRow(string $channelCode): ?NodeElement
+    protected function getChannelPriceRow(string $channelCode): NodeElement
     {
         try {
             return $this->getElement('price_row', ['%channel_code%' => $channelCode]);
