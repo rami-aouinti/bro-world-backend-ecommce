@@ -21,9 +21,9 @@ class PricingElement extends Element implements PricingElementInterface
 {
     public function getPriceForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelCode);
-
-        if (null === $channelPriceRow) {
+        try {
+            $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        } catch (ElementNotFoundException) {
             return '';
         }
 
@@ -34,7 +34,11 @@ class PricingElement extends Element implements PricingElementInterface
 
     public function getOriginalPriceForChannel(string $channelCode): string
     {
-        $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        try {
+            $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        } catch (ElementNotFoundException) {
+            return '';
+        }
 
         $priceForChannel = $channelPriceRow->find('css', '[data-test-original-price]');
 
@@ -91,20 +95,21 @@ class PricingElement extends Element implements PricingElementInterface
         ]);
     }
 
+    /** @return NodeElement[] */
     protected function getAppliedPromotionsForChannel(string $channelCode): array
     {
-        /** @var NodeElement $channelPriceRow */
-        $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        try {
+            $channelPriceRow = $this->getChannelPriceRow($channelCode);
+        } catch (ElementNotFoundException) {
+            return [];
+        }
 
         return $channelPriceRow->findAll('css', '[data-test-applied-promotion]');
     }
 
+    /** @throws ElementNotFoundException */
     protected function getChannelPriceRow(string $channelCode): NodeElement
     {
-        try {
-            return $this->getElement('price_row', ['%channel_code%' => $channelCode]);
-        } catch (ElementNotFoundException) {
-            return null;
-        }
+        return $this->getElement('price_row', ['%channel_code%' => $channelCode]);
     }
 }
