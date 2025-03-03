@@ -110,14 +110,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /** @return NodeElement[] */
-    private function getAppliedCatalogPromotions(string $variantName, string $channelName): array
+    protected function getAppliedCatalogPromotions(string $variantName, string $channelName): array
     {
         $pricingElement = $this->getPricingRow($variantName, $channelName);
 
         return $pricingElement->findAll('css', '.applied-promotion');
     }
 
-    private function getPricingRow(string $variantName, string $channelName): NodeElement
+    protected function getPricingRow(string $variantName, string $channelName): NodeElement
     {
         /** @var NodeElement|null $pricingRow */
         $pricingRow = $this->getDocument()->find(

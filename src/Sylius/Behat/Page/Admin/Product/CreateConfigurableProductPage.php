@@ -36,7 +36,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         $minkParameters,
         RouterInterface $router,
         string $routeName,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters, $router, $routeName);
     }
@@ -98,7 +98,7 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
         return parent::getElement($name, $parameters);
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Shop;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class CartWidgetElement extends Element implements CartWidgetElementInterface
+class CartWidgetElement extends Element implements CartWidgetElementInterface
 {
     public function getCartTotalQuantity(): int
     {
