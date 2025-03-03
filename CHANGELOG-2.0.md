@@ -1,5 +1,14 @@
 # CHANGELOG FOR `2.0.X`
 
+## v2.0.5 (2025-03-03)
+
+#### Details
+
+- [#17706](https://github.com/Sylius/Sylius/issues/17706) [API][Admin] Fix contract tests for API Platform 4.1 + limit tabler version ([@GSadee](https://github.com/GSadee))
+- [#17708](https://github.com/Sylius/Sylius/issues/17708) [Maintenance] Fix invalid default address component prop config ([@NoResponseMate](https://github.com/NoResponseMate))
+- [#17700](https://github.com/Sylius/Sylius/issues/17700) [Behat] Remove `final` keyword from element classes ([@Rafikooo](https://github.com/Rafikooo))
+- [#17710](https://github.com/Sylius/Sylius/issues/17710) Fix autocomplete styles ([@bartek-sek](https://github.com/bartek-sek))
+
 ## v2.0.4 (2025-02-26)
 
 #### Details
