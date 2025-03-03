@@ -85,7 +85,7 @@ class CreatePage extends Page implements CreatePageInterface
         ]);
     }
 
-    private function getValidationMessageFor(string $element): string
+    protected function getValidationMessageFor(string $element): string
     {
         $errorElement = $this->getElement($element)->getParent()->find('css', '[data-test-validation-error]');
         Assert::notNull($errorElement);

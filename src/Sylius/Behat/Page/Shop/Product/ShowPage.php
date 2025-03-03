@@ -30,7 +30,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly SummaryPageInterface $summaryPage,
+        protected readonly SummaryPageInterface $summaryPage,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -382,7 +382,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
         ]);
     }
 
-    private function waitForElementToBeReady(): void
+    protected function waitForElementToBeReady(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
             $this->getDocument()->waitFor(1, fn (): bool => $this->summaryPage->isOpen());
@@ -399,7 +399,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters): NodeElement
+    protected function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

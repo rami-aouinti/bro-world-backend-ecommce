@@ -23,7 +23,7 @@ use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
-final class FormElement extends BaseFormElement implements FormElementInterface
+class FormElement extends BaseFormElement implements FormElementInterface
 {
     use ChecksCodeImmutability;
     use SpecifiesItsField;
@@ -31,7 +31,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
     public function __construct(
         Session $session,
         array|MinkParameters $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -125,7 +125,7 @@ final class FormElement extends BaseFormElement implements FormElementInterface
         return $this->getElement('code');
     }
 
-    private function expandTranslationAccordion(string $localeCode): void
+    protected function expandTranslationAccordion(string $localeCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

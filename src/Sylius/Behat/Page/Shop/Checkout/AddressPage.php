@@ -34,7 +34,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private AddressFactoryInterface $addressFactory,
+        protected AddressFactoryInterface $addressFactory,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -72,7 +72,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function checkInvalidCredentialsValidation(): bool
     {
         /** @var NodeElement $validationElement */
-        $validationElement = $this->getDocument()->waitFor(3, function (): ?NodeElement {
+        $validationElement = $this->getDocument()->waitFor(3, function (): NodeElement {
             try {
                 $validationElement = $this->getElement('login_validation_error');
             } catch (ElementNotFoundException) {
@@ -87,8 +87,9 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function checkValidationMessageFor(string $element, string $message): bool
     {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
+        try {
+            $foundElement = $this->getFieldElement($element);
+        } catch(ElementNotFoundException) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '[data-test-validation-error]');
         }
 
@@ -317,7 +318,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     }
 
     /** @return string[] */
-    private function getOptionsFromSelect(NodeElement $element): array
+    protected function getOptionsFromSelect(NodeElement $element): array
     {
         return array_map(
             /** @return string[] */
@@ -326,7 +327,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
         );
     }
 
-    private function getPreFilledAddress(string $type): AddressInterface
+    protected function getPreFilledAddress(string $type): AddressInterface
     {
         $this->assertAddressType($type);
 
@@ -350,7 +351,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
         return $address;
     }
 
-    private function specifyAddress(AddressInterface $address, string $type): void
+    protected function specifyAddress(AddressInterface $address, string $type): void
     {
         $this->assertAddressType($type);
 
@@ -371,9 +372,9 @@ class AddressPage extends ShopPage implements AddressPageInterface
         }
     }
 
-    private function getFieldElement(string $element): ?NodeElement
+    protected function getFieldElement(string $element, array $parameters = []): NodeElement
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
@@ -381,19 +382,19 @@ class AddressPage extends ShopPage implements AddressPageInterface
         return $element;
     }
 
-    private function waitForLoginAction(): bool
+    protected function waitForLoginAction(): bool
     {
         return $this->getDocument()->waitFor(5, fn () => !$this->hasElement('login_password'));
     }
 
-    private function assertAddressType(string $type): void
+    protected function assertAddressType(string $type): void
     {
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
 
         Assert::oneOf($type, $availableTypes, sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
     }
 
-    private function chooseDifferentAddress(string $type): void
+    protected function chooseDifferentAddress(string $type): void
     {
         $elem = $this->getElement(sprintf('different_%s_address', $type));
         $elem->click();

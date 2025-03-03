@@ -27,7 +27,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        private readonly TableAccessorInterface $tableAccessor,
+        protected readonly TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
     }
@@ -439,7 +439,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         ;
     }
 
-    protected function getRowWithItem(string $itemName): ?NodeElement
+    protected function getRowWithItem(string $itemName): NodeElement
     {
         return $this->getElement('item', ['%name%' => $itemName]);
     }

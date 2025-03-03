@@ -15,7 +15,7 @@ namespace Sylius\Behat\Element\Admin\Taxon;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element as BaseElement;
 
-final class TreeElement extends BaseElement implements TreeElementInterface
+class TreeElement extends BaseElement implements TreeElementInterface
 {
     public function getTaxonsNames(): array
     {
