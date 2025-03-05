@@ -113,7 +113,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
         ]);
     }
 
-    private function getProductsNames(string $elementName): array
+    protected function getProductsNames(string $elementName): array
     {
         return array_map(
             fn (NodeElement $element) => $element->getText(),

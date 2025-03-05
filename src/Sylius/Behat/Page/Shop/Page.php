@@ -53,7 +53,7 @@ abstract class Page extends SymfonyPage implements PageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters): NodeElement
+    protected function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

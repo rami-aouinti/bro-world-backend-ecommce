@@ -21,12 +21,12 @@ use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\Helper\AutocompleteHelperInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-final class MediaFormElement extends BaseFormElement implements MediaFormElementInterface
+class MediaFormElement extends BaseFormElement implements MediaFormElementInterface
 {
     public function __construct(
         Session $session,
         $minkParameters,
-        private readonly AutocompleteHelperInterface $autocompleteHelper,
+        protected readonly AutocompleteHelperInterface $autocompleteHelper,
     ) {
         parent::__construct($session, $minkParameters);
     }
@@ -213,7 +213,7 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         );
     }
 
-    private function getFirstImageSubform(): NodeElement
+    protected function getFirstImageSubform(): NodeElement
     {
         $images = $this->getElement('images');
         $imageSubforms = $images->findAll('css', '[data-test-image-subform]');
@@ -221,7 +221,7 @@ final class MediaFormElement extends BaseFormElement implements MediaFormElement
         return reset($imageSubforms);
     }
 
-    private function changeTab(): void
+    protected function changeTab(): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;

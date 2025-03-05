@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
 
-final class RegisterElement extends Element implements RegisterElementInterface
+class RegisterElement extends Element implements RegisterElementInterface
 {
     public function register(): void
     {
@@ -114,7 +114,7 @@ final class RegisterElement extends Element implements RegisterElementInterface
      *
      * @throws ElementNotFoundException
      */
-    private function getFieldElement(string $element, array $parameters): NodeElement
+    protected function getFieldElement(string $element, array $parameters): NodeElement
     {
         $element = $this->getElement($element, $parameters);
         while (null !== $element && !$element->hasClass('field')) {

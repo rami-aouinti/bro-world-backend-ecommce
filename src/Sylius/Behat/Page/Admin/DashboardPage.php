@@ -155,7 +155,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
         ]);
     }
 
-    private function waitForStatisticsUpdate(): void
+    protected function waitForStatisticsUpdate(): void
     {
         sleep(1); // we need to sleep, as sometimes the check below is executed faster than the form sets the busy attribute
         $liveElement = $this->getElement('statistics_component');
