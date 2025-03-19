@@ -23,7 +23,7 @@ body:
           label: How to reproduce
           description: |
               ⚠️  This is the most important part of the report ⚠️
-              We’ll have a much better chance of helping if we can easily reproduce the issue. 
+              We’ll have a much better chance of helping if we can easily reproduce the issue.
               Please take a moment to share some code or configuration details to make it easier for us to investigate and fix the problem.
       validations:
           required: true
