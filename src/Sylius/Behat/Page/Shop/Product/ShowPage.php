@@ -16,7 +16,7 @@ namespace Sylius\Behat\Page\Shop\Product;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Service\DriverHelper;

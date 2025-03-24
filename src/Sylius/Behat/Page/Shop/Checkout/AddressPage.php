@@ -17,7 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Behat\Service\JQueryHelper;
 use Sylius\Component\Core\Factory\AddressFactoryInterface;
@@ -195,6 +195,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
+        DriverHelper::waitForPageReload($this->getSession());
     }
 
     public function backToStore(): void
