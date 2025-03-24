@@ -17,8 +17,9 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -36,6 +37,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function saveChanges(): void
     {
         $this->getDocument()->pressButton('sylius_save_changes_button');
+        DriverHelper::waitForPageReload($this->getSession());
     }
 
     public function cancelChanges(): void

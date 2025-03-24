@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 class GeneratePage extends SymfonyPage implements GeneratePageInterface
