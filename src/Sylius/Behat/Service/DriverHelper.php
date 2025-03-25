@@ -33,7 +33,7 @@ abstract class DriverHelper
 
     public static function waitForPageReload(Session $session): void
     {
-        if (DriverHelper::isJavascript($session->getDriver())) {
+        if (self::isJavascript($session->getDriver())) {
             $session->wait(500, "document.readyState === 'complete'");
         }
     }
