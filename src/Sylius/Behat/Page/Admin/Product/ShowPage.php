@@ -15,8 +15,8 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use Sylius\Behat\Context\Ui\Admin\Helper\NavigationTrait;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Routing\RouterInterface;
 

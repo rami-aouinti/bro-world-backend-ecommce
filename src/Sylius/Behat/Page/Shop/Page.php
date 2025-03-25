@@ -15,7 +15,8 @@ namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 abstract class Page extends SymfonyPage implements PageInterface
 {
