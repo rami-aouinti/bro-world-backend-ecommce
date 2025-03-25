@@ -182,6 +182,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void

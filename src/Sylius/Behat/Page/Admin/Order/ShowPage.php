@@ -18,6 +18,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -340,6 +341,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function getOrderCurrency(): string
     {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
         return $this->getElement('currency')->getText();
     }
 

@@ -27,6 +27,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function selectPaymentMethod(string $paymentMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getSession()->wait(100, "document.body !== null");
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
 
             return;
@@ -59,7 +60,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeShippingMethod(): void

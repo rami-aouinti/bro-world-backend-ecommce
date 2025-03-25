@@ -27,6 +27,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function selectShippingMethod(string $shippingMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getSession()->wait(100, "document.body !== null");
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
 
             return;
@@ -75,7 +76,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void

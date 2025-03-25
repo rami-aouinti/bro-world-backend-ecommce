@@ -205,7 +205,7 @@ class AddressPage extends ShopPage implements AddressPageInterface
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function backToStore(): void

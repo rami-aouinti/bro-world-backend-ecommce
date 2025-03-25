@@ -40,7 +40,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
             $this->getDocument()->find('css', 'body')->click();
         }
         $this->getDocument()->find('css', '[data-test-update-changes-button]')->click();
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function cancelChanges(): void

@@ -52,7 +52,7 @@ default:
                                 unexpectedAlertBehaviour: accept
                         options:
                             browser_arguments:
-                                - --window-size=1920,1200
+                                - --window-size=1200,1000
                                 - --headless
                                 - --no-sandbox
                                 - --disable-dev-shm-usage

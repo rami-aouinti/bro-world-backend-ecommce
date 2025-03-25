@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Page\Shop\Account;
 
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 
 class LoginPage extends SymfonyPage implements LoginPageInterface
 {
@@ -30,6 +31,8 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     public function logIn(): void
     {
         $this->getElement('login_button')->click();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function specifyPassword(string $password): void
