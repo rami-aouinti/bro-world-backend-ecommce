@@ -27,7 +27,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function selectShippingMethod(string $shippingMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getSession()->wait(100, "document.body !== null");
+            $this->getSession()->wait(100, 'document.body !== null');
             $this->getElement('shipping_method_select', ['%shipping_method%' => $shippingMethod])->click();
 
             return;

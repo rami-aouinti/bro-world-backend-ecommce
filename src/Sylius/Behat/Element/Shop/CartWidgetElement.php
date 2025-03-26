@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Shop;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element;
-use Sylius\Behat\Service\DriverHelper;
 
 class CartWidgetElement extends Element implements CartWidgetElementInterface
 {
