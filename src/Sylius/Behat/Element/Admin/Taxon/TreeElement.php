@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Element\Admin\Taxon;
 
 use FriendsOfBehat\PageObjectExtension\Element\Element as BaseElement;
+use Sylius\Behat\Service\DriverHelper;
 
 class TreeElement extends BaseElement implements TreeElementInterface
 {
@@ -31,6 +32,8 @@ class TreeElement extends BaseElement implements TreeElementInterface
 
     public function countTaxons(): int
     {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
         return count($this->getElement('tree_taxons')->findAll('css', '[data-test-tree-taxon]'));
     }
 

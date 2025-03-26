@@ -385,7 +385,7 @@ class ShowPage extends ShopPage implements ShowPageInterface
     protected function waitForElementToBeReady(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->waitFor(1, fn (): bool => $this->summaryPage->isOpen());
+            $this->getDocument()->waitFor(2, fn (): bool => $this->summaryPage->isOpen());
         }
     }
 

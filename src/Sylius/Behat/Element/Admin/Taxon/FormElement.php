@@ -87,6 +87,8 @@ class FormElement extends BaseFormElement implements FormElementInterface
 
     public function getTranslationFieldValue(string $element, string $localeCode): string
     {
+        DriverHelper::waitForPageToLoad($this->getSession());
+
         return $this->getElement($element, ['%locale_code%' => $localeCode])->getValue();
     }
 
