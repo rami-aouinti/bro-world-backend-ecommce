@@ -37,7 +37,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function saveChanges(): void
     {
         $this->getDocument()->pressButton('sylius_save_changes_button');
-        DriverHelper::waitForPageReload($this->getSession());
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function cancelChanges(): void
