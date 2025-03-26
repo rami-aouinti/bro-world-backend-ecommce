@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Behat\Service\DriverHelper;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -182,6 +182,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     public function confirmOrder(): void
     {
         $this->getElement('confirm_button')->press();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void

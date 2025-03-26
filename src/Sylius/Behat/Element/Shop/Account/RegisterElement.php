@@ -16,12 +16,15 @@ namespace Sylius\Behat\Element\Shop\Account;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Service\DriverHelper;
 
 class RegisterElement extends Element implements RegisterElementInterface
 {
     public function register(): void
     {
         $this->getElement('register_button')->click();
+
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function specifyEmail(?string $email): void
