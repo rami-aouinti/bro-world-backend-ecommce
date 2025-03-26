@@ -27,7 +27,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function selectPaymentMethod(string $paymentMethod): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getSession()->wait(100, 'document.body !== null');
+            DriverHelper::waitForPageToLoad($this->getSession());
             $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
 
             return;
