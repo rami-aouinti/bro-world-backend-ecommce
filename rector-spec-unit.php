@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\PhpSpecToPHPUnit\Set\MigrationSetList;
+use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddReturnTypeDeclarationRector;
 use Rector\Visibility\Rector\ClassMethod\ExplicitPublicClassMethodRector;
-use Sylius\Component\Addressing\Model\Zone;
 
 return static function (RectorConfig $config): void
 {
@@ -22,6 +22,7 @@ return static function (RectorConfig $config): void
     $config->sets([
         LevelSetList::UP_TO_PHP_82,
         MigrationSetList::PHPSPEC_TO_PHPUNIT,
+        PHPUnitSetList::PHPUNIT_90,
     ]);
     $config->rules([
         AddParamTypeDeclarationRector::class,
@@ -37,13 +38,13 @@ return static function (RectorConfig $config): void
     // # Fix MockObject phpdoc
     // find src/Sylius/path_to_spec_folder/spec/ -type f -name "*Spec.php" -exec sed -i '' "s/\|MockObject /\&MockObject /g" {} +
     // # Fix shouldImplement to assertInstanceOf
-    // find src/Sylius/path_to_tests_folder/spec/ -type f -name "*Spec.php" -exec sed -i '' 's/(\$this->[^\-]+)->shouldImplement\(([^)]+)\);/\self::assertInstanceOf(\2, \1);/g' {} +
-    // # Fix $this->assert*( to self::assert*(
-    // find src/Sylius/path_to_tests_folder/spec/ -type f -name "*Spec.php" -exec sed -i '' -E 's/\$this->assert([^\(]+)\(/self::assert\1(/g' {} +
+    // find src/Sylius/path_to_spec_folder/spec/ -type f -name "*Spec.php" -exec sed -i '' 's/(\$this->[^\-]+)->shouldImplement\(([^)]+)\);/\self::assertInstanceOf(\2, \1);/g' {} +
+    //
     // vendor/bin/phpspec-to-phpunit rename-suffix src/Sylius/path_to_spec_folder/spec/
     // vendor/bin/ecs check src/Sylius/path_to_spec_folder/spec/ --fix
     // mv src/Sylius/path_to_spec_folder/spec/ src/Sylius/path_to_spec_folder/Tests/
     // vendor/bin/phpstan analyse
+    // vendor/bin/phpunit src/Sylius/path_to_bundle_or_component
     //
     // Finally, you will have to check for non setup 'setUp' method and add it manually to instantiate the missing context property.
     // Ex add this:
