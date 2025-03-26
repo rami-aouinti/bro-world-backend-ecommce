@@ -43,6 +43,7 @@ return static function (RectorConfig $config): void
     // vendor/bin/phpspec-to-phpunit rename-suffix src/Sylius/path_to_spec_folder/spec/
     // vendor/bin/ecs check src/Sylius/path_to_spec_folder/spec/ --fix
     // mv src/Sylius/path_to_spec_folder/spec/ src/Sylius/path_to_spec_folder/Tests/
+    // vendor/bin/phpstan analyse
     //
     // Finally, you will have to check for non setup 'setUp' method and add it manually to instantiate the missing context property.
     // Ex add this:
