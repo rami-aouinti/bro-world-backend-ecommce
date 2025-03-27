@@ -11,28 +11,24 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Behat\Context\Api\Common;
+namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\When;
-use Sylius\Behat\Client\ApiClientInterface;
+use Sylius\Behat\Element\SaveElementInterface;
 
 final readonly class SaveContext implements Context
 {
-    public function __construct(private ApiClientInterface $client)
-    {
+    public function __construct(
+        private SaveElementInterface $saveElement,
+    ) {
     }
 
     #[When('I save my changes')]
     #[When('I try to save my changes')]
+    #[When('I save my changes to the images')]
     public function iSaveMyChanges(): void
     {
-        $this->client->update();
-    }
-
-    #[When('I save my changes to the images')]
-    public function iSaveMyChangesToTheImages(): void
-    {
-        // Intentionally left blank
+        $this->saveElement->saveChanges();
     }
 }
