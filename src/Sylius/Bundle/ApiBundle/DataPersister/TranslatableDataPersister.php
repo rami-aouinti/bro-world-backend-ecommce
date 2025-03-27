@@ -16,9 +16,17 @@ namespace Sylius\Bundle\ApiBundle\DataPersister;
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use ApiPlatform\Core\DataPersister\ResumableDataPersisterInterface;
 use Sylius\Bundle\ApiBundle\Exception\TranslationInDefaultLocaleCannotBeRemoved;
-use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Resource\Model\TranslatableInterface;
+use Sylius\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    TranslatableDataPersister::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class TranslatableDataPersister implements ContextAwareDataPersisterInterface, ResumableDataPersisterInterface
 {
     public function __construct(private TranslationLocaleProviderInterface $localeProvider)

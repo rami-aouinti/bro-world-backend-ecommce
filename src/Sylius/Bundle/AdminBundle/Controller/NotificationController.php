@@ -25,6 +25,14 @@ use Sylius\Bundle\CoreBundle\SyliusCoreBundle;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    NotificationController::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class NotificationController
 {
     public function __construct(
@@ -34,35 +42,6 @@ final class NotificationController
         private string $environment,
         private ?StreamFactoryInterface $streamFactory = null,
     ) {
-        if (!$client instanceof ClientInterface) {
-            trigger_deprecation(
-                'sylius/admin-bundle',
-                '1.13',
-                'Using a service that does not implement "%s" as a 1st argument of "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
-                ClientInterface::class,
-                self::class,
-            );
-        }
-
-        if (!$requestFactory instanceof RequestFactoryInterface) {
-            trigger_deprecation(
-                'sylius/admin-bundle',
-                '1.13',
-                'Using a service that does not implement "%s" as a 2nd argument of "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
-                RequestFactoryInterface::class,
-                self::class,
-            );
-        }
-
-        if (null === $streamFactory) {
-            trigger_deprecation(
-                'sylius/admin-bundle',
-                '1.13',
-                'Not passing a service that implements "%s" as a 5th argument of "%s" constructor is deprecated and will be prohibited in Sylius 2.0.',
-                StreamFactoryInterface::class,
-                self::class,
-            );
-        }
     }
 
     public function getVersionAction(Request $request): JsonResponse

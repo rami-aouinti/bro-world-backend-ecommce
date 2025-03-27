@@ -18,14 +18,23 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Repository\AvatarImageRepositoryInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    UploadAvatarImageAction::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class UploadAvatarImageAction
 {
+    /** @param FactoryInterface<ImageInterface> $avatarImageFactory */
     public function __construct(
         private FactoryInterface $avatarImageFactory,
         private AvatarImageRepositoryInterface $avatarImageRepository,

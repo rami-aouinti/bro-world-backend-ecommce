@@ -17,8 +17,9 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\DriverHelper;
 use Symfony\Component\Routing\RouterInterface;
 
 class CreatePage extends SymfonyPage implements CreatePageInterface
@@ -35,6 +36,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     public function create(): void
     {
         $this->getDocument()->pressButton('Create');
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function getValidationMessage(string $element): string

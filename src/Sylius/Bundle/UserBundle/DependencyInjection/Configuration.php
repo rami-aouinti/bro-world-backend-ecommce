@@ -15,9 +15,9 @@ namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\UserBundle\Controller\UserController;
-use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -102,6 +102,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->end()
                                             ->end()
                                             ->arrayNode('pin')
+                                                ->setDeprecated('sylius/user-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
                                                     ->integerNode('length')

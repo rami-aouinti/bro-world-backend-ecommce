@@ -75,6 +75,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius_core.price_history.batch_size', $config['price_history']['batch_size']);
         $container->setParameter('sylius_core.orders_statistics.intervals_map', $config['orders_statistics']['intervals_map'] ?? []);
         $container->setParameter('sylius_core.max_int_value', $config['max_int_value']);
+        $container->setParameter('sylius_core.allowed_images_mime_types', $config['allowed_images_mime_types']);
 
         /** @var string $env */
         $env = $container->getParameter('kernel.environment');
@@ -100,6 +101,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
                 )),
             },
         );
+        $container->setAlias('sylius.adapter.filesystem.default', FilesystemAdapterInterface::class);
 
         $this->registerAutoconfiguration($container);
     }
@@ -225,7 +227,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->registerAttributeForAutoconfiguration(
             AsCatalogPromotionPriceCalculator::class,
             static function (ChildDefinition $definition, AsCatalogPromotionPriceCalculator $attribute): void {
-                $definition->addTag(AsCatalogPromotionPriceCalculator::SERVICE_TAG, ['priority' => $attribute->getPriority()]);
+                $definition->addTag(AsCatalogPromotionPriceCalculator::SERVICE_TAG, [
+                    'type' => $attribute->getType(),
+                    'priority' => $attribute->getPriority(),
+                ]);
             },
         );
 

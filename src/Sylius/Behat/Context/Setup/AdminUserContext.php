@@ -18,20 +18,26 @@ use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\AvatarImage;
+use Sylius\Component\Core\Model\AvatarImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 final class AdminUserContext implements Context
 {
+    /**
+     * @param UserRepositoryInterface<AdminUserInterface> $userRepository
+     * @param FactoryInterface<AvatarImageInterface> $avatarImageFactory
+     */
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private ExampleFactoryInterface $userFactory,
-        private UserRepositoryInterface $userRepository,
-        private ImageUploaderInterface $imageUploader,
-        private ObjectManager $objectManager,
-        private \ArrayAccess $minkParameters,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly ExampleFactoryInterface $userFactory,
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly ImageUploaderInterface $imageUploader,
+        private readonly ObjectManager $objectManager,
+        private readonly \ArrayAccess $minkParameters,
+        private readonly FactoryInterface $avatarImageFactory,
     ) {
     }
 
@@ -99,7 +105,7 @@ final class AdminUserContext implements Context
     {
         $filesPath = $this->minkParameters['files_path'];
 
-        $avatar = new AvatarImage();
+        $avatar = $this->avatarImageFactory->createNew();
         $avatar->setFile(new UploadedFile($filesPath . $avatarPath, basename($avatarPath)));
 
         $this->imageUploader->upload($avatar);

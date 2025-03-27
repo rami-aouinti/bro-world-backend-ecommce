@@ -18,6 +18,13 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated. Will be removed in Sylius 2.0.',
+    StatisticsController::class,
+);
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class StatisticsController
 {
     public function __construct(

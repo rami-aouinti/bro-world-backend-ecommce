@@ -14,9 +14,17 @@ declare(strict_types=1);
 namespace Sylius\Bundle\ApiBundle\Validator;
 
 use ApiPlatform\Symfony\Validator\Exception\ValidationException;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Resource\Model\ResourceInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+trigger_deprecation(
+    'sylius/api-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    ResourceApiInputDataPropertiesValidator::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class ResourceApiInputDataPropertiesValidator implements ResourceInputDataPropertiesValidatorInterface
 {
     public function __construct(private ValidatorInterface $validator)

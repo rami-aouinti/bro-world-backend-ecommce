@@ -23,23 +23,26 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ShopBillingData;
+use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 final class ChannelContext implements Context
 {
     /**
      * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
+     * @param FactoryInterface<ShopBillingDataInterface> $shopBillingDataFactory
      */
     public function __construct(
-        private SharedStorageInterface $sharedStorage,
-        private ChannelContextSetterInterface $channelContextSetter,
-        private DefaultChannelFactoryInterface $unitedStatesChannelFactory,
-        private DefaultChannelFactoryInterface $defaultChannelFactory,
-        private ChannelRepositoryInterface $channelRepository,
-        private ObjectManager $channelManager,
+        private readonly SharedStorageInterface $sharedStorage,
+        private readonly ChannelContextSetterInterface $channelContextSetter,
+        private readonly DefaultChannelFactoryInterface $unitedStatesChannelFactory,
+        private readonly DefaultChannelFactoryInterface $defaultChannelFactory,
+        private readonly ChannelRepositoryInterface $channelRepository,
+        private readonly ObjectManager $channelManager,
+        private readonly FactoryInterface $shopBillingDataFactory,
     ) {
     }
 
@@ -243,7 +246,7 @@ final class ChannelContext implements Context
         CountryInterface $country,
         string $taxId,
     ): void {
-        $shopBillingData = new ShopBillingData();
+        $shopBillingData = $this->shopBillingDataFactory->createNew();
         $shopBillingData->setCompany($company);
         $shopBillingData->setStreet($street);
         $shopBillingData->setPostcode($postcode);

@@ -11,8 +11,11 @@
 
 -->
 
-<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <imports>
         <import resource="services/**.xml"/>
     </imports>
@@ -34,28 +37,30 @@
                  class="Sylius\Component\Shipping\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.shipping_methods_resolver"/>
         </service>
-        <service id="Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface"
-                 alias="sylius.shipping_methods_resolver"/>
+        <service id="sylius.resolver.shipping_methods" alias="sylius.shipping_methods_resolver"/>
+        <service id="sylius.resolver.shipping_methods.composite" alias="sylius.shipping_methods_resolver"/>
+        <service id="Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface" alias="sylius.shipping_methods_resolver"/>
 
         <service id="sylius.shipping_methods_resolver.default"
                  class="Sylius\Component\Shipping\Resolver\ShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method"/>
-            <argument type="service" id="sylius.shipping_method_eligibility_checker"/>
+            <argument type="service" id="sylius.checker.shipping_method_eligibility"/>
             <tag name="sylius.shipping_method_resolver" type="default" label="Default"/>
         </service>
+        <service id="sylius.resolver.shipping_methods.default" alias="sylius.shipping_methods_resolver.default"/>
 
         <service id="sylius.shipping_method_resolver.default"
                  class="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method"/>
         </service>
-        <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface"
-                 alias="sylius.shipping_method_resolver.default"/>
+        <service id="sylius.resolver.shipping_method.default" alias="sylius.shipping_method_resolver.default"/>
+        <service id="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface" alias="sylius.shipping_method_resolver.default"/>
 
         <service id="sylius.shipping_calculator" class="Sylius\Component\Shipping\Calculator\DelegatingCalculator">
             <argument type="service" id="sylius.registry.shipping_calculator"/>
         </service>
-        <service id="Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface"
-                 alias="sylius.shipping_calculator"/>
+        <service id="sylius.calculator.shipping" alias="sylius.shipping_calculator" />
+        <service id="Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface" alias="sylius.shipping_calculator"/>
 
         <service id="sylius.shipping_calculator.flat_rate"
                  class="Sylius\Component\Shipping\Calculator\FlatRateCalculator">
@@ -63,6 +68,7 @@
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType"
                  label="sylius.form.shipping_calculator.flat_rate_configuration.label"/>
         </service>
+        <service id="sylius.calculator.shipping.flat_rate" alias="sylius.shipping_calculator.flat_rate" />
 
         <service id="sylius.shipping_calculator.per_unit_rate"
                  class="Sylius\Component\Shipping\Calculator\PerUnitRateCalculator">
@@ -70,12 +76,14 @@
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType"
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label"/>
         </service>
+        <service id="sylius.calculator.shipping.per_unit_rate" alias="sylius.shipping_calculator.per_unit_rate" />
 
         <service id="sylius.calendar" class="Sylius\Bundle\ShippingBundle\Provider\Calendar"/>
 
         <service id="sylius.shipping_date_assigner" class="Sylius\Bundle\ShippingBundle\Assigner\ShippingDateAssigner">
             <argument type="service" id="Sylius\Calendar\Provider\DateTimeProviderInterface"/>
         </service>
+        <service id="sylius.assigner.shipping_date" alias="sylius.shipping_date_assigner"/>
 
         <service id="sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal"
                  class="Sylius\Component\Shipping\Checker\Rule\TotalWeightGreaterThanOrEqualRuleChecker">
@@ -83,6 +91,8 @@
                  label="sylius.form.shipping_method_rule.total_weight_greater_than_or_equal"
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Rule\TotalWeightGreaterThanOrEqualConfigurationType"/>
         </service>
+        <service id="sylius.checker.shipping_method_rule.total_weight_greater_than_or_equal"
+                 alias="sylius.shipping_method_rule_checker.total_weight_greater_than_or_equal"/>
 
         <service id="sylius.shipping_method_rule_checker.total_weight_less_than_or_equal"
                  class="Sylius\Component\Shipping\Checker\Rule\TotalWeightLessThanOrEqualRuleChecker">
@@ -90,5 +100,7 @@
                  label="sylius.form.shipping_method_rule.total_weight_less_than_or_equal"
                  form-type="Sylius\Bundle\ShippingBundle\Form\Type\Rule\TotalWeightLessThanOrEqualConfigurationType"/>
         </service>
+        <service id="sylius.checker.shipping_method_rule.total_weight_less_than_or_equal"
+                 alias="sylius.shipping_method_rule_checker.total_weight_less_than_or_equal"/>
     </services>
 </container>

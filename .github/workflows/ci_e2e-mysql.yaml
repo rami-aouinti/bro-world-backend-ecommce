@@ -81,7 +81,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.2
+                uses: SyliusLabs/BuildTestAppAction@v2.3
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -111,11 +111,12 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}), ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }} - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
+                    overwrite: true
 
     behat-ui-js-chromedriver:
         needs: get-matrix
@@ -157,7 +158,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: "Restore dependencies"
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -168,7 +169,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.2.1
+                uses: SyliusLabs/BuildTestAppAction@v2.3
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -180,7 +181,6 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
-                    chrome_version: stable
 
             -   name: Run Behat (Chromedriver)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@mink:chromedriver&&~@todo&&~@cli" --suite-tags="@ui" --rerun
@@ -189,11 +189,12 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }})"
+                    name: "Logs (JS with Chromedriver, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
+                    overwrite: true
 
     behat-ui-js-panther:
         needs: get-matrix
@@ -235,7 +236,7 @@ jobs:
                 run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
             -   name: "Restore dependencies"
-                uses: actions/cache@v3
+                uses: actions/cache@v4
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -246,7 +247,7 @@ jobs:
                 run: composer require --no-update --no-scripts --no-interaction "twig/twig:${{ matrix.twig }}"
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.2.1
+                uses: SyliusLabs/BuildTestAppAction@v2.3
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-symfony-${{ matrix.symfony }}-api-platform-${{ matrix.api-platform }}"
@@ -258,10 +259,6 @@ jobs:
                     php_version: ${{ matrix.php }}
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
-                    chrome_version: stable
-
-            -   name: Install Behat driver
-                run: vendor/bin/bdi detect drivers
 
             -   name: Run Behat (Panther)
                 run: vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@ui" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@ui" --rerun || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@todo&&~@cli" --suite-tags="@ui" --rerun
@@ -270,8 +267,9 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }})"
+                    name: "Logs (JS with Panther, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, ApiPlatform ${{ matrix.api-platform }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
+                    overwrite: true

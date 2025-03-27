@@ -37,7 +37,7 @@ use Sylius\Component\Core\Model\ShopBillingData;
 use Sylius\Component\Core\Model\ShopBillingDataInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 use Sylius\Component\Core\Model\TaxonImageInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -54,7 +54,10 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
+                ->scalarNode('autoconfigure_with_attributes')
+                    ->setDeprecated('sylius/core-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
+                    ->defaultFalse()
+                ->end()
                 ->booleanNode('prepend_doctrine_migrations')->defaultTrue()->end()
                 ->booleanNode('shipping_address_based_taxation')->defaultFalse()->end()
                 ->booleanNode('order_by_identifier')->defaultTrue()->end()
@@ -133,6 +136,7 @@ final class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('state_machine')
+                    ->setDeprecated('sylius/core-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->scalarNode('default_adapter')->defaultValue('winzou_state_machine')->end()
@@ -141,6 +145,10 @@ final class Configuration implements ConfigurationInterface
                             ->scalarPrototype()->end()
                         ->end()
                     ->end()
+                ->end()
+                ->arrayNode('allowed_images_mime_types')
+                    ->prototype('scalar')->end()
+                    ->defaultValue(['image/jpeg', 'image/png', 'image/gif', 'image/webp'])
                 ->end()
             ->end()
         ;

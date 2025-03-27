@@ -7179,3 +7179,14 @@ parameters:
 			message: "#^Method Sylius\\\\Component\\\\User\\\\Security\\\\Checker\\\\TokenUniquenessChecker\\:\\:__construct\\(\\) has parameter \\$repository with generic interface Sylius\\\\Component\\\\Resource\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: src/Sylius/Component/User/Security/Checker/TokenUniquenessChecker.php
+
+		-
+			message: "#^Call to method sanitize\\(\\) on an unknown class enshrined\\\\svgSanitize\\\\Sanitizer.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Uploader/ImageUploader.php
+
+		-
+			message: "#^Property Sylius\\\\Component\\\\Core\\\\Uploader\\\\ImageUploader\\:\\:\\$sanitizer has unknown class enshrined\\\\svgSanitize\\\\Sanitizer as its type.$#"
+			count: 1
+			path: src/Sylius/Component/Core/Uploader/ImageUploader.php
+

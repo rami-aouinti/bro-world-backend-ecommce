@@ -15,7 +15,7 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPage;
+use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\DriverHelper;
 
 class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
@@ -93,6 +93,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function nextStep(): void
     {
         $this->getElement('next_step')->press();
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     public function changeAddress(): void

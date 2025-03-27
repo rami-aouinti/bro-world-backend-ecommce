@@ -28,6 +28,10 @@ final class ImageUploaderTest extends WebTestCase
     /** @test */
     public function it_sanitizes_file_content_if_it_is_svg_mime_type(): void
     {
+        if (!class_exists(\enshrined\svgSanitize\Sanitizer::class)) {
+            $this->markTestSkipped('This test requires "enshrined/svg-sanitize" package to be installed.');
+        }
+
         self::$client = static::createClient();
 
         $imageUploader = self::$kernel->getContainer()->get('sylius.image_uploader');

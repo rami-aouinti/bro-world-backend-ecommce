@@ -24,6 +24,7 @@
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "Doctrine\\DBAL\\Platforms\\MySQLPlatform",
+    "enshrined\\svgSanitize\\Sanitizer",
     "Http\\Client\\HttpClient",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",

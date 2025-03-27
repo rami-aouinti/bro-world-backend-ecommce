@@ -29,7 +29,7 @@ use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\OrderSequence;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -46,7 +46,10 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('autoconfigure_with_attributes')->defaultFalse()->end()
+                ->scalarNode('autoconfigure_with_attributes')
+                    ->setDeprecated('sylius/order-bundle', '1.14', 'The "%path%.%node%" is deprecated and will be removed in 2.0.')
+                    ->defaultFalse()
+                ->end()
             ->end()
         ;
 

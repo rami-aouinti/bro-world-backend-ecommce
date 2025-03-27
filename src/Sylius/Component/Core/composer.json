@@ -27,7 +27,6 @@
     ],
     "require": {
         "php": "^8.1",
-        "enshrined/svg-sanitize": "^0.16",
         "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "knplabs/gaufrette": "^0.10 || ^0.11",
         "league/flysystem": "^2.4",
@@ -46,7 +45,7 @@
         "sylius/product": "^1.13",
         "sylius/promotion": "^1.13",
         "sylius/registry": "^1.5",
-        "sylius/resource": "^1.9",
+        "sylius/resource": "^1.11",
         "sylius/review": "^1.13",
         "sylius/shipping": "^1.13",
         "sylius/state-machine-abstraction": "^1.13",

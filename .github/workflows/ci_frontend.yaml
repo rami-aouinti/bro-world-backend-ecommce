@@ -36,7 +36,7 @@ jobs:
                 uses: notiz-dev/github-action-json-property@release
                 with:
                     path: '.github/workflows/matrix.json'
-                    prop_path: '${{ inputs.type }}.e2e-mysql'
+                    prop_path: '${{ inputs.type }}.frontend'
 
     frontend:
         needs: get-matrix
@@ -73,7 +73,7 @@ jobs:
                 uses: actions/checkout@v4
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.0
+                uses: SyliusLabs/BuildTestAppAction@v2.3
                 with:
                     build_type: "sylius"
                     e2e_js: "yes"

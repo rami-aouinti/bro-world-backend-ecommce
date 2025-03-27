@@ -38,20 +38,20 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLoca
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\SqlWalker\OrderByIdentifierSqlWalker;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Metadata\Metadata;
+use Sylius\Resource\Metadata\Metadata;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class SyliusCoreBundle extends AbstractResourceBundle
 {
-    public const VERSION = '1.13.12-DEV';
+    public const VERSION = '1.14.4-DEV';
 
-    public const VERSION_ID = '11312';
+    public const VERSION_ID = '11404';
 
     public const MAJOR_VERSION = '1';
 
-    public const MINOR_VERSION = '13';
+    public const MINOR_VERSION = '14';
 
-    public const RELEASE_VERSION = '12';
+    public const RELEASE_VERSION = '4';
 
     public const EXTRA_VERSION = 'DEV';
 

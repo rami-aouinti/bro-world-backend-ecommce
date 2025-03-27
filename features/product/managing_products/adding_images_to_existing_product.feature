@@ -17,7 +17,16 @@ Feature: Adding images to an existing product
         Then I should be notified that it has been successfully uploaded
         And the product "Lamborghini Gallardo Model" should have an image with "banner" type
 
-    @ui @mink:chromedriver @api
+    @api @ui @mink:chromedriver
+    Scenario: Trying to add svg image to an existing product
+        Given the store has a product "Lamborghini Gallardo Model"
+        When I want to modify this product
+        And I attach the "sylius.svg" image with "banner" type to this product
+        And I save my changes to the images
+        Then I should be notified that svg file is not allowed
+        And this product should not have any images
+
+    @api @ui @mink:chromedriver
     Scenario: Adding multiple images to an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify this product

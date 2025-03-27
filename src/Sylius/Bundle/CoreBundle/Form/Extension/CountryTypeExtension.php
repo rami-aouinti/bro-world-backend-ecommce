@@ -16,7 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,8 +25,17 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Intl\Countries;
 
+trigger_deprecation(
+    'sylius/core-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    CountryTypeExtension::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CountryTypeExtension extends AbstractTypeExtension
 {
+    /** @param RepositoryInterface<CountryInterface> $countryRepository */
     public function __construct(private RepositoryInterface $countryRepository)
     {
     }

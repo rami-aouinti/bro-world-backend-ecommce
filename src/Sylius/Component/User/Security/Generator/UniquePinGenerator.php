@@ -13,10 +13,18 @@ declare(strict_types=1);
 
 namespace Sylius\Component\User\Security\Generator;
 
-use Sylius\Component\Resource\Generator\RandomnessGeneratorInterface;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
+use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Webmozart\Assert\Assert;
 
+trigger_deprecation(
+    'sylius/user',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    UniquePinGenerator::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class UniquePinGenerator implements GeneratorInterface
 {
     private int $pinLength;

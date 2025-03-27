@@ -11,7 +11,11 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
     <services>
         <defaults public="true" />
 
@@ -28,8 +32,9 @@
             <argument type="service" id="sylius.repository.customer" />
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>
+        <service id="sylius.validator.registered_user" alias="sylius.validator.unique.registered_user" />
         <service id="sylius.validator.cart_item_availability" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator">
-            <argument type="service" id="sylius.availability_checker" />
+            <argument type="service" id="sylius.checker.inventory.availability" />
             <tag name="validator.constraint_validator" alias="sylius_cart_item_availability" />
         </service>
         <service id="sylius.validator.has_all_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefinedValidator">
@@ -55,15 +60,18 @@
         </service>
 
         <service id="sylius.validator.shipping_method_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderShippingMethodEligibilityValidator">
-            <argument type="service" id="sylius.shipping_method_eligibility_checker" />
+            <argument type="service" id="sylius.checker.shipping_method_eligibility" />
             <tag name="validator.constraint_validator" alias="sylius_order_shipping_method_eligibility_validator" />
         </service>
+        <service id="sylius.validator.order_shipping_method_eligibility" alias="sylius.validator.shipping_method_integrity" />
         <service id="sylius.validator.payment_method_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderPaymentMethodEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_payment_method_eligibility_validator" />
         </service>
+        <service id="sylius.validator.order_payment_method_eligibility" alias="sylius.validator.payment_method_integrity" />
         <service id="sylius.validator.product_integrity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\OrderProductEligibilityValidator">
             <tag name="validator.constraint_validator" alias="sylius_order_product_eligibility_validator" />
         </service>
+        <service id="sylius.validator.order_product_eligibility" alias="sylius.validator.product_integrity" />
         <service id="sylius.validator.channel_default_locale_enabled" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ChannelDefaultLocaleEnabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_channel_default_locale_enabled" />
         </service>
@@ -109,6 +117,7 @@
             <argument>%sylius_order.resend_order_confirmation_email.order_states%</argument>
             <tag name="validator.constraint_validator" alias="sylius_order_confirmation_with_valid_order_state" />
         </service>
+        <service id="sylius.validator.resend_order_confirmation_email_with_valid_order_state" alias="sylius.validator.order_confirmation_with_valid_order_state" />
 
         <service id="sylius.validator.product_image_variants_belong_to_owner" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ProductImageVariantsBelongToOwnerValidator">
             <tag name="validator.constraint_validator" alias="sylius_product_image_variants_belong_to_owner" />
@@ -118,10 +127,18 @@
             <argument type="service" id="sylius.repository.shipment" />
             <tag name="validator.constraint_validator" alias="sylius_shipment_confirmation_with_valid_shipment_state" />
         </service>
+        <service id="sylius.validator.resend_shipment_confirmation_email_with_valid_order_state" alias="sylius.validator.shipment_confirmation_with_valid_order_state" />
 
         <service id="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxIntegerValidator">
             <argument>%sylius_core.max_int_value%</argument>
             <tag name="validator.constraint_validator" alias="sylius_max_integer" />
+        </service>
+
+        <service id="sylius.validator.max_integer" alias="Sylius\Bundle\CoreBundle\Validator\Constraints\MaxIntegerValidator" />
+
+        <service id="sylius.validator.allowed_image_mime_types" class="Sylius\Bundle\CoreBundle\Validator\Constraints\AllowedImageMimeTypesValidator">
+            <argument>%sylius_core.allowed_images_mime_types%</argument>
+            <tag name="validator.constraint_validator" alias="sylius_image_allowed_mime_types_validator" />
         </service>
     </services>
 </container>

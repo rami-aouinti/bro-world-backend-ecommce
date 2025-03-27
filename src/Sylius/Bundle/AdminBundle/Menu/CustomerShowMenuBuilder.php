@@ -19,6 +19,14 @@ use Sylius\Bundle\AdminBundle\Event\CustomerShowMenuBuilderEvent;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    PromotionUpdateMenuBuilder::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class CustomerShowMenuBuilder
 {
     public const EVENT_NAME = 'sylius.menu.admin.customer.show';
@@ -72,7 +80,10 @@ final class CustomerShowMenuBuilder
             $menu
                 ->addChild('user_delete', [
                     'route' => 'sylius_admin_shop_user_delete',
-                    'routeParameters' => ['id' => $customer->getUser()->getId()],
+                    'routeParameters' => [
+                        'id' => $customer->getUser()->getId(),
+                        'customerId' => $customer->getId(),
+                    ],
                 ])
                 ->setAttribute('type', 'delete')
                 ->setAttribute('resource_id', $customer->getUser()->getId())

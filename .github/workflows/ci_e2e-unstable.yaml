@@ -40,7 +40,7 @@ jobs:
                     composer config prefer-stable false
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.2
+                uses: SyliusLabs/BuildTestAppAction@v2.3
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
@@ -67,8 +67,9 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}) [Unstable], MySQL ${{ matrix.mysql }})"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}) [Unstable], MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
+                    overwrite: true

@@ -18,6 +18,14 @@ use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+trigger_deprecation(
+    'sylius/admin-bundle',
+    '1.14',
+    'The "%s" class is deprecated and will be removed in Sylius 2.0.',
+    NotificationWidgetExtension::class,
+);
+
+/** @deprecated since Sylius 1.14 and will be removed in Sylius 2.0. */
 final class NotificationWidgetExtension extends AbstractExtension
 {
     public function __construct(private bool $areNotificationsEnabled, private int $checkFrequency)

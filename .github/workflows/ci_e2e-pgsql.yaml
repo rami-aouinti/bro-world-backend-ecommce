@@ -33,7 +33,7 @@ jobs:
             -   name: "Checkout"
                 uses: actions/checkout@v4
                 if: "${{ inputs.branch == '' }}"
-            -   
+            -
                 name: "Get matrix"
                 id: matrix
                 uses: notiz-dev/github-action-json-property@release
@@ -77,7 +77,7 @@ jobs:
                 uses: actions/checkout@v4
 
             -   name: Build application
-                uses: SyliusLabs/BuildTestAppAction@v2.2
+                uses: SyliusLabs/BuildTestAppAction@v2.3
                 with:
                     build_type: "sylius"
                     cache_key:  "${{ github.run_id }}-${{ runner.os }}-${{ hashFiles('composer.json') }}-php-${{ matrix.php }}-symfony-${{ matrix.symfony }}-"
@@ -105,8 +105,9 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }})"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, PostgreSQL ${{ matrix.postgres }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
                     if-no-files-found: ignore
+                    overwrite: true
