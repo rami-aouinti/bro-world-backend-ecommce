@@ -23,6 +23,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\Request as HttpRequest;
@@ -40,6 +41,7 @@ final class CartContext implements Context
         private IriConverterInterface $iriConverter,
         private RequestFactoryInterface $requestFactory,
         private string $apiUrlPrefix,
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
@@ -50,7 +52,7 @@ final class CartContext implements Context
     {
         $this->shopClient->delete(Resources::ORDERS, $tokenValue);
 
-        $this->sharedStorage->set('cart_token', null);
+        $this->sharedStorage->remove('cart_token');
     }
 
     /**
@@ -116,7 +118,6 @@ final class CartContext implements Context
     /**
      * @When /^I add ("[^"]+" variant) of (this product) to the (cart)$/
      * @When /^I add ("[^"]+" variant) of (product "[^"]+") to the (cart)$/
-     * @When /^I have ("[^"]+" variant) of (product "[^"]+") in the (cart)$/
      */
     public function iAddVariantOfThisProductToTheCart(
         ProductVariantInterface $productVariant,
@@ -205,7 +206,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I removed (product "[^"]+") from the (cart)$/
      * @When /^I remove (product "[^"]+") from the (cart)$/
      */
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
@@ -378,16 +378,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^my (cart) should be empty$/
-     * @Then /^(cart) should be empty with no value$/
+     * @Then my cart should be empty
      */
-    public function myCartShouldBeEmpty(string $tokenValue): void
+    public function myCartShouldBeEmpty(): void
     {
-        $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
+        $tokenValue = $this->sharedStorage->get('cart_token');
 
-        Assert::true(
-            $this->responseChecker->isShowSuccessful($response),
-            SprintfResponseEscaper::provideMessageWithEscapedResponseContent('Cart has not been created.', $response),
+        Assert::isEmpty(
+            $this->responseChecker->getValue($this->shopClient->show(Resources::ORDERS, $tokenValue), 'items'),
+            'Cart is not empty.',
         );
     }
 
@@ -844,6 +843,7 @@ final class CartContext implements Context
             'created_as_guest',
             $this->responseChecker->getValue($this->shopClient->getLastResponse(), 'customer') === null,
         );
+        $this->sharedStorage->set('order', $this->orderRepository->findOneBy(['tokenValue' => $tokenValue]));
 
         return $tokenValue;
     }
