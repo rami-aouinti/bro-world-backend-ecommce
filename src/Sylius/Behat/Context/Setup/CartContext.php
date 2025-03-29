@@ -182,7 +182,7 @@ final readonly class CartContext implements Context
         $this->sharedStorage->set('cart_token', $tokenValue);
         $this->sharedStorage->set(
             'order',
-            $message->last(HandledStamp::class)->getResult()
+            $message->last(HandledStamp::class)->getResult(),
         );
 
         return $tokenValue;
