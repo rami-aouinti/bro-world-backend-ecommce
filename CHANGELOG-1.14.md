@@ -1,5 +1,23 @@
 # CHANGELOG FOR `1.14.X`
 
+## v1.14.4 (2025-03-31)
+
+#### Details
+
+- [#17709](https://github.com/Sylius/Sylius/issues/17709) Update bunnyshell/workflows to v2 ([@GSadee](https://github.com/GSadee))
+- [#17730](https://github.com/Sylius/Sylius/issues/17730) [CI] Update actions/upload-artifact to v4 ([@mpysiak](https://github.com/mpysiak))
+- [#17764](https://github.com/Sylius/Sylius/issues/17764) [Behat] Add wait for page reload ([@Wojdylak](https://github.com/Wojdylak))
+- [#17767](https://github.com/Sylius/Sylius/issues/17767) RTL for arabic languages 1.14 ([@bartek-sek](https://github.com/bartek-sek))
+- [#17770](https://github.com/Sylius/Sylius/issues/17770) [CS][DX] Refactor
+- [#17776](https://github.com/Sylius/Sylius/issues/17776) [Bug] Fix missing twig variable ([@mpysiak](https://github.com/mpysiak))
+- [#17773](https://github.com/Sylius/Sylius/issues/17773) [Behat] Rename DriverHelper::waitForPageReload to DriverHelper::waitForPageToLoad ([@GSadee](https://github.com/GSadee))
+- [#17732](https://github.com/Sylius/Sylius/issues/17732) change github  PR template ([@christopherhero](https://github.com/christopherhero))
+- [#17762](https://github.com/Sylius/Sylius/issues/17762) Missing configurationFormType to AsAttributeType ([@tidall87](https://github.com/tidall87))
+- [#17790](https://github.com/Sylius/Sylius/issues/17790) [CS][DX] Refactor
+- [#17798](https://github.com/Sylius/Sylius/issues/17798) 1.14 rtl fixes ([@bartek-sek](https://github.com/bartek-sek))
+- [#17808](https://github.com/Sylius/Sylius/issues/17808) [1.14] Arabic translations ([@CoderMaggie](https://github.com/CoderMaggie))
+- [#17792](https://github.com/Sylius/Sylius/issues/17792) Fix config key in upgrade document ([@revoltek-daniel](https://github.com/revoltek-daniel))
+
 ## v1.14.3 (2025-02-26)
 
 #### Details
