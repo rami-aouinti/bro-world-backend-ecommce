@@ -45,7 +45,7 @@ The old namespaces are deprecated and may be removed in future versions. Update 
 
     ```yaml
     sylius_core:
-        allowed_image_mime_types: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml']
+        allowed_images_mime_types: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml']
     ```
 
 ## Configuration
