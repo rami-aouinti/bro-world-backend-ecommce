@@ -1,3 +1,0 @@
-files:
-  - source: /src/Sylius/Bundle/**/Resources/translations/*en.yml
-    translation: /src/Sylius/Bundle/%original_path%/%original_file_name%.%two_letters_code%.yml
