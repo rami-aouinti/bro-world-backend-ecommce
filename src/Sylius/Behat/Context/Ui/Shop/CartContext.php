@@ -76,7 +76,6 @@ final readonly class CartContext implements Context
     /**
      * @Then my cart should be empty
      * @Then my cart should be cleared
-     * @Then cart should be empty with no value
      */
     public function iShouldBeNotifiedThatMyCartIsEmpty(): void
     {
@@ -86,7 +85,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given I removed product :productName from the cart
      * @When I remove product :productName from the cart
      */
     public function iRemoveProductFromTheCart(string $productName): void
@@ -304,13 +302,11 @@ final readonly class CartContext implements Context
      * @Given /^an anonymous user added (product "([^"]+)") to the cart$/
      * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
-     * @Given I added product :product to the cart
      * @Given he added product :product to the cart
-     * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
-     * @Given /^the customer (?:added|adds) ("[^"]+" product) to the cart$/
-     * @Given /^I (?:add|added) ("[^"]+" product) to the (cart)$/
      * @Given /^the visitor has (product "[^"]+") in the cart$/
      * @Given /^the customer has (product "[^"]+") in the cart$/
+     * @When /^the customer adds ("[^"]+" product) to the cart$/
+     * @When /^I add ("[^"]+" product) to the (cart)$/
      * @When /^the visitor adds ("[^"]+" product) to the cart$/
      * @When I add product :product to the cart
      * @When I add the product :product to the cart
@@ -352,8 +348,6 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given I have :variantName variant of product :product in the cart
-     * @Given /^I have "([^"]+)" variant of (this product) in the cart$/
      * @When I add :variantName variant of product :product to the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
@@ -383,8 +377,7 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given /^I have(?:| added) (\d+) (product(?:|s) "([^"]+)") (?:to|in) the cart$/
-     * @When /^I add(?:|ed)(?:| again) (\d+) (products "([^"]+)") to the cart$/
+     * @When /^I add(?:| again) (\d+) (products "([^"]+)") to the cart$/
      */
     public function iAddProductsToTheCart(string $quantity, ProductInterface $product): void
     {
@@ -457,7 +450,6 @@ final readonly class CartContext implements Context
 
     /**
      * @Given I have :product with :productOption :productOptionValue in the cart
-     * @Given I have product :product with product option :productOption :productOptionValue in the cart
      * @When I add :product with :productOption :productOptionValue to the cart
      */
     public function iAddThisProductWithToTheCart(
@@ -554,7 +546,6 @@ final readonly class CartContext implements Context
 
     /**
      * @Given I use coupon with code :couponCode
-     * @Given this cart has promotion applied with coupon :couponCode
      */
     public function iUseCouponWithCode(string $couponCode): void
     {
