@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory;
@@ -64,9 +65,9 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given the store ships everywhere for :shippingMethodName
      * @Given the store ships everywhere with :shippingMethodName
      */
+    #[Given('the store ships everywhere for :shippingMethodName')]
     public function theStoreShipsEverywhereWith(string $shippingMethodName): void
     {
         /** @var ZoneInterface $zone */
@@ -218,9 +219,7 @@ final class ShippingContext implements Context
         ]));
     }
 
-    /**
-     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee$/
-     */
+    #[Given('/^the store has "([^"]+)" shipping method with ("[^"]+") fee$/')]
     public function storeHasShippingMethodWithFee(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');

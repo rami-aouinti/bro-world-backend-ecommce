@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
@@ -32,11 +33,8 @@ final readonly class AddressContext implements Context
     ) {
     }
 
-    /**
-     * @Given I addressed the cart
-     * @Given I addressed it
-     * @Given I have addressed the cart to :countryName
-     */
+    #[Given('I addressed the cart')]
+    #[Given('I addressed the cart to :countryName')]
     public function iAddressedTheCart(?string $countryName = null): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
