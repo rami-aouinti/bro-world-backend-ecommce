@@ -17,5 +17,5 @@ Feature: Seeing detailed information of cart
     @api @ui @javascript
     Scenario: Viewing items total of my cart
         When I add 5 of them to my cart
-        And I check details of my cart
+        And I check the details of my cart
         Then my cart should have "$62.70" items total
