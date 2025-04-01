@@ -13,7 +13,7 @@ Feature: Preventing payment step completion without a selected method
     @api @no-ui
     Scenario: Preventing payment step completion if there are no available methods
         When I add product "PHP T-Shirt" to the cart
-        And I have addressed the cart to "United States"
+        And I addressed the cart to "United States"
         And I proceed with selecting "Free" shipping method
         And I check the details of my cart
         Then I should see that no payment method is assigned
@@ -31,7 +31,7 @@ Feature: Preventing payment step completion without a selected method
     Scenario: Preventing payment step completion if there are no available methods for a channel
         Given the store has "Cash on Delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
-        And I have addressed the cart to "United States"
+        And I addressed the cart to "United States"
         And I proceed with selecting "Free" shipping method
         When I check the details of my cart
         Then I should see that no payment method is assigned
