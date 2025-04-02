@@ -15,8 +15,8 @@ Feature: Ability to confirm an order with a promotion on shipping
     @api @ui
     Scenario: Successfully placing an order
         Given I added product "PHP T-Shirt" to the cart
-        When I am at the checkout addressing step
-        And I specify the email as "jon.snow@example.com"
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method and "Offline" payment
         And I confirm my order

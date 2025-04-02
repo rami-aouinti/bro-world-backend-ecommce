@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing an order shipping method and payment method details on summary page
     In order to be certain about a shipping method and payment method
-    As a Customer
+    As a Visitor
     I want to be able to see all details of chosen shipping method and payment method
 
     Background:
@@ -9,11 +9,12 @@ Feature: Seeing an order shipping method and payment method details on summary p
         And the store has a product "Lannister Coat" priced at "$19.99"
         And the store allows shipping with "Cash on delivery"
         And the store allows paying "Offline"
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing shipping method and payment method
-        When I add product "Lannister Coat" to the cart
+        Given I added product "Lannister Coat" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Cash on delivery" shipping method and "Offline" payment
         Then I should be on the checkout summary step

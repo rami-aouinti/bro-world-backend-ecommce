@@ -837,7 +837,6 @@ final readonly class PromotionContext implements Context
     }
 
     #[Given('/^([^"]+) gives ("(?:€|£|\$)[^"]+") off on a ("[^"]*" product)$/')]
-
     public function itGivesFixedDiscountOffOnAProduct(PromotionInterface $promotion, int $discount, ProductInterface $product): void
     {
         $this->createUnitFixedPromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));

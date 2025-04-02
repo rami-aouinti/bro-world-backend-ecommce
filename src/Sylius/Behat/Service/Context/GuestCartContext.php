@@ -22,7 +22,7 @@ final readonly class GuestCartContext implements CartContextInterface
 {
     public function __construct(
         private OrderRepositoryInterface $orderRepository,
-        private string $guestCartTokenFilePath
+        private string $guestCartTokenFilePath,
     ) {
     }
 

@@ -188,7 +188,7 @@
             <tag name="messenger.message_handler" bus="sylius.payment_request.command_bus" />
         </service>
 
-        <service id="sylius.behat.context.cart" class="Sylius\Behat\Service\Context\GuestCartContext">
+        <service id="sylius.behat.context.guest_cart" class="Sylius\Behat\Service\Context\GuestCartContext">
             <argument type="service" id="sylius.repository.order" />
             <argument>%sylius.behat.guest_cart_token_file%</argument>
             <tag name="sylius.context.cart" priority="-900" />
