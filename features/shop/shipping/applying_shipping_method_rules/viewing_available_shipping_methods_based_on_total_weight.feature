@@ -1,7 +1,7 @@
 @applying_shipping_method_rules
 Feature: Viewing available shipping methods based on total weight
     In order to only see applicable shipping methods
-    As an Customer
+    As a Visitor
     I want to see the shipping methods that are available to my order based on the total weight of my order
 
     Background:
@@ -15,7 +15,6 @@ Feature: Viewing available shipping methods based on total weight
         And this shipping method is only available for orders with a total weight greater or equal to 100.0
         And the store has "Fairytale Delivery Service" shipping method with "$2.00" fee
         And this shipping method is only available for orders with a total weight less or equal to 1.0
-        And I am a logged in customer
 
     @api @ui
     Scenario: Seeing shipping methods that handle heavy goods

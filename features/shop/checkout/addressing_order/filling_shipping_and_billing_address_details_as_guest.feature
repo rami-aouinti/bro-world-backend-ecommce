@@ -1,7 +1,7 @@
 @checkout
 Feature: Addressing an order
     In order to address an order
-    As a Guest
+    As a Visitor
     I want to be able to fill addressing details
 
     Background:

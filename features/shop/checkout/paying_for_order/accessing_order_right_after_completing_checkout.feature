@@ -1,7 +1,7 @@
 @paying_for_order
 Feature: Having good number of items in changing payment method page
     In order to verify that I am changing the payment method of correct order
-    As a Guest
+    As a Visitor
     I want to see correct details about my order on changing the payment method page
 
     Background:

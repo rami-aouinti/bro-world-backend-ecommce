@@ -11,12 +11,12 @@ Feature: Ability to confirm an order with a promotion on shipping
         And there is a promotion "Holiday promotion"
         And the promotion gives "10%" discount on shipping to every order
         And the store allows paying Offline
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Successfully placing an order
-        When I add product "PHP T-Shirt" to the cart
-        And I am at the checkout addressing step
+        Given I added product "PHP T-Shirt" to the cart
+        When I am at the checkout addressing step
+        And I specify the email as "jon.snow@example.com"
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "DHL" shipping method and "Offline" payment
         And I confirm my order

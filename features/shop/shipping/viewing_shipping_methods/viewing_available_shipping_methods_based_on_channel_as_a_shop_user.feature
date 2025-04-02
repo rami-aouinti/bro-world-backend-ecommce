@@ -1,7 +1,7 @@
 @viewing_shipping_methods
 Feature: Viewing available shipping methods based on channel
     In order to only see applicable shipping methods
-    As a Customer
+    As a Visitor
     I want to see the shipping methods that are available to my order based on the channel
 
     Background:
@@ -14,7 +14,6 @@ Feature: Viewing available shipping methods based on channel
         And the store has "ultra fast" shipping method with "$4.00" fee per unit for "United States" channel
         And the store has "uber speedy" shipping method with "$15.00" fee per shipment for "United Kingdom" channel
         And the store has a product "T-Shirt" priced at "$20.00" available in channel "United Kingdom" and channel "United States"
-        And I am a logged in customer
 
     @api @ui
     Scenario: Seeing shipping methods that are available in channel as an logged in customer

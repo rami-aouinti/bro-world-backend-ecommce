@@ -1,7 +1,7 @@
 @applying_shipping_method_rules
 Feature: Viewing available shipping methods based on items total
     In order to only see applicable shipping methods
-    As a Customer
+    As a Visitor
     I want to see the shipping methods that are available to my order
 
     Background:
@@ -23,7 +23,6 @@ Feature: Viewing available shipping methods based on items total
         And it gives "50%" discount on shipping to every order
         And there is a promotion "Expensive promotion"
         And it gives "$5.00" off on a "Expensive Jacket" product
-        And I am a logged in customer
 
     @api @ui
     Scenario: Seeing shipping methods that handle expensive goods

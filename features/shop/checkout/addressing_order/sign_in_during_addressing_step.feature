@@ -1,7 +1,7 @@
 @checkout
 Feature: Sign in to the store during checkout
     In order to sign during the addressing step
-    As a Guest
+    As a Visitor
     I want to be able to sign in
 
     Background:
