@@ -15,16 +15,17 @@ Feature: Apply correct taxes on visitor cart
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes for taxed product
-        When I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Proper taxes after specifying billing address
-        When I add product "PHP T-Shirt" to the cart
-        And I proceed as guest "john@example.com" with "Austria" as billing country
-        When I check the details of my cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I proceed as guest "john@example.com" with "Austria" as billing country
+        And I check the details of my cart
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
