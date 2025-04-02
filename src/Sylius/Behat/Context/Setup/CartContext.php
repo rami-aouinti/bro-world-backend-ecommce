@@ -97,6 +97,7 @@ final readonly class CartContext implements Context
      * @Given /^I have ("[^"]+" variant of product "[^"]+") in the (cart)$/
      * @Given /^I have ("[^"]+" variant of this product) in the (cart)$/
      */
+    #[Given('/^I added ("[^"]+" variant of product "[^"]+") to the (cart)$/')]
     public function iHaveVariantOfProductInTheCart(ProductVariantInterface $productVariant, ?string $tokenValue): void
     {
         if ($tokenValue === null || !$this->doesCartWithTokenExist($tokenValue)) {
