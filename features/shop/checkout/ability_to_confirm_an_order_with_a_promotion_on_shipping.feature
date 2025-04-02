@@ -1,7 +1,7 @@
 @checkout
 Feature: Ability to confirm an order with a promotion on shipping
     In order to be sure that the shipping discount was applied to my order
-    As a Customer
+    As a Visitor
     I want to be able to see all remaining steps
 
     Background:
