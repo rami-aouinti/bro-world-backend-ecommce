@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -507,9 +508,7 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is(?: a| another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/
-     */
+    #[Given('/^there is(?: a| another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" product)$/')]
     public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOnProduct(
         string $name,
         float $discount,

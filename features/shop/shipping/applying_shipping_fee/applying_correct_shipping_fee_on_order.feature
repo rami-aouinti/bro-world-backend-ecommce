@@ -17,7 +17,7 @@ Feature: Apply correct shipping fee on order
         Given I have product "PHP T-Shirt" in the cart
         And I addressed the cart
         And I completed the shipping step with "DHL" shipping method
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$110.00"
         And my cart shipping total should be "$10.00"
 
@@ -29,6 +29,7 @@ Feature: Apply correct shipping fee on order
         When I decide to change order shipping method
         And I change shipping method to "FedEx"
         And I complete the shipping step
+        And I check the details of my cart
         Then my cart total should be "$130.00"
         And my cart shipping total should be "$30.00"
 

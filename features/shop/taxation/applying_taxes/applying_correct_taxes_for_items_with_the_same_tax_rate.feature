@@ -17,14 +17,14 @@ Feature: Apply correct taxes for items with the same tax rate
     @api @ui
     Scenario: Proper taxes for taxed product
         Given I added product "PHP T-Shirt" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$123.00"
         And my cart taxes should be "$23.00"
 
     @api @ui
     Scenario: Proper taxes for multiple same products with the same tax rate
         Given I added 3 products "PHP T-Shirt" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$369.00"
         And my cart taxes should be "$69.00"
 
@@ -32,7 +32,7 @@ Feature: Apply correct taxes for items with the same tax rate
     Scenario: Proper taxes for multiple different products with the same tax rate
         Given I added 3 products "PHP T-Shirt" to the cart
         And I added 2 products "Symfony Hat" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$442.80"
         And my cart taxes should be "$82.80"
 
@@ -40,7 +40,7 @@ Feature: Apply correct taxes for items with the same tax rate
     Scenario: Proper taxes after removing one of the item
         Given I added 3 products "PHP T-Shirt" to the cart
         And I added 2 products "Symfony Hat" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         And I remove product "PHP T-Shirt" from the cart
         Then my cart total should be "$73.80"
         And my cart taxes should be "$13.80"

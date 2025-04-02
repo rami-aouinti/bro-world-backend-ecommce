@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
@@ -56,9 +57,9 @@ final readonly class CartContext implements Context
 
     /**
      * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
-     * @Given /^I added(?:| again) (\d+) (products "[^"]+") to the (cart)$/
      * @Given /^I added (\d+) of (them) to (?:the|my) (cart)$/
      */
+    #[Given('/^I added (\d+) (products "[^"]+") to the (cart)$/')]
     public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
@@ -78,13 +79,14 @@ final readonly class CartContext implements Context
     }
 
     /**
-     * @Given /^I added (product "[^"]+") to the (cart)$/
      * @Given /^I have (product "[^"]+") in the (cart)$/
      * @Given /^I have (product "[^"]+") added to the (cart)$/
      * @Given /^the (?:customer|visitor) has (product "[^"]+") in the (cart)$/
-     * @Given /^the (?:customer|visitor) added ("[^"]+" product) to the (cart)$/
      * @When /^the (?:customer|visitor) try to add (product "[^"]+") in the customer (cart)$/
      */
+    #[Given('/^I added (product "[^"]+") to the (cart)$/')]
+    #[Given('/^I added (this product) to the (cart)$/')]
+    #[Given('/^the customer added ("[^"]+" product) to the (cart)$/')]
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue);

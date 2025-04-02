@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
@@ -460,9 +461,7 @@ final class CheckoutContext implements Context
         $this->sharedStorage->set('response', $response);
     }
 
-    /**
-     * @When I decide to change order shipping method
-     */
+    #[When('I decide to change order shipping method')]
     public function iDecideToChangeOrderShippingMethod(): void
     {
         // This step is relevant only for the UI
@@ -1074,10 +1073,8 @@ final class CheckoutContext implements Context
         );
     }
 
-    /**
-     * @Then /^my discount should be ("[^"]+")$/
-     * @Then there should be no discount applied
-     */
+    #[Then('/^my discount should be ("[^"]+")$/')]
+    #[Then('there should be no discount applied')]
     public function myDiscountShouldBe(int $discount = 0): void
     {
         if ($this->sharedStorage->has('cart_token')) {

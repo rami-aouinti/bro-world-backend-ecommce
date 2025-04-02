@@ -16,6 +16,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Event\ProductUpdated;
@@ -46,7 +47,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Webmozart\Assert\Assert;
 
-final class ProductContext implements Context
+final readonly class ProductContext implements Context
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
@@ -72,14 +73,12 @@ final class ProductContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store has a product :productName
-     * @Given the store has a :productName product
-     * @Given I added a product :productName
-     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
-     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
-     */
-    public function storeHasAProductPricedAt($productName, int $price = 100, ?ChannelInterface $channel = null): void
+    #[Given('/^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/')]
+    #[Given('the store has a product :productName')]
+    #[Given('the store has a :productName product')]
+    #[Given('I added a product :productName')]
+    #[Given('/^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/')]
+    public function storeHasAProductPricedAt(string $productName, int $price = 100, ?ChannelInterface $channel = null): void
     {
         $product = $this->createProduct($productName, $price, $channel);
 

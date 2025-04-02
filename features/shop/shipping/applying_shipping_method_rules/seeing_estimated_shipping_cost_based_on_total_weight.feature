@@ -19,11 +19,11 @@ Feature: Seeing estimated shipping costs based on total weight
     @api @ui
     Scenario: Seeing valid estimated shipping cost for the cart with a total weight over minimum total weight configured on the shipping method
         Given I added product "Jacket for the Lochness Monster" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart estimated shipping cost should be "$200.00"
 
     @api @ui
     Scenario: Seeing valid estimated shipping cost for the cart with a total weight under maximum total weight configured on the shipping method
         Given I added product "T-Shirt for Tinkerbell" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart estimated shipping cost should be "$2.00"

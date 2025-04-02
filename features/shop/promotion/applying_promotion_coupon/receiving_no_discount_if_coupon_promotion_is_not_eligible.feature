@@ -16,7 +16,8 @@ Feature: Receiving no discount if coupon promotion is not eligible
     @api @ui @mink:chromedriver
     Scenario: Receiving no discount if promotion for the applied coupon is not enabled in the current channel
         Given this promotion is not available in any channel
-        When I add 2 products "PHP T-Shirt" to the cart
+        And I added 2 products "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
@@ -25,7 +26,8 @@ Feature: Receiving no discount if coupon promotion is not eligible
     @api @ui @mink:chromedriver
     Scenario: Receiving no discount if promotion for the applied coupon has not started yet
         Given this promotion starts tomorrow
-        When I add 2 products "PHP T-Shirt" to the cart
+        And I added 2 products "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
@@ -34,7 +36,8 @@ Feature: Receiving no discount if coupon promotion is not eligible
     @api @ui @mink:chromedriver
     Scenario: Receiving no discount if promotion for the applied coupon has already expired
         Given this promotion has already expired
-        When I add 2 products "PHP T-Shirt" to the cart
+        And I added 2 products "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
@@ -44,7 +47,8 @@ Feature: Receiving no discount if coupon promotion is not eligible
     Scenario: Receiving no discount if promotion's usage for the applied coupon is already exceeded
         Given this promotion has usage limit equal to 100
         And this promotion usage limit is already reached
-        When I add 2 products "PHP T-Shirt" to the cart
+        And I added 2 products "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$200.00"
@@ -52,7 +56,8 @@ Feature: Receiving no discount if coupon promotion is not eligible
 
     @api @ui @mink:chromedriver
     Scenario: Receiving no discount if promotion's rules for the applied coupon are not fulfilled
-        When I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"

@@ -1,7 +1,7 @@
 @receiving_discount
 Feature: Receiving fixed discount on cart
     In order to pay proper amount while buying promoted goods
-    As a Visitor
+    As a Customer
     I want to have promotions applied to my cart
 
     Background:
@@ -15,7 +15,7 @@ Feature: Receiving fixed discount on cart
         Given there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
         And I added product "PHP T-Shirt" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
@@ -25,7 +25,7 @@ Feature: Receiving fixed discount on cart
         And it gives "$106.00" discount to every order
         And I added product "PHP T-Shirt" to the cart
         And I added product "PHP Mug" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$0.00"
         And my discount should be "-$106.00"
 
@@ -34,7 +34,7 @@ Feature: Receiving fixed discount on cart
         Given there is a promotion "Thanksgiving sale"
         And it gives "$200.00" discount to every order
         And I added product "PHP T-Shirt" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$0.00"
         And my discount should be "-$100.00"
 
@@ -44,8 +44,9 @@ Feature: Receiving fixed discount on cart
         And there is a promotion "Holiday promotion"
         And it gives "$10.00" discount to every order
         And I added product "PHP T-Shirt" to the cart
-        And I addressed it
+        And I addressed the cart
         When I proceed with selecting "DHL" shipping method
+        And I check the details of my cart
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$10.00"
         And my discount should be "-$10.00"
