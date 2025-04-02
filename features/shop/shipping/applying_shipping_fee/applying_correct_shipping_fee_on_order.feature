@@ -1,7 +1,7 @@
 @applying_shipping_fee
 Feature: Apply correct shipping fee on order
     In order to decide on amount paid for shipment
-    As a Customer
+    As a Visitor
     I want to have shipping fee applied based on chosen shipping method
 
     Background:
@@ -10,7 +10,6 @@ Feature: Apply correct shipping fee on order
         And the store has "DHL" shipping method with "$10.00" fee
         And the store has "FedEx" shipping method with "$30.00" fee
         And the store has "UPS" shipping method with "$5.00" fee per unit for "United States" channel
-        And I am a logged in customer
 
     @api @ui
     Scenario: Adding proper shipping fee

@@ -1,7 +1,7 @@
 @paying_for_order
 Feature: Changing the offline payment method after order confirmation
     In order to try different payment methods
-    As a Guest
+    As a Visitor
     I want to be able to change the method after order confirmation
 
     Background:

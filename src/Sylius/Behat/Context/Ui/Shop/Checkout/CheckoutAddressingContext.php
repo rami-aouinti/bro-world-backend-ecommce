@@ -237,11 +237,15 @@ final readonly class CheckoutAddressingContext implements Context
             $address = $this->createDefaultAddress();
         }
 
-        $this->addressPage->open();
-        $this->iSpecifyTheBillingAddressAs($address);
+        if (!$this->addressPage->isOpen()) {
+            $this->addressPage->open();
+        }
+        $this->addressPage->specifyBillingAddress($address);
 
-        $key = sprintf('shipping_address_%s_%s', strtolower((string) $address->getFirstName()), strtolower((string) $address->getLastName()));
-        $this->sharedStorage->set($key, $address);
+        $billingKey = sprintf('billing_address_%s_%s', strtolower((string) $address->getFirstName()), strtolower((string) $address->getLastName()));
+        $shippingKey = sprintf('shipping_address_%s_%s', strtolower((string) $address->getFirstName()), strtolower((string) $address->getLastName()));
+        $this->sharedStorage->set($billingKey, $address);
+        $this->sharedStorage->set($shippingKey, $address);
 
         $this->addressPage->nextStep();
     }

@@ -1,7 +1,7 @@
 @paying_for_order
 Feature: Paying Offline during checkout as guest
     In order to pay with cash or by external means
-    As a Guest
+    As a Visitor
     I want to be able to complete checkout process without paying
 
     Background:

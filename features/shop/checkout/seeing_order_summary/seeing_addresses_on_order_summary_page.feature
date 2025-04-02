@@ -1,7 +1,7 @@
 @checkout
 Feature: Seeing order addresses on order summary page
     In order to be certain about shipping and billing address
-    As a Customer
+    As a Visitor
     I want to be able to see addresses on the order summary page
 
     Background:
@@ -9,11 +9,12 @@ Feature: Seeing order addresses on order summary page
         And the store has a product "Lannister Coat" priced at "$19.99"
         And the store ships everywhere for Free
         And the store allows paying with "Cash on Delivery"
-        And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Seeing the same shipping and billing address on order summary
-        When I add product "Lannister Coat" to the cart
+        Given I added product "Lannister Coat" to the cart
+        When I am at the checkout addressing step
+        And I specify the email as "jon.snow@example.com"
         And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         And I should be on the checkout summary step
@@ -21,8 +22,9 @@ Feature: Seeing order addresses on order summary page
 
     @api @ui @mink:chromedriver
     Scenario: Seeing different shipping and billing address on order summary
-        When I add product "Lannister Coat" to the cart
-        And I am at the checkout addressing step
+        Given I added product "Lannister Coat" to the cart
+        When I am at the checkout addressing step
+        And I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step

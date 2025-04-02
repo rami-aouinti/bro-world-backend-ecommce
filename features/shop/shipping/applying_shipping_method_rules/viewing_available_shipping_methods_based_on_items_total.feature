@@ -1,7 +1,7 @@
 @applying_shipping_method_rules
 Feature: Viewing available shipping methods based on items total
     In order to only see applicable shipping methods
-    As a Customer
+    As a Visitor
     I want to see the shipping methods that are available to my order
 
     Background:
@@ -13,7 +13,6 @@ Feature: Viewing available shipping methods based on items total
         And the store has "Below $29.99" shipping method with "$10.00" fee
         And this shipping method is only available for orders under or equal to "$29.99"
         And the store has "DHL" shipping method with "$20.00" fee
-        And I am a logged in customer
 
     @api @ui
     Scenario: Seeing shipping methods that handle expensive goods

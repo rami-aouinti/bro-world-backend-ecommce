@@ -1,7 +1,7 @@
 @applying_promotion_rules
 Feature: Receiving discount based on customer group
     In order to apply discount only for selected customer group
-    As a Customer
+    As a Visitor
     I want to have a discount applied when I belong to a specific customer group
 
     Background:
@@ -11,9 +11,10 @@ Feature: Receiving discount based on customer group
         And there is a promotion "Wholesale promotion"
         And the promotion gives "10%" off the order for customers from "Wholesale" group
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Not logged in customer should not receive discount
-        When I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$80.00"
         And there should be no discount applied
 

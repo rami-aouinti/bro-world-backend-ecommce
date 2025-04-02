@@ -44,6 +44,7 @@ final readonly class CartContext implements Context
         private ProductVariantResolverInterface $productVariantResolver,
         private RandomnessGeneratorInterface $generator,
         private SharedStorageInterface $sharedStorage,
+        private string $guestCartTokenFilePath,
     ) {
     }
 
@@ -170,6 +171,8 @@ final readonly class CartContext implements Context
                 /** @var CustomerInterface $customer */
                 $email = $user->getCustomer()->getEmail();
             }
+        } else {
+            file_put_contents($this->guestCartTokenFilePath, $tokenValue);
         }
 
         $pickupCart = new PickupCart(
