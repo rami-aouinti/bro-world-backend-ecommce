@@ -15,11 +15,16 @@ namespace Sylius\Behat\Element;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use FriendsOfBehat\PageObjectExtension\Element\Element;
+use Sylius\Behat\Service\DriverHelper;
 
 class SaveElement extends Element implements SaveElementInterface
 {
     public function saveChanges(): void
     {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->getDocument()->find('css', 'body')->click();
+            DriverHelper::waitForPageToLoad($this->getSession());
+        }
         try {
             $this->getElement('update_changes_button')->press();
         } catch (ElementNotFoundException) {
