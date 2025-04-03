@@ -11,32 +11,32 @@ Feature: Changing the offline payment method after order confirmation
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for Free
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Retrying the payment with different Offline payment
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
         And I retry the payment with "Offline" payment method
         Then I should have chosen "Offline" payment method
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Retrying the payment with different Offline payment works correctly together with inventory
         Given there is 1 unit of product "PHP T-Shirt" available in the inventory
         And this product is tracked by the inventory
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
         And I retry the payment with "Offline" payment method
         Then I should have chosen "Offline" payment method
 
-    @todo-api @ui @mink:chromedriver
+    @todo-api @ui
     Scenario: Being unable to pay for my order if my chosen payment method gets disabled
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -44,10 +44,10 @@ Feature: Changing the offline payment method after order confirmation
         And I try to pay for my order
         Then I should be notified to choose a payment method
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Retrying the payment with different payment method after order confirmation when the original is disabled
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -55,10 +55,10 @@ Feature: Changing the offline payment method after order confirmation
         And I retry the payment with "Offline" payment method
         Then I should have chosen "Offline" payment method
 
-    @todo-api @ui @mink:chromedriver
+    @todo-api @ui
     Scenario: Being unable to pay for my order if no methods are available
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -69,8 +69,8 @@ Feature: Changing the offline payment method after order confirmation
 
     @api @no-ui
     Scenario: Changing chosen Offline payment method to another Offline payment method after checkout
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -81,8 +81,8 @@ Feature: Changing the offline payment method after order confirmation
     Scenario: Changing the payment method to a different Offline payment method works correctly together with inventory
         Given there is 1 unit of product "PHP T-Shirt" available in the inventory
         And this product is tracked by the inventory
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -91,8 +91,8 @@ Feature: Changing the offline payment method after order confirmation
 
     @api @no-ui
     Scenario: Changing chosen Offline payment method to another Offline payment method after checkout when the original is disabled
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order

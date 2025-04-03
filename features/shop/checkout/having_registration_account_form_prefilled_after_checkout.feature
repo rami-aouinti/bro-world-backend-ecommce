@@ -10,10 +10,10 @@ Feature: Having registration form prefilled after checkout
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Having prefilled registration form after checkout
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method and "Offline" payment
         And I confirm my order
         Then I should see the thank you page

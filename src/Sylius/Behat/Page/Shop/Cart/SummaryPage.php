@@ -129,6 +129,7 @@ class SummaryPage extends ShopPage implements SummaryPageInterface
     public function changeQuantity(string $productName, string $quantity): void
     {
         $this->getElement('item_quantity', ['%name%' => $productName])->setValue($quantity);
+        $this->getDocument()->find('css', 'body')->click();
         $this->waitForComponentsUpdate();
     }
 

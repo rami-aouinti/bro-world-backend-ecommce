@@ -9,11 +9,11 @@ Feature: Changing address during checkout
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And the store ships everywhere for Free
 
-    @no-api @ui @javascript
+    @no-api @ui
     Scenario: Going back to addressing step with and changing email
-        When I add product "T-Shirt banana" to the cart
-        And I go to the checkout addressing step
-        And I specify the email as "jon.snow@example.com"
+        Given I added product "T-Shirt banana" to the cart
+        And I am at the checkout addressing step
+        When I specify the email as "jon.snow@example.com"
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I decide to change my address
