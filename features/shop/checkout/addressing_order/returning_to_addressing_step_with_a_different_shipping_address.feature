@@ -41,7 +41,7 @@ Feature: Returning to addressing step with a different shipping address
         And I decide to change my address
         And shipping address should be visible
 
-    @no-api @ui
+    @no-api @ui @javascript
     Scenario: Going back to addressing step after not submitting a different shipping address
         Given I added product "Summer T-Shirt" to the cart
         And I am at the checkout addressing step
@@ -49,4 +49,4 @@ Feature: Returning to addressing step with a different shipping address
         And I specify the billing address as "Brooklyn", "9036 Country Club Ave.", "11230", "United States" for "John Doe"
         And I complete the addressing step
         And I decide to change my address
-        And shipping address should not be visible
+        Then shipping address should not be visible
