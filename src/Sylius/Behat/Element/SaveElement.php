@@ -31,6 +31,7 @@ class SaveElement extends Element implements SaveElementInterface
             // Fallback for elements with different data-test attributes
             $this->getElement('save_changes_button')->press();
         }
+        DriverHelper::waitForPageToLoad($this->getSession());
     }
 
     protected function getDefinedElements(): array
