@@ -69,8 +69,8 @@ Feature: Changing the offline payment method after order confirmation
 
     @api @no-ui
     Scenario: Changing chosen Offline payment method to another Offline payment method after checkout
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -81,8 +81,8 @@ Feature: Changing the offline payment method after order confirmation
     Scenario: Changing the payment method to a different Offline payment method works correctly together with inventory
         Given there is 1 unit of product "PHP T-Shirt" available in the inventory
         And this product is tracked by the inventory
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order
@@ -91,8 +91,8 @@ Feature: Changing the offline payment method after order confirmation
 
     @api @no-ui
     Scenario: Changing chosen Offline payment method to another Offline payment method after checkout when the original is disabled
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with selecting "Free" shipping method
         And I proceed with selecting "Cash on delivery" payment method
         And I confirm my order

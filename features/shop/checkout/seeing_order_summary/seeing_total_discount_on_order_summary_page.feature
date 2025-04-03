@@ -19,7 +19,8 @@ Feature: Seeing order promotion total on order summary page
         Given I added product "The Sorting Hat" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order promotion total should be "-$9.00"

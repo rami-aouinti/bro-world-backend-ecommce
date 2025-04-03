@@ -16,7 +16,8 @@ Feature: Selecting an order payment method
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
         And I select "Bank transfer" payment method
@@ -28,7 +29,8 @@ Feature: Selecting an order payment method
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I select "Free" shipping method
         And I complete the shipping step
         And I select "Bank transfer" payment method

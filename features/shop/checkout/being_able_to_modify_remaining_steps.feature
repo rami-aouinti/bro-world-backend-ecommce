@@ -17,7 +17,8 @@ Feature: Changing checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
         And I complete the addressing step
@@ -28,7 +29,8 @@ Feature: Changing checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
@@ -37,10 +39,11 @@ Feature: Changing checkout steps
 
     @no-api @ui @javascript
     Scenario: Addressing my order after selecting shipping method
-        Given I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I have proceeded selecting "Free" shipping method
         And I go back to addressing step of the checkout
         And I change the shipping address to "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
@@ -52,7 +55,8 @@ Feature: Changing checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I have proceeded selecting "Free" shipping method
         And I go back to shipping step of the checkout
         And I select "Raven Post" shipping method
@@ -64,7 +68,8 @@ Feature: Changing checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I go back to shipping step of the checkout
         And I select "Raven Post" shipping method
@@ -76,7 +81,8 @@ Feature: Changing checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I have proceeded order with "Free" shipping method and "Offline" payment
         And I go back to payment step of the checkout
         And I select "Bank transfer" payment method

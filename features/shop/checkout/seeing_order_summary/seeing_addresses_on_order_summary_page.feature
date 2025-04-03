@@ -15,7 +15,8 @@ Feature: Seeing order addresses on order summary page
         Given I added product "Lannister Coat" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         And I should be on the checkout summary step
         And address to "Jon Snow" should be used for both shipping and billing of my order

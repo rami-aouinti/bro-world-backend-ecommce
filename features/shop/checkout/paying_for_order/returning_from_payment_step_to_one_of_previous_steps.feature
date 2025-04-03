@@ -15,7 +15,8 @@ Feature: Returning from payment step to one of previous steps
         Given I added product "Hulk Mug" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I complete the shipping step
         And I decide to change order shipping method
         Then I should be redirected to the shipping step
@@ -26,7 +27,8 @@ Feature: Returning from payment step to one of previous steps
         Given I added product "Hulk Mug" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I complete the shipping step
         And I go to the shipping step
         Then I should be redirected to the shipping step
@@ -37,7 +39,8 @@ Feature: Returning from payment step to one of previous steps
         Given I added product "Hulk Mug" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I complete the shipping step
         And I go to the addressing step
         Then I should be redirected to the addressing step

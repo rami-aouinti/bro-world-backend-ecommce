@@ -23,7 +23,8 @@ Feature: Preventing payment step completion without a selected method
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with selecting "Free" shipping method
         Then I should not be able to complete the payment step
         And there should be information about no payment methods available for my order
@@ -44,7 +45,8 @@ Feature: Preventing payment step completion without a selected method
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
@@ -68,7 +70,8 @@ Feature: Preventing payment step completion without a selected method
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
@@ -80,7 +83,8 @@ Feature: Preventing payment step completion without a selected method
         And this payment method is disabled
         And the store has "Cash on Delivery" payment method not assigned to any channel
         And I have product "PHP T-Shirt" in the cart
-        When I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        When I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with selecting "Free" shipping method
         When I check the details of my cart
         Then I should see that no payment method is assigned
@@ -94,7 +98,8 @@ Feature: Preventing payment step completion without a selected method
         And I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the email as "jon.snow@example.com"
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
         And I proceed with selecting "Free" shipping method
         And I do not select any payment method
         Then I should not be able to complete the payment step
