@@ -25,6 +25,7 @@ class SaveElement extends Element implements SaveElementInterface
             $this->getDocument()->find('css', 'body')->click();
             DriverHelper::waitForPageToLoad($this->getSession());
         }
+
         try {
             $this->getElement('update_changes_button')->press();
         } catch (ElementNotFoundException) {
