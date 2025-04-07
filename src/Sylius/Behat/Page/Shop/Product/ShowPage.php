@@ -61,6 +61,12 @@ class ShowPage extends ShopPage implements ShowPageInterface
         $this->waitForElementToBeReady();
     }
 
+    public function updateQuantity(int $quantity): void
+    {
+        $this->getElement('quantity')->setValue((string) $quantity);
+        $this->waitForElementUpdate('add_to_cart_component');
+    }
+
     public function addToCartWithVariant(string $variant): void
     {
         $this->selectVariant($variant);
@@ -197,6 +203,11 @@ class ShowPage extends ShopPage implements ShowPageInterface
         }
 
         return $this->getElement('add_to_cart_button') !== null && false === $this->getElement('add_to_cart_button')->hasAttribute('disabled');
+    }
+
+    public function hasAddToCartButtonEnabled(): bool
+    {
+        return $this->getElement('add_to_cart_button')->hasAttribute('disabled') === false;
     }
 
     public function hasAssociation(string $productAssociationName): bool
