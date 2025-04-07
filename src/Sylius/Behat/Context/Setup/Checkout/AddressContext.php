@@ -15,16 +15,14 @@ namespace Sylius\Behat\Context\Setup\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Core\Factory\AddressFactoryInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final readonly class AddressContext implements Context
 {
-    /** @param AddressFactoryInterface<AddressInterface> $addressFactory */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private MessageBusInterface $commandBus,
@@ -35,6 +33,7 @@ final readonly class AddressContext implements Context
 
     #[Given('I addressed the cart')]
     #[Given('I addressed the cart to :countryName')]
+    #[Given('the customer addressed the cart')]
     public function iAddressedTheCart(?string $countryName = null): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
@@ -45,37 +44,20 @@ final readonly class AddressContext implements Context
             $address = $this->addressFactory->createDefaultWithCountryCode($countryCode) :
             $address = $this->addressFactory->createDefault();
 
-        $command = new UpdateCart(orderTokenValue: $cartToken, email: null, billingAddress: $address);
-        $this->commandBus->dispatch($command);
+        $this->commandBus->dispatch(new UpdateCart(
+            orderTokenValue: $cartToken,
+            billingAddress: $address,
+        ));
     }
 
-    /**
-     * @Given /^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
-     */
+    #[Given('/^I have specified the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/')]
     public function iHaveSpecifiedDefaultBillingAddressForName(): void
     {
         $cartToken = $this->sharedStorage->get('cart_token');
 
-        $command = new UpdateCart(
+        $this->commandBus->dispatch(new UpdateCart(
             orderTokenValue: $cartToken,
-            email: null,
-            billingAddress: $this->getDefaultAddress(),
-        );
-        $this->commandBus->dispatch($command);
-    }
-
-    private function getDefaultAddress(): AddressInterface
-    {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
-
-        $address->setCity('New York');
-        $address->setStreet('Wall Street');
-        $address->setPostcode('00-001');
-        $address->setCountryCode('US');
-        $address->setFirstName('Richy');
-        $address->setLastName('Rich');
-
-        return $address;
+            billingAddress: $this->addressFactory->createDefaultWithCountryCode('US'),
+        ));
     }
 }
