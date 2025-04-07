@@ -713,19 +713,14 @@ final class CheckoutContext implements Context
         throw new \Exception(sprintf('Payment method %s not found in response.', $paymentMethod->getName()));
     }
 
-    /**
-     * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
-     */
+    #[Then('I should not be able to confirm order because products do not fit :shippingMethod requirements')]
     public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(
         ShippingMethodInterface $shippingMethod,
     ): void {
-        $this->iConfirmMyOrder();
-
         $response = $this->client->getLastResponse();
 
         Assert::same($response->getStatusCode(), 422);
-
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $response,
             sprintf(
                 'Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
@@ -1170,7 +1165,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatThisProductHasBeenDisabled(ProductInterface $product): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             sprintf('This product %s has been disabled.', $product->getName()),
         ));
@@ -1181,7 +1176,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatThisProductDoesNotExist(ProductInterface $product): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             sprintf('The product %s does not exist.', $product->getName()),
         ));
@@ -1192,7 +1187,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatProductVariantDoesNotExist(ProductVariantInterface $productVariant): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             sprintf('The product variant %s does not exist.', $productVariant->getCode()),
         ));
@@ -1203,7 +1198,7 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeInformedThatProductVariantWithCodeDoesNotExist(string $code): void
     {
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $this->client->getLastResponse(),
             sprintf('The product variant %s does not exist.', $code),
         ));
@@ -1245,7 +1240,7 @@ final class CheckoutContext implements Context
 
         Assert::same($response->getStatusCode(), 422);
 
-        Assert::true($this->isViolationWithMessageInResponse(
+        Assert::true($this->responseChecker->isViolationWithMessageInResponse(
             $response,
             sprintf(
                 'This payment method %s has been disabled. Please reselect your payment method.',
@@ -1445,22 +1440,6 @@ final class CheckoutContext implements Context
             'Please select proper province.',
             sprintf('%s.%s', $addressType, 'provinceCode'),
         ));
-    }
-
-    private function isViolationWithMessageInResponse(Response $response, string $message, ?string $property = null): bool
-    {
-        $violations = $this->responseChecker->getResponseContent($response)['violations'];
-        foreach ($violations as $violation) {
-            if ($violation['message'] === $message && $property === null) {
-                return true;
-            }
-
-            if ($violation['message'] === $message && $property !== null && $violation['propertyPath'] === $property) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private function addressOrderWithCountryAndEmail(CountryInterface $country, ?string $email = null): void
