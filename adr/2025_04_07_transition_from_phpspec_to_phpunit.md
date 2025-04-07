@@ -37,9 +37,11 @@ continuing with PHPSpec is beneficial or if a transition to PHPUnit for unit tes
 ### Option 2: Migrate unit tests from PHPSpec to PHPUnit
 
 * **Good**, because aligns Sylius with the broader PHP ecosystem, making contribution easier.
-* **Good**, because reduces tooling complexity by unifying the test suite under a single framework.
+* **Good**, because reduces tooling complexity by removing a niche framework.
 * **Good**, because provides more flexibility in writing unit tests.
 * **Good**, because of better support from IDEs, static analysis tools, and CI/CD pipelines.
+* **Good**, because is directory agnostic, meaning tests can be structured more freely without being tightly coupled 
+  to a specific directory structure.
 * **Bad**, because requires refactoring existing PHPSpec tests to PHPUnit.
 * **Bad**, because developers accustomed to PHPSpec need to adapt to a different testing approach.
 
