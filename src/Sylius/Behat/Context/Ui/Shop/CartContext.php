@@ -47,9 +47,11 @@ final readonly class CartContext implements Context
     ) {
     }
 
-    #[When('I check the details of my cart')]
     #[When('/^I see the summary of my (?:|previous )cart$/')]
     #[When('I check items in my cart')]
+    #[When('I check the details of my cart')]
+    #[When('the customer checks the details of their cart')]
+    #[When('the visitor checks the details of their cart')]
     public function iCheckDetailsOfMyCart(): void
     {
         $this->summaryPage->open();
@@ -280,8 +282,6 @@ final readonly class CartContext implements Context
      * @Given /^I add (this product) to the cart$/
      * @Given /^I have (product "[^"]+") added to the cart$/
      * @Given he added product :product to the cart
-     * @Given /^the visitor has (product "[^"]+") in the cart$/
-     * @Given /^the customer has (product "[^"]+") in the cart$/
      * @When /^the customer adds ("[^"]+" product) to the cart$/
      * @When /^I add ("[^"]+" product) to the (cart)$/
      * @When /^the visitor adds ("[^"]+" product) to the cart$/
@@ -364,10 +364,8 @@ final readonly class CartContext implements Context
         $this->sharedStorage->set('product', $product);
     }
 
-    /**
-     * @Then /^I should be(?: on| redirected to) my cart summary page$/
-     * @Then I should not be able to address an order with an empty cart
-     */
+    #[Then('/^I should be(?: on| redirected to) my cart summary page$/')]
+    #[Then('I should not be able to address an order with an empty cart')]
     public function shouldBeOnMyCartSummaryPage(): void
     {
         $this->summaryPage->waitForRedirect(3);
@@ -466,11 +464,9 @@ final readonly class CartContext implements Context
         Assert::same($this->summaryPage->getQuantity($productName), $quantity);
     }
 
-    /**
-     * @Then /^the customer can see "([^"]+)" product in the cart$/
-     * @Then /^the visitor can see "([^"]+)" product in the cart$/
-     */
-    public function theCustomerCanSeeProductInTheCart(string $productName): void
+    #[Then('/^the customer should see "([^"]+)" product in the cart$/')]
+    #[Then('/^the visitor should see "([^"]+)" product in the cart$/')]
+    public function theCustomerShouldSeeProductInTheCart(string $productName): void
     {
         Assert::true(
             $this->summaryPage->hasItemNamed($productName),

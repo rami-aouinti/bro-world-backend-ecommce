@@ -243,7 +243,8 @@ final class CartContext implements Context
     }
 
     #[When('/^I check the details of my (cart)$/')]
-    #[When('/^I check details of my (cart)$/')]
+    #[When('/^the visitor checks the details of their (cart)$/')]
+    #[When('/^the customer checks the details of their (cart)$/')]
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
@@ -630,9 +631,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^the (?:visitor|customer) can see ("[^"]+" product) in the (cart)$/
+     * @Then /^the (?:visitor|customer) should see ("[^"]+" product) in the (cart)$/
      */
-    public function theVisitorCanSeeProductInTheCart(
+    public function theVisitorShouldSeeProductInTheCart(
         ProductInterface $product,
         string $tokenValue,
         int $quantity = 1,
@@ -716,9 +717,7 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then I should be redirected to my cart summary page
-     */
+    #[Then('I should be redirected to my cart summary page')]
     public function iShouldBeRedirectedToMyCartSummaryPage(): void
     {
         // Intentionally left blank to fulfill context expectation
