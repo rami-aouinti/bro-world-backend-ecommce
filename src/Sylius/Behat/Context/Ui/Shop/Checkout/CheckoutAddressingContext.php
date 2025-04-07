@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
@@ -107,9 +109,7 @@ final readonly class CheckoutAddressingContext implements Context
         $this->addressPage->specifyBillingAddressProvince($provinceName);
     }
 
-    /**
-     * @When I try to open checkout addressing page
-     */
+    #[When('I try to open checkout addressing page')]
     public function iTryToOpenCheckoutAddressingPage(): void
     {
         $this->addressPage->tryToOpen();
@@ -425,18 +425,14 @@ final readonly class CheckoutAddressingContext implements Context
         Assert::false($this->addressPage->checkFormValidationMessage('This form should not contain extra fields.'), 'Found "This form should not contains extra fields." validation message');
     }
 
-    /**
-     * @Then I should be redirected to the addressing step
-     * @Then I should be on the checkout addressing step
-     */
-    public function iShouldBeRedirectedToTheAddressingStep()
+    #[Then('I should be redirected to the addressing step')]
+    #[Then('I should be on the checkout addressing step')]
+    public function iShouldBeRedirectedToTheAddressingStep(): void
     {
         $this->addressPage->verify();
     }
 
-    /**
-     * @Then I should be able to go to the shipping step again
-     */
+    #[Then('I should be able to go to the shipping step again')]
     public function iShouldBeAbleToGoToTheShippingStepAgain(): void
     {
         $this->addressPage->nextStep();
