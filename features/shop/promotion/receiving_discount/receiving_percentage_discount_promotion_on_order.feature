@@ -22,7 +22,8 @@ Feature: Receiving percentage discount promotion on order
     Scenario: Receiving percentage discount does not affect the shipping fee
         Given the store has "DHL" shipping method with "$10.00" fee
         And I added product "PHP T-Shirt" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$90.00"
         And my cart shipping total should be "$10.00"
