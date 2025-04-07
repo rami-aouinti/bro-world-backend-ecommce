@@ -15,7 +15,8 @@ Feature: Not seeing payment method instructions on thank you page if order total
     @no-api @ui
     Scenario: Not being informed about payment instructions on thank you page
         Given I added product "PHP T-Shirt" to the cart
-        And I have proceeded through checkout process with "Free" shipping method
+        And I addressed the cart
+        And I chose "Free" shipping method
         When I confirm my order
         Then I should see the thank you page
         And I should not see any instructions about payment method
