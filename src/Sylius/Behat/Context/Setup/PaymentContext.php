@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -102,9 +103,7 @@ final readonly class PaymentContext implements Context
         $this->paymentMethodManager->flush();
     }
 
-    /**
-     * @Given /^(this payment method) is not using Payum$/
-     */
+    #[Given('/^(this payment method) is not using Payum$/')]
     public function thisPaymentMethodIsNotUsingPayum(PaymentMethodInterface $paymentMethod): void
     {
         /** @var GatewayConfigInterface $gatewayConfig */
