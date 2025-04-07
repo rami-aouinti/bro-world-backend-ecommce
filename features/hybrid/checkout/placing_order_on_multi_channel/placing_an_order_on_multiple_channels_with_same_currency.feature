@@ -22,8 +22,8 @@ Feature: Placing an order on multiple channels with same currency
         Given I changed my current channel to "Web"
         And I added product "PHP T-Shirt" to the cart
         And I addressed the cart
-        When I proceeded with "Free" shipping method and "Offline" payment method
-        And I confirm my order
+        And I chose "Free" shipping method and "Offline" payment method
+        When I confirm my order
         Then the administrator should see that order placed by "customer@example.com" has "USD" currency
 
     @api @ui
