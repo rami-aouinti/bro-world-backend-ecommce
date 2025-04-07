@@ -52,7 +52,12 @@ class ShowPage extends ShopPage implements ShowPageInterface
         $this->getElement('quantity')->setValue($quantity);
         $this->waitForElementUpdate('add_to_cart_component');
 
-        $this->getElement('add_to_cart_button')->click();
+        $buttonElement = $this->getElement('add_to_cart_button');
+        if ($buttonElement->hasAttribute('disabled')) {
+            return;
+        }
+
+        $buttonElement->click();
         $this->waitForElementToBeReady();
     }
 
