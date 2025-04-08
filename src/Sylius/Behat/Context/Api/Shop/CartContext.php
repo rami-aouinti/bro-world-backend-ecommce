@@ -284,10 +284,8 @@ final class CartContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
-     * @Then I should be notified that the quantity of the product :product must be between 1 and 9999
-     */
+    #[Then('/^I should be notified that the quantity of (this product) must be between 1 and 9999$/')]
+    #[Then('I should be notified that the quantity of the product :product must be between 1 and 9999')]
     public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
