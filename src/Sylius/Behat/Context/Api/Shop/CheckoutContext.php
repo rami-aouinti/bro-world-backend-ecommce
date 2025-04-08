@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Given;
 use Behat\Step\Then;
 use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Context\Api\Shop\Checkout\CheckoutShippingContext;
 use Sylius\Behat\Service\Converter\IriConverterInterface;
+use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -68,6 +70,7 @@ final class CheckoutContext implements Context
         private readonly IriConverterInterface $iriConverter,
         private readonly SharedStorageInterface $sharedStorage,
         private readonly RequestFactoryInterface $requestFactory,
+        private readonly AddressFactoryInterface $addressFactory,
         private readonly string $shippingMethodClass,
         private readonly string $paymentMethodClass,
     ) {
@@ -230,9 +233,11 @@ final class CheckoutContext implements Context
      * @When /^the (?:customer|visitor) specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
-    public function iSpecifyTheBillingAddressAs(AddressInterface $address): void
+    #[Given('the customer specify the billing address')]
+    #[Given('the visitor specify the billing address')]
+    public function iSpecifyTheBillingAddressAs(?AddressInterface $address = null): void
     {
-        $this->fillAddress('billingAddress', $address);
+        $this->fillAddress('billingAddress', $address ?? $this->addressFactory->createDefault());
     }
 
     /**
@@ -526,8 +531,10 @@ final class CheckoutContext implements Context
      */
     public function theVisitorHasNoProceedWithShippingMethodInTheCustomerCart(): void
     {
-        $this->getCart();
-        $this->iShouldBeInformedThatCartIsNoLongerAvailable();
+        $response = $this->client->getLastResponse();
+
+        Assert::same($response->getStatusCode(), 404, 'Resource should be inaccessible.');
+        Assert::same($this->responseChecker->getResponseContent($response)['hydra:description'], 'Not Found');
     }
 
     /**

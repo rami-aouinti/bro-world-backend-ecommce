@@ -31,6 +31,7 @@ final readonly class ShippingContext implements Context
 
     #[Given('I chose :shippingMethod shipping method')]
     #[Given('the customer chose :shippingMethod shipping method')]
+    #[Given('the visitor chose :shippingMethod shipping method')]
     public function iChoseShippingMethod(ShippingMethodInterface $shippingMethod): void
     {
         $this->chooseShippingMethod($shippingMethod);

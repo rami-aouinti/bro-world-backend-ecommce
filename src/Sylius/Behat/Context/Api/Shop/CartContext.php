@@ -245,7 +245,8 @@ final class CartContext implements Context
     #[When('/^I check the details of my (cart)$/')]
     #[When('/^the visitor checks the details of their (cart)$/')]
     #[When('/^the customer checks the details of their (cart)$/')]
-    public function iCheckDetailsOfMyCart(string $tokenValue): void
+    #[When('/^the customer tries to check the details of their (cart)$/')]
+    public function iCheckTheDetailsOfMyCart(string $tokenValue): void
     {
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
     }

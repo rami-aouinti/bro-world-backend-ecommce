@@ -31,6 +31,7 @@ final readonly class PaymentContext implements Context
 
     #[Given('I chose :paymentMethod payment method')]
     #[Given('the customer chose :paymentMethod payment method')]
+    #[Given('the visitor chose :paymentMethod payment method')]
     public function iChosePaymentMethod(PaymentMethodInterface $paymentMethod): void
     {
         $this->choosePaymentMethod($paymentMethod);
