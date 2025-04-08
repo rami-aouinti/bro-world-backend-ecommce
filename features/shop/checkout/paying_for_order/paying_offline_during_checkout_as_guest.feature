@@ -1,7 +1,7 @@
 @paying_for_order
 Feature: Paying Offline during checkout as guest
     In order to pay with cash or by external means
-    As a Guest
+    As a Visitor
     I want to be able to complete checkout process without paying
 
     Background:
@@ -11,37 +11,37 @@ Feature: Paying Offline during checkout as guest
         And the store ships everywhere for Free
         And the store allows paying Offline
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Successfully placing an order
         Given this payment method is not using Payum
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        And I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
         And I choose "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Using Payum successfully placing an order
-        When I add product "PHP T-Shirt" to the cart
-        And I complete addressing step with email "john@example.com" and "United States" based billing address
+        Given I added product "PHP T-Shirt" to the cart
+        When I complete addressing step with email "john@example.com" and "United States" based billing address
         And I proceed with "Free" shipping method
         And I choose "Offline" payment method
         And I confirm my order
         Then I should see the thank you page
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui
     Scenario: Successfully placing an order using custom locale
         Given this payment method is not using Payum
-        When I add product "PHP T-Shirt" to the cart
-        And I proceed through checkout process in the "French (France)" locale with email "john@example.com"
+        And I added product "PHP T-Shirt" to the cart
+        When I proceed through checkout process in the "French (France)" locale with email "john@example.com"
         And I confirm my order
         Then I should see the thank you page in "French (France)"
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui
     Scenario: Using Payum successfully placing an order using custom locale
-        When I add product "PHP T-Shirt" to the cart
-        And I proceed through checkout process in the "French (France)" locale with email "john@example.com"
+        Given I added product "PHP T-Shirt" to the cart
+        When I proceed through checkout process in the "French (France)" locale with email "john@example.com"
         And I confirm my order
         Then I should see the thank you page in "French (France)"
 

@@ -26,6 +26,7 @@ Feature: Apply correct shipping fee with taxes on order
         And I addressed the cart
         When I proceed with "DHL" shipping method
         And I choose "Offline" payment method
+        And I check the details of my cart
         Then my cart total should be "$112.30"
         And my cart taxes should be "$2.30"
         And my cart shipping total should be "$12.30"
@@ -36,6 +37,7 @@ Feature: Apply correct shipping fee with taxes on order
         When I proceed with selecting "Germany" as billing country
         And I proceed with "DHL-World" shipping method
         And I choose "Offline" payment method
+        When I check the details of my cart
         Then my cart total should be "$122.00"
         And my cart taxes should be "$2.00"
         And my cart shipping total should be "$22.00"

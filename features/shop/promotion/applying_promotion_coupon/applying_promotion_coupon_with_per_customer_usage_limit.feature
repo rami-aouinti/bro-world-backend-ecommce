@@ -17,7 +17,8 @@ Feature: Applying promotion coupon with per customer usage limit
 
     @api @ui @mink:chromedriver
     Scenario: Receiving discount from valid coupon with a per customer usage limit as a logged in customer
-        When I add product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
@@ -28,7 +29,8 @@ Feature: Applying promotion coupon with per customer usage limit
         And I bought a "PHP T-Shirt" and a "PHP Socks"
         And I used "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        When I add product "PHP T-Shirt" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
@@ -39,7 +41,8 @@ Feature: Applying promotion coupon with per customer usage limit
         And I placed an order "#00000022"
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        When I add product "PHP T-Shirt" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
@@ -52,7 +55,8 @@ Feature: Applying promotion coupon with per customer usage limit
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         But I cancelled this order
-        When I add product "PHP T-Shirt" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
@@ -65,7 +69,8 @@ Feature: Applying promotion coupon with per customer usage limit
         And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
         And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         But I cancelled this order
-        When I add product "PHP T-Shirt" to the cart
+        And I added product "PHP T-Shirt" to the cart
+        When I check the details of my cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"

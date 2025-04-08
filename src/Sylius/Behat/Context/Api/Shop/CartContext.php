@@ -15,6 +15,8 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use ApiPlatform\Metadata\IriConverterInterface;
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\RequestFactoryInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
@@ -78,8 +80,8 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I (?:add|added)(?:| the) (this product) to the (cart)$/
-     * @When /^I (?:add|added)(?:| the) ("[^"]+" product) to the (cart)$/
+     * @When /^I add(?:| the) (this product) to the (cart)$/
+     * @When /^I add(?:| the) ("[^"]+" product) to the (cart)$/
      * @When /^I add(?:| the) (product "[^"]+") to the (cart)$/
      * @When /^the (?:visitor|customer) adds(?:| the) ("[^"]+" product) to the (cart)$/
      */
@@ -205,9 +207,7 @@ final class CartContext implements Context
         $this->changeQuantityOfOrderItem((string) $itemResponse['id'], $quantity, $tokenValue);
     }
 
-    /**
-     * @When /^I remove (product "[^"]+") from the (cart)$/
-     */
+    #[When('/^I remove (product "[^"]+") from the (cart)$/')]
     public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
     {
         $itemResponse = $this->getOrderItemResponseFromProductInCart($product, $tokenValue);
@@ -242,10 +242,8 @@ final class CartContext implements Context
         $this->pickupCart('not_valid');
     }
 
-    /**
-     * @When /^I check details of my (cart)$/
-     * @When /^I check the details of my (cart)$/
-     */
+    #[When('/^I check the details of my (cart)$/')]
+    #[When('/^I check details of my (cart)$/')]
     public function iCheckDetailsOfMyCart(string $tokenValue): void
     {
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
@@ -286,10 +284,8 @@ final class CartContext implements Context
         ));
     }
 
-    /**
-     * @Then /^I should be notified that the quantity of (this product) must be between 1 and 9999$/
-     * @Then I should be notified that the quantity of the product :product must be between 1 and 9999
-     */
+    #[Then('/^I should be notified that the quantity of (this product) must be between 1 and 9999$/')]
+    #[Then('I should be notified that the quantity of the product :product must be between 1 and 9999')]
     public function iShouldBeNotifiedThatTheQuantityOfThisProductMustBeBetween(ProductInterface $product): void
     {
         Assert::true($this->responseChecker->hasViolationWithMessage(
@@ -333,11 +329,9 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^my (cart)'s total should be ("[^"]+")$/
-     * @Then /^my (cart) total should be ("[^"]+")$/
-     * @Then /^the (cart) total should be ("[^"]+")$/
-     */
+    #[Then('/^my (cart)\'s total should be ("[^"]+")$/')]
+    #[Then('/^my (cart) total should be ("[^"]+")$/')]
+    #[Then('/^the (cart) total should be ("[^"]+")$/')]
     public function myCartTotalShouldBe(string $tokenValue, int $total): void
     {
         $response = $this->shopClient->show(Resources::ORDERS, $tokenValue);
@@ -559,10 +553,8 @@ final class CartContext implements Context
         );
     }
 
-    /**
-     * @Then /^(its|theirs) price should be decreased by ("[^"]+")$/
-     * @Then /^(product "[^"]+") price should be decreased by ("[^"]+")$/
-     */
+    #[Then('/^(its) price should be decreased by ("[^"]+")$/')]
+    #[Then('/^(product "[^"]+") price should be decreased by ("[^"]+")$/')]
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
         $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
@@ -590,9 +582,7 @@ final class CartContext implements Context
         $this->compareItemPrice($product->getName(), $pricing - $amount, 'subtotal');
     }
 
-    /**
-     * @Then product :product price should not be decreased
-     */
+    #[Then('product :product price should not be decreased')]
     public function productPriceShouldNotBeDecreased(ProductInterface $product): void
     {
         $this->compareItemPrice($product->getName(), $this->getExpectedPriceOfProductTimesQuantity($product));
@@ -711,13 +701,11 @@ final class CartContext implements Context
         Assert::true($this->hasItemWithNameAndQuantity($response, $product->getName(), $quantity));
     }
 
-    /**
-     * @Then /^my cart shipping total should be ("[^"]+")$/
-     * @Then I should not see shipping total for my cart
-     * @Then /^my cart estimated shipping cost should be ("[^"]+")$/
-     * @Then there should be no shipping fee
-     * @Then my cart shipping should be for Free
-     */
+    #[Then('/^my cart shipping total should be ("[^"]+")$/')]
+    #[Then('I should not see shipping total for my cart')]
+    #[Then('/^my cart estimated shipping cost should be ("[^"]+")$/')]
+    #[Then('there should be no shipping fee')]
+    #[Then('my cart shipping should be for free')]
     public function myCartShippingFeeShouldBe(int $shippingTotal = 0): void
     {
         $response = $this->shopClient->getLastResponse();

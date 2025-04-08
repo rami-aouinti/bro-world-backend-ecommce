@@ -36,7 +36,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     public function create(): void
     {
         if (DriverHelper::isJavascript($this->getDriver())) {
-            $this->getDocument()->find('css', 'body')->click();
+            $this->blur();
             $this->waitForFormUpdate();
         }
         $this->getDocument()->pressButton('Create');

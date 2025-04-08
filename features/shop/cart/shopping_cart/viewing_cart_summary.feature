@@ -17,7 +17,7 @@ Feature: Viewing a cart summary
     Scenario: Viewing information about empty cart after clearing cookies
         Given the store has a product "T-Shirt banana" priced at "$12.54"
         And I added product "T-Shirt banana" to the cart
-        When I am on the summary of my cart page
+        When I check the details of my cart
         And I've been gone for a long time
         And I try to proceed to the checkout
         Then I should see an empty cart

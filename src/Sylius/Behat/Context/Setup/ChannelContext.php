@@ -71,9 +71,7 @@ final class ChannelContext implements Context
         $this->channelManager->flush();
     }
 
-    /**
-     * @Given the store operates on a single channel in "United States"
-     */
+    #[Given('the store operates on a single channel in "United States"')]
     public function storeOperatesOnASingleChannelInUnitedStates(): void
     {
         $defaultData = $this->unitedStatesChannelFactory->create();
@@ -82,9 +80,7 @@ final class ChannelContext implements Context
         $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
-    /**
-     * @Given the store operates on a single channel in the "United States" named :channelName
-     */
+    #[Given('the store operates on a single channel in the "United States" named :channelName')]
     public function storeOperatesOnASingleChannelInTheUnitedStatesNamed(string $channelName): void
     {
         $channelCode = StringInflector::nameToLowercaseCode($channelName);
@@ -293,12 +289,12 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
      * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
      * @When customer view shop on :channel channel
-     * @When I am in the :channel channel
      */
-    public function iChangeMyCurrentChannelTo(ChannelInterface $channel): void
+    #[Given('/^I changed my current (channel to "([^"]+)")$/')]
+    #[Given('I am in the :channel channel')]
+    public function iChangedMyCurrentChannelTo(ChannelInterface $channel): void
     {
         $this->sharedStorage->set('channel', $channel);
         $this->sharedStorage->set('hostname', $channel->getHostname());
