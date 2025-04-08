@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\When;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
@@ -36,9 +37,7 @@ final readonly class CheckoutPaymentContext implements Context
         $this->selectPaymentPage->tryToOpen();
     }
 
-    /**
-     * @When I decide to change order shipping method
-     */
+    #[When('I decide to change order shipping method')]
     public function iDecideToChangeOrderShippingMethod(): void
     {
         $this->selectPaymentPage->changeShippingMethod();

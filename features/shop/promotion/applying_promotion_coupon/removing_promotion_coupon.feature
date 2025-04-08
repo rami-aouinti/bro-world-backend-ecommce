@@ -15,7 +15,7 @@ Feature: Removing promotion coupon
     Scenario: Removing coupon code from cart
         Given I added product "PHP T-Shirt" to the cart
         And this cart has promotion applied with coupon "SANTA2016"
-        When I check details of my cart
+        When I check the details of my cart
         And I remove coupon from my cart
         Then my cart total should be "$100.00"
         And there should be no discount applied

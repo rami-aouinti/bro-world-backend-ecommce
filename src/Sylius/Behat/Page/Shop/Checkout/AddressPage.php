@@ -197,6 +197,10 @@ class AddressPage extends ShopPage implements AddressPageInterface
 
     public function nextStep(): void
     {
+        if (DriverHelper::isJavascript($this->getDriver())) {
+            $this->blur();
+            DriverHelper::waitForPageToLoad($this->getSession());
+        }
         $this->getElement('next_step')->press();
         DriverHelper::waitForPageToLoad($this->getSession());
     }

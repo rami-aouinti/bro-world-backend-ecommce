@@ -22,7 +22,7 @@ Feature: Receiving a discount based on a configured promotion
         Given there is a promotion "First order promotion"
         And it gives "20%" off on the customer's 1st order
         And I added product "Metallica dress" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then my cart total should be "$40.00"
         And my discount should be "-$10.00"
 
@@ -34,7 +34,8 @@ Feature: Receiving a discount based on a configured promotion
         And I added 7 products "Black Sabbath jacket" to the cart
         And I addressed the cart
         When I proceed with "DHL" shipping method
-        Then theirs subtotal price should be decreased by "$70.00"
+        And I check the details of my cart
+        Then its subtotal price should be decreased by "$70.00"
         And my cart total should be "$630.00"
         And my cart shipping total should be "$0.00"
 
@@ -43,7 +44,7 @@ Feature: Receiving a discount based on a configured promotion
         Given there is a promotion "Jacket-trousers pack"
         And it gives "10%" off on every product classified as "Jackets" if order contains any product classified as "Trousers"
         And I added products "Iron Maiden trousers" and "Black Sabbath jacket" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then product "Black Sabbath jacket" price should be discounted by "$10.00"
         And my cart total should be "$170.00"
 
@@ -52,7 +53,7 @@ Feature: Receiving a discount based on a configured promotion
         Given there is a promotion "Greatest promotion"
         And it gives "20%" off on every product classified as "Jackets" and a "$50.00" discount to every order with items total equal at least "$500.00"
         And I added 7 products "Black Sabbath jacket" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then theirs subtotal price should be decreased by "$140.00"
         And my cart total should be "$510.00"
         And my discount should be "-$190.00"
@@ -62,7 +63,7 @@ Feature: Receiving a discount based on a configured promotion
         Given there is a promotion "Formal attire pack"
         And it gives "10%" off on every product classified as "Formal attire" or "Dresses" if order contains any product classified as "Trousers" or "Jackets"
         And I added products "Rammstein bow tie", "Metallica dress" and "Iron Maiden trousers" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then product "Metallica dress" price should be discounted by "$5.00"
         And product "Rammstein bow tie" price should be discounted by "$1.00"
         And my cart total should be "$134.00"
@@ -73,7 +74,7 @@ Feature: Receiving a discount based on a configured promotion
         And it gives "10%" off on every product classified as "Jackets" and "$20.00" discount on every order
         And I added product "Iron Maiden trousers" to the cart
         And I added product "Black Sabbath jacket" to the cart
-        When I check details of my cart
+        When I check the details of my cart
         Then product "Black Sabbath jacket" price should be discounted by "$10.00"
         And my discount should be "-$30.00"
         And my cart total should be "$150.00"

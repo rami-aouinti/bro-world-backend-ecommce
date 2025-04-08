@@ -1,7 +1,7 @@
 @shopping_cart
 Feature: Currency rounding edge case
     In order to pay proper value of my cart
-    As a Visitor
+    As a Customer
     I want to have total value of my cart items rounded properly
 
     Background:
@@ -15,6 +15,7 @@ Feature: Currency rounding edge case
     Scenario: Changing the currency of my cart
         Given I added product "The Pug Mug" to the cart
         When I switch to the "EUR" currency
+        And I check the details of my cart
         Then the grand total value should be "€6.82"
         And the grand total value in base currency should be "$7.00"
 
@@ -22,6 +23,7 @@ Feature: Currency rounding edge case
     Scenario: Changing the currency of my cart
         Given I added 2 products "The Pug Mug" to the cart
         When I switch to the "EUR" currency
+        And I check the details of my cart
         Then the grand total value in base currency should be "$14.00"
         And I should see "The Pug Mug" with unit price "€6.82" in my cart
         But the grand total value should be "€13.63"
