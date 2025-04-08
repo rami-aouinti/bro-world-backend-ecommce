@@ -26,7 +26,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 final readonly class CheckoutAddressingContext implements Context

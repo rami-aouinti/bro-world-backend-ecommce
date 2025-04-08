@@ -162,9 +162,14 @@ final readonly class CheckoutShippingContext implements Context
 
     public function chooseShippingMethod(?ShippingMethodInterface $shippingMethod = null): void
     {
-        $content = $this->responseChecker->getResponseContent(
-            $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token'))),
-        );
+        $response = $this->client->requestGet(sprintf('orders/%s', $this->sharedStorage->get('cart_token')));
+
+        // Lack of authorization
+        if (!$this->responseChecker->isShowSuccessful($response)) {
+            return;
+        }
+
+        $content = $this->responseChecker->getResponseContent($response);
 
         $this->client->requestPatch(
             uri: sprintf(
