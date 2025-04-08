@@ -52,10 +52,10 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
     {
         return array_merge(parent::getDefinedElements(), [
             'channel' => '[data-test-channel-code="%channel_code%"]',
-            'channel_tab' => '[data-test-channel-tab="%channel_code%"]',
+            'channel_accordion' => '[data-test-product-channel-pricings-accordion="%channel_code%"]',
             'channels' => '[data-test-channels]',
-            'original_price' => '[data-test-original-price-in-channel="%channel_code%"]',
-            'price' => '[data-test-price-in-channel="%channel_code%"]',
+            'original_price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_originalPrice',
+            'price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_price',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ]);
     }
@@ -66,7 +66,7 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
             return;
         }
 
-        $this->getElement('channel_tab', ['%channel_code%' => $channelCode])->click();
+        $this->getElement('channel_accordion', ['%channel_code%' => $channelCode])->click();
     }
 
     protected function changeTab(): void
