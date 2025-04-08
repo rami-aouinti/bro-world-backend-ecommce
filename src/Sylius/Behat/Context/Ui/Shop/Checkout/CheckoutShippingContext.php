@@ -72,7 +72,7 @@ final readonly class CheckoutShippingContext implements Context
 
     /**
      * @When I complete the shipping step
-     * @When I complete the shipping step with first shipping method
+     * @When I complete the shipping step with the first shipping method
      */
     public function iCompleteTheShippingStep(): void
     {

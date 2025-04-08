@@ -62,8 +62,8 @@ final readonly class CheckoutShippingContext implements Context
         );
     }
 
-    #[When('I complete the shipping step with first shipping method')]
-    public function iCompleteTheShippingStepWithFirstShippingMethod(): void
+    #[When('I complete the shipping step with the first shipping method')]
+    public function iCompleteTheShippingStepWithTheFirstShippingMethod(): void
     {
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodRepository->findOneBy([]);
