@@ -171,8 +171,12 @@ final readonly class CartContext implements Context
                 /** @var CustomerInterface $customer */
                 $email = $user->getCustomer()->getEmail();
             }
+
+            $this->sharedStorage->set('created_as_guest', false);
         } else {
             file_put_contents($this->guestCartTokenFilePath, $tokenValue);
+
+            $this->sharedStorage->set('created_as_guest', true);
         }
 
         $pickupCart = new PickupCart(

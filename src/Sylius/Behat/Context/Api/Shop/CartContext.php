@@ -23,6 +23,7 @@ use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Context\Api\Resources;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SprintfResponseEscaper;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -58,7 +59,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I see the summary of my ((?:|previous )cart)$/
+     * @When /^I see the summary of my (cart)$/
      * @When /^the visitor try to see the summary of ((?:visitor|customer)'s cart)$/
      * @When /^the (?:visitor|customer) see the summary of ((?:|their )cart)$/
      */
@@ -69,6 +70,12 @@ final class CartContext implements Context
         }
 
         $this->shopClient->show(Resources::ORDERS, $tokenValue);
+    }
+
+    #[When('/^I see the summary of my (previous cart)$/')]
+    public function iSeeTheSummaryOfMyPreviousCart(OrderInterface $cart): void
+    {
+        $this->shopClient->show(Resources::ORDERS, $cart->getTokenValue());
     }
 
     /**
@@ -313,9 +320,13 @@ final class CartContext implements Context
     /**
      * @Then /^I should not have access to the summary of my (previous cart)$/
      */
-    public function iShouldNotHaveAccessToTheSummaryOfMyCart(string $tokenValue): void
+    public function iShouldNotHaveAccessToTheSummaryOfMyCart(OrderInterface $order): void
     {
-        Assert::same($this->shopClient->show(Resources::ORDERS, $tokenValue)->getStatusCode(), Response::HTTP_NOT_FOUND);
+        Assert::same(
+            $this->shopClient->show(Resources::ORDERS, $order->getTokenValue())->getStatusCode(),
+            Response::HTTP_NOT_FOUND,
+            'The access to the summary of the previous cart should be forbidden.',
+        );
     }
 
     /**
@@ -838,6 +849,13 @@ final class CartContext implements Context
 
     private function putProductToCart(ProductInterface $product, ?string $tokenValue, int $quantity = 1): void
     {
+        // Hotfix for a bug that allowed a guest to add a product to the cart belonging to a logged-in user
+        $hasToken = $this->sharedStorage->has('token');
+        $createdAsGuest = $this->sharedStorage->has('created_as_guest') ? $this->sharedStorage->get('created_as_guest') : null;
+        if (!$hasToken && $createdAsGuest === false) {
+            $tokenValue = null;
+        }
+
         $tokenValue ??= $this->pickupCart();
 
         $request = $this->requestFactory->customItemAction(
