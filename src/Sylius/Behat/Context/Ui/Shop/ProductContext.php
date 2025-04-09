@@ -597,7 +597,7 @@ final readonly class ProductContext implements Context
     }
 
     #[Then('I should not be able to add it')]
-    function iShouldNotBeAbleToAddIt(): void
+    public function iShouldNotBeAbleToAddIt(): void
     {
         Assert::false($this->showPage->hasAddToCartButtonEnabled(), 'Add to cart button should be disabled.');
     }
