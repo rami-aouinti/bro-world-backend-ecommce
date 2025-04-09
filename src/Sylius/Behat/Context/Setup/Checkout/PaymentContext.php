@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChoosePaymentMethod;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -37,15 +38,18 @@ final readonly class PaymentContext implements Context
         $this->choosePaymentMethod($paymentMethod);
     }
 
-    public function choosePaymentMethod(PaymentMethodInterface $paymentMethod): void
+    /** @throws SharedStorageElementNotFoundException */
+    public function choosePaymentMethod(?PaymentMethodInterface $paymentMethod = null): void
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
+        $paymentMethodCode = $paymentMethod?->getCode() ?? $this->sharedStorage->get('payment_method')->getCode();
+
         $this->commandBus->dispatch(new ChoosePaymentMethod(
             $order->getTokenValue(),
             $order->getPayments()->first()->getId(),
-            $paymentMethod->getCode(),
+            $paymentMethodCode,
         ));
     }
 }

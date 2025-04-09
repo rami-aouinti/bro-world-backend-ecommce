@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\ChooseShippingMethod;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -37,15 +38,18 @@ final readonly class ShippingContext implements Context
         $this->chooseShippingMethod($shippingMethod);
     }
 
-    public function chooseShippingMethod(ShippingMethodInterface $shippingMethod): void
+    /** @throws SharedStorageElementNotFoundException */
+    public function chooseShippingMethod(?ShippingMethodInterface $shippingMethod = null): void
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
+        $shippingMethodCode = $shippingMethod?->getCode() ?? $this->sharedStorage->get('shipping_method')->getCode();
+
         $this->commandBus->dispatch(new ChooseShippingMethod(
             $order->getTokenValue(),
             $order->getShipments()->first()->getId(),
-            $shippingMethod->getCode(),
+            $shippingMethodCode,
         ));
     }
 }
