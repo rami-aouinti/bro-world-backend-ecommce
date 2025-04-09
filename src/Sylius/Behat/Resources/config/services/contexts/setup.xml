@@ -41,6 +41,9 @@
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.address" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.shipping" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.payment" />
             <argument>%sylius.behat.guest_cart_token_file%</argument>
         </service>
 

@@ -98,9 +98,9 @@ final readonly class CheckoutCompleteContext implements Context
      * @Given the visitor confirm his order
      * @Given the customer confirm his order
      * @Given the customer confirmed the order
-     * @When I confirm my order
      * @When I try to confirm my order
      */
+    #[When('I confirm my order')]
     public function iConfirmMyOrder(): void
     {
         if (!$this->completePage->isOpen()) {
@@ -255,10 +255,8 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::true($this->completePage->hasProductUnitPrice($product, $price));
     }
 
-    /**
-     * @Then /^I should be notified that (this product) does not have sufficient stock$/
-     * @Then I should be notified that product :product does not have sufficient stock
-     */
+    #[Then('/^I should be notified that (this product) does not have sufficient stock$/')]
+    #[Then('I should be notified that product :product does not have sufficient stock')]
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         Assert::true($this->completePage->hasProductOutOfStockValidationMessage($product));

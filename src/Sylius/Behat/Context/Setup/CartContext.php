@@ -15,6 +15,9 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Sylius\Behat\Context\Setup\Checkout\AddressContext;
+use Sylius\Behat\Context\Setup\Checkout\PaymentContext;
+use Sylius\Behat\Context\Setup\Checkout\ShippingContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
@@ -32,7 +35,6 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-
 final readonly class CartContext implements Context
 {
     /**
@@ -44,6 +46,9 @@ final readonly class CartContext implements Context
         private ProductVariantResolverInterface $productVariantResolver,
         private RandomnessGeneratorInterface $generator,
         private SharedStorageInterface $sharedStorage,
+        private AddressContext $addressContext,
+        private ShippingContext $shippingContext,
+        private PaymentContext $paymentContext,
         private string $guestCartTokenFilePath,
     ) {
     }
@@ -64,6 +69,14 @@ final readonly class CartContext implements Context
     public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
+    }
+
+    #[Given('I proceeded through the checkout process')]
+    public function iProceededThroughTheCheckoutProcess(): void
+    {
+        $this->addressContext->addressCart();
+        $this->shippingContext->chooseShippingMethod();
+        $this->paymentContext->choosePaymentMethod();
     }
 
     /**

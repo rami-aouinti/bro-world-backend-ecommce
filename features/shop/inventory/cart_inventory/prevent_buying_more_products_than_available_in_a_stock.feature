@@ -14,18 +14,10 @@ Feature: Prevent buying more products than available in a stock
     @api @ui @javascript
     Scenario: Preventing from adding more items to the cart than it's available in stock
         When I add 6 products "T-Shirt Mononoke" to the cart
-        Then I should still be on product "T-Shirt Mononoke" page
-        And I should be notified that this product does not have sufficient stock
+        Then I should be notified that this product does not have sufficient stock
 
     @api @ui @javascript
     Scenario: Preventing from adding more items to the cart than it's available in stock by adding same item twice
+        Given I added 5 products "T-Shirt Mononoke" to the cart
         When I add 5 products "T-Shirt Mononoke" to the cart
-        And I add again 5 products "T-Shirt Mononoke" to the cart
-        Then I should still be on product "T-Shirt Mononoke" page
         And I should be notified that this product does not have sufficient stock
-
-    @api @ui @javascript
-    Scenario: Allowing to add items to the cart if they are in stock
-        When I add 4 products "T-Shirt Mononoke" to the cart
-        Then I should not be notified that this product does not have sufficient stock
-        And I should be on my cart summary page

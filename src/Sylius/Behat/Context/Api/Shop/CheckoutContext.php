@@ -423,9 +423,9 @@ final class CheckoutContext implements Context
     /**
      * @Given I confirmed my order
      * @Given the customer confirmed the order
-     * @When I confirm my order
      * @When /^the (?:visitor|customer) confirm his order$/
      */
+    #[When('I confirm my order')]
     public function iConfirmMyOrder(): void
     {
         $response = $this->completeOrder();
@@ -564,7 +564,6 @@ final class CheckoutContext implements Context
 
     /**
      * @When I proceed through checkout process
-     * @When I proceeded through checkout process
      */
     public function iProceedThroughCheckoutProcess(): void
     {
@@ -909,6 +908,7 @@ final class CheckoutContext implements Context
      * @Then I should see the thank you page
      * @Then /^the (?:visitor|customer) should see the thank you page$/
      */
+    #[Then('my order should be completed successfully')]
     public function iShouldSeeTheThankYouPage(): void
     {
         Assert::same($this->getCheckoutState(), OrderCheckoutStates::STATE_COMPLETED);
@@ -1125,9 +1125,7 @@ final class CheckoutContext implements Context
         ));
     }
 
-    /**
-     * @Then I should not see the thank you page
-     */
+    #[Then('I should not see the thank you page')]
     public function iShouldNotSeeTheThankYouPage(): void
     {
         Assert::same($this->client->getLastResponse()->getStatusCode(), 422);
@@ -1253,9 +1251,7 @@ final class CheckoutContext implements Context
         $this->assertProvinceMessage(StringInflector::nameToCamelCase($addressType));
     }
 
-    /**
-     * @Then I should be notified that product :product does not have sufficient stock
-     */
+    #[Then('I should be notified that product :product does not have sufficient stock')]
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $variant */
