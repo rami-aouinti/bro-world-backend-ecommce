@@ -19,6 +19,7 @@ use Sylius\Behat\Service\Factory\AddressFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -47,6 +48,34 @@ final readonly class AddressContext implements Context
         );
     }
 
+    #[Given('I addressed the cart with :provinceName province')]
+    public function iAddressedTheCartWithProvince(string $provinceName): void
+    {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithProvinceName($provinceName),
+        );
+    }
+
+    #[Given('/^I addressed the cart with "([^"]+)" as the shipping address$/')]
+    public function iAddressedTheCartWithShippingAddress(
+        string $shippingFullName,
+    ): void {
+        $this->addressCart(
+            shippingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $shippingFullName)),
+        );
+    }
+
+    #[Given('/^I addressed the cart with "([^"]+)" as the billing address and "([^"]+)" as the shipping address$/')]
+    public function iAddressedTheCartWithBillingAndShippingAddress(
+        string $billingFullName,
+        string $shippingFullName,
+    ): void {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $billingFullName)),
+            shippingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $shippingFullName)),
+        );
+    }
+
     #[Given('/^I addressed the cart with email "([^"]+)"$/')]
     #[Given('/^the (?:customer|visitor) addressed the cart with email "([^"]+)"$/')]
     public function iAddressedTheCartWithEmail(string $email): void
@@ -72,16 +101,51 @@ final readonly class AddressContext implements Context
         );
     }
 
-    public function addressCart(?string $cartToken = null, ?string $email = null, ?AddressInterface $billingAddress = null): void
-    {
+    public function addressCart(
+        ?string $cartToken = null,
+        ?string $email = null,
+        ?AddressInterface $billingAddress = null,
+        ?AddressInterface $shippingAddress = null,
+    ): void {
         if ($email === null && $this->sharedStorage->has('user')) {
             $email = $this->sharedStorage->get('user')->getEmail();
         }
 
+        $billingAddress = $billingAddress ?? $shippingAddress ?? $this->addressFactory->createDefault();
+        $shippingAddress = $shippingAddress ?? $billingAddress ?? $this->addressFactory->createDefault();
+
         $this->commandBus->dispatch(new UpdateCart(
             orderTokenValue: $cartToken ?? $this->sharedStorage->get('cart_token'),
             email: $email,
-            billingAddress: $billingAddress ?? $this->addressFactory->createDefault(),
+            billingAddress: $billingAddress,
+            shippingAddress: $shippingAddress,
         ));
+
+        $this->storeAddresses($billingAddress, $shippingAddress);
+    }
+
+    private function storeAddresses(
+        ?AddressInterface $billingAddress = null,
+        ?AddressInterface $shippingAddress = null,
+    ): void {
+        if ($billingAddress === null && $shippingAddress !== null) {
+            $billingAddress = clone $shippingAddress;
+        }
+
+        if ($shippingAddress === null && $billingAddress !== null) {
+            $shippingAddress = clone $billingAddress;
+        }
+
+        $billingKey = sprintf(
+            'billing_address_%s',
+            StringInflector::nameToLowercaseCode($billingAddress->getFirstName() . ' ' . $billingAddress->getLastName())
+        );
+        $this->sharedStorage->set($billingKey, $billingAddress);
+
+        $shippingKey = sprintf(
+            'shipping_address_%s',
+            StringInflector::nameToLowercaseCode($shippingAddress->getFirstName() . ' ' . $shippingAddress->getLastName())
+        );
+        $this->sharedStorage->set($shippingKey, $shippingAddress);
     }
 }
