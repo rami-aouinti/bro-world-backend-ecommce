@@ -39,6 +39,14 @@ final readonly class AddressContext implements Context
         $this->addressCart();
     }
 
+    #[Given('I addressed the cart with my default address')]
+    public function iAddressedTheCartWith(): void
+    {
+        $this->addressCart(
+            billingAddress: $this->sharedStorage->get('user')->getCustomer()->getDefaultAddress(),
+        );
+    }
+
     #[Given('/^I addressed the cart with email "([^"]+)"$/')]
     #[Given('/^the (?:customer|visitor) addressed the cart with email "([^"]+)"$/')]
     public function iAddressedTheCartWithEmail(string $email): void
@@ -66,6 +74,10 @@ final readonly class AddressContext implements Context
 
     public function addressCart(?string $cartToken = null, ?string $email = null, ?AddressInterface $billingAddress = null): void
     {
+        if ($email === null && $this->sharedStorage->has('user')) {
+            $email = $this->sharedStorage->get('user')->getEmail();
+        }
+
         $this->commandBus->dispatch(new UpdateCart(
             orderTokenValue: $cartToken ?? $this->sharedStorage->get('cart_token'),
             email: $email,
