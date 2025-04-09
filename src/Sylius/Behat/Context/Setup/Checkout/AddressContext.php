@@ -39,6 +39,7 @@ final readonly class AddressContext implements Context
         $this->addressCart();
     }
 
+    #[Given('/^I addressed the cart with email "([^"]+)"$/')]
     #[Given('/^the (?:customer|visitor) addressed the cart with email "([^"]+)"$/')]
     public function iAddressedTheCartWithEmail(string $email): void
     {
