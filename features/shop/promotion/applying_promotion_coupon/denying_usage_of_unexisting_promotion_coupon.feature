@@ -11,7 +11,7 @@ Feature: Denying usage of nonexistent promotion coupon
         And this promotion gives "$10.00" discount to every order
         And I am a logged in customer
 
-    @api @ui @mink:chromedriver
+    @api @ui @javascript
     Scenario: Receiving no discount from nonexistent coupon
         Given I added product "PHP T-Shirt" to the cart
         When I check the details of my cart

@@ -239,6 +239,7 @@
             <argument type="service" id="sylius.generator.promotion_coupon" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.fixture.example_factory.promotion" />
+            <argument type="service" id="sylius.command_bus"/>
         </service>
 
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
