@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Behat\Transformation\Transform;
 use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -49,16 +50,13 @@ final readonly class CartContext implements Context
         ) ? $token : null;
     }
 
-    /**
-     * @Transform /^((?:previous|customer|customer's|visitor's|their) cart)$/
-     */
-    public function providePreviousCartToken(): ?string
+    #[Transform('/^(previous cart)$/')]
+    public function providePreviousCart(): ?OrderInterface
     {
-        if ($this->sharedStorage->has('previous_cart_token')) {
-            return $this->sharedStorage->get('previous_cart_token');
-        }
-
-        return $this->provideCartToken();
+        return $this->orderRepository->findOneBy([
+            'tokenValue' => $this->sharedStorage->get('previous_cart_token'),
+            'state' => OrderCheckoutStates::STATE_CART,
+        ]);
     }
 
     /**

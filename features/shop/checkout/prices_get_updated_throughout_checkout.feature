@@ -49,7 +49,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I have selected "Pigeon Mail" shipping method
         And I complete the shipping step
         When the exchange rate of "US Dollar" to "British Pound" is 3.0
-        And I decide to change order shipping method
+        And I decide to change shipping method
         Then the subtotal of "The Pug Mug" item should be "£30.00"
 
     @no-api @ui @javascript

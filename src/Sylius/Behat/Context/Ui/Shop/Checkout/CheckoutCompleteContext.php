@@ -15,8 +15,11 @@ namespace Sylius\Behat\Context\Ui\Shop\Checkout;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Doctrine\ORM\EntityManagerInterface;
 use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
+use Sylius\Behat\Exception\SharedStorageElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
@@ -46,10 +49,20 @@ final readonly class CheckoutCompleteContext implements Context
     ) {
     }
 
-    /**
-     * @When I try to open checkout complete page
-     * @When I want to complete checkout
-     */
+    #[When('I check summary of my order')]
+    public function iCheckSummaryOfMyOrder(): void
+    {
+        $this->completePage->open();
+    }
+
+    #[When('I try to complete checkout')]
+    public function iTryToCompleteCheckout(): void
+    {
+        $this->completePage->open();
+        $this->completePage->confirmOrder();
+    }
+
+    #[When('I try to open checkout complete page')]
     public function iTryToOpenCheckoutCompletePage(): void
     {
         $this->completePage->tryToOpen();
@@ -91,7 +104,7 @@ final readonly class CheckoutCompleteContext implements Context
     public function iConfirmMyOrder(): void
     {
         if (!$this->completePage->isOpen()) {
-            $this->completePage->open();
+            $this->completePage->open($this->getLocaleHeader());
         }
 
         $this->completePage->confirmOrder();
@@ -291,13 +304,9 @@ final readonly class CheckoutCompleteContext implements Context
         Assert::false($this->completePage->hasPaymentMethod());
     }
 
-    /**
-     * @Then I should not be able to confirm order because products do not fit :shippingMethod requirements
-     */
+    #[Then('I should not be able to confirm order because products do not fit :shippingMethod requirements')]
     public function iShouldNotBeAbleToConfirmOrderBecauseDoNotBelongsToShippingCategory(ShippingMethodInterface $shippingMethod): void
     {
-        $this->completePage->confirmOrder();
-
         Assert::same(
             $this->completePage->getValidationErrors(),
             sprintf(
@@ -396,9 +405,7 @@ final readonly class CheckoutCompleteContext implements Context
         throw new UnexpectedPageException('It should not be possible to complete checkout complete step.');
     }
 
-    /**
-     * @Then I should not be able to confirm order because the :shippingMethodName shipping method is not available
-     */
+    #[Then('I should not be able to confirm order because the :shippingMethodName shipping method is not available')]
     public function iShouldNotBeAbleToConfirmOrderBecauseTheShippingMethodIsNotAvailable(string $shippingMethodName): void
     {
         Assert::same(
@@ -416,5 +423,17 @@ final readonly class CheckoutCompleteContext implements Context
     public function iShouldSeeWithUnitPrice(ProductInterface $product, int $unitPrice): void
     {
         Assert::same($this->completePage->getProductUnitPrice($product), $unitPrice);
+    }
+
+    /** @return string[] */
+    private function getLocaleHeader(): array
+    {
+        try {
+            $localeCode = $this->sharedStorage->get('locale_code');
+        } catch (SharedStorageElementNotFoundException) {
+            $localeCode = 'en_US';
+        }
+
+        return ['_locale' => $localeCode];
     }
 }

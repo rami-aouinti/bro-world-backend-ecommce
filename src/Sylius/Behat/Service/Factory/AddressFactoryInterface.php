@@ -16,9 +16,7 @@ namespace Sylius\Behat\Service\Factory;
 use Sylius\Component\Core\Factory\AddressFactoryInterface as BaseAddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 
-/**
- * @implements BaseAddressFactoryInterface<AddressInterface>
- */
+/** @extends BaseAddressFactoryInterface<AddressInterface> */
 interface AddressFactoryInterface extends BaseAddressFactoryInterface
 {
     public function createDefault(): AddressInterface;

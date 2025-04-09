@@ -7,7 +7,7 @@ Feature: Being unable to see details of a cart
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$12.00"
-        And the customer added "PHP T-Shirt" product to the cart
+        And the customer added product "PHP T-Shirt" to the cart
         And I am logged in as an administrator
 
     @api @ui

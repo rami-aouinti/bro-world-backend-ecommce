@@ -24,7 +24,7 @@ Feature: Placing an order after moving back in checkout process
     Scenario: Placing an order after moving back from the checkout summary to the shipping method step but without any shipping method modification
         Given I added product "PHP T-Shirt" to the cart
         And I was at the checkout summary step
-        When I go back to shipping step of the checkout
+        When I go back to the shipping step
         And I return to the checkout summary step
         And I confirm my order
         Then I should see the thank you page

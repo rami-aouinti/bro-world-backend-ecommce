@@ -87,7 +87,8 @@ final readonly class CartContext implements Context
      */
     #[Given('/^I added (product "[^"]+") to the (cart)$/')]
     #[Given('/^I added (this product) to the (cart)$/')]
-    #[Given('/^the customer added ("[^"]+" product) to the (cart)$/')]
+    #[Given('/^the visitor added (product "[^"]+") to the (cart)$/')]
+    #[Given('/^the customer added (product "[^"]+") to the (cart)$/')]
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue);
@@ -114,10 +115,8 @@ final readonly class CartContext implements Context
         $this->sharedStorage->set('variant', $productVariant);
     }
 
-    /**
-     * @Given /^I have (product "[^"]+") with (product option "[^"]+") ([^"]+) in the (cart)$/
-     */
-    public function iAddThisProductWithToTheCart(
+    #[Given('/^I added (product "[^"]+") with (product option "[^"]+") ([^"]+) to the (cart)$/')]
+    public function iAddedProductWithOptionToTheCart(
         ProductInterface $product,
         ProductOptionInterface $productOption,
         string $productOptionValue,
@@ -172,8 +171,12 @@ final readonly class CartContext implements Context
                 /** @var CustomerInterface $customer */
                 $email = $user->getCustomer()->getEmail();
             }
+
+            $this->sharedStorage->set('created_as_guest', false);
         } else {
             file_put_contents($this->guestCartTokenFilePath, $tokenValue);
+
+            $this->sharedStorage->set('created_as_guest', true);
         }
 
         $pickupCart = new PickupCart(

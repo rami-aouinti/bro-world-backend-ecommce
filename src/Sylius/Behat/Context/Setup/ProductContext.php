@@ -49,6 +49,20 @@ use Webmozart\Assert\Assert;
 
 final readonly class ProductContext implements Context
 {
+    /**
+     * @param SharedStorageInterface $sharedStorage
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param ProductFactoryInterface<ProductInterface> $productFactory
+     * @param FactoryInterface<ProductTranslationInterface> $productTranslationFactory
+     * @param FactoryInterface<ProductVariantInterface> $productVariantFactory
+     * @param FactoryInterface<ProductVariantTranslationInterface> $productVariantTranslationFactory
+     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
+     * @param FactoryInterface<ProductOptionInterface> $productOptionFactory
+     * @param FactoryInterface<ProductOptionValueInterface> $productOptionValueFactory
+     * @param FactoryInterface<ProductImageInterface> $productImageFactory
+     * @param FactoryInterface<ProductTaxonInterface> $productTaxonFactory
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ProductRepositoryInterface $productRepository,

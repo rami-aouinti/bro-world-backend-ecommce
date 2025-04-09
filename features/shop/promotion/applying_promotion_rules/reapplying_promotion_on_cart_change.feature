@@ -16,8 +16,8 @@ Feature: Reapplying promotion on cart change
         And the promotion gives "100%" discount on shipping to every order
         And I added product "PHP T-Shirt" to the cart
         And I addressed the cart
-        When I proceed with "DHL" shipping method
-        And I remove product "PHP T-Shirt" from the cart
+        And I chose "DHL" shipping method
+        When I remove product "PHP T-Shirt" from the cart
         Then my cart should be empty
         And there should be no shipping fee
         And there should be no discount applied
@@ -29,8 +29,8 @@ Feature: Reapplying promotion on cart change
         And the promotion gives "100%" discount on shipping to every order
         And I added product "PHP T-Shirt" to the cart
         And I addressed the cart
-        When I chose "DHL" shipping method
-        And I decide to change order shipping method
+        And I chose "DHL" shipping method
+        When I decide to change shipping method
         And I change shipping method to "FedEx"
         And I complete the shipping step
         And I check the details of my cart

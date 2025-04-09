@@ -36,8 +36,14 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Resource\Doctrine\Persistence\RepositoryInterface;
 use Sylius\Resource\Factory\FactoryInterface;
 
-final class ShippingContext implements Context
+final readonly class ShippingContext implements Context
 {
+    /**
+     * @param ShippingMethodRepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
+     * @param RepositoryInterface<ZoneInterface> $zoneRepository
+     * @param ShippingMethodExampleFactory $shippingMethodExampleFactory
+     * @param FactoryInterface<ShippingMethodRuleInterface> $shippingMethodRuleFactory
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -64,9 +70,7 @@ final class ShippingContext implements Context
         ]));
     }
 
-    /**
-     * @Given the store ships everywhere with :shippingMethodName
-     */
+    #[Given('the store ships everywhere with :shippingMethodName')]
     #[Given('the store ships everywhere for :shippingMethodName')]
     public function theStoreShipsEverywhereWith(string $shippingMethodName): void
     {
@@ -107,9 +111,7 @@ final class ShippingContext implements Context
         }
     }
 
-    /**
-     * @Given the store (also )allows shipping with :name
-     */
+    #[Given('the store (also )allows shipping with :name')]
     public function theStoreAllowsShippingMethodWithName(string $name): void
     {
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create(['name' => $name, 'enabled' => true]));
@@ -198,10 +200,8 @@ final class ShippingContext implements Context
         }
     }
 
-    /**
-     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee within the ("[^"]+" zone)$/
-     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee for the (rest of the world)$/
-     */
+    #[Given('/^the store has "([^"]+)" shipping method with ("[^"]+") fee within the ("[^"]+" zone)$/')]
+    #[Given('/^the store has "([^"]+)" shipping method with ("[^"]+") fee for the (rest of the world)$/')]
     public function storeHasShippingMethodWithFeeAndZone(string $shippingMethodName, int $fee, ZoneInterface $zone): void
     {
         $channel = $this->sharedStorage->get('channel');
@@ -319,9 +319,7 @@ final class ShippingContext implements Context
         ]));
     }
 
-    /**
-     * @Given /^the store has disabled "([^"]+)" shipping method with ("[^"]+") fee$/
-     */
+    #[Given('/^the store has disabled "([^"]+)" shipping method with ("[^"]+") fee$/')]
     public function storeHasDisabledShippingMethodWithFee(string $shippingMethodName, int $fee): void
     {
         $channel = $this->sharedStorage->get('channel');
@@ -441,13 +439,11 @@ final class ShippingContext implements Context
         $this->shippingMethodManager->flush();
     }
 
-    /**
-     * @Given /^(this shipping method) requires that all units match to ("([^"]+)" shipping category)$/
-     */
+    #[Given('/^(this shipping method) requires that all units match to ("([^"]+)" shipping category)$/')]
     public function thisShippingMethodRequiresThatAllUnitsMatchToShippingCategory(
         ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory,
-    ) {
+    ): void {
         $shippingMethod->setCategory($shippingCategory);
         $shippingMethod->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL);
         $this->shippingMethodManager->flush();
@@ -545,10 +541,8 @@ final class ShippingContext implements Context
         $this->addRuleToShippingMethod($rule, $shippingMethod);
     }
 
-    /**
-     * @Given /^(this shipping method) has been disabled$/
-     * @Given /^(this shipping method) has been disabled for ("[^"]+" channel)$/
-     */
+    #[Given('/^(this shipping method) has been disabled$/')]
+    #[Given('/^(this shipping method) has been disabled for ("[^"]+" channel)$/')]
     public function thisShippingMethodHasBeenDisabled(ShippingMethodInterface $shippingMethod, ?ChannelInterface $channel = null): void
     {
         /** @var ShippingMethodInterface $shippingMethod */
