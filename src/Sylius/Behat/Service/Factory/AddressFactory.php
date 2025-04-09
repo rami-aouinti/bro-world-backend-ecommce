@@ -50,4 +50,21 @@ final class AddressFactory extends BaseAddressFactory implements AddressFactoryI
 
         return $address;
     }
+
+    public function createDefaultWithProvinceName(string $provinceName): AddressInterface
+    {
+        $address = $this->createDefault();
+        $address->setProvinceName($provinceName);
+
+        return $address;
+    }
+
+    public function createDefaultWithFirstAndLastName(string $firstName, string $lastName): AddressInterface
+    {
+        $address = $this->createDefault();
+        $address->setFirstName($firstName);
+        $address->setLastName($lastName);
+
+        return $address;
+    }
 }
