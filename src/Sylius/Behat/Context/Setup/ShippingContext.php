@@ -41,7 +41,6 @@ final readonly class ShippingContext implements Context
     /**
      * @param ShippingMethodRepositoryInterface<ShippingMethodInterface> $shippingMethodRepository
      * @param RepositoryInterface<ZoneInterface> $zoneRepository
-     * @param ShippingMethodExampleFactory $shippingMethodExampleFactory
      * @param FactoryInterface<ShippingMethodRuleInterface> $shippingMethodRuleFactory
      */
     public function __construct(

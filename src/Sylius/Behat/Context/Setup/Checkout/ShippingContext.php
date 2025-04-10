@@ -45,7 +45,7 @@ final readonly class ShippingContext implements Context
         $this->commandBus->dispatch(new ChooseShippingMethod(
             $order->getTokenValue(),
             $order->getShipments()->first()->getId(),
-            $shippingMethod->getCode()
+            $shippingMethod->getCode(),
         ));
     }
 }

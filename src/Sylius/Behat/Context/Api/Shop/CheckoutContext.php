@@ -506,7 +506,6 @@ final class CheckoutContext implements Context
 
     #[When('I decide to change my address')]
     #[When('I go to the addressing step')]
-
     public function iDecideToChangeMyAddress(): void
     {
         // This step is relevant only for the UI

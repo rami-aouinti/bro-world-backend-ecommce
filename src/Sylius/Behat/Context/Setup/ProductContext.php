@@ -50,7 +50,6 @@ use Webmozart\Assert\Assert;
 final readonly class ProductContext implements Context
 {
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface<ProductInterface> $productRepository
      * @param ProductFactoryInterface<ProductInterface> $productFactory
      * @param FactoryInterface<ProductTranslationInterface> $productTranslationFactory
