@@ -31,6 +31,7 @@ final class AddressFactory extends BaseAddressFactory implements AddressFactoryI
         $address->setStreet('Wall Street');
         $address->setPostcode('00-001');
         $address->setCountryCode('US');
+        $address->setProvinceName('Arkansas');
         $address->setFirstName('Richy');
         $address->setLastName('Rich');
 

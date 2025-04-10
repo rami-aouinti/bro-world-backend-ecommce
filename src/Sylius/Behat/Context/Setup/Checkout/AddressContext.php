@@ -40,19 +40,20 @@ final readonly class AddressContext implements Context
         $this->addressCart();
     }
 
-    #[Given('I addressed the cart with my default address')]
-    public function iAddressedTheCartWith(): void
-    {
-        $this->addressCart(
-            billingAddress: $this->sharedStorage->get('user')->getCustomer()->getDefaultAddress(),
-        );
-    }
-
     #[Given('I addressed the cart with :provinceName province')]
     public function iAddressedTheCartWithProvince(string $provinceName): void
     {
         $this->addressCart(
             billingAddress: $this->addressFactory->createDefaultWithProvinceName($provinceName),
+        );
+    }
+
+    #[Given('/^I addressed the cart with "([^"]+)" as the billing address$/')]
+    public function iAddressedTheCartWithBillingAddress(
+        string $billingFullName,
+    ): void {
+        $this->addressCart(
+            billingAddress: $this->addressFactory->createDefaultWithFirstAndLastName(...explode(' ', $billingFullName)),
         );
     }
 
