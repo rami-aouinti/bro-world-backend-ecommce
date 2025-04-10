@@ -239,6 +239,7 @@ final readonly class CartContext implements Context
 
     #[Then('/^(its) price should be decreased by ("[^"]+")$/')]
     #[Then('/^(its|theirs) subtotal price should be decreased by ("[^"]+")$/')]
+    #[Then('/^the subtotal price of (product "[^"]+") should be decreased by ("[^"]+")$/')]
     #[Then('/^(product "[^"]+") price should be decreased by ("[^"]+")$/')]
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
