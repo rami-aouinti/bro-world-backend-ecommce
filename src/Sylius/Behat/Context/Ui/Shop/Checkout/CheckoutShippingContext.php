@@ -90,7 +90,6 @@ final readonly class CheckoutShippingContext implements Context
     #[When('I go to the shipping step')]
     #[When('I want to complete the shipping step')]
     #[When('the customer wants to complete the shipping step')]
-
     public function iWantToCompleteTheShippingStep(): void
     {
         $this->selectShippingPage->open();

@@ -483,7 +483,8 @@ final readonly class ManagingOrdersContext implements Context
         Assert::same(
             $order['paymentState'],
             strtolower($orderPaymentState),
-            sprintf('Order "%s" does not have "%s" payment state', $order['tokenValue'], $orderPaymentState));
+            sprintf('Order "%s" does not have "%s" payment state', $order['tokenValue'], $orderPaymentState),
+        );
     }
 
     /**
