@@ -9,11 +9,11 @@ Feature:
         And the store has a product "T-Shirt banana" priced at "$12.54"
         And I am a logged in customer
 
-    @no-api @ui @mink:chromedriver
+    @no-api @ui
     Scenario: Updating the cart on checkout
         Given I added product "T-Shirt banana" to the cart
+        And I changed product "T-Shirt banana" quantity to 2 in my cart
         When I check the details of my cart
-        And I change product "T-Shirt banana" quantity to 2
         And I proceed to the checkout
         Then I should be on the checkout addressing page
         And the quantity of "T-Shirt banana" should be 2
