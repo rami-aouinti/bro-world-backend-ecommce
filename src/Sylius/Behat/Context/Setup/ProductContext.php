@@ -601,7 +601,7 @@ final readonly class ProductContext implements Context
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
-        $product = $this->createProduct($productName, 0, $channel);
+        $product = $this->createProduct(productName: $productName, channel: $channel);
 
         $this->saveProduct($product);
     }

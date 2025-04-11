@@ -608,7 +608,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByCustomer($this->getCartResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
     }
 
     /**
