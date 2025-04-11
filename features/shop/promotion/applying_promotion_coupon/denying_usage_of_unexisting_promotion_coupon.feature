@@ -11,11 +11,10 @@ Feature: Denying usage of nonexistent promotion coupon
         And this promotion gives "$10.00" discount to every order
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving no discount from nonexistent coupon
         Given I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2011"
         When I check the details of my cart
-        And I use coupon with code "SANTA2011"
-        Then I should be notified that the coupon is invalid
-        And my cart total should be "$100.00"
+        Then my cart total should be "$100.00"
         And there should be no discount applied

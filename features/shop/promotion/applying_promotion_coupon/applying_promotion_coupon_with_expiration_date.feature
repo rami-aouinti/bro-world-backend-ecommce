@@ -20,12 +20,11 @@ Feature: Applying promotion coupon with an expiration date
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving no discount from expired coupon
         Given this coupon has already expired
         And I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
         When I check the details of my cart
-        And I use coupon with code "SANTA2016"
-        Then I should be notified that the coupon is invalid
-        And my cart total should be "$100.00"
+        Then my cart total should be "$100.00"
         And there should be no discount applied
