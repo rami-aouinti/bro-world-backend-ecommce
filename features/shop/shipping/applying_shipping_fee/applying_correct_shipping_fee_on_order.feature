@@ -33,11 +33,12 @@ Feature: Apply correct shipping fee on order
         Then my cart total should be "$130.00"
         And my cart shipping total should be "$30.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Changing per unit shipping fee after decreasing quantity of item
         Given I added 2 products "PHP T-Shirt" to the cart
         And I addressed the cart
         And I chose "UPS" shipping method
-        When I change "PHP T-Shirt" quantity to 1
+        And I changed product "PHP T-Shirt" quantity to 1 in my cart
+        When I check the details of my cart
         Then my cart total should be "$105.00"
         And my cart shipping total should be "$5.00"
