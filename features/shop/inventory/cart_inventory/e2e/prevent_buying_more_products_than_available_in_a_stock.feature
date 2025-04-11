@@ -1,5 +1,5 @@
 @cart_inventory
-Feature: Prevent buying more products than available in a stock
+Feature: Prevent from buying more products than available in a stock
     In order to buy only available items
     As a Customer
     I want to be prevented from adding items over the available amount
