@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\PhpSpecToPHPUnit\Rector\Class_\CompleteMissingSetUpPropertyRector;
 use Rector\PhpSpecToPHPUnit\Set\MigrationSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\LevelSetList;
@@ -11,26 +10,21 @@ use Rector\TypeDeclaration\Rector\ClassMethod\AddParamTypeDeclarationRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddReturnTypeDeclarationRector;
 use Rector\Visibility\Rector\ClassMethod\ExplicitPublicClassMethodRector;
 
-return static function (RectorConfig $config): void
-{
-    $config->paths([
+return RectorConfig::configure()
+    ->withPaths([
         // __DIR__ . '/src/Sylius/Component/Addressing/spec',
-        __DIR__ . '/src/Sylius/Component/Attribute/spec',
-    ]);
-
-    $config->importNames();
-    $config->removeUnusedImports();
-
-    $config->sets([
+    ])
+    ->withImportNames(removeUnusedImports: true)
+    ->withSets([
         LevelSetList::UP_TO_PHP_82,
         MigrationSetList::PHPSPEC_TO_PHPUNIT,
         PHPUnitSetList::PHPUNIT_90,
-    ]);
-    $config->rules([
+    ])
+    ->withRules([
         AddParamTypeDeclarationRector::class,
         AddReturnTypeDeclarationRector::class,
         ExplicitPublicClassMethodRector::class,
-    ]);
+    ])
 
     // After executing:
     // vendor/bin/rector process -c rector-spec-unit.php
@@ -55,4 +49,4 @@ return static function (RectorConfig $config): void
     //    {
     //        $this->currentClass = new TheCurrentTestedClass();
     //    }
-};
+;
