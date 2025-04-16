@@ -18,7 +18,7 @@ return RectorConfig::configure()
     ->withSets([
         LevelSetList::UP_TO_PHP_82,
         MigrationSetList::PHPSPEC_TO_PHPUNIT,
-        PHPUnitSetList::PHPUNIT_90,
+        PHPUnitSetList::PHPUNIT_100,
     ])
     ->withRules([
         AddParamTypeDeclarationRector::class,
