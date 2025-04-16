@@ -13,14 +13,15 @@ Feature: Selecting order shipping method
 
     @api @ui
     Scenario: Selecting one of available shipping method
-        Given I have product "Targaryen T-Shirt" in the cart
-        And I specified the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        When I select "Raven Post" shipping method
+        Given I added product "Targaryen T-Shirt" to the cart
+        And I addressed the cart
+        When I go to the shipping step
+        And I select "Raven Post" shipping method
         And I complete the shipping step
         Then I should be on the checkout payment step
 
     @api @no-ui
     Scenario: Selecting shipping method before addressing the order
-        Given I have product "Targaryen T-Shirt" in the cart
+        Given I added product "Targaryen T-Shirt" to the cart
         When I select "Raven Post" shipping method
         Then I should be notified that the order should be addressed first

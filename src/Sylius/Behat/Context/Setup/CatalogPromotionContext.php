@@ -188,10 +188,8 @@ final class CatalogPromotionContext implements Context
         $this->entityManager->flush();
     }
 
-    /**
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant) and ("[^"]+" variant)$/
-     * @Given /^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/
-     */
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant) and ("[^"]+" variant)$/')]
+    #[Given('/^there is (?:a|another) catalog promotion "([^"]*)" that reduces price by ("[^"]+") and applies on ("[^"]+" variant)$/')]
     public function thereIsACatalogPromotionThatReducesPriceByAndAppliesOn(
         string $name,
         float $discount,

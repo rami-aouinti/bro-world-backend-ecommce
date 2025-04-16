@@ -58,7 +58,7 @@ Feature: Changing checkout steps
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I have proceeded selecting "Free" shipping method
-        And I go back to shipping step of the checkout
+        And I go back to the shipping step
         And I select "Raven Post" shipping method
         And I complete the shipping step
         Then I should be on the checkout payment step
@@ -71,7 +71,7 @@ Feature: Changing checkout steps
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I have proceeded order with "Free" shipping method and "Offline" payment
-        And I go back to shipping step of the checkout
+        And I go back to the shipping step
         And I select "Raven Post" shipping method
         And I complete the shipping step
         Then I should be on the checkout payment step

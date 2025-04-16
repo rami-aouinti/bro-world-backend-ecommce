@@ -66,6 +66,7 @@ default:
                                 - --disable-background-networking
                                 - --disable-dev-tools
                                 - --disable-extensions
+                                - --disable-password-manager-leak-detection
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension: ~

@@ -11,10 +11,10 @@ Feature: Applying promotion coupon
         And this promotion gives "100%" discount to every order
         And I am a logged in customer
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving full percentage discount for my cart
         Given I added product "PHP T-Shirt" to the cart
+        And I applied the coupon with code "SANTA2016"
         When I check the details of my cart
-        And I use coupon with code "SANTA2016"
         Then my cart total should be "$0.00"
         And my discount should be "-$100.00"

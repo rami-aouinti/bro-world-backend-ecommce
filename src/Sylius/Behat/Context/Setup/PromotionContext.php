@@ -17,6 +17,7 @@ use Behat\Behat\Context\Context;
 use Behat\Step\Given;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
@@ -37,6 +38,7 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final readonly class PromotionContext implements Context
 {
@@ -55,6 +57,7 @@ final readonly class PromotionContext implements Context
         private PromotionCouponGeneratorInterface $couponGenerator,
         private ObjectManager $objectManager,
         private ExampleFactoryInterface $promotionExampleFactory,
+        private MessageBusInterface $commandBus,
     ) {
     }
 
@@ -69,6 +72,15 @@ final readonly class PromotionContext implements Context
             startsAt: (new \DateTime('-3 day'))->format('Y-m-d'),
             endsAt: (new \DateTime('+3 day'))->format('Y-m-d'),
         );
+    }
+
+    #[Given('I applied the coupon with code :couponCode')]
+    public function iAppliedTheCouponWithCode(string $couponCode): void
+    {
+        $this->commandBus->dispatch(new UpdateCart(
+            $this->sharedStorage->get('cart_token'),
+            couponCode: $couponCode,
+        ));
     }
 
     /**

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Step\Then;
+use Behat\Step\When;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Order\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
@@ -44,8 +46,8 @@ final readonly class ManagingOrdersContext implements Context
 
     /**
      * @Given I am browsing orders
-     * @When I browse orders
      */
+    #[When('I browse orders')]
     public function iBrowseOrders(): void
     {
         $this->indexPage->open();
@@ -58,6 +60,12 @@ final readonly class ManagingOrdersContext implements Context
      * @When /^I view the summary of the (order placed by "[^"]+")$/
      */
     public function iViewTheSummaryOfTheOrder(OrderInterface $order): void
+    {
+        $this->showPage->open(['id' => $order->getId()]);
+    }
+
+    #[When('/^I view the summary of the (last order)$/')]
+    public function iViewTheSummaryOfTheLastOrder(OrderInterface $order): void
     {
         $this->showPage->open(['id' => $order->getId()]);
     }
@@ -765,6 +773,12 @@ final readonly class ManagingOrdersContext implements Context
      * @Then /^(this order) should have order payment state "([^"]+)"$/
      */
     public function theOrderShouldHavePaymentState(OrderInterface $order, string $orderPaymentState): void
+    {
+        Assert::true($this->indexPage->isSingleResourceOnPage(['paymentState' => $orderPaymentState]));
+    }
+
+    #[Then('the last order should have order payment state :orderPaymentState')]
+    public function theLastOrderShouldHavePaymentState(string $orderPaymentState): void
     {
         Assert::true($this->indexPage->isSingleResourceOnPage(['paymentState' => $orderPaymentState]));
     }

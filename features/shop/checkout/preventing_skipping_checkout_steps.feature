@@ -17,7 +17,7 @@ Feature: Preventing skipping checkout steps
     Scenario: Skipping shipping checkout step
         Given I added product "PHP T-Shirt" to the cart
         And I addressed the cart
-        When I want to complete checkout
+        When I try to open checkout complete page
         Then I should be on the checkout shipping step
 
     @no-api @ui
@@ -27,14 +27,14 @@ Feature: Preventing skipping checkout steps
         When I want to complete the shipping step
         And I have selected "Free" shipping method
         And I complete the shipping step
-        And I want to complete checkout
+        And I try to open checkout complete page
         Then I should be on the checkout payment step
 
     @no-api @ui
     Scenario: Skipping addressing checkout step
         Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
-        When I want to complete checkout
+        When I try to open checkout complete page
         Then I should be on the checkout addressing step
 
     @no-api @ui
@@ -42,7 +42,7 @@ Feature: Preventing skipping checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I have product "Paganini T-Shirt" in the cart
         And I am at the checkout addressing step
-        When I want to complete checkout
+        When I try to open checkout complete page
         Then I should be on the checkout addressing step
 
     @no-api @ui
@@ -50,7 +50,7 @@ Feature: Preventing skipping checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I have product "Paganini T-Shirt" in the cart
         And I addressed the cart
-        When I want to complete checkout
+        When I try to open checkout complete page
         Then I should be on the checkout shipping step
 
     @no-api @ui
@@ -58,7 +58,7 @@ Feature: Preventing skipping checkout steps
         Given I added product "PHP T-Shirt" to the cart
         And I added product "Paganini T-Shirt" to the cart
         And I addressed the cart
-        When I want to complete checkout
+        When I try to open checkout complete page
         And I have selected "Free" shipping method
         And I complete the shipping step
         And I want to pay for order

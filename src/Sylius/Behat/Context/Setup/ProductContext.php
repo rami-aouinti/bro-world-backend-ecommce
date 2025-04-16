@@ -49,6 +49,19 @@ use Webmozart\Assert\Assert;
 
 final readonly class ProductContext implements Context
 {
+    /**
+     * @param ProductRepositoryInterface<ProductInterface> $productRepository
+     * @param ProductFactoryInterface<ProductInterface> $productFactory
+     * @param FactoryInterface<ProductTranslationInterface> $productTranslationFactory
+     * @param FactoryInterface<ProductVariantInterface> $productVariantFactory
+     * @param FactoryInterface<ProductVariantTranslationInterface> $productVariantTranslationFactory
+     * @param FactoryInterface<ChannelPricingInterface> $channelPricingFactory
+     * @param FactoryInterface<ProductOptionInterface> $productOptionFactory
+     * @param FactoryInterface<ProductOptionValueInterface> $productOptionValueFactory
+     * @param FactoryInterface<ProductImageInterface> $productImageFactory
+     * @param FactoryInterface<ProductTaxonInterface> $productTaxonFactory
+     * @param ProductVariantRepositoryInterface<ProductVariantInterface> $productVariantRepository
+     */
     public function __construct(
         private SharedStorageInterface $sharedStorage,
         private ProductRepositoryInterface $productRepository,
@@ -588,7 +601,7 @@ final readonly class ProductContext implements Context
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
-        $product = $this->createProduct($productName, 0, $channel);
+        $product = $this->createProduct(productName: $productName, channel: $channel);
 
         $this->saveProduct($product);
     }
@@ -661,9 +674,7 @@ final readonly class ProductContext implements Context
         $this->addOptionToProduct($product, $optionName, []);
     }
 
-    /**
-     * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
-     */
+    #[Given('/^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/')]
     public function thereIsQuantityOfProductAvailableInTheInventory(int $quantity, ProductInterface $product): void
     {
         $this->updateOnHand($product, $quantity);
@@ -685,10 +696,8 @@ final readonly class ProductContext implements Context
         $this->updateOnHand($product, 0, true);
     }
 
-    /**
-     * @When other customer has bought :quantity :product products by this time
-     */
-    public function otherCustomerHasBoughtProductsByThisTime($quantity, ProductInterface $product)
+    #[Given('other customer has bought :quantity :product products by this time')]
+    public function otherCustomerHasBoughtProductsByThisTime(int $quantity, ProductInterface $product): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
@@ -697,11 +706,9 @@ final readonly class ProductContext implements Context
         $this->objectManager->flush();
     }
 
-    /**
-     * @Given /^(this product) is tracked by the inventory$/
-     * @Given /^(?:|the )("[^"]+" product) is(?:| also) tracked by the inventory$/
-     */
-    public function thisProductIsTrackedByTheInventory(ProductInterface $product)
+    #[Given('/^(this product) is tracked by the inventory$/')]
+    #[Given('/^(?:|the )("[^"]+" product) is(?:| also) tracked by the inventory$/')]
+    public function thisProductIsTrackedByTheInventory(ProductInterface $product): void
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);

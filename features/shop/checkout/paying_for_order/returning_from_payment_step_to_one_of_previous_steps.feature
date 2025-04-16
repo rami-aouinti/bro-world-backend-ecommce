@@ -18,7 +18,7 @@ Feature: Returning from payment step to one of previous steps
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         And I complete the shipping step
-        And I decide to change order shipping method
+        And I decide to change shipping method
         Then I should be redirected to the shipping step
         And I should be able to go to the payment step again
 

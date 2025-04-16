@@ -339,27 +339,6 @@ final readonly class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer chose ("[^"]+" shipping method)$/
-     */
-    public function theCustomerChoseShippingMethod(ShippingMethodInterface $shippingMethod): void
-    {
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-
-        foreach ($order->getShipments() as $shipment) {
-            $shipment->setMethod($shippingMethod);
-        }
-
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
-        if (!$order->getPayments()->isEmpty()) {
-            $this->stateMachine->apply($order, OrderPaymentTransitions::GRAPH, OrderPaymentTransitions::TRANSITION_PAY);
-        }
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^the customer chose ("[^"]+" payment)$/
      */
     public function theCustomerChosePayment(PaymentMethodInterface $paymentMethod): void
