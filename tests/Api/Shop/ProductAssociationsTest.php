@@ -26,7 +26,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_product_association(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -42,7 +42,7 @@ final class ProductAssociationsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_nothing_if_association_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');

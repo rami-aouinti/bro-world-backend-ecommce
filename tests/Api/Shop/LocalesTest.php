@@ -17,7 +17,7 @@ use Sylius\Tests\Api\JsonApiTestCase;
 
 final class LocalesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_locales(): void
     {
         $this->loadFixturesFromFiles(['channel/channel_without_locales.yaml', 'locale.yaml']);
@@ -27,7 +27,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/locale/get_locales_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_only_locales_from_current_channel(): void
     {
         $this->loadFixturesFromFiles(['locale.yaml', 'channel/channel.yaml']);
@@ -37,7 +37,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/locale/get_locales_from_channel_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_locale(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml']);

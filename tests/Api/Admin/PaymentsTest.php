@@ -32,7 +32,7 @@ final class PaymentsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_payments(): void
     {
         $this->loadFixturesFromFiles([
@@ -51,7 +51,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment/get_payments');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_payments_filtered_by_state(): void
     {
         $this->loadFixturesFromFiles([
@@ -73,7 +73,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment/get_payments_filtered_by_state');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_payments_of_the_specific_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -95,7 +95,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment/get_payment');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_completes_payment(): void
     {
         $this->loadFixturesFromFiles([
@@ -114,7 +114,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment/patch_complete_payment');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_refunds_the_payment(): void
     {
         $this->loadFixturesFromFiles([
@@ -133,7 +133,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment/patch_refund_payment');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_refund_the_payment_if_it_is_not_fulfilled(): void
     {
         $this->loadFixturesFromFiles([
@@ -152,7 +152,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseErrorMessage('Transition "refund" cannot be applied on "new" payment.');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_refund_the_payment_if_it_is_already_refunded(): void
     {
         $this->loadFixturesFromFiles([
@@ -172,7 +172,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseErrorMessage('Transition "refund" cannot be applied on "refunded" payment.');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_refund_the_payment_if_it_is_cancelled(): void
     {
         $this->loadFixturesFromFiles([
@@ -192,7 +192,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseErrorMessage('Transition "refund" cannot be applied on "cancelled" payment.');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_complete_payment_if_it_is_not_in_the_new_state(): void
     {
         $this->loadFixturesFromFiles([

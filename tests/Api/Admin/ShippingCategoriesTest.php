@@ -30,7 +30,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
@@ -47,7 +47,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_shipping_categories(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
@@ -61,7 +61,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_shipping_category(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -84,7 +84,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_an_existing_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);
@@ -109,7 +109,7 @@ final class ShippingCategoriesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_a_shipping_category(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'shipping_category.yaml']);

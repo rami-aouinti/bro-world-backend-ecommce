@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductVariantsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_products_with_original_price(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
@@ -38,7 +38,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_products_without_original_price(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
@@ -53,7 +53,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/product_variant/get_product_variant_with_price_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_product_variant_with_translations(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -73,7 +73,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_product_variant_with_applied_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -97,7 +97,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_nothing_if_variant_not_found(): void
     {
         $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -112,7 +112,7 @@ final class ProductVariantsTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_product_variants(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');

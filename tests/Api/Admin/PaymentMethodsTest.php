@@ -22,7 +22,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_payment_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -48,7 +48,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_payment_methods(): void
     {
         $this->loadFixturesFromFiles([
@@ -67,7 +67,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_payment_method(): void
     {
         $this->loadFixturesFromFiles([
@@ -108,7 +108,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_removes_a_payment_method(): void
     {
         $this->setUpAdminContext();
@@ -127,7 +127,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_a_payment_method(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -172,7 +172,7 @@ final class PaymentMethodsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_update_a_payment_method_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

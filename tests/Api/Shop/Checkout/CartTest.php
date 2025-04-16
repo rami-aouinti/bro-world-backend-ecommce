@@ -28,7 +28,7 @@ final class CartTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_an_empty_cart_as_a_guest(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -40,7 +40,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCreated('shop/checkout/cart/create_cart_as_guest');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_an_empty_cart_as_a_shop_user(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -53,7 +53,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCreated('shop/checkout/cart/create_cart_as_shop_user');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_an_empty_cart_as_a_guest_with_provided_locale(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -65,7 +65,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCreated('shop/checkout/cart/create_cart_with_locale');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_existing_cart_if_customer_has_cart(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -83,7 +83,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCreated('shop/checkout/cart/get_existing_cart_if_customer_has_cart');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_an_empty_cart_as_guest(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -97,7 +97,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/cart/get_empty_cart');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_cart_as_a_guest(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -118,7 +118,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/cart/get_cart');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_adds_item_to_order_as_guest(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -144,7 +144,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCreated('shop/checkout/cart/add_item');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_add_item_to_order_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
@@ -171,7 +171,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_removes_item_from_the_cart(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -195,7 +195,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_remove_item_from_the_cart_if_invalid_id_item(): void
     {
         $this->setUpDefaultDeleteHeaders();
@@ -216,7 +216,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_remove_item_from_the_cart_if_invalid_order_token(): void
     {
         $this->setUpDefaultDeleteHeaders();
@@ -237,7 +237,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_item_quantity_in_cart(): void
     {
         $this->loadFixturesFromFiles([
@@ -269,7 +269,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_update_item_quantity_in_cart_with_missing_fields(): void
     {
         $this->loadFixturesFromFiles([
@@ -300,7 +300,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_update_item_quantity_if_invalid_id_item(): void
     {
         $this->loadFixturesFromFiles([
@@ -323,7 +323,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_email_and_addresses_as_as_a_guest(): void
     {
         $this->setUpDefaultPutHeaders();
@@ -369,7 +369,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/cart/update_cart_as_guest');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_addresses_as_a_shop_user(): void
     {
         $this->setUpDefaultPutHeaders();
@@ -416,7 +416,7 @@ final class CartTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/checkout/cart/update_cart_as_shop_user');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_change_email_as_a_shop_user(): void
     {
         $this->setUpDefaultPutHeaders();
@@ -449,7 +449,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_update_without_items(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml']);
@@ -473,7 +473,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_update_without_required_billing_address(): void
     {
         $this->loadFixturesFromFiles([
@@ -512,7 +512,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_update_without_required_shipping_address(): void
     {
         $this->loadFixturesFromFiles([
@@ -551,7 +551,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_update_with_invalid_data(): void
     {
         $this->loadFixturesFromFiles([
@@ -598,7 +598,7 @@ final class CartTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_cart(): void
     {
         $this->setUpDefaultGetHeaders();

@@ -28,7 +28,7 @@ final class AdjustmentsTest extends JsonApiTestCase
         $this->setUpOrderPlacer();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_not_found_on_get_adjustment(): void
     {
         $this->loadFixturesFromFiles([

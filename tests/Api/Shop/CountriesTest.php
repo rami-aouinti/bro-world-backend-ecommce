@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CountriesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_countries(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'country.yaml']);
@@ -29,7 +29,7 @@ final class CountriesTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/country/get_countries_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_only_countries_from_current_channel(): void
     {
         $this->loadFixturesFromFiles(['channel/channel_with_countries.yaml', 'country.yaml']);
@@ -40,7 +40,7 @@ final class CountriesTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/country/get_countries_from_channel_response', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_country(): void
     {
         $this->loadFixturesFromFiles(['country.yaml']);

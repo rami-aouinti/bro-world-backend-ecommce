@@ -26,7 +26,7 @@ final class ProductOptionValuesTest extends JsonApiTestCase
         $this->setUpAdminContext();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_product_option_value(): void
     {
         $this->setUpDefaultGetHeaders();

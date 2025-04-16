@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonImagesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_taxon_image(): void
     {
         $fixtures = $this->loadFixturesFromFile('taxon_image.yaml');
@@ -45,7 +45,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_taxon_image_with_an_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFile('taxon_image.yaml');
@@ -70,7 +70,7 @@ final class TaxonImagesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_prevents_getting_a_taxon_image_with_an_invalid_image_filter(): void
     {
         $fixtures = $this->loadFixturesFromFile('taxon_image.yaml');

@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductAttributesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_product_attribute_with_translations_in_default_locale(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);
@@ -36,7 +36,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_product_attribute_with_translations_in_locale_from_header(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);

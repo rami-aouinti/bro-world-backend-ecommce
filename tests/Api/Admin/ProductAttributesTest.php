@@ -38,7 +38,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         $this->setUpAdminContext();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_product_attributes(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_attribute.yaml']);
@@ -53,7 +53,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_product_attribute(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -77,7 +77,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_a_product_attribute(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -97,7 +97,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_text_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -130,7 +130,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_another_product_attribute_on_specified_position(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -156,7 +156,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         $this->assertResponseCreated('admin/product_attribute/post_product_attribute_on_specified_position');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_textarea_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -185,7 +185,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_checkbox_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -214,7 +214,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_an_integer_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -243,7 +243,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_float_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -272,7 +272,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_percent_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -301,7 +301,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_datetime_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -333,7 +333,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_date_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -365,7 +365,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_select_product_attribute(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -408,7 +408,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_product_attribute_without_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -428,7 +428,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_product_attribute_with_unregistered_type(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -456,7 +456,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_text_product_attribute_with_invalid_configuration(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -489,7 +489,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_select_product_attribute_with_disabled_multiple_option(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -532,7 +532,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_select_product_attribute_with_invalid_max_entries_configuration(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -575,7 +575,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_select_product_attribute_with_invalid_min_entries_configuration(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -617,7 +617,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_a_product_attribute(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -673,7 +673,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_update_the_code_and_type_of_existing_product_attribute(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -701,7 +701,7 @@ final class ProductAttributesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_update_a_product_attribute_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

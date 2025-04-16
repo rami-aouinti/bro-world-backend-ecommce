@@ -24,7 +24,7 @@ final class ProductAttributeValuesTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_attribute_value(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);

@@ -23,7 +23,7 @@ final class CustomersTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_customers(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
@@ -42,7 +42,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
@@ -64,7 +64,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_customer_statistics(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -91,7 +91,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_customer(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -119,7 +119,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_customer_with_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer_group.yaml']);
@@ -156,7 +156,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_creating_a_customer_with_invalid_email(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -178,7 +178,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_creating_a_customer_with_already_taken_email(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
@@ -200,7 +200,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_creating_a_customer_with_invalid_name(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -224,7 +224,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_creating_a_customer_with_invalid_gender(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -247,7 +247,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_customer(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
@@ -287,7 +287,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_updating_a_customer_with_invalid_gender(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer.yaml']);
@@ -312,7 +312,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_shop_user(): void
     {
         $this->setUpAdminContext();

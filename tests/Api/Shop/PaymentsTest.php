@@ -38,7 +38,7 @@ final class PaymentsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_payment_from_placed_order(): void
     {
         $order = $this->placeOrder();
@@ -48,7 +48,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/payment/get_payment');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_get_another_user_payment(): void
     {
         $order = $this->placeOrder(email: 'another_user@example.com');
@@ -58,7 +58,7 @@ final class PaymentsTest extends JsonApiTestCase
         $this->assertResponseNotFound();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_get_the_shop_user_payment_when_not_authenticated(): void
     {
         $order = $this->placeOrder();

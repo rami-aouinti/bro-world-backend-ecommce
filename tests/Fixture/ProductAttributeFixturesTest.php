@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class ProductAttributeFixturesTest extends KernelTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function fixtures_are_loaded_properly(): void
     {
         $kernel = static::bootKernel();

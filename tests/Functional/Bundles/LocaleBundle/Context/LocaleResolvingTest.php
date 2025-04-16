@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class LocaleResolvingTest extends KernelTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_ignores_accept_language_header_when_locale_is_present_in_url(): void
     {
         $this->loadFixtures([
@@ -44,7 +44,7 @@ final class LocaleResolvingTest extends KernelTestCase
         $this->assertStringContainsString('Your cart is empty.', $content);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_sets_locale_based_on_accept_language_header_when_no_locale_in_url_provided(): void
     {
         $this->loadFixtures([
@@ -68,7 +68,7 @@ final class LocaleResolvingTest extends KernelTestCase
         $this->assertStringContainsString('Nazwa użytkownika', $content);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_redirects_to_default_locale_when_not_defined_in_the_request_nor_header(): void
     {
         $this->loadFixtures([

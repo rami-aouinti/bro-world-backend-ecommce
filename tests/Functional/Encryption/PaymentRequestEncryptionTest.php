@@ -47,11 +47,9 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
         ]);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getPayload
-     */
+    
+    #[\PHPUnit\Framework\Attributes\DataProvider('getPayload')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_covers_encryption_and_decryption_when_saving_and_loading_the_payload(mixed $payload): void
     {
         $paymentRequest = $this->createTestPaymentRequest();
@@ -75,7 +73,7 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
         self::assertNotEquals($payload, $payloadFromDatabase);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_encrypt_and_decrypt_null_payloads(): void
     {
         $paymentRequest = $this->createTestPaymentRequest();
@@ -99,11 +97,9 @@ final class PaymentRequestEncryptionTest extends KernelTestCase
         self::assertNull($payloadFromDatabase);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getResponseData
-     */
+    
+    #[\PHPUnit\Framework\Attributes\DataProvider('getResponseData')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_covers_encryption_and_decryption_when_saving_and_loading_the_response_data(
         array $responseData,
     ): void {

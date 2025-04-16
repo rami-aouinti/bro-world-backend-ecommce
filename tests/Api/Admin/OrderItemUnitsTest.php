@@ -29,7 +29,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_an_order_item_unit(): void
     {
         $this->loadFixturesFromFiles([
@@ -47,7 +47,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/order_item_units/get_order_item_unit_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_adjustments_for_an_order_item_unit(): void
     {
         $this->loadFixturesFromFiles([

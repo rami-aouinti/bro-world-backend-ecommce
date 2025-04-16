@@ -21,18 +21,16 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
 
     private const SHOP_404_PAGE_HOOK = 'The page you are looking for does not exist.';
 
-    /** @before */
+    #[\PHPUnit\Framework\Attributes\Before]
     public function setUpClient(): void
     {
         $this->client = self::createClient(['debug' => false], ['HTTP_ACCEPT' => 'text/html']);
         $this->client->followRedirects();
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getSyliusResourcesUrlPart
-     */
+    
+    #[\PHPUnit\Framework\Attributes\DataProvider('getSyliusResourcesUrlPart')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_shows_admin_not_found_page_for_a_logged_in_admin_when_accessing_nonexistent_resource_edit_page(
         string $syliusResourceUrlPart,
     ): void {
@@ -46,7 +44,7 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
         $this->assertStringContainsString(self::ADMIN_404_PAGE_HOOK, $content);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_shows_admin_not_found_page_for_a_logged_in_admin_when_accessing_an_unknown_url(): void
     {
         $this->loginAdminUser();
@@ -59,7 +57,7 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
         $this->assertStringContainsString(self::ADMIN_404_PAGE_HOOK, $content);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_shows_shop_not_found_page_for_a_visitor_when_accessing_an_unknown_url(): void
     {
         $this->loadFixtures();
@@ -73,7 +71,7 @@ final class AdminSectionNotFoundPageTest extends JsonApiTestCase
     }
 
     /** @return iterable<string[]> */
-    private static function getSyliusResourcesUrlPart(): iterable
+    public static function getSyliusResourcesUrlPart(): iterable
     {
         yield ['users'];
         yield ['catalog-promotions'];

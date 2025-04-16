@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CartCollectorTest extends KernelTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_has_no_cart_when_no_channel_is_present(): void
     {
         $this->loadFixtures([]);
@@ -37,7 +37,7 @@ final class CartCollectorTest extends KernelTestCase
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_has_no_cart_data_when_no_cart_and_no_session_are_available(): void
     {
         $this->loadFixtures([__DIR__ . '/../DataFixtures/ORM/resources/order.yml']);
@@ -48,7 +48,7 @@ final class CartCollectorTest extends KernelTestCase
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_has_no_cart_data_when_cart_is_not_available(): void
     {
         $this->loadFixtures([__DIR__ . '/../DataFixtures/ORM/resources/order.yml']);
@@ -68,7 +68,7 @@ final class CartCollectorTest extends KernelTestCase
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_no_cart_data_when_request_is_stateless(): void
     {
         $sessionFactory = self::getContainer()->get('session.factory');
@@ -96,7 +96,7 @@ final class CartCollectorTest extends KernelTestCase
         $this->assertFalse($collector->hasCart());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_collects_cart_data(): void
     {
         $sessionFactory = self::getContainer()->get('session.factory');

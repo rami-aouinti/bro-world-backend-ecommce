@@ -28,7 +28,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         $this->entityManager = new EntityManager($this->getTestOrmConnection($config), $config);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_appends_order_by_identifier_to_the_query(): void
     {
         self::assertStringEndsWith(
@@ -53,7 +53,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_appends_order_by_identifier_composite_to_the_query(): void
     {
         self::assertStringEndsWith(
@@ -78,7 +78,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_append_order_by_identifier_to_the_query_if_query_is_grouped(): void
     {
         self::assertStringEndsWith(
@@ -89,7 +89,7 @@ final class OrderByIdentifierSqlWalkerTest extends AbstractOrmTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_append_order_by_identifier_to_the_query_if_aggregate_function_is_used(): void
     {
         self::assertStringEndsWith(

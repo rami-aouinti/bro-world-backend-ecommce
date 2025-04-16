@@ -30,7 +30,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->setUpDefaultPatchHeaders();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_customer_as_logged_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -45,7 +45,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/customer/get_customer_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_logs_in(): void
     {
         $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -61,7 +61,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/customer/log_in_customer_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_customer_as_another_logged_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -76,7 +76,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_customer_as_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -88,7 +88,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_registers_a_new_customer(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml']);
@@ -107,7 +107,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_customers_data(): void
     {
         $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
@@ -131,7 +131,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/customer/put_customer_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_sends_reset_password_email(): void
     {
         $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
@@ -150,7 +150,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertEmailCount(1);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_validates_wrong_reset_password_request(): void
     {
         $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
@@ -170,7 +170,7 @@ final class CustomersTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_resets_account_password(): void
     {
         $loadedData = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);
@@ -192,7 +192,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_prevents_from_resetting_password_with_invalid_token(): void
     {
         $this->loadFixturesFromFiles(['authentication/shop_user_with_reset_password_token.yaml', 'channel/channel.yaml']);
@@ -208,7 +208,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_prevents_from_resetting_password_with_expired_token(): void
     {
         $this->loadFixturesFromFiles([
@@ -227,7 +227,7 @@ final class CustomersTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_changes_password(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml', 'channel/channel.yaml']);

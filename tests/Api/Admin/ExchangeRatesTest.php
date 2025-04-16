@@ -22,7 +22,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_an_exchange_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -48,7 +48,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_exchange_rates(): void
     {
         $this->loadFixturesFromFiles([
@@ -71,7 +71,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_an_exchange_rate(): void
     {
         $this->loadFixturesFromFiles([
@@ -99,7 +99,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_an_existing_exchange_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -128,7 +128,7 @@ final class ExchangeRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_an_exchange_rate(): void
     {
         $this->setUpAdminContext();

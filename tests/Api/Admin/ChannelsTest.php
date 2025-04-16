@@ -29,7 +29,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->setUpAdminContext();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_channel(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -46,7 +46,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/channel/get_channel_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_channels(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -57,7 +57,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/channel/get_channels_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_channel(): void
     {
         $this->setUpDefaultPostHeaders();
@@ -108,14 +108,14 @@ final class ChannelsTest extends JsonApiTestCase
     }
 
     /**
-     * @test
      *
-     * @dataProvider getBlankFieldsData
-     * @dataProvider getTooLongFieldsData
      *
      * @param array<string, string> $inputData
      * @param array<string, string> $validation
      */
+    #[\PHPUnit\Framework\Attributes\DataProvider('getBlankFieldsData')]
+    #[\PHPUnit\Framework\Attributes\DataProvider('getTooLongFieldsData')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_prevents_creating_a_channel_with_invalid_data(array $inputData, array $validation): void
     {
         $this->setUpDefaultPostHeaders();
@@ -127,7 +127,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->assertJsonResponseViolations($this->client->getResponse(), [$validation], false);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_an_existing_channel(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -181,7 +181,7 @@ final class ChannelsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_a_channel(): void
     {
         $this->setUpDefaultDeleteHeaders();
@@ -197,7 +197,7 @@ final class ChannelsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_prevents_deleting_the_only_channel(): void
     {
         $this->setUpDefaultDeleteHeaders();
@@ -212,7 +212,7 @@ final class ChannelsTest extends JsonApiTestCase
     /**
      * @return \Generator<array{0: array<string, string>, 1: array<string, string>}>
      */
-    public function getBlankFieldsData(): iterable
+    public static function getBlankFieldsData(): iterable
     {
         $blankFields = [
             'code' => 'channel code',
@@ -234,7 +234,7 @@ final class ChannelsTest extends JsonApiTestCase
     /**
      * @return \Generator<array{0: array<string, string>, 1: array<string, string>}>
      */
-    public function getTooLongFieldsData(): iterable
+    public static function getTooLongFieldsData(): iterable
     {
         $valueOverStringMax = str_repeat('a@', 128);
 

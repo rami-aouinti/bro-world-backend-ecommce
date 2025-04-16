@@ -22,7 +22,7 @@ final class TaxRatesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_tax_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -44,7 +44,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_tax_rates(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -63,7 +63,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_new_tax_rate(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -91,7 +91,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_new_tax_rate_with_default_amount(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -118,7 +118,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_an_existing_tax_rate(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);
@@ -148,7 +148,7 @@ final class TaxRatesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_an_error_when_trying_to_update_with_a_malformed_amount(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'tax_rates.yaml']);

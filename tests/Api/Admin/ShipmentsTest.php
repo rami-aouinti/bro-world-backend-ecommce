@@ -28,7 +28,7 @@ final class ShipmentsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_shipments(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
@@ -53,7 +53,7 @@ final class ShipmentsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_shipment(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
@@ -75,7 +75,7 @@ final class ShipmentsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_ships_shipment(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
@@ -92,7 +92,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_ACCEPTED);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_resends_shipment_confirmation_email(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
@@ -111,7 +111,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertEmailCount(2);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_resends_shipment_confirmation_email_for_shipment_with_invalid_state(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml', 'payment_method.yaml']);
@@ -131,7 +131,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertEmailCount(1);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_adjustments_for_a_shipment(): void
     {
         $this->loadFixturesFromFiles([

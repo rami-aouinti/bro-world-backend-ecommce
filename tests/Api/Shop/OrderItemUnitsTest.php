@@ -30,7 +30,7 @@ final class OrderItemUnitsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_return_an_order_item_unit(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

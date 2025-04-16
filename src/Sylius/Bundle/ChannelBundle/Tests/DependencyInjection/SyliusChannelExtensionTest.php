@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_fallbacks_to_enabled_kernel_debug_parameter_if_debug_is_not_defined(): void
     {
         $this->container->setParameter('kernel.debug', true);
@@ -33,7 +33,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, true);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_fallbacks_to_disabled_kernel_debug_parameter_if_debug_is_not_defined(): void
     {
         $this->container->setParameter('kernel.debug', false);
@@ -43,7 +43,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, false);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_uses_enabled_debug_config_if_defined(): void
     {
         $this->load(['debug' => true]);
@@ -51,7 +51,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, true);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_uses_disabled_debug_config_if_defined(): void
     {
         $this->load(['debug' => false]);
@@ -59,7 +59,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius.collector.channel', 2, false);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_autoconfigures_channel_context_with_attribute(): void
     {
         $this->container->setDefinition(
@@ -79,7 +79,7 @@ final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_autoconfigures_request_based_channel_resolver_with_attribute(): void
     {
         $this->container->setDefinition(

@@ -25,7 +25,7 @@ final class ProvincesTest extends JsonApiTestCase
         $this->setUpDefaultGetHeaders();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_province(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['country.yaml']);

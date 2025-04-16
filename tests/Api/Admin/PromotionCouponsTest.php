@@ -32,7 +32,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_promotion_coupon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -48,7 +48,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion_coupon/get_promotion_coupon_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_promotion_coupons_for_specific_promotion(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -61,7 +61,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion_coupon/get_promotion_coupons_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_an_empty_array_result_when_the_promotion_has_not_exist(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -71,7 +71,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion_coupon/get_empty_promotion_coupons_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_promotion_coupon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -93,7 +93,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseCreated('admin/promotion_coupon/post_promotion_coupon_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_promotion_coupon_if_promotion_does_not_exist(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -112,7 +112,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseNotFound('Parent resource not found.');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_a_promotion_coupon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -136,7 +136,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/promotion_coupon/put_promotion_coupon_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_generates_promotion_coupons(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -159,7 +159,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseCreated('admin/promotion_coupon/generate_promotion_coupons_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_generate_promotion_coupons_with_non_existing_promotion_code(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -183,7 +183,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_removes_a_promotion_coupon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml']);
@@ -199,7 +199,7 @@ final class PromotionCouponsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_delete_a_promotion_coupon_in_use(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'promotion/promotion.yaml', 'promotion/promotion_order.yaml']);

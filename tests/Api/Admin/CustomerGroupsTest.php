@@ -29,7 +29,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
         $this->setUpAdminContext();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_customer_group(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -44,7 +44,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/customer_group/get_customer_group_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_customer_groups(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -56,7 +56,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/customer_group/get_customer_groups_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_customer_group(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -79,7 +79,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_an_existing_customer_group(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer_group.yaml']);
@@ -105,7 +105,7 @@ final class CustomerGroupsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_a_customer_group(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'customer_group.yaml']);

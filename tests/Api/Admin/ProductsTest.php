@@ -23,7 +23,7 @@ final class ProductsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_product(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -49,7 +49,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_products(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product.yaml']);
@@ -68,7 +68,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_products_with_image_filter(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'channel/channel.yaml', 'product/product.yaml']);
@@ -88,7 +88,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_product(): void
     {
         $this->loadFixturesFromFiles([
@@ -146,7 +146,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_product_without_required_data(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -166,7 +166,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_product_with_invalid_translation_locale(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -198,7 +198,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_a_product_when_locale_differs_from_key(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
@@ -227,7 +227,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_the_existing_product(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -313,7 +313,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_update_a_product_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -355,7 +355,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_the_product(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -377,7 +377,7 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NO_CONTENT);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_delete_the_product_in_use(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

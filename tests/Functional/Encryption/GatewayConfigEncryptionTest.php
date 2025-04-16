@@ -61,7 +61,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         ]);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_covers_encryption_and_decryption_when_saving_and_loading(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -87,7 +87,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         self::assertNotSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_encrypt_when_gateway_factory_is_disabled_for_encryption(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -113,7 +113,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         self::assertSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_encrypt_when_gateway_config_use_payum(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();
@@ -139,7 +139,7 @@ final class GatewayConfigEncryptionTest extends KernelTestCase
         self::assertSame(self::$gatewayConfigData, $gatewayConfigFromDatabase);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_encrypt_empty_config(): void
     {
         $gatewayConfig = $this->gatewayFactory->createNew();

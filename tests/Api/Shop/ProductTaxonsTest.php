@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProductTaxonsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_product_taxon(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_taxon.yaml']);

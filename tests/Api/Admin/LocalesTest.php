@@ -22,7 +22,7 @@ final class LocalesTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_denies_access_to_a_locales_list_for_not_authenticated_user(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -32,7 +32,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_locale(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
@@ -48,7 +48,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/locale/get_locale_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_locales(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);
@@ -61,7 +61,7 @@ final class LocalesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/locale/get_locales_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_locale(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml']);
@@ -83,7 +83,7 @@ final class LocalesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_creating_a_locale_with_invalid_code(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/api_administrator.yaml']);
@@ -105,7 +105,7 @@ final class LocalesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_an_unused_locale(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'locale.yaml']);

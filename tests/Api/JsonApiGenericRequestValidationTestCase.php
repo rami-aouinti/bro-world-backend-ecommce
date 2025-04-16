@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class JsonApiGenericRequestValidationTestCase extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_a_bad_request_response_code_if_request_body_is_not_valid_json(): void
     {
         $this->client->request(

@@ -26,7 +26,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_payment_requests_for_payment(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -47,7 +47,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('admin/payment_request/get_payment_requests_for_payment');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_payment_request(): void
     {
         $this->setUpDefaultGetHeaders();

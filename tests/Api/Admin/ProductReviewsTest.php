@@ -23,7 +23,7 @@ final class ProductReviewsTest extends JsonApiTestCase
 {
     use AdminUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -45,7 +45,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_product_reviews(): void
     {
         $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -60,7 +60,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_accepts_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -82,7 +82,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_rejects_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -104,7 +104,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_a_product_review(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -131,11 +131,9 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider invalidRatingRangeDataProvider
-     */
+    
+    #[\PHPUnit\Framework\Attributes\DataProvider('invalidRatingRangeDataProvider')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_allow_to_update_a_product_review_with_invalid_rating(int $rating): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/api_administrator.yaml', 'product/product_review.yaml']);
@@ -164,7 +162,7 @@ final class ProductReviewsTest extends JsonApiTestCase
         );
     }
 
-    public function invalidRatingRangeDataProvider(): iterable
+    public static function invalidRatingRangeDataProvider(): iterable
     {
         yield [-1];
         yield [6];

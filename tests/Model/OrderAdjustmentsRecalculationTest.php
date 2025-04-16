@@ -43,7 +43,7 @@ final class OrderAdjustmentsRecalculationTest extends TestCase
         $this->order->addAdjustment($neutralAdjustment);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_recalculates_order_total_properly_with_order_item_adjustments(): void
     {
         $adjustmentNumberOne = $this->createAdjustment(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT, -300, false);
@@ -64,7 +64,7 @@ final class OrderAdjustmentsRecalculationTest extends TestCase
         $this->assertEquals(-155, $this->item->getAdjustmentsTotal());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_recalculates_order_total_properly_with_order_adjustments(): void
     {
         $adjustmentNumberOne = $this->createAdjustment(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, -100, false);
@@ -85,7 +85,7 @@ final class OrderAdjustmentsRecalculationTest extends TestCase
         $this->assertEquals(-155, $this->order->getAdjustmentsTotal());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_recalculates_order_total_properly_with_order_unit_adjustments(): void
     {
         $adjustmentNumberOne = $this->createAdjustment(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT, -200, false);

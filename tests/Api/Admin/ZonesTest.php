@@ -27,7 +27,7 @@ final class ZonesTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_zones(): void
     {
         $this->loadFixturesFromFiles([
@@ -40,7 +40,7 @@ final class ZonesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/zone/get_zones');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_zone(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -56,7 +56,7 @@ final class ZonesTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'admin/zone/get_zone');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_zone(): void
     {
         $this->loadFixturesFromFiles([
@@ -87,7 +87,7 @@ final class ZonesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_zone(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -119,7 +119,7 @@ final class ZonesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_deletes_a_zone(): void
     {
         $fixtures = $this->loadFixturesFromFiles([

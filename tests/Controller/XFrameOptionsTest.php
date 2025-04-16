@@ -17,7 +17,7 @@ use ApiTestCase\JsonApiTestCase;
 
 final class XFrameOptionsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_sets_frame_options_header(): void
     {
         $this->client->request('GET', '/');

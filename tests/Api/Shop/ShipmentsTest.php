@@ -38,7 +38,7 @@ final class ShipmentsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_shipment(): void
     {
         $order = $this->placeOrder();
@@ -47,7 +47,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertResponseSuccessful('shop/shipment/get_shipment_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_get_another_user_shipment(): void
     {
         $order = $this->placeOrder(email: 'another_user@example.com');
@@ -57,7 +57,7 @@ final class ShipmentsTest extends JsonApiTestCase
         $this->assertResponseNotFound();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_get_the_shop_user_shipment_when_not_authenticated(): void
     {
         $order = $this->placeOrder();

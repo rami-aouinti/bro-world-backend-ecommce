@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TaxonsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_taxons(): void
     {
         $this->loadFixturesFromFile('taxonomy.yaml');
@@ -33,7 +33,7 @@ final class TaxonsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/taxon/get_taxons', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_taxon(): void
     {
         $this->loadFixturesFromFile('taxonomy.yaml');
@@ -48,7 +48,7 @@ final class TaxonsTest extends JsonApiTestCase
         $this->assertResponse($response, 'shop/taxon/get_taxon', Response::HTTP_OK);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_nothing_when_trying_to_get_taxonomy_item_that_is_disabled(): void
     {
         $this->loadFixturesFromFile('taxonomy.yaml');

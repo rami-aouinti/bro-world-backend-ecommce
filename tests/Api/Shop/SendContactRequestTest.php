@@ -22,7 +22,7 @@ final class SendContactRequestTest extends JsonApiTestCase
 {
     use ShopUserLoginTrait;
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_sends_contact_request(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml']);
@@ -44,7 +44,7 @@ final class SendContactRequestTest extends JsonApiTestCase
         self::assertEmailAddressContains(self::getMailerMessage(), 'To', 'web@sylius.com');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_sends_contact_request_as_logged_in_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'authentication/shop_user.yaml']);

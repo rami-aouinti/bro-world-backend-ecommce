@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CatalogPromotionsTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_catalog_promotion(): void
     {
         $catalogPromotion = $this->loadFixturesAndGetCatalogPromotion();

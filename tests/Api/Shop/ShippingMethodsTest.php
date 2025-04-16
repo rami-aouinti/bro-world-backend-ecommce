@@ -32,7 +32,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_all_available_shipping_methods_by_default_in_given_channel(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
@@ -42,7 +42,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_shipping_methods_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_shipping_method(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
@@ -52,7 +52,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_shipping_method_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_get_a_shipping_method_not_available_in_given_channel(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
@@ -62,7 +62,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_shipping_methods_available_for_given_shipment_and_order(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'cart.yaml', 'country.yaml', 'shipping_method.yaml']);
@@ -82,7 +82,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_order_shipping_methods_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_available_shipping_methods_of_assigned_cart_for_visitor(): void
     {
         $this->loadFixturesFromFiles([
@@ -106,7 +106,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_order_shipping_methods_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_available_shipping_methods_of_assigned_cart_for_other_users_if_shipment_id_and_cart_provided(): void
     {
         $this->loadFixturesFromFiles([
@@ -134,7 +134,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_order_shipping_methods_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_empty_list_of_available_shipping_methods_for_not_existent_shipment(): void
     {
         $this->loadFixturesFromFiles([
@@ -150,7 +150,7 @@ final class ShippingMethodsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/shipping_method/get_empty_order_shipping_methods_response');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_empty_list_of_available_shipping_methods_for_not_existent_order(): void
     {
         $this->loadFixturesFromFiles([

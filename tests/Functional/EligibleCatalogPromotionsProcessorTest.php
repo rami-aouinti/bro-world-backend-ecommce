@@ -35,7 +35,7 @@ final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
         $fixtureLoader->load([__DIR__ . '/../DataFixtures/ORM/resources/scheduled_catalog_promotions.yml'], [], [], PurgeMode::createDeleteMode());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_provides_catalog_promotions_with_precision_to_seconds(): void
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */
@@ -64,7 +64,7 @@ final class EligibleCatalogPromotionsProcessorTest extends WebTestCase
         unlink($dateFilePath);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_provides_catalog_promotions_with_precision_to_seconds_for_end_date(): void
     {
         /** @var EligibleCatalogPromotionsProvider $eligibleCatalogPromotionsProvider */

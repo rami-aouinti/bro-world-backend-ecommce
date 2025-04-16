@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class CurrenciesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_currency(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['channel/channel.yaml', 'currency.yaml']);
@@ -40,7 +40,7 @@ final class CurrenciesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_currencies(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'currency.yaml']);

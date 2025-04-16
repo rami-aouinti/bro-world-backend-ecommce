@@ -17,7 +17,7 @@ use Sylius\Tests\Api\JsonApiTestCase;
 
 final class ProductOptionValuesTest extends JsonApiTestCase
 {
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_product_option_value(): void
     {
         $this->setUpDefaultGetHeaders();

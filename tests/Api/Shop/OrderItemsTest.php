@@ -30,7 +30,7 @@ final class OrderItemsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_order_items_created_by_a_user_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -57,7 +57,7 @@ final class OrderItemsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_order_items_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -84,7 +84,7 @@ final class OrderItemsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_order_items_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -111,7 +111,7 @@ final class OrderItemsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_order_items_created_by_a_guest_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -138,7 +138,7 @@ final class OrderItemsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_order_items_created_by_a_guest_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -165,7 +165,7 @@ final class OrderItemsTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_an_order_item_created_by_a_user_authenticated_as_a_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -188,7 +188,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_by_user');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_return_an_order_item_created_by_a_user_authenticated_as_another_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -212,7 +212,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_return_an_order_item_created_by_a_user_authenticated_as_a_guest(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -236,7 +236,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_an_order_item_created_by_a_guest_authenticated_as_a_guest(): void
     {
         $this->loadFixturesFromFiles([
@@ -258,7 +258,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_by_guest');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_return_an_order_item_created_by_a_guest_authenticated_as_a_user(): void
     {
         $this->loadFixturesFromFiles([
@@ -280,7 +280,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_order_item_adjustments(): void
     {
         $this->loadFixturesFromFiles([
@@ -299,7 +299,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_order_item_adjustments');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_empty_order_item_adjustments_if_order_token_is_wrong(): void
     {
         $this->loadFixturesFromFiles([
@@ -318,7 +318,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponse($this->client->getResponse(), 'shop/order_item/get_empty_order_item_adjustments');
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_nothing_if_a_user_tries_to_get_the_order_item_adjustments_of_another_user(): void
     {
         $this->loadFixturesFromFiles([
@@ -341,7 +341,7 @@ final class OrderItemsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_FORBIDDEN);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_prevents_visitors_from_getting_the_item_adjustments_of_a_user_order(): void
     {
         $this->loadFixturesFromFiles([

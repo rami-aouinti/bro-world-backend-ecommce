@@ -29,7 +29,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_product_association_types(): void
     {
         $this->loadFixturesFromFiles([
@@ -45,7 +45,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_gets_a_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -64,7 +64,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_returns_nothing_if_association_type_not_found(): void
     {
         $this->loadFixturesFromFiles([
@@ -78,7 +78,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_creates_a_product_association_type(): void
     {
         $this->loadFixturesFromFiles([
@@ -104,7 +104,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_create_product_association_type_without_required_data(): void
     {
         $this->loadFixturesFromFiles([
@@ -121,7 +121,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_updates_a_product_association_type(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
@@ -158,7 +158,7 @@ final class ProductAssociationTypesTest extends JsonApiTestCase
         );
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_does_not_update_a_product_association_type_with_duplicate_locale_translation(): void
     {
         $fixtures = $this->loadFixturesFromFiles([
