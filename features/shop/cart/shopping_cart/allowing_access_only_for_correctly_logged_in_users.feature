@@ -52,11 +52,11 @@ Feature: Allowing access only for correctly logged in users
         When the visitor confirm his order
         Then the visitor should see the thank you page
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Accessing to increase quantity of an item in the cart by the visitor
         Given the visitor added product "Stark T-Shirt" to the cart
+        And the visitor changed this product quantity to 2 in their cart
         When the visitor checks the details of their cart
-        And the visitor change product "Stark T-Shirt" quantity to 2 in his cart
         Then the visitor should see product "Stark T-Shirt" with quantity 2 in his cart
 
     @api @ui

@@ -32,20 +32,22 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
         And I added product "PHP Mug" to the cart
-        When I change product "PHP Mug" quantity to 4 in my cart
+        And I changed product "PHP Mug" quantity to 4 in my cart
+        When I check the details of my cart
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Not receiving free shipping after changing the quantity of a product in the cart
         Given the promotion gives free shipping to every order over "$70.00"
         And I added product "PHP Mug" to the cart
-        When I change product "PHP Mug" quantity to 4 in my cart
-        And I change product "PHP Mug" quantity to 2 in my cart
+        And I changed product "PHP Mug" quantity to 4 in my cart
+        And I changed product "PHP Mug" quantity to 2 in my cart
+        When I check the details of my cart
         Then my cart total should be "$50.00"
         And my cart shipping total should be "$10.00"
 
@@ -59,20 +61,22 @@ Feature: Receiving percentage discount on shipping
         Then my cart total should be "$80.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Still receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
         And I added product "PHP Mug" to the cart
         And I added product "PHP T-Shirt" to the cart
-        When I remove product "PHP Mug" from the cart
+        And I removed product "PHP Mug" from the cart
+        When I check the details of my cart
         Then my cart total should be "$100.00"
         And my cart shipping total should be "$0.00"
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not receiving free shipping after removing the product from the cart
         Given the promotion gives free shipping to every order over "$70.00"
         And I added product "PHP Mug" to the cart
         And I added product "PHP T-Shirt" to the cart
-        When I remove product "PHP T-Shirt" from the cart
+        And I removed product "PHP T-Shirt" from the cart
+        When I check the details of my cart
         Then my cart total should be "$30.00"
         And my cart shipping total should be "$10.00"

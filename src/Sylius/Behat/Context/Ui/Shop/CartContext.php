@@ -180,10 +180,6 @@ final readonly class CartContext implements Context
     #[Then('my cart estimated shipping cost should be :shippingTotal')]
     public function myCartShippingFeeShouldBe(string $shippingTotal = '$0.00'): void
     {
-        if (!$this->summaryPage->isOpen()) {
-            $this->summaryPage->open();
-        }
-
         Assert::same($this->summaryPage->getShippingTotal(), $shippingTotal);
     }
 
@@ -226,8 +222,6 @@ final readonly class CartContext implements Context
     #[Then('there should be no discount applied')]
     public function thereShouldBeNoDiscountApplied(): void
     {
-        $this->summaryPage->open();
-
         try {
             $this->summaryPage->getPromotionTotal();
         } catch (ElementNotFoundException) {
@@ -239,6 +233,7 @@ final readonly class CartContext implements Context
 
     #[Then('/^(its) price should be decreased by ("[^"]+")$/')]
     #[Then('/^(its|theirs) subtotal price should be decreased by ("[^"]+")$/')]
+    #[Then('/^the subtotal price of (product "[^"]+") should be decreased by ("[^"]+")$/')]
     #[Then('/^(product "[^"]+") price should be decreased by ("[^"]+")$/')]
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
@@ -523,9 +518,7 @@ final readonly class CartContext implements Context
         $this->summaryPage->applyCoupon($couponCode);
     }
 
-    /**
-     * @Then I should be notified that the coupon is invalid
-     */
+    #[Then('I should be notified that the coupon is invalid')]
     public function iShouldBeNotifiedThatCouponIsInvalid(): void
     {
         Assert::same(

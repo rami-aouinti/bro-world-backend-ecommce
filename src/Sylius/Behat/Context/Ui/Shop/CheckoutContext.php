@@ -87,7 +87,6 @@ final readonly class CheckoutContext implements Context
 
     /**
      * @When I proceed through checkout process
-     * @When I proceeded through checkout process
      * @When I proceed through checkout process in the :localeCode locale
      * @When I proceed through checkout process in the :localeCode locale with email :email
      */

@@ -44,13 +44,11 @@ final readonly class PaymentContext implements Context
     ) {
     }
 
-    /**
-     * @Given the store (also )allows paying (with ):paymentMethodName
-     * @Given the store (also )allows paying with :paymentMethodName at position :position
-     */
+    #[Given('the store (also )allows paying (with ):paymentMethodName')]
+    #[Given('the store (also )allows paying (with ):paymentMethodName at position :position')]
     public function storeAllowsPaying(string $paymentMethodName, ?int $position = null): void
     {
-        $this->createPaymentMethod($paymentMethodName, 'PM_' . StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
+        $this->createPaymentMethod($paymentMethodName, StringInflector::nameToCode($paymentMethodName), 'Offline', 'Payment method', true, $position);
     }
 
     /**

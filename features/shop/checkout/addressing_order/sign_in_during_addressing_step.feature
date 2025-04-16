@@ -11,7 +11,7 @@ Feature: Sign in to the store during checkout
 
     @no-api @ui @javascript
     Scenario: Displaying login form if the customer has an account
-        And I added product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I am at the checkout addressing step
         When I specify the email as "francis@underwood.com"
         Then I should be able to log in

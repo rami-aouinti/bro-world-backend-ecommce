@@ -22,4 +22,8 @@ interface AddressFactoryInterface extends BaseAddressFactoryInterface
     public function createDefault(): AddressInterface;
 
     public function createDefaultWithCountryCode(string $countryCode): AddressInterface;
+
+    public function createDefaultWithProvinceName(string $provinceName): AddressInterface;
+
+    public function createDefaultWithFirstAndLastName(string $firstName, string $lastName): AddressInterface;
 }

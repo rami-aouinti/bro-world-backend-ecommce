@@ -10,14 +10,15 @@ Feature: Reapplying promotion on cart change
         And there is a promotion "Holiday promotion"
         And I am a logged in customer
 
-    @api @ui @javascript
+    @api @ui
     Scenario: Not receiving discount on shipping after removing last item from cart
         Given the store has "DHL" shipping method with "$10.00" fee
         And the promotion gives "100%" discount on shipping to every order
         And I added product "PHP T-Shirt" to the cart
         And I addressed the cart
         And I chose "DHL" shipping method
-        When I remove product "PHP T-Shirt" from the cart
+        And I removed product "PHP T-Shirt" from the cart
+        When I check the details of my cart
         Then my cart should be empty
         And there should be no shipping fee
         And there should be no discount applied
@@ -37,28 +38,31 @@ Feature: Reapplying promotion on cart change
         Then my cart total should be "$100.00"
         And my cart shipping should be for free
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Receiving discount after removing an item from the cart and then adding another one
         Given the store has a product "Symfony T-Shirt" priced at "$150.00"
         And the promotion gives "$10.00" discount to every order
         And I added product "PHP T-Shirt" to the cart
-        When I remove product "PHP T-Shirt" from the cart
-        And I add product "Symfony T-Shirt" to the cart
+        And I removed product "PHP T-Shirt" from the cart
+        And I added product "Symfony T-Shirt" to the cart
+        When I check the details of my cart
         Then my cart total should be "$140.00"
         And my discount should be "-$10.00"
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Not receiving discount when cart does not meet the required total value after removing an item
         Given the promotion gives "$10.00" discount to every order with items total at least "$120.00"
         And I added 2 products "PHP T-Shirt" to the cart
-        When I change product "PHP T-Shirt" quantity to 1
+        And I changed product "PHP T-Shirt" quantity to 1 in my cart
+        When I check the details of my cart
         Then my cart total should be "$100.00"
         And there should be no discount applied
 
-    @api @ui @mink:chromedriver
+    @api @ui
     Scenario: Not receiving discount when cart does not meet the required quantity after removing an item
         Given the promotion gives "$10.00" discount to every order with quantity at least 3
         And I added 3 products "PHP T-Shirt" to the cart
-        When I change product "PHP T-Shirt" quantity to 1
+        And I changed product "PHP T-Shirt" quantity to 1 in my cart
+        When I check the details of my cart
         Then my cart total should be "$100.00"
         And there should be no discount applied

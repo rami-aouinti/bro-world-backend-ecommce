@@ -568,6 +568,7 @@ final class CartContext implements Context
 
     #[Then('/^(its) price should be decreased by ("[^"]+")$/')]
     #[Then('/^(product "[^"]+") price should be decreased by ("[^"]+")$/')]
+    #[Then('/^the subtotal price of (product "[^"]+") should be decreased by ("[^"]+")$/')]
     public function itsPriceShouldBeDecreasedBy(ProductInterface $product, int $amount): void
     {
         $pricing = $this->getExpectedPriceOfProductTimesQuantity($product);
@@ -607,7 +608,7 @@ final class CartContext implements Context
      */
     public function iShouldSeeWithQuantityInMyCart(string $productName, int $quantity): void
     {
-        $this->checkProductQuantityByCustomer($this->getCartResponse(), $productName, $quantity);
+        $this->checkProductQuantityByCustomer($this->shopClient->getLastResponse(), $productName, $quantity);
     }
 
     /**

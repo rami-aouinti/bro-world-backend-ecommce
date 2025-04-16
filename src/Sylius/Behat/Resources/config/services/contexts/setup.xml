@@ -41,6 +41,9 @@
             <argument type="service" id="sylius.resolver.product_variant" />
             <argument type="service" id="sylius.random_generator" />
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.address" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.shipping" />
+            <argument type="service" id="sylius.behat.context.setup.checkout.payment" />
             <argument>%sylius.behat.guest_cart_token_file%</argument>
         </service>
 
@@ -236,6 +239,7 @@
             <argument type="service" id="sylius.generator.promotion_coupon" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.fixture.example_factory.promotion" />
+            <argument type="service" id="sylius.command_bus"/>
         </service>
 
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">

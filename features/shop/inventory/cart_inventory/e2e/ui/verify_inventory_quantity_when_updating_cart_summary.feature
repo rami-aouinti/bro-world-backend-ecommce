@@ -12,10 +12,15 @@ Feature: Verifying inventory quantity on cart summary
         And the store has a product "Black Dress" priced at "€50.20"
         And this product is tracked by the inventory
         And there are 10 units of product "Black Dress" available in the inventory
+        And I am a logged in customer
 
-    @api @ui
-    Scenario: Placing an order with products that have sufficient quantity
+    @no-api @ui @mink:chromedriver
+    Scenario: Preventing the cart recalculation when the form has errors
         Given I added 3 products "Iron Maiden T-Shirt" to the cart
-        And I changed product "Iron Maiden T-Shirt" quantity to 5 in my cart
-        When I check the details of my cart
-        And I should see "Iron Maiden T-Shirt" with quantity 5 in my cart
+        And I added product "Black Dress" to the cart
+        When I change product "Iron Maiden T-Shirt" quantity to 4 in my cart
+        And I change product "Black Dress" quantity to 11 in my cart
+        Then I should be notified that this product has insufficient stock
+        And I should see "Iron Maiden T-Shirt" with quantity 4 in my cart
+        And I should see "Black Dress" with quantity 11 in my cart
+        And the cart total should be "$100.36"

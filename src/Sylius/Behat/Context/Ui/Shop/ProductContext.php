@@ -615,7 +615,7 @@ final readonly class ProductContext implements Context
      */
     public function theMainImageShouldBeOfType(string $type): void
     {
-        Assert::true($this->showPage->isMainImageOfType($type));
+        Assert::true($this->showPage->isMainImageOfTypeDisplayed($type), sprintf('Main image should be of type "%s" but it is not.', $type));
     }
 
     /**

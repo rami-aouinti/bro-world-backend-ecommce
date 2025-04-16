@@ -261,10 +261,14 @@ class ShowPage extends ShopPage implements ShowPageInterface
 
         $imageUrl = $this->getElement('main_image', ['%type%' => $type])->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
-        $pageText = $this->getDocument()->getText();
+
+        if (stripos($this->getDocument()->getText(), '404 Not Found')) {
+            throw new UnexpectedPageException(sprintf('Image not found at "%s"', $imageUrl));
+        }
+
         $this->getDriver()->back();
 
-        return false === stripos($pageText, '404 Not Found');
+        return true;
     }
 
     public function getFirstThumbnailsImageType(): string
