@@ -18,7 +18,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping
         Given the store has "DHL" shipping method with "$51.06" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Symfony Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$60.55"
         And my cart taxes should be "$4.60"
@@ -28,7 +29,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping
         Given the store has "DHL" shipping method with "$51.04" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Symfony Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$60.53"
         And my cart taxes should be "$4.59"
@@ -41,7 +43,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping
         And the store has "DHL" shipping method with "$51.04" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Sonata Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$62.83"
         And my cart taxes should be "$6.89"

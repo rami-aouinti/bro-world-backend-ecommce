@@ -15,7 +15,7 @@ Feature: Skipping payment step when only one payment method is available
     Scenario: Seeing checkout completion page after shipping if only one payment method is available
         Given I added product "Guards! Guards!" to the cart
         When I complete addressing step with email "guest@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout complete step
         And my order's payment method should be "Bank transfer"
 
@@ -24,7 +24,7 @@ Feature: Skipping payment step when only one payment method is available
         Given the store has "Offline" payment method not assigned to any channel
         And I added product "Guards! Guards!" to the cart
         When I complete addressing step with email "guest@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout complete step
         And my order's payment method should be "Bank transfer"
 
@@ -34,7 +34,7 @@ Feature: Skipping payment step when only one payment method is available
         And the payment method "Offline" is disabled
         And I added product "Guards! Guards!" to the cart
         When I complete addressing step with email "guest@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout complete step
         And my order's payment method should be "Bank transfer"
 
@@ -43,5 +43,5 @@ Feature: Skipping payment step when only one payment method is available
         Given the store has disabled all payment methods
         And I added product "Guards! Guards!" to the cart
         When I complete addressing step with email "guest@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step

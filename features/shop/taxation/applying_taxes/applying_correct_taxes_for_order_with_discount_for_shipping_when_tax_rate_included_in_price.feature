@@ -18,7 +18,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         Given the store has "DHL" shipping method with "$56.95" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Symfony Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$61.25"
         And my included in price taxes should be "$4.66"
@@ -28,7 +29,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         Given the store has "DHL" shipping method with "$56.85" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Symfony Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$61.16"
         And my included in price taxes should be "$4.65"
@@ -41,7 +43,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         And the store has "DHL" shipping method with "$50.00" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Sonata Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$55.00"
         And my included in price taxes should be "$5.96"
@@ -54,7 +57,8 @@ Feature: Apply correct taxes for an order with a discount for a shipping when ta
         And the store has "DHL" shipping method with "$50.00" fee
         And shipping method "DHL" belongs to "Shipping" tax category
         And I added product "Sonata Mug" to the cart
-        And I proceed with selecting "DHL" shipping method
+        And I addressed the cart
+        And I chose "DHL" shipping method
         When I check the details of my cart
         Then my cart total should be "$57.30"
         And my included in price taxes should be "$4.09"

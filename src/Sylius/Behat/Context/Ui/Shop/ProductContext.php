@@ -597,7 +597,7 @@ final readonly class ProductContext implements Context
     }
 
     #[Then('I should not be able to add it')]
-    function iShouldNotBeAbleToAddIt(): void
+    public function iShouldNotBeAbleToAddIt(): void
     {
         Assert::false($this->showPage->hasAddToCartButtonEnabled(), 'Add to cart button should be disabled.');
     }
@@ -615,7 +615,7 @@ final readonly class ProductContext implements Context
      */
     public function theMainImageShouldBeOfType(string $type): void
     {
-        Assert::true($this->showPage->isMainImageOfType($type));
+        Assert::true($this->showPage->isMainImageOfTypeDisplayed($type), sprintf('Main image should be of type "%s" but it is not.', $type));
     }
 
     /**
