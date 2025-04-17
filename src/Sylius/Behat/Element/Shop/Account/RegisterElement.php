@@ -29,8 +29,7 @@ class RegisterElement extends Element implements RegisterElementInterface
         Session $session,
         $minkParameters = [],
         protected ?SharedStorageInterface $sharedStorage = null,
-    )
-    {
+    ) {
         parent::__construct($session, $minkParameters);
     }
 

@@ -33,7 +33,6 @@ class ResetPasswordPage extends SymfonyPage implements ResetPasswordPageInterfac
         parent::__construct($session, $minkParameters, $router);
     }
 
-
     public function getRouteName(): string
     {
         return 'sylius_shop_password_reset';
