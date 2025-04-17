@@ -139,13 +139,13 @@ final readonly class AddressContext implements Context
 
         $billingKey = sprintf(
             'billing_address_%s',
-            StringInflector::nameToLowercaseCode($billingAddress->getFirstName() . ' ' . $billingAddress->getLastName())
+            StringInflector::nameToLowercaseCode($billingAddress->getFirstName() . ' ' . $billingAddress->getLastName()),
         );
         $this->sharedStorage->set($billingKey, $billingAddress);
 
         $shippingKey = sprintf(
             'shipping_address_%s',
-            StringInflector::nameToLowercaseCode($shippingAddress->getFirstName() . ' ' . $shippingAddress->getLastName())
+            StringInflector::nameToLowercaseCode($shippingAddress->getFirstName() . ' ' . $shippingAddress->getLastName()),
         );
         $this->sharedStorage->set($shippingKey, $shippingAddress);
     }

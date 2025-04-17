@@ -38,6 +38,7 @@ use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Resource\Generator\RandomnessGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+
 final readonly class CartContext implements Context
 {
     /**
