@@ -150,7 +150,7 @@ sylius_twig_hooks:
     hooks:
         'sylius_shop.account.profile_update.update.content.main.form':
             secondary_phone_number:
-                template: '@App/account/profile_update/update/content/main/form/secondary_phone_number.html.twig'
+                template: 'account/profile_update/update/content/main/form/secondary_phone_number.html.twig'
                 priority: 600
 ```
 
