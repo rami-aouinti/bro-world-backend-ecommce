@@ -35,6 +35,7 @@ use Webmozart\Assert\Assert;
 final class LoginContext implements Context
 {
     use SecurePasswordTrait;
+
     private ?RequestInterface $request = null;
 
     public function __construct(
