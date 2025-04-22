@@ -13,11 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Ui\Admin\Helper;
 
-use FriendsOfBehat\PageObjectExtension\Page\SymfonyPageInterface;
-use Sylius\Behat\Behaviour\SpecifiesItsField;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Webmozart\Assert\Assert;
-
 trait SecurePasswordTrait
 {
     private function replaceWithSecurePassword(string $password): string
