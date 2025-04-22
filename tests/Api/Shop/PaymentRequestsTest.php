@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Sylius\Component\Payment\Model\PaymentRequestInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Sylius\Tests\Api\Utils\OrderPlacerTrait;
@@ -30,7 +32,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         parent::setUp();
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_gets_a_payment_request(): void
     {
         $this->setUpDefaultGetHeaders();
@@ -62,8 +64,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
      *
      * @throws \JsonException
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('createPaymentRequestProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[DataProvider('createPaymentRequestProvider')]
+    #[Test]
     public function it_creates_a_payment_request(array $fixturesPaths, string $responsePath): void
     {
         $fixtures = $this->loadFixturesFromFiles($fixturesPaths);
@@ -93,7 +95,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_does_not_create_a_payment_request_for_not_existent_order(): void
     {
         $this->loadFixturesFromFiles([
@@ -125,7 +127,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseCode($this->client->getResponse(), Response::HTTP_NOT_FOUND);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_does_not_create_a_payment_request_without_required_data(): void
     {
         $this->loadFixturesFromFiles([
@@ -154,7 +156,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_does_not_create_a_payment_request_with_not_existent_action(): void
     {
         $this->loadFixturesFromFiles([
@@ -200,8 +202,8 @@ final class PaymentRequestsTest extends JsonApiTestCase
      *
      * @throws \JsonException
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('updatePaymentRequestProvider')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[DataProvider('updatePaymentRequestProvider')]
+    #[Test]
     public function it_updates_a_payment_request(array $fixturesPaths, string $responsePath): void
     {
         $this->setUpDefaultGetHeaders();
@@ -226,7 +228,7 @@ final class PaymentRequestsTest extends JsonApiTestCase
         $this->assertResponseSuccessful($responsePath);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_does_not_update_a_payment_request_in_wrong_state(): void
     {
         $this->setUpDefaultGetHeaders();

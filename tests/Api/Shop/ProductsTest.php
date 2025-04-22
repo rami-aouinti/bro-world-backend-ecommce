@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Shop;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Tests\Api\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ProductsTest extends JsonApiTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_preserves_query_param_when_redirecting_from_product_slug_to_product_code(): void
     {
         $this->loadFixturesFromFile('product/product_variant_with_original_price.yaml');
@@ -35,7 +37,7 @@ final class ProductsTest extends JsonApiTestCase
         $this->assertResponseCode($response, Response::HTTP_MOVED_PERMANENTLY);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_returns_product_with_translations_in_default_locale(): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -56,8 +58,8 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     
-    #[\PHPUnit\Framework\Attributes\DataProvider('getGermanLocales')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[DataProvider('getGermanLocales')]
+    #[Test]
     public function it_returns_product_with_translations_in_locale_from_header(string $germanLocale): void
     {
         $fixtures = $this->loadFixturesFromFile('product/product_with_many_locales.yaml');
@@ -81,7 +83,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_returns_products_collection(): void
     {
         $this->loadFixturesFromFiles(['product/product_variant_with_original_price.yaml']);
@@ -99,7 +101,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_returns_products_collection_with_only_available_associations(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');
@@ -117,7 +119,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_returns_products_with_reviews(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product.yaml']);
@@ -135,7 +137,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_returns_product_item_with_only_available_associations(): void
     {
         $this->loadFixturesFromFile('product/products_with_associations.yaml');
@@ -154,8 +156,8 @@ final class ProductsTest extends JsonApiTestCase
     }
 
     
-    #[\PHPUnit\Framework\Attributes\DataProvider('getPolishLocales')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[DataProvider('getPolishLocales')]
+    #[Test]
     public function it_returns_product_attributes_collection_with_translations_in_locale_from_header(
         string $polishLocale,
     ): void {
@@ -173,7 +175,7 @@ final class ProductsTest extends JsonApiTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_returns_paginated_attributes_collection(): void
     {
         $this->loadFixturesFromFiles(['channel/channel.yaml', 'product/product_attribute.yaml']);

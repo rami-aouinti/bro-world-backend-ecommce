@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection\Compiler;
 
+use PHPUnit\Framework\Attributes\Test;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
 use PHPUnit\Framework\Constraint\LogicalNot;
@@ -23,7 +24,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_collects_tagged_channel_contexts(): void
     {
         $this->setDefinition('sylius.context.channel.composite', new Definition());
@@ -42,7 +43,7 @@ final class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_collects_tagged_channel_contexts_with_priority(): void
     {
         $this->setDefinition('sylius.context.channel.composite', new Definition());
@@ -61,7 +62,7 @@ final class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_does_not_add_method_calls_to_the_overriding_service_if_the_composite_service_is_overridden(): void
     {
         $this->setDefinition('sylius.context.channel', new Definition());
@@ -80,7 +81,7 @@ final class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
         );
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function it_still_adds_method_calls_to_composite_context_even_if_it_was_overridden(): void
     {
         $this->setDefinition('sylius.context.channel', new Definition());
