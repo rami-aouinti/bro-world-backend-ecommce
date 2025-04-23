@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\AttributeBundle\Tests\Form\Type\AttributeType;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Assert;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -28,9 +29,7 @@ final class SelectAttributeTypeTest extends TypeTestCase
 
     private ObjectProphecy $translationProvider;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function it_return_all_choices(): void
     {
         $this->assertChoicesLabels(['value 1'], [

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Abstraction\StateMachine\Functional\DependencyInjection;
 
+use PHPUnit\Framework\Attributes\Test;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\DependencyInjection\Configuration;
@@ -22,7 +23,7 @@ final class ConfigurationTest extends TestCase
 {
     use ConfigurationTestCaseTrait;
 
-    /** @test */
+    #[Test]
     public function it_allows_to_configure_a_default_state_machine_adapter(): void
     {
         $this->assertProcessedConfigurationEquals(
@@ -38,7 +39,7 @@ final class ConfigurationTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_allows_to_configure_the_state_machines_adapters_mapping(): void
     {
         $this->assertProcessedConfigurationEquals(
