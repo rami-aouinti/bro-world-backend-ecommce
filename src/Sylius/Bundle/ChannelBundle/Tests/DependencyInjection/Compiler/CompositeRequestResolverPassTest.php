@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection\Compiler;
 
-use PHPUnit\Framework\Attributes\Test;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Constraint\LogicalNot;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

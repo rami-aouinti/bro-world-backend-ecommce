@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Abstraction\StateMachine\Functional\DependencyInjection;
 
-use PHPUnit\Framework\Attributes\Test;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Sylius\Abstraction\StateMachine\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

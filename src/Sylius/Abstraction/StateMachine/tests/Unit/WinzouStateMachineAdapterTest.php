@@ -21,6 +21,7 @@ use SM\StateMachine\StateMachine as WinzouStateMachine;
 use Sylius\Abstraction\StateMachine\Exception\StateMachineExecutionException;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Abstraction\StateMachine\WinzouStateMachineAdapter;
+
 final class WinzouStateMachineAdapterTest extends TestCase
 {
     /** @var FactoryInterface&MockObject */
