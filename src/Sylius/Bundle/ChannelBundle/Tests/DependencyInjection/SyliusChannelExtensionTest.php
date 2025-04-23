@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ChannelBundle\Tests\DependencyInjection;
 
-use PHPUnit\Framework\Attributes\Test;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ChannelBundle\Attribute\AsChannelContext;
 use Sylius\Bundle\ChannelBundle\Attribute\AsRequestBasedChannelResolver;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\SyliusChannelExtension;
