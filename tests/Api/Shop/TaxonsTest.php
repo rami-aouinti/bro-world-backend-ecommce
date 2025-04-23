@@ -63,4 +63,20 @@ final class TaxonsTest extends JsonApiTestCase
 
         $this->assertSame(Response::HTTP_NOT_FOUND, $response->getStatusCode());
     }
+
+    /** @test */
+    public function it_preserves_query_param_when_redirecting_from_taxon_slug_to_taxon_code(): void
+    {
+        $this->loadFixturesFromFile('taxonomy.yaml');
+
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v2/shop/taxons-by-slug/categories/t-shirts?paramName=paramValue',
+            server: self::CONTENT_TYPE_HEADER,
+        );
+        $response = $this->client->getResponse();
+
+        $this->assertEquals('/api/v2/shop/taxons/T_SHIRTS?paramName=paramValue', $response->headers->get(('Location')));
+        $this->assertResponseCode($response, Response::HTTP_MOVED_PERMANENTLY);
+    }
 }
