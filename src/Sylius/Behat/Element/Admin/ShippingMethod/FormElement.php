@@ -155,7 +155,7 @@ class FormElement extends BaseFormElement implements FormElementInterface
             'calculator' => '#sylius_admin_shipping_method_calculator',
             'calculator_configuration_amount' => '#sylius_admin_shipping_method_configuration_%channelCode%_amount',
             'calculator_configuration_channel_tab' => '[data-test-calculator-configuration] [data-test-channel-tab^="%channelCode%_"]',
-            'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content="%channelCode%"]',
+            'calculator_configuration_channel_tab_content' => '[data-test-calculator-configuration] [data-test-channel-tab-content^="%channelCode%_"]',
             'channel' => '[name="sylius_admin_shipping_method[channels][]"][value="%channelCode%"]',
             'code' => '#sylius_admin_shipping_method_code',
             'description' => '#sylius_admin_shipping_method_translations_%localeCode%_description',

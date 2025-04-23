@@ -52,7 +52,7 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
     {
         return array_merge(parent::getDefinedElements(), [
             'channel' => '[data-test-channel-code="%channel_code%"]',
-            'channel_tab' => '[data-test-channel-tab^="%channel_code%_"]',
+            'channel_tab' => '[data-test-channel-tab="%channel_code%"]',
             'channels' => '[data-test-channels]',
             'original_price' => '[data-test-original-price-in-channel="%channel_code%"]',
             'price' => '[data-test-price-in-channel="%channel_code%"]',
