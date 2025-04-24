@@ -16,6 +16,8 @@ layout:
 
 <div data-full-width="false"><figure><img src="https://sylius.com/assets/github-readme.png?20" alt=""><figcaption></figcaption></figure></div>
 
+{% embed url="https://sylius.com/github-readme/link/" %}
+
 **Sylius** is an open-source e-commerce platform with a modular architecture, providing a robust foundation for online stores. It focuses on delivering a dynamic developer experience and allows extensive customization to meet unique business needs.
 
 Key features include product and customer management, versatile shopping cart systems, flexible tax categories, and promotional tools. Sylius supports seamless integration with third-party services and customizable workflows.
