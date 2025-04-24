@@ -5,6 +5,7 @@ default:
     suites:
         ui_administrator_login:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.session
 

@@ -119,7 +119,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
             parent::getDefinedElements(),
             [
                 'channel' => '[data-test-channel-code="%channel_code%"]',
-                'channel_tab' => '[data-test-channel-tab="%channelCode%"]',
+                'channel_tab' => '[data-test-channel-tab^="%channelCode%_"]',
                 'channels' => '[data-test-channels]',
                 'code' => '[data-test-code]',
                 'enabled' => '[data-test-enabled]',
