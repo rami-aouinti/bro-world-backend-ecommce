@@ -14,7 +14,7 @@ layout:
 
 # 📖 Sylius 2.0 Documentation
 
-<div data-full-width="false"><figure><img src="https://sylius.com/assets/github-readme.png?20" alt=""><figcaption></figcaption></figure></div>
+<figure><img src="https://sylius.com/assets/github-readme.png" alt=""><figcaption></figcaption></figure>
 
 {% embed url="https://sylius.com/github-readme/link/" %}
 
