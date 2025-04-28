@@ -22,14 +22,14 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
     public function specifyPrice(ChannelInterface $channel, string $price): void
     {
         $this->changeTab();
-        $this->changeChannelTab($channel->getCode());
+        $this->changeChannelAccordion($channel->getCode());
         $this->getElement('price', ['%channel_code%' => $channel->getCode()])->setValue($price);
     }
 
     public function specifyOriginalPrice(ChannelInterface $channel, int $originalPrice): void
     {
         $this->changeTab();
-        $this->changeChannelTab($channel->getCode());
+        $this->changeChannelAccordion($channel->getCode());
         $this->getElement('original_price', ['%channel_code%' => $channel->getCode()])->setValue($originalPrice);
     }
 
@@ -54,19 +54,23 @@ class ChannelPricingsFormElement extends BaseFormElement implements ChannelPrici
             'channel' => '[data-test-channel-code="%channel_code%"]',
             'channel_accordion' => '[data-test-product-channel-pricings-accordion="%channel_code%"]',
             'channels' => '[data-test-channels]',
-            'original_price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_originalPrice',
-            'price' => '#sylius_admin_product_variant_channelPricings_%channel_code%_price',
+            'original_price' => '[data-test-original-price-in-channel="%channel_code%"]',
+            'price' => '[data-test-price-in-channel="%channel_code%"]',
             'side_navigation_tab' => '[data-test-side-navigation-tab="%name%"]',
         ]);
     }
 
-    protected function changeChannelTab(string $channelCode): void
+    protected function changeChannelAccordion(string $channelCode): void
     {
         if (DriverHelper::isNotJavascript($this->getDriver())) {
             return;
         }
 
-        $this->getElement('channel_accordion', ['%channel_code%' => $channelCode])->click();
+        $accordion = $this->getElement('channel_accordion', ['%channel_code%' => $channelCode]);
+
+        if ($accordion->hasClass('collapsed')) {
+            $accordion->click();
+        }
     }
 
     protected function changeTab(): void
