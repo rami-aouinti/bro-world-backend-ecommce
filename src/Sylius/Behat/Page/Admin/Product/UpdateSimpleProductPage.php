@@ -222,10 +222,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         if (null === $imageElement && null === $imageUrl) {
             return false;
         }
+        $originalUrl = $this->getDriver()->getCurrentUrl();
 
         $this->getDriver()->visit($imageUrl);
         $statusCode = $this->getDriver()->getStatusCode();
-        $this->getDriver()->back();
+        $this->getDriver()->visit($originalUrl);
 
         return in_array($statusCode, [200, 304], true);
     }
