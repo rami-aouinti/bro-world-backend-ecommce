@@ -81,7 +81,7 @@ jobs:
                     php_version: "8.2"
                     symfony_version: "6.4.*"
                     node_version: ${{ matrix.node }}
-                    chrome_version: 135
+                    chrome_version: stable
                     
             -   name: "Run javascript linter"
                 run: yarn lint
