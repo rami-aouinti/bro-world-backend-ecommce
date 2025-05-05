@@ -5,6 +5,7 @@ default:
     suites:
         ui_applying_shipping_fee:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.guest_cart
                 - sylius.behat.context.hook.session
@@ -21,6 +22,7 @@ default:
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.shipping
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.payment

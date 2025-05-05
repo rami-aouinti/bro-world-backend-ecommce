@@ -25,7 +25,7 @@ Feature: Viewing available payment methods based on current channel
         And I am in the "United States" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
@@ -36,7 +36,7 @@ Feature: Viewing available payment methods based on current channel
         And I am in the "Poland" channel
         And I have product "PHP T-Shirt" in the cart
         When I complete addressing step with "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of Poland" and "Offline" payment methods
         But I should not see "Bank of Universe" and "Bank of America" payment methods
@@ -46,7 +46,7 @@ Feature: Viewing available payment methods based on current channel
         Given I am in the "United States" channel
         And I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of America" and "Offline" payment methods
         But I should not see "Bank of Poland" and "Bank of Universe" payment methods
@@ -56,7 +56,7 @@ Feature: Viewing available payment methods based on current channel
         Given I am in the "Poland" channel
         And I added product "PHP T-Shirt" to the cart
         When I complete addressing step with email "john@example.com" and "United States" based billing address
-        And I complete the shipping step with first shipping method
+        And I complete the shipping step with the first shipping method
         Then I should be on the checkout payment step
         And I should see "Bank of Poland" and "Offline" payment methods
         But I should not see "Bank of Universe" and "Bank of America" payment methods

@@ -15,13 +15,19 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use Sylius\Behat\Context\Setup\Checkout\AddressContext;
+use Sylius\Behat\Context\Setup\Checkout\PaymentContext;
+use Sylius\Behat\Context\Setup\Checkout\ShippingContext;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\ApiBundle\Command\Cart\AddItemToCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\ChangeItemQuantityInCart;
 use Sylius\Bundle\ApiBundle\Command\Cart\PickupCart;
+use Sylius\Bundle\ApiBundle\Command\Cart\RemoveItemFromCart;
 use Sylius\Bundle\ApiBundle\Command\Checkout\UpdateCart;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -44,6 +50,9 @@ final readonly class CartContext implements Context
         private ProductVariantResolverInterface $productVariantResolver,
         private RandomnessGeneratorInterface $generator,
         private SharedStorageInterface $sharedStorage,
+        private AddressContext $addressContext,
+        private ShippingContext $shippingContext,
+        private PaymentContext $paymentContext,
         private string $guestCartTokenFilePath,
     ) {
     }
@@ -58,12 +67,20 @@ final readonly class CartContext implements Context
 
     /**
      * @Given /^I have(?:| added) (\d+) (product(?:|s) "[^"]+") (?:to|in) the (cart)$/
-     * @Given /^I added (\d+) of (them) to (?:the|my) (cart)$/
      */
     #[Given('/^I added (\d+) (products "[^"]+") to the (cart)$/')]
+    #[Given('/^I added (\d+) of (them) to (?:the|my) (cart)$/')]
     public function iAddedGivenQuantityOfProductsToTheCart(int $quantity, ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue, $quantity);
+    }
+
+    #[Given('I proceeded through the checkout process')]
+    public function iProceededThroughTheCheckoutProcess(): void
+    {
+        $this->addressContext->addressCart();
+        $this->shippingContext->chooseShippingMethod();
+        $this->paymentContext->choosePaymentMethod();
     }
 
     /**
@@ -87,10 +104,30 @@ final readonly class CartContext implements Context
      */
     #[Given('/^I added (product "[^"]+") to the (cart)$/')]
     #[Given('/^I added (this product) to the (cart)$/')]
-    #[Given('/^the customer added ("[^"]+" product) to the (cart)$/')]
+    #[Given('/^I added (this product) to the (cart) again$/')]
+    #[Given('/^the visitor added (product "[^"]+") to the (cart)$/')]
+    #[Given('/^the customer added (product "[^"]+") to the (cart)$/')]
     public function iAddedProductToTheCart(ProductInterface $product, ?string $tokenValue): void
     {
         $this->addProductToCart($product, $tokenValue);
+    }
+
+    #[Given('/^I changed (product "[^"]+") quantity to (\d+) in my (cart)$/')]
+    #[Given('/^the visitor changed (product "[^"]+") quantity to (\d+) in their (cart)$/')]
+    #[Given('/^the visitor changed (this product) quantity to (\d+) in their (cart)$/')]
+    public function iChangedProductQuantityInTheCart(ProductInterface $product, int $quantity, ?string $tokenValue): void
+    {
+        /** @var OrderInterface $cart */
+        $cart = $this->sharedStorage->get('order');
+        $orderItemId = $cart->getItems()->filter(
+            static fn (OrderItemInterface $orderItem): bool => $orderItem->getVariant()->getProduct() === $product,
+        )->first()->getId();
+
+        $this->commandBus->dispatch(new ChangeItemQuantityInCart(
+            orderTokenValue: $tokenValue,
+            orderItemId: $orderItemId,
+            quantity: $quantity,
+        ));
     }
 
     /**
@@ -114,10 +151,8 @@ final readonly class CartContext implements Context
         $this->sharedStorage->set('variant', $productVariant);
     }
 
-    /**
-     * @Given /^I have (product "[^"]+") with (product option "[^"]+") ([^"]+) in the (cart)$/
-     */
-    public function iAddThisProductWithToTheCart(
+    #[Given('/^I added (product "[^"]+") with (product option "[^"]+") ([^"]+) to the (cart)$/')]
+    public function iAddedProductWithOptionToTheCart(
         ProductInterface $product,
         ProductOptionInterface $productOption,
         string $productOptionValue,
@@ -137,6 +172,36 @@ final readonly class CartContext implements Context
                 )
                 ->getCode(),
             quantity: 1,
+        ));
+    }
+
+    #[Given('/^I removed (product "[^"]+") from the (cart)$/')]
+    public function iRemoveProductFromTheCart(ProductInterface $product, string $tokenValue): void
+    {
+        /** @var OrderInterface $cart */
+        $cart = $this->sharedStorage->get('order');
+        $itemId = $cart->getItems()->filter(
+            static fn (OrderItemInterface $orderItem): bool => $orderItem->getVariant()->getProduct() === $product,
+        )->first()->getId();
+
+        $this->commandBus->dispatch(new RemoveItemFromCart(
+            orderTokenValue: $tokenValue,
+            itemId: $itemId,
+        ));
+    }
+
+    #[Given('/^I removed ("[^"]+" variant) from the (cart)$/')]
+    public function iRemoveVariantFromTheCart(ProductVariantInterface $variant, string $tokenValue): void
+    {
+        /** @var OrderInterface $cart */
+        $cart = $this->sharedStorage->get('order');
+        $itemId = $cart->getItems()->filter(
+            static fn (OrderItemInterface $orderItem): bool => $orderItem->getVariant() === $variant,
+        )->first()->getId();
+
+        $this->commandBus->dispatch(new RemoveItemFromCart(
+            orderTokenValue: $tokenValue,
+            itemId: $itemId,
         ));
     }
 
@@ -172,8 +237,12 @@ final readonly class CartContext implements Context
                 /** @var CustomerInterface $customer */
                 $email = $user->getCustomer()->getEmail();
             }
+
+            $this->sharedStorage->set('created_as_guest', false);
         } else {
             file_put_contents($this->guestCartTokenFilePath, $tokenValue);
+
+            $this->sharedStorage->set('created_as_guest', true);
         }
 
         $pickupCart = new PickupCart(

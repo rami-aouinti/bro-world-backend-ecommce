@@ -5,6 +5,7 @@ default:
     suites:
         ui_applying_taxes:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.calendar
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.guest_cart
@@ -25,6 +26,7 @@ default:
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.shipping
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.geographical

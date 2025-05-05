@@ -5,6 +5,7 @@ default:
     suites:
         ui_checkout:
             contexts:
+                - sylius.behat.context.hook.bad_gateway
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.guest_cart
                 - sylius.behat.context.hook.mailer
@@ -37,7 +38,10 @@ default:
                 - sylius.behat.context.setup.admin_user
                 - sylius.behat.context.setup.cart
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.checkout
                 - sylius.behat.context.setup.checkout.address
+                - sylius.behat.context.setup.checkout.payment
+                - sylius.behat.context.setup.checkout.shipping
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.exchange_rate

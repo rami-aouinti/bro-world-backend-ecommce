@@ -25,7 +25,7 @@ Feature: Apply correct taxes on visitor cart
     @api @ui
     Scenario: Proper taxes after specifying billing address
         Given I added product "PHP T-Shirt" to the cart
-        When I proceed as guest "john@example.com" with "Austria" as billing country
-        And I check the details of my cart
+        And I addressed the cart to "Austria"
+        When I check the details of my cart
         Then my cart total should be "$110.00"
         And my cart taxes should be "$10.00"
