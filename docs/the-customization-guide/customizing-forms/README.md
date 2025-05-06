@@ -19,7 +19,7 @@ Let’s say you want to customize the **Customer Profile Form** by:
 
 1. &#x20;**Ensure Your Model Supports New Fields**
 
-Before adding a new field, make sure it exists in the model. For example, `secondaryPhoneNumber` must be added to the **Customer entity** and properly mapped in your database. To learn how to do that, check [this part of the doc](customizing-models/).
+Before adding a new field, make sure it exists in the model. For example, `secondaryPhoneNumber` must be added to the **Customer entity** and properly mapped in your database. To learn how to do that, check [this part of the doc](../customizing-models/).
 
 2. **Create a Form Extension**
 
@@ -168,7 +168,7 @@ sylius_twig_hooks:
 
 Then your final result should look like:
 
-<figure><img src="../.gitbook/assets/Screenshot from 2025-04-09 11-31-08.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot from 2025-04-09 11-31-08.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
 Find out more about the amazing features of Twig Hooks [here](https://stack.sylius.com/twig-hooks/getting-started)
