@@ -102,6 +102,14 @@ a {
         background: $sylius-brand-color !important;
         border-radius: 0 99px 99px 0 !important;
     }
+    a.item.item-content{
+        display: flex !important;
+        align-items: center;
+    }
+    .item .navbar-plus-badge {
+        margin-left: auto;
+        width: 4.5rem;
+    }
 }
 
 // ----------------------------------
@@ -370,3 +378,48 @@ div[id^="sylius_catalog_promotion_actions"] {
 .text-break {
     word-break: break-word;
 }
+
+.plus-blur {
+    position: relative;
+    overflow: hidden;
+
+    .blur-content {
+        transition: filter 0.3s ease;
+
+        &:hover {
+            filter: blur(2px);
+
+            * {
+                pointer-events: none;
+            }
+        }
+    }
+
+    .overlay-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        z-index: 10;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        max-width: 80%;
+        height: auto;
+    }
+
+    &:hover {
+        .overlay-image {
+            opacity: 1;
+        }
+
+        .blur-content {
+            filter: blur(2px);
+
+            * {
+                pointer-events: none;
+            }
+        }
+    }
+}
+
