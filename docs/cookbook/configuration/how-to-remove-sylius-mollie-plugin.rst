@@ -1,7 +1,7 @@
 How to remove Sylius Mollie Plugin in Sylius 1.14
 =================================================
 
-The SyliusMolliePlugin is included by default in Sylius Standard 1.14.
+The Sylius/MolliePlugin is included by default in Sylius-Standard 1.14.
 
 If you wish to remove it, follow these steps:
 
