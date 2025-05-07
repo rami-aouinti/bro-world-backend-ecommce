@@ -158,6 +158,7 @@ Configuration
     configuration/installation-commands
     configuration/disabling-admin-notifications
     configuration/admin-prefix
+    configuration/how-to-remove-sylius-mollie-plugin
 
 .. include:: /cookbook/configuration/map.rst.inc
 
