@@ -1,5 +1,18 @@
 # CHANGELOG FOR `1.14.X`
 
+## v1.14.5 (2025-05-07)
+
+#### Details
+
+- [#17838](https://github.com/Sylius/Sylius/issues/17838) [Documentation] Update Contributing Translations page ([@GSadee](https://github.com/GSadee))
+- [#17848](https://github.com/Sylius/Sylius/issues/17848) Update validators.de.yml ([@hersche](https://github.com/hersche))
+- [#17879](https://github.com/Sylius/Sylius/issues/17879) [Behat] Change driver for statistics and account tests ([@Rafikooo](https://github.com/Rafikooo))
+- [#17927](https://github.com/Sylius/Sylius/issues/17927) [CI] Fix failing behat tests ([@mpysiak](https://github.com/mpysiak))
+- [#17919](https://github.com/Sylius/Sylius/issues/17919) Fix dev firewall order ([@SVillette](https://github.com/SVillette))
+- [#17829](https://github.com/Sylius/Sylius/issues/17829) [Admin] Plus features clickbaits ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17937](https://github.com/Sylius/Sylius/issues/17937) [Admin] Plus UTM link ([@PiotrTulacz](https://github.com/PiotrTulacz))
+- [#17946](https://github.com/Sylius/Sylius/issues/17946) [Composer] Add conflict to behat/gherkin ([@GSadee](https://github.com/GSadee))
+
 ## v1.14.4 (2025-03-31)
 
 #### Details
