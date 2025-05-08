@@ -134,6 +134,27 @@
   * [How to change a redirect after the add to cart action?](the-customization-guide/customizing-checkout/how-to-change-a-redirect-after-the-add-to-cart-action.md)
 * [Tips & Tricks](the-customization-guide/tips-and-tricks.md)
 
+## Sylius Official Plugins Documentation
+
+* [CMS Plugin](sylius-official-plugins-documentation/cms-plugin/README.md)
+  * [Getting Started](sylius-official-plugins-documentation/cms-plugin/getting-started/README.md)
+    * [Installation](sylius-official-plugins-documentation/cms-plugin/getting-started/installation.md)
+    * [Upgrading](sylius-official-plugins-documentation/cms-plugin/getting-started/upgrading.md)
+    * [Quick Start](sylius-official-plugins-documentation/cms-plugin/getting-started/quick-start.md)
+  * [Features Overview](sylius-official-plugins-documentation/cms-plugin/features-overview/README.md)
+    * [Collections](sylius-official-plugins-documentation/cms-plugin/features-overview/collections.md)
+    * [Content Templates](sylius-official-plugins-documentation/cms-plugin/features-overview/content-templates.md)
+    * [Pages](sylius-official-plugins-documentation/cms-plugin/features-overview/pages.md)
+    * [Blocks](sylius-official-plugins-documentation/cms-plugin/features-overview/blocks.md)
+    * [Media](sylius-official-plugins-documentation/cms-plugin/features-overview/media.md)
+  * [Developer Reference](sylius-official-plugins-documentation/cms-plugin/developer-reference/README.md)
+    * [Collections](sylius-official-plugins-documentation/cms-plugin/developer-reference/collections.md)
+    * [Pages](sylius-official-plugins-documentation/cms-plugin/developer-reference/pages.md)
+    * [Blocks](sylius-official-plugins-documentation/cms-plugin/developer-reference/blocks.md)
+    * [Media](sylius-official-plugins-documentation/cms-plugin/developer-reference/media.md)
+    * [Content Element](sylius-official-plugins-documentation/cms-plugin/developer-reference/content-element.md)
+    * [Templates](sylius-official-plugins-documentation/cms-plugin/developer-reference/templates.md)
+
 ## THE COOKBOOK v1.x
 
 * [The Cookbook v1.x](https://old-docs.sylius.com/en/1.13/cookbook/index.html)
