@@ -1,5 +1,3 @@
 # Installation
 
-The full installation guide can be found directly in the repository here:
-
-{% @github-files/github-code-block %}
+The full installation guide can be found directly in the repository [here](https://github.com/Sylius/CmsPlugin?tab=readme-ov-file#installation).
