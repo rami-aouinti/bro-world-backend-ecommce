@@ -6,6 +6,7 @@ default:
         api_customer_account:
             contexts:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.guest_cart
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel
@@ -35,6 +36,7 @@ default:
 
                 - sylius.behat.context.api.email
                 - sylius.behat.context.api.shop.checkout
+                - sylius.behat.context.api.shop.checkout.order_details
                 - sylius.behat.context.api.shop.customer
                 - sylius.behat.context.api.shop.login
                 - sylius.behat.context.api.shop.order
