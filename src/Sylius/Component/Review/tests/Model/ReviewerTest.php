@@ -27,24 +27,24 @@ final class ReviewerTest extends TestCase
         $this->reviewer = new Reviewer();
     }
 
-    public function testItImplementsReviewerInterface(): void
+    public function testShouldImplementReviewerInterface(): void
     {
         self::assertInstanceOf(ReviewerInterface::class, $this->reviewer);
     }
 
-    public function testHasAnEmail(): void
+    public function testEmailShouldBeMutable(): void
     {
         $this->reviewer->setEmail('john.doe@example.com');
         self::assertSame('john.doe@example.com', $this->reviewer->getEmail());
     }
 
-    public function testHasAFirstName(): void
+    public function testNameShouldBeMutable(): void
     {
         $this->reviewer->setFirstName('John');
         self::assertSame('John', $this->reviewer->getFirstName());
     }
 
-    public function testHasALastName(): void
+    public function testLastNameShouldBeMutable(): void
     {
         $this->reviewer->setLastName('Doe');
         self::assertSame('Doe', $this->reviewer->getLastName());

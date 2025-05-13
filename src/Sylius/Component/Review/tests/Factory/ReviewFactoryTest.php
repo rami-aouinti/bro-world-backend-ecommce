@@ -25,74 +25,66 @@ use Sylius\Resource\Factory\FactoryInterface;
 final class ReviewFactoryTest extends TestCase
 {
     /** @var FactoryInterface<ReviewInterface>&MockObject */
-    private FactoryInterface $factoryMock;
+    private FactoryInterface $factory;
 
     /** @var ReviewFactory<ReviewInterface> */
     private ReviewFactory $reviewFactory;
 
+    /** @var ReviewableInterface&MockObject */
+    private ReviewableInterface $subject;
+
+    /** @var ReviewInterface&MockObject */
+    private ReviewInterface $review;
+
     protected function setUp(): void
     {
         parent::setUp();
-        $this->factoryMock = $this->createMock(FactoryInterface::class);
-        $this->reviewFactory = new ReviewFactory($this->factoryMock);
+        $this->factory = $this->createMock(FactoryInterface::class);
+        $this->reviewFactory = new ReviewFactory($this->factory);
+        $this->subject = $this->createMock(ReviewableInterface::class);
+        $this->review = $this->createMock(ReviewInterface::class);
     }
 
-    public function testItImplementsFactoryInterface(): void
+    public function testShouldImplementFactoryInterface(): void
     {
         self::assertInstanceOf(FactoryInterface::class, $this->reviewFactory);
     }
 
-    public function testItImplementsReviewFactoryInterface(): void
+    public function testImplementReviewFactoryInterface(): void
     {
         self::assertInstanceOf(ReviewFactoryInterface::class, $this->reviewFactory);
     }
 
-    public function testCreatingANewReview(): void
+    public function testCreatesNewReview(): void
     {
-        /** @var ReviewInterface|MockObject $reviewMock */
-        $reviewMock = $this->createMock(ReviewInterface::class);
-
-        $this->factoryMock->expects($this->once())->method('createNew')->willReturn($reviewMock);
-
-        self::assertSame($reviewMock, $this->reviewFactory->createNew());
+        $this->factory->expects($this->once())->method('createNew')->willReturn($this->review);
+        self::assertSame($this->review, $this->reviewFactory->createNew());
     }
 
-    public function testCreatingAReviewWithSubject(): void
+    public function testCreatesReviewWithSubject(): void
     {
-        /** @var ReviewableInterface&MockObject $subjectMock */
-        $subjectMock = $this->createMock(ReviewableInterface::class);
+        $this->factory->expects($this->once())->method('createNew')->willReturn($this->review);
 
-        /** @var ReviewInterface&MockObject $reviewMock */
-        $reviewMock = $this->createMock(ReviewInterface::class);
+        $this->review->expects($this->once())->method('setReviewSubject')->with($this->subject);
 
-        $this->factoryMock->expects($this->once())->method('createNew')->willReturn($reviewMock);
+        $result = $this->reviewFactory->createForSubject($this->subject);
 
-        $reviewMock->expects($this->once())->method('setReviewSubject')->with($subjectMock);
-
-        $result = $this->reviewFactory->createForSubject($subjectMock);
-
-        self::assertSame($reviewMock, $result);
+        self::assertSame($this->review, $result);
     }
 
-    public function testCreatingAReviewWithSubjectAndReviewer(): void
+    public function testCreatesReviewWithSubjectAndReviewer(): void
     {
-        /** @var ReviewableInterface&MockObject $subjectMock */
-        $subjectMock = $this->createMock(ReviewableInterface::class);
+        /** @var ReviewerInterface&MockObject $reviewer */
+        $reviewer = $this->createMock(ReviewerInterface::class);
 
-        /** @var ReviewInterface&MockObject $reviewMock */
-        $reviewMock = $this->createMock(ReviewInterface::class);
+        $this->factory->expects($this->once())->method('createNew')->willReturn($this->review);
 
-        /** @var ReviewerInterface&MockObject $reviewerMock */
-        $reviewerMock = $this->createMock(ReviewerInterface::class);
+        $this->review->expects($this->once())->method('setReviewSubject')->with($this->subject);
 
-        $this->factoryMock->expects($this->once())->method('createNew')->willReturn($reviewMock);
+        $this->review->expects($this->once())->method('setAuthor')->with($reviewer);
 
-        $reviewMock->expects($this->once())->method('setReviewSubject')->with($subjectMock);
+        $result = $this->reviewFactory->createForSubjectWithReviewer($this->subject, $reviewer);
 
-        $reviewMock->expects($this->once())->method('setAuthor')->with($reviewerMock);
-
-        $result = $this->reviewFactory->createForSubjectWithReviewer($subjectMock, $reviewerMock);
-
-        self::assertSame($reviewMock, $result);
+        self::assertSame($this->review, $result);
     }
 }

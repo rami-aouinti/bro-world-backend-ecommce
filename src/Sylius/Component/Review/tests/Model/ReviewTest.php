@@ -30,56 +30,56 @@ final class ReviewTest extends TestCase
         $this->review = new Review();
     }
 
-    public function testItImplementsReviewInterface(): void
+    public function testShouldImplementReviewInterface(): void
     {
         self::assertInstanceOf(ReviewInterface::class, $this->review);
     }
 
-    public function testTitle(): void
+    public function testTitleShouldBeMutable(): void
     {
         $this->review->setTitle('review title');
         self::assertSame('review title', $this->review->getTitle());
     }
 
-    public function testRating(): void
+    public function testRatingShouldBeMutable(): void
     {
         $this->review->setRating(5);
         self::assertSame(5, $this->review->getRating());
     }
 
-    public function testComment(): void
+    public function testCommentShouldBeMutable(): void
     {
         $this->review->setComment('Lorem ipsum dolor');
         self::assertSame('Lorem ipsum dolor', $this->review->getComment());
     }
 
-    public function testAuthor(): void
+    public function testAuthorShouldBeMutable(): void
     {
         $author = $this->createMock(ReviewerInterface::class);
         $this->review->setAuthor($author);
         self::assertSame($author, $this->review->getAuthor());
     }
 
-    public function testDefaultStatus(): void
+    public function testDefaultStatusShouldBeNew(): void
     {
         self::assertSame(ReviewInterface::STATUS_NEW, $this->review->getStatus());
     }
 
-    public function testReviewSubject(): void
+    public function testReviewSubjectShouldBeMutable(): void
     {
         $reviewSubject = $this->createMock(ReviewableInterface::class);
         $this->review->setReviewSubject($reviewSubject);
         self::assertSame($reviewSubject, $this->review->getReviewSubject());
     }
 
-    public function testCreatedAt(): void
+    public function testCreatedAtShouldBeMutable(): void
     {
         $createdAt = new DateTime();
         $this->review->setCreatedAt($createdAt);
         self::assertSame($createdAt, $this->review->getCreatedAt());
     }
 
-    public function testUpdatedAt(): void
+    public function testUpdatedAtShouldBeMutable(): void
     {
         $updatedAt = new DateTime();
         $this->review->setUpdatedAt($updatedAt);

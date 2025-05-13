@@ -25,64 +25,55 @@ final class AverageRatingCalculatorTest extends TestCase
 {
     private AverageRatingCalculator $averageRatingCalculator;
 
+    /** @var ReviewableInterface&MockObject */
+    private ReviewableInterface $reviewable;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->averageRatingCalculator = new AverageRatingCalculator();
+        $this->reviewable = $this->createMock(ReviewableInterface::class);
     }
 
-    public function testItImplementsReviewableRatingCalculatorInterface(): void
+    public function testShouldImplementReviewableRatingCalculatorInterface(): void
     {
-        self::assertInstanceOf(
-            ReviewableRatingCalculatorInterface::class,
-            $this->averageRatingCalculator,
-        );
+        self::assertInstanceOf(ReviewableRatingCalculatorInterface::class, $this->averageRatingCalculator);
     }
 
-    public function testCalculatingAverageRating(): void
+    public function testCalculateAverageRating(): void
     {
-        /** @var ReviewableInterface&MockObject $reviewableMock */
-        $reviewableMock = $this->createMock(ReviewableInterface::class);
+        /** @var ReviewInterface&MockObject $review1 */
+        $review1 = $this->createMock(ReviewInterface::class);
 
-        /** @var ReviewInterface&MockObject $review1Mock */
-        $review1Mock = $this->createMock(ReviewInterface::class);
+        /** @var ReviewInterface&MockObject $review2 */
+        $review2 = $this->createMock(ReviewInterface::class);
 
-        /** @var ReviewInterface&MockObject $review2Mock */
-        $review2Mock = $this->createMock(ReviewInterface::class);
+        $this->reviewable->expects($this->once())->method('getReviews')->willReturn(new ArrayCollection([$review1, $review2]));
 
-        $reviewableMock->expects($this->once())->method('getReviews')->willReturn(new ArrayCollection([$review1Mock, $review2Mock]));
+        $review1->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_ACCEPTED);
+        $review1->expects($this->once())->method('getRating')->willReturn(4);
 
-        $review1Mock->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_ACCEPTED);
-        $review1Mock->expects($this->once())->method('getRating')->willReturn(4);
+        $review2->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_ACCEPTED);
+        $review2->expects($this->once())->method('getRating')->willReturn(5);
 
-        $review2Mock->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_ACCEPTED);
-        $review2Mock->expects($this->once())->method('getRating')->willReturn(5);
-
-        self::assertSame(4.5, $this->averageRatingCalculator->calculate($reviewableMock));
+        self::assertSame(4.5, $this->averageRatingCalculator->calculate($this->reviewable));
     }
 
     public function testReturningZeroIfGivenReviewableObjectHasNoReviews(): void
     {
-        /** @var ReviewableInterface&MockObject $reviewableMock */
-        $reviewableMock = $this->createMock(ReviewableInterface::class);
-
-        $reviewableMock->expects($this->once())->method('getReviews')->willReturn(new ArrayCollection([]));
-
-        self::assertSame(0.0, $this->averageRatingCalculator->calculate($reviewableMock));
+        $this->reviewable->expects($this->once())->method('getReviews')->willReturn(new ArrayCollection([]));
+        self::assertSame(0.0, $this->averageRatingCalculator->calculate($this->reviewable));
     }
 
     public function testReturningZeroIfGivenReviewableObjectHasReviewsButNoneOfThemIsAccepted(): void
     {
-        /** @var ReviewableInterface&MockObject $reviewableMock */
-        $reviewableMock = $this->createMock(ReviewableInterface::class);
+        /** @var ReviewInterface&MockObject $review */
+        $review = $this->createMock(ReviewInterface::class);
 
-        /** @var ReviewInterface&MockObject $reviewMock */
-        $reviewMock = $this->createMock(ReviewInterface::class);
+        $this->reviewable->expects($this->once())->method('getReviews')->willReturn(new ArrayCollection([$review]));
 
-        $reviewableMock->expects($this->once())->method('getReviews')->willReturn(new ArrayCollection([$reviewMock]));
+        $review->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_NEW);
 
-        $reviewMock->expects($this->once())->method('getStatus')->willReturn(ReviewInterface::STATUS_NEW);
-
-        self::assertSame(0.0, $this->averageRatingCalculator->calculate($reviewableMock));
+        self::assertSame(0.0, $this->averageRatingCalculator->calculate($this->reviewable));
     }
 }
