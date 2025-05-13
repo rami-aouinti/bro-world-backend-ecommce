@@ -14,7 +14,7 @@ sylius:
             billing_address: Adresse de facturation
             different_shipping_address: Utiliser une adresse différente pour la livraison ?
             only_customer_registration: Créer un compte ?
-            subscribed_to_newsletter: S'abonner à la newsletter
+            subscribed_to_newsletter: S'abonner à l'infolettre
         customer_group:
             name: Nom
             roles: Rôles
