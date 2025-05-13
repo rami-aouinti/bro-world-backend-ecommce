@@ -27,13 +27,13 @@ sylius_twig_hooks:
 ### Render the media
 
 ```twig
-{{ sylius_cms_render_block('my_media_code') }}
+{{ sylius_cms_render_media('my_media_code') }}
 ```
 
 You can render the custom template by passing the appropriate option:
 
 ```twig
-{{ sylius_cms_render_block('my_media_code', 'my_custom_template.html.twig') }}
+{{ sylius_cms_render_media('my_media_code', 'my_custom_template.html.twig') }}
 ```
 
 ### Render the media directly by calling the route
