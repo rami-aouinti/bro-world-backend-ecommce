@@ -12,7 +12,7 @@ use Rector\Visibility\Rector\ClassMethod\ExplicitPublicClassMethodRector;
 
 return RectorConfig::configure()
     ->withPaths([
-        // __DIR__ . '/src/Sylius/Component/Addressing/spec',
+         __DIR__ . '/src/Sylius/Component/Locale/spec',
     ])
     ->withImportNames(removeUnusedImports: true)
     ->withSets([
