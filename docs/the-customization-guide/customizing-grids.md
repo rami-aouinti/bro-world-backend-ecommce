@@ -18,7 +18,7 @@ Grids in Sylius are responsible for rendering lists of entities in the administr
 You can customize grids declaratively in YAML or programmatically using event listeners.
 
 {% hint style="info" %}
-&#x20;If you’re new to Sylius grids, we recommend starting with the [SyliusGridBundle documentation](https://github.com/Sylius/SyliusGridBundle/blob/master/docs/index.md).
+&#x20;If you’re new to Sylius grids, we recommend starting with the [SyliusGridBundle documentation](https://stack.sylius.com/grid/index).
 {% endhint %}
 
 ### Why Customize a Grid?
@@ -121,28 +121,6 @@ sylius_grid:
 {% hint style="warning" %}
 The `show` action doesn't exist on the product grid by default - make sure it is added first.
 {% endhint %}
-
-***
-
-#### ✅ Hiding the Label of an Action (but Keeping the Button)
-
-This is different from disabling the action entirely. You might want to keep the button visible as an icon, without a label.
-
-```yaml
-# config/packages/_sylius.yaml
-sylius_grid:
-    grids:
-        sylius_admin_product_review:
-            actions:
-                item:
-                    delete:
-                        type: delete
-                        options:
-                            labeled: false
-```
-
-* `enabled: false` → removes the action.
-* `options.labeled: false` → keeps the action but hides the label.
 
 ***
 
