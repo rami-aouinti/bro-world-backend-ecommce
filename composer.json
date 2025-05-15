@@ -222,7 +222,7 @@
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^10.5",
         "psr/event-dispatcher": "^1.0",
-        "rector/custom-phpspec-to-phpunit": "*",
+        "rector/custom-phpspec-to-phpunit": "^0.6",
         "rector/rector": "^2.0",
         "robertfausk/behat-panther-extension": "^1.1",
         "sylius-labs/coding-standard": "^4.4",
