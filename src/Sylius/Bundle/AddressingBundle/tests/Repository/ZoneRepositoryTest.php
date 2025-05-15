@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\AddressingBundle\Tests\Repository;
+namespace Tests\Sylius\Bundle\AddressingBundle\Repository;
 
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -95,6 +95,7 @@ final class ZoneRepositoryTest extends KernelTestCase
         $repository = $this->getRepository();
         $zones = [];
 
+        /** @var ZoneInterface $visegradGroupZone */
         $visegradGroupZone = $repository->findOneBy(['code' => 'VISEGRAD_GROUP']);
         foreach ($repository->findByMembers([$visegradGroupZone]) as $zone) {
             $zones[$zone->getCode()] = $zone;
@@ -123,9 +124,10 @@ final class ZoneRepositoryTest extends KernelTestCase
         $this->assertArrayNotHasKey('NATO', $zones);
     }
 
+    /** @return ZoneRepositoryInterface<ZoneInterface> */
     private function getRepository(): ZoneRepositoryInterface
     {
-        /** @var ZoneRepositoryInterface $repository */
+        /** @var ZoneRepositoryInterface<ZoneInterface> $repository */
         $repository = self::getContainer()->get('sylius.repository.zone');
 
         return $repository;
