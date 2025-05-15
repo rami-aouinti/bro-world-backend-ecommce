@@ -63,13 +63,9 @@ class FloatAttributeTypeTest extends TestCase
         $context = $this->createMock(ExecutionContextInterface::class);
         $validator = $this->createMock(ValidatorInterface::class);
 
-        $attributeValue->expects(self::once())
-            ->method('getValue')
-            ->willReturn(null);
+        $attributeValue->expects(self::once())->method('getValue')->willReturn(null);
 
-        $context->expects(self::once())
-            ->method('getValidator')
-            ->willReturn($validator);
+        $context->expects(self::once())->method('getValidator')->willReturn($validator);
 
         $validator->expects(self::once())
             ->method('validate')
@@ -84,32 +80,22 @@ class FloatAttributeTypeTest extends TestCase
             }))
             ->willReturn($constraintViolationList);
 
-        $constraintViolationList->expects(self::once())
-            ->method('rewind');
+        $constraintViolationList->expects(self::once())->method('rewind');
         $constraintViolationList->expects(self::exactly(2))
             ->method('valid')
             ->willReturnOnConsecutiveCalls(true, false);
-        $constraintViolationList->expects(self::once())
-            ->method('current')
-            ->willReturn($constraintViolation);
-        $constraintViolationList->expects(self::once())
-            ->method('next');
-
-        $constraintViolation->expects(self::once())
-            ->method('getMessage')
-            ->willReturn('error message');
-
+        $constraintViolationList->expects(self::once())->method('current')->willReturn($constraintViolation);
+        $constraintViolationList->expects(self::once())->method('next');
+        $constraintViolation->expects(self::once())->method('getMessage')->willReturn('error message');
         $context->expects(self::once())
             ->method('buildViolation')
             ->with('error message')
             ->willReturn($constraintViolationBuilder);
-
         $constraintViolationBuilder->expects(self::once())
             ->method('atPath')
             ->with('value')
             ->willReturn($constraintViolationBuilder);
-        $constraintViolationBuilder->expects(self::once())
-            ->method('addViolation');
+        $constraintViolationBuilder->expects(self::once())->method('addViolation');
 
         $this->type->validate($attributeValue, $context, ['required' => true]);
     }
