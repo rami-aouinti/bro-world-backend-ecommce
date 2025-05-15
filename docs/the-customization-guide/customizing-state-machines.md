@@ -18,6 +18,10 @@ Sylius uses Symfony's Workflow Component to manage business processes such as or
 
 Sylius provides predefined workflows, but many projects require customizations. This guide will walk you through how to find, extend, and modify these workflows in a clear, step-by-step way.
 
+{% hint style="info" %}
+To get an overview of how state machines are structured and used across Sylius resources (like orders, shipments, and payments), refer to the [State Machine Architecture Guide](../the-book/architecture/state-machine.md) in the Sylius Book.
+{% endhint %}
+
 ## How to find the desired state machine to customize?
 
 #### Locate the Workflow Graph
@@ -200,7 +204,7 @@ Result:
 
 ### Adding Workflow Callbacks
 
-You can hook into workflow events using Symfony event listeners.
+You can hook into workflow events using **Symfony event listeners**.
 
 #### Example: Send an Email After Order Completion
 
