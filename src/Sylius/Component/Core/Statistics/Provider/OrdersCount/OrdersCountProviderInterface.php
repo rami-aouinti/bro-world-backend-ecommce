@@ -11,10 +11,10 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Statistics\Provider\OrdersTotals;
+namespace Sylius\Component\Core\Statistics\Provider\OrdersCount;
 
 use Sylius\Component\Core\Statistics\Provider\SalesProviderInterface;
 
-interface OrdersTotalsProviderInterface extends SalesProviderInterface
+interface OrdersCountProviderInterface extends SalesProviderInterface
 {
 }

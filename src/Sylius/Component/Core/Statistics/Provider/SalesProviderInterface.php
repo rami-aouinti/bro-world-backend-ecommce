@@ -15,8 +15,8 @@ namespace Sylius\Component\Core\Statistics\Provider;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 
-interface SalesStatisticsProviderInterface
+interface SalesProviderInterface
 {
-    /** @return array<array{period: string, ...}> */
-    public function provide(string $intervalType, \DatePeriod $datePeriod, ChannelInterface $channel): array;
+    /** @return array<array-key, array{period: \DateTimeInterface, ...}> */
+    public function provideForPeriodInChannel(\DatePeriod $period, ChannelInterface $channel): array;
 }

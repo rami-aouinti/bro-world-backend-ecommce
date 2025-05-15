@@ -11,31 +11,30 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Component\Core\Statistics\Provider\OrdersTotals;
+namespace Sylius\Component\Core\Statistics\Provider\OrdersCount;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-final class DayBasedOrdersTotalProvider implements OrdersTotalsProviderInterface
+final class MonthBasedOrdersCountProvider implements OrdersCountProviderInterface
 {
     /** @param OrderRepositoryInterface<OrderInterface> $orderRepository */
     public function __construct(private OrderRepositoryInterface $orderRepository)
     {
     }
 
-    /** @return array<array-key, array{period: \DateTimeInterface, total: int}> */
+    /** @return array<array-key, array{period: \DateTimeInterface, paidOrdersCount: int}> */
     public function provideForPeriodInChannel(\DatePeriod $period, ChannelInterface $channel): array
     {
-        /** @param array<array-key, array{total: string|int, year: int, month: int, day: int}> $totals */
-        $totals = $this->orderRepository->getGroupedTotalPaidSalesForChannelInPeriod(
+        /** @param array<array{paid_orders_count: string|int, year: int, month: int}> $amounts */
+        $amounts = $this->orderRepository->countGroupedPaidForChannelInPeriod(
             $channel,
             $period->getStartDate(),
             $period->getEndDate(),
             [
                 'year' => 'YEAR(o.checkoutCompletedAt) AS year',
                 'month' => 'MONTH(o.checkoutCompletedAt) AS month',
-                'day' => 'DAY(o.checkoutCompletedAt) AS day',
             ],
         );
 
@@ -43,21 +42,22 @@ final class DayBasedOrdersTotalProvider implements OrdersTotalsProviderInterface
         foreach ($period as $date) {
             $result[] = [
                 'period' => $date,
-                'total' => $this->getTotalForDate($totals, $date),
+                'paidOrdersCount' => $this->getAmountForDate($amounts, $date),
             ];
         }
 
         return $result;
     }
 
-    /** @param array<array{total: string|int, year: int, month: int, day: int}> $totals */
-    private function getTotalForDate(array $totals, \DateTimeInterface $date): int
+    /** @param array<array{paid_orders_count: string|int, year: int, month: int}> $amounts */
+    private function getAmountForDate(array $amounts, \DateTimeInterface $date): int
     {
-        $formattedPeriodDate = $date->format('Y-n-j');
+        $formattedPeriodDate = $date->format('Y-n');
 
-        foreach ($totals as $entry) {
-            if ($formattedPeriodDate === $entry['year'] . '-' . $entry['month'] . '-' . $entry['day']) {
-                return (int) $entry['total'];
+        foreach ($amounts as $entry) {
+            $entryDate = $entry['year'] . '-' . $entry['month'];
+            if ($formattedPeriodDate === $entryDate) {
+                return (int) $entry['paid_orders_count'];
             }
         }
 
