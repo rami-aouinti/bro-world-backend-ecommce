@@ -153,8 +153,8 @@ final class StatisticsTest extends JsonApiTestCase
     public static function getIntervals(): iterable
     {
         yield ['day'];
-//        yield ['month'];
-//        yield ['year'];
+        yield ['month'];
+        yield ['year'];
     }
 
     #[DataProvider('invalidPeriods')]
