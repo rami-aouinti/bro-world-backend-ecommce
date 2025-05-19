@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 final class FakeChannelPersisterTest extends TestCase
 {
     /** @var FakeChannelCodeProviderInterface&MockObject */
-    private MockObject $fakeHostnameProvider;
+    private MockObject $fakeChannelCodeProvider;
 
     private FakeChannelPersister $fakeChannelPersister;
 
@@ -42,8 +42,8 @@ final class FakeChannelPersisterTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->fakeHostnameProvider = $this->createMock(FakeChannelCodeProviderInterface::class);
-        $this->fakeChannelPersister = new FakeChannelPersister($this->fakeHostnameProvider);
+        $this->fakeChannelCodeProvider = $this->createMock(FakeChannelCodeProviderInterface::class);
+        $this->fakeChannelPersister = new FakeChannelPersister($this->fakeChannelCodeProvider);
         $this->kernelMock = $this->createMock(HttpKernelInterface::class);
         $this->requestMock = $this->createMock(Request::class);
         $this->responseMock = $this->createMock(Response::class);
@@ -52,7 +52,7 @@ final class FakeChannelPersisterTest extends TestCase
 
     public function testAppliesOnlyToMasterRequests(): void
     {
-        $this->fakeHostnameProvider->expects(self::never())->method('getCode');
+        $this->fakeChannelCodeProvider->expects(self::never())->method('getCode');
 
         $this->responseMock->headers = $this->responseHeaderBag;
 
@@ -68,7 +68,7 @@ final class FakeChannelPersisterTest extends TestCase
 
     public function testAppliesOnlyForRequestWithFakeChannelCode(): void
     {
-        $this->fakeHostnameProvider->expects(self::once())
+        $this->fakeChannelCodeProvider->expects(self::once())
             ->method('getCode')
             ->with($this->requestMock)
             ->willReturn(null);
@@ -83,7 +83,7 @@ final class FakeChannelPersisterTest extends TestCase
 
     public function testPersistsFakeChannelCodesInACookie(): void
     {
-        $this->fakeHostnameProvider
+        $this->fakeChannelCodeProvider
             ->expects(self::once())
             ->method('getCode')
             ->with($this->requestMock)
