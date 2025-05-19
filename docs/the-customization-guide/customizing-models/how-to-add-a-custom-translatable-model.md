@@ -370,11 +370,6 @@ sylius_grid:
                 description:
                     type: string
                     label: sylius.ui.description
-                enabled:
-                    type: twig
-                    label: sylius.ui.enabled
-                    options:
-                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
             actions:
                 main:
                     create:
