@@ -285,6 +285,8 @@ Now that your `Supplier` entity and its translation logic are ready, the next st
 
 1. **Register the translatable resource** with Sylius Resource Bundle.
 2. **Configure the routes** to expose CRUD operations in the Sylius Admin Panel.
+3. **Configure the grid** to see the list of newly created resources.
+4. **Add missing translations** if needed for your resource name.
 
 #### Register the Resource and Translation
 
@@ -347,6 +349,80 @@ app_admin_supplier:
 
 ***
 
+#### Configure grid
+
+To manage `Supplier` entities from the Sylius Admin Panel, you need to configure a **grid**. This grid defines how supplier records appear and which actions are available (create, update, delete).
+
+📁 **File path**: `config/packages/_sylius.yaml`
+
+```yaml
+sylius_grid:
+    grids:
+        app_admin_supplier:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Supplier
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                description:
+                    type: string
+                    label: sylius.ui.description
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+```
+
+📌 **Explanation**:
+
+* **Grid name**: `app_admin_supplier` – you can reference this in routes and templates.
+* **Driver**: `doctrine/orm` uses Doctrine to fetch `App\Entity\Supplier` data.
+* **Fields**:
+  * `name`, `description` – basic string fields rendered with default labels.
+  * `enabled` – a custom field rendered using a Twig template.
+* **Actions**:
+  * `main.create` – shows a **Create** button at the top of the grid.
+  * `item.update` & `item.delete` – appear on each row, allowing editing or removal of the specific entity.
+
+***
+
+#### Configure Translations
+
+To display human-readable labels for your `Supplier` entity in the admin panel, define UI translation strings.
+
+📁 **File path**: `translations/messages.en.yaml`
+
+<pre class="language-yaml"><code class="lang-yaml"><strong>app:
+</strong>    ui:
+        suppliers: 'Suppliers'
+        supplier: 'Supplier'
+</code></pre>
+
+📌 **Explanation**:
+
+* These keys are used in grid labels, menu items, form titles, and other UI elements.
+* You can reuse them across templates and configuration files (e.g., `label: app.ui.supplier`).
+* Make sure to clear your Symfony cache after adding new translation keys:
+
+```bash
+bin/console cache:clear
+```
+
+***
+
 ### Step 5: Update the Database with Migrations
 
 Now that your entities and resource configuration are complete, you'll need to update your database schema. This is done using Doctrine Migrations.
@@ -384,22 +460,12 @@ It helps unify your form sections and make translations **clean, readable, and w
 
 #### 🧩 1: Use the Built-In Macro to Render Translations
 
-```twig
-{% raw %}
-{% import '@SyliusAdmin/shared/helper/translations.html.twig' as translations %}
-{% endraw %}
-
-{{ translations.with_hook(form.translations, prefixes, null, {
-    accordion_flush: true
-}) }}
-```
-
-This macro automatically applies consistent layout, translation tabs, and localization context.
+Use [macro](https://github.com/Sylius/Sylius/blob/v2.0.7/src/Sylius/Bundle/AdminBundle/templates/shared/helper/translations.html.twig) to automatically apply consistent layout, translation tabs, and localization context.
 
 {% hint style="success" %}
 The `with_hook` macro works hand-in-hand with Sylius's Twig hook system to render clean, localized translation forms.\
 But that’s just the beginning — the helper contains more useful methods to streamline translation UIs.\
-👉 **Explore all available macros and helper functions** [**here**](https://github.com/Sylius/Sylius/blob/v2.0.7/src/Sylius/Bundle/AdminBundle/templates/shared/helper/translations.html.twig)**.**
+👉 **Explore all available macros and helper functions** [**here**](https://github.com/Sylius/Sylius/tree/v2.0.7/src/Sylius/Bundle/AdminBundle/templates/shared/helper)**.**
 
 👉 **Find out more about the twig hooks** [**here**](https://stack.sylius.com/twig-hooks/getting-started)**.**
 {% endhint %}
@@ -450,6 +516,12 @@ These templates will override the default rendering and allow the macro to integ
         }) }}
     </div>
 </div>
+```
+
+```twig
+{# templates/admin/supplier/form/sections/general/email.html.twig #}
+
+{{ form_row(hookable_metadata.context.form.email) }}
 ```
 
 #### 📝 3: Define Individual Translation Fields
