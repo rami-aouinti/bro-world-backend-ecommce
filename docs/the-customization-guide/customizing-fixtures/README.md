@@ -128,7 +128,8 @@ sylius_fixtures:
 
 ## Customizing Fixtures for Extended Models
 
-If you’ve added custom fields to an entity, you'll also need to update the fixture logic.
+If you’ve added custom fields to an entity, you'll also need to update the fixture logic.\
+Let's assume that `ShippingMethod` has been extended with `deliveryConditions` field.
 
 #### Scenario: Adding `deliveryConditions` to `ShippingMethod`
 
@@ -137,26 +138,27 @@ If you’ve added custom fields to an entity, you'll also need to update the fix
 ```php
 <?php
 
-// src/Fixture/Factory/ShippingMethodExampleFactory.php
-
 namespace App\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory as BaseShippingMethodExampleFactory;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ShippingMethodExampleFactory extends BaseShippingMethodExampleFactory
 {
+    // ...
     public function create(array $options = []): ShippingMethodInterface
     {
-        /** @var ShippingMethod $shippingMethod */
         $shippingMethod = parent::create($options);
 
         if (!isset($options['deliveryConditions'])) {
             return $shippingMethod;
         }
 
-        foreach ($this->getLocales() as $localeCode) {
+        // Access locales through the parent's public API (if available)
+        // or find another way to get locales
+        foreach ($this->getLocalesFromRepository() as $localeCode) {
             $shippingMethod->setCurrentLocale($localeCode);
             $shippingMethod->setFallbackLocale($localeCode);
             $shippingMethod->setDeliveryConditions($options['deliveryConditions']);
@@ -168,19 +170,27 @@ final class ShippingMethodExampleFactory extends BaseShippingMethodExampleFactor
     protected function configureOptions(OptionsResolver $resolver): void
     {
         parent::configureOptions($resolver);
+
         $resolver
             ->setDefault('deliveryConditions', 'some_default_value')
-            ->setAllowedTypes('deliveryConditions', ['null', 'string']);
+            ->setAllowedTypes('deliveryConditions', ['null', 'string'])
+        ;
     }
 
-    private function getLocales(): iterable
+    private function getLocalesFromRepository(): iterable
     {
-        foreach ($this->localeRepository->findAll() as $locale) {
+        /** @var LocaleInterface[] $locales */
+        $locales = $this->localeRepository->findAll();
+        foreach ($locales as $locale) {
             yield $locale->getCode();
         }
     }
 }
 ```
+
+{% hint style="warning" %}
+Since Sylius 2.0.8, fixture factory constructor args are `protected`—easy to extend. On older versions, you must override the full constructor.
+{% endhint %}
 
 2. Extend the Fixture Class
 
@@ -213,25 +223,25 @@ final class ShippingMethodFixture extends BaseShippingMethodFixture
 Update your `config/services.yaml`:
 
 ```yaml
-sylius.fixture.example_factory.shipping_method:
-    class: App\Fixture\Factory\ShippingMethodExampleFactory
-    arguments:
-        - "@sylius.factory.shipping_method"
-        - "@sylius.repository.zone"
-        - "@sylius.repository.shipping_category"
-        - "@sylius.repository.locale"
-        - "@sylius.repository.channel"
-        - "@sylius.repository.tax_category"
-    public: true
-
-sylius.fixture.shipping_method:
-    class: App\Fixture\ShippingMethodFixture
-    arguments:
-        - "@sylius.manager.shipping_method"
-        - "@sylius.fixture.example_factory.shipping_method"
-    tags:
-        - { name: sylius_fixtures.fixture }
-
+services:
+    sylius.fixture.example_factory.shipping_method:
+        class: App\Fixture\Factory\ShippingMethodExampleFactory
+        arguments:
+            - "@sylius.factory.shipping_method"
+            - "@sylius.repository.zone"
+            - "@sylius.repository.shipping_category"
+            - "@sylius.repository.locale"
+            - "@sylius.repository.channel"
+            - "@sylius.repository.tax_category"
+        public: true
+    
+    sylius.fixture.shipping_method:
+        class: App\Fixture\ShippingMethodFixture
+        arguments:
+            - "@sylius.manager.shipping_method"
+            - "@sylius.fixture.example_factory.shipping_method"
+        tags:
+            - { name: sylius_fixtures.fixture }
 ```
 
 {% hint style="warning" %}
