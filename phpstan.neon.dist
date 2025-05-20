@@ -18,8 +18,8 @@ parameters:
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/tests/**.php'
         - '**/Bundle/*/Tests/**.php'
-        - '**/spec/**.php'
         - 'src/Sylius/Behat/**.php'
+        - '**/spec/**.php'
 
         # Vendor files in subpackages
         - '**/Bundle/*/vendor/**.php'
