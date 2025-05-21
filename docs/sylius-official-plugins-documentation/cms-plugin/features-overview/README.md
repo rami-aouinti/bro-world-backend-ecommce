@@ -1,23 +1,32 @@
+---
+layout:
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+---
+
 # Features Overview
 
-### Features Overview
+The **Sylius CMS Plugin** adds a powerful Content Management System to your Sylius store. It allows you to create, manage, and publish dynamic content directly from the Sylius Admin Panel—no development needed.
 
-**Sylius CMS Plugin** extends Sylius with a full CMS, so you can create, edit and publish dynamic pages right from your shop’s admin.
+<figure><img src="../../../.gitbook/assets/cms-features.png" alt="" width="225"><figcaption></figcaption></figure>
 
-#### Key Admin Tiles
+## Key Features in the Admin Panel
 
-* **Collections**\
-  Group related content (blocks, pages, media) into reusable containers.\
-  → [Learn more](collections.md)
-* **Content Templates**\
-  Define skeletons of content elements to scaffold new pages or blocks.\
-  → [Learn more](content-templates.md)
-* **Pages**\
-  Create and organize full CMS pages (home, blog posts, info pages, etc.).\
-  → [Learn more](pages.md)
-* **Blocks**\
-  Build modular content pieces (headers, banners, text sections) you can drop into pages or templates.\
-  → [Learn more](blocks.md)
-* **Media**\
-  Central hub for uploading and managing images, videos & other assets used across your CMS.\
-  → [Learn more](media.md)
+* [**Collections**](collections.md)\
+  Group related content elements, such as pages, blocks, and media, into reusable containers. Perfect for organizing content by themes or sections.
+* [**Content Templates**](content-templates.md)\
+  Create predefined structures (templates) for pages or blocks. Speed up content creation and ensure consistency across your site.
+* [**Pages**](pages.md)\
+  Build complete pages for your storefront, like home pages, blog posts, and informational sections. Fully customizable and easy to organize.
+* [**Blocks**](blocks.md)\
+  Design modular content pieces such as headers, banners, or text areas. Easily insert them into pages or reuse them in templates.
+* [**Media**](media.md)\
+  Centralized media library for managing images, videos, and downloadable files. Use assets across pages, blocks, and templates.

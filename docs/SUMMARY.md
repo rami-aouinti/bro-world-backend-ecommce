@@ -1,6 +1,5 @@
 # Table of contents
 
-* [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)
 * [📖 Sylius 2.0 Documentation](README.md)
   * [Organization](sylius-2.0-documentation/organization/README.md)
     * [Release Cycle](sylius-2.0-documentation/organization/release-cycle.md)
@@ -10,7 +9,6 @@
 
 ## Getting Started with Sylius
 
-* [Index](getting-started-with-sylius/index.md)
 * [Installation](getting-started-with-sylius/installation.md)
 * [Basic Configuration](getting-started-with-sylius/basic-configuration.md)
 * [Shipping & Payment](getting-started-with-sylius/shipping-and-payment.md)
@@ -138,10 +136,9 @@
 ## Sylius Official Plugins Documentation
 
 * [CMS Plugin](sylius-official-plugins-documentation/cms-plugin/README.md)
-  * [Getting Started](sylius-official-plugins-documentation/cms-plugin/getting-started/README.md)
-    * [Installation](sylius-official-plugins-documentation/cms-plugin/getting-started/installation.md)
-    * [Upgrading](sylius-official-plugins-documentation/cms-plugin/getting-started/upgrading.md)
-    * [Quick Start](sylius-official-plugins-documentation/cms-plugin/getting-started/quick-start.md)
+  * [Quick Start](sylius-official-plugins-documentation/cms-plugin/quick-start.md)
+  * [Installation](sylius-official-plugins-documentation/cms-plugin/installation.md)
+  * [Upgrading](sylius-official-plugins-documentation/cms-plugin/upgrading.md)
   * [Features Overview](sylius-official-plugins-documentation/cms-plugin/features-overview/README.md)
     * [Collections](sylius-official-plugins-documentation/cms-plugin/features-overview/collections.md)
     * [Content Templates](sylius-official-plugins-documentation/cms-plugin/features-overview/content-templates.md)
@@ -156,9 +153,9 @@
     * [Content Element](sylius-official-plugins-documentation/cms-plugin/developer-reference/content-element.md)
     * [Templates](sylius-official-plugins-documentation/cms-plugin/developer-reference/templates.md)
 
-## THE COOKBOOK v1.x
+## Sylius 1.x Documentation
 
-* [The Cookbook v1.x](https://old-docs.sylius.com/en/1.13/cookbook/index.html)
+* [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)
 
 ## The Cookbook 2.0
 
@@ -216,7 +213,6 @@
 
 ## Tests
 
-* [Index](tests/index.md)
 * [Behaviour Driven Development](tests/behaviour-driven-development/README.md)
   * [How to add a new context?](tests/behaviour-driven-development/how-to-add-a-new-context.md)
   * [How to add a new page object?](tests/behaviour-driven-development/how-to-add-a-new-page-object.md)

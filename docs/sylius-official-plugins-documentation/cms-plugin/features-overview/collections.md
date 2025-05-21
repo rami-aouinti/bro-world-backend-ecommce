@@ -1,40 +1,51 @@
 # Collections
 
-The **Collections** feature lets administrators group and manage related content—blocks, CMS pages, and media—into named containers. This structure makes it easy to build consistent, reusable layouts across your store.
+The **Collections** feature in the Sylius CMS Plugin allows administrators to group and manage related content, such as CMS pages, blocks, or media, into named containers. This provides a flexible, reusable structure for building consistent layouts and managing content across your storefront.
 
 ## Why Use Collections?
 
-* **Organize content**\
-  Group blog posts, product galleries, promotional banners, or any other elements under a single collection.
-* **Maintain consistency**\
-  Apply the same set of blocks, pages, or media to multiple CMS pages at once.
-* **Increase flexibility**\
-  Rearrange, add, or remove items within a collection without touching individual pages.
+* **Organize Content**\
+  Group similar content elements—like blog posts, product highlights, or promotional banners—into a single logical unit.
+* **Maintain Layout Consistency**\
+  Apply the same set of content blocks, media, or pages across multiple areas of your site, ensuring a cohesive design and message.
+* **Improve Flexibility**\
+  Rearrange or update grouped items in one place without modifying each individual page.
 
 ## Key Concepts
 
 * **Container**\
-  A collection acts as a wrapper: you attach a bundle of blocks, pages, or media to it.
+  A collection acts as a wrapper that contains blocks, pages, or media.
 * **Presentation**\
-  Collections determine how and where content appears on your storefront.
+  Controls how grouped content is rendered and positioned in the storefront.
 * **Customization**\
-  Use collections to tailor page layouts for different marketing campaigns or user segments.
+  Ideal for tailoring layouts for specific campaigns, product categories, or user segments.
+
+<figure><img src="../../../.gitbook/assets/cms-collection.png" alt=""><figcaption></figcaption></figure>
 
 ## Creating a Collection
 
-1. **Open the Sylius admin panel**
-2. **Go to** **CMS → Collections**
-3. **Click** **“Create”**
-4.  **Fill in** the form fields:
+1. **Open the Sylius Admin Panel**
+2. **Navigate to**: `CMS → Collections`
+3. **Click**: `Create`
+4. **Fill in the Form**:
+   * **Code**: A unique system identifier (e.g., `home_banner_set`)
+   * **Name**: A readable label shown in the admin panel
+   * **Type**: Choose whether the collection will include:
+     * `Pages`
+     * `Blocks`
+     * `Media`
+   * **Content Field**:\
+     Depending on the selected type, a dynamic autocomplete field appears (`Pages`, `Blocks`, or `Media`). Select one or more content items to include in this collection.
+5. **Submit the Form**
 
-    * **Code** - a unique identifier
-    * **Name** - the display label
-    * **Type -** select whether the collection will contain pages, blocks, or media
-    * **Content field** – appears below as a dynamic Autocomplete input (labelled Pages, Blocks, or Media, depending on the selected Type); you can select multiple elements to include in the collection.
+## Accessing a Collection on the Storefront
 
+Once created, the collection becomes accessible at:
 
-5. Submit the form.
-6.  The collection content will be available in the store at the following URL
+```bash
+{your-store-hostname}/{locale}/collections/{collection-code}/pages
+```
 
-    `{store-hostname}/{locale}/collections/{collection-code}/pages`
+Example:\
+`https://example.com/en_US/collections/homepage-banners/pages`
 

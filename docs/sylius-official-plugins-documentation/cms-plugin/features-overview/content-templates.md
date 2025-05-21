@@ -1,50 +1,60 @@
 # Content Templates
 
-Content Templates let you define reusable skeletons of content elements that you can drop into blocks or pages. They speed up assembly and enforce consistent layouts across your store.
+**Content Templates** allow you to define reusable layout structures—called _skeletons_—for pages and blocks. These templates help you assemble content faster, maintain consistent design across your store, and update layouts in one place.
 
-Available content elements:
+## What Can a Content Template Include?
 
-* Single media
-* Multiple media
-* Products carousel by Taxon
-* Products grid by Taxon
-* Pages collection
-* Textarea
-* Heading
-* Products carousel
-* Products grid
-* Taxons list
-* Spacer
+You can mix and match the following **content elements (widgets)** when building a template:
+
+* **Single Media**
+* **Multiple Media**
+* **Products Carousel by Taxon**
+* **Products Grid by Taxon**
+* **Pages Collection**
+* **Textarea**
+* **Heading**
+* **Products Carousel**
+* **Products Grid**
+* **Taxons List**
+* **Spacer**
 
 ## Why Use Content Templates?
 
 * **Consistency**\
-  Ensure all pages or blocks built from the same template share the same structure and styling.
+  Standardize the structure and design of your pages and blocks.
 * **Efficiency**\
-  Build complex layouts once and reuse them everywhere, reducing manual work.
+  Define layouts once and reuse them, reducing repetitive work.
 * **Flexibility**\
-  Modify the template structure in one place to update all associated pages and blocks.
+  Update the structure centrally—changes are reflected across all content using the template.
 
-***
+## How to Create a Content Template
 
-## Creating a Content Template
+1. **Open the Sylius Admin Panel**
+2. **Navigate to**: `CMS → Content Templates`
+3. **Click**: `Create New Content Template`
+4. **Fill in the Template Details**:
+   * **Name**: A descriptive label (e.g., `Product Feature Section`)
+   * **Type**: Select whether the template will be used for:
+     * `Page`
+     * `Block`
+   * **Add Content Elements**:\
+     Select from the available widgets and arrange them in the desired order.
+5. **Save** the template.
 
-1. **Open** the Sylius admin panel.
-2. **Navigate to** **CMS → Content Templates**.
-3. **Click** “Create New Content Template.”
-4. **Enter** a **Name** (e.g. “Product Feature Section”).
-5. **Choose** a **Type** (“Page” or “Block”).
-6. **Add** content elements by selecting and arranging widgets from the list above.
-7. **Save** the template.
-8. **Repeat** to create additional templates as needed.
+You can create as many templates as needed to support different content types or marketing goals.
 
-***
+<figure><img src="../../../.gitbook/assets/cms-content-templates.png" alt=""><figcaption></figcaption></figure>
 
-## Using Content Templates in Pages and Blocks
+## Using a Content Template in a Page or Block
 
-1. In the page or block editor, locate the **Content Template** field.
-2. Begin typing the template name—an autocomplete dropdown will appear.
-3. **Select** your template and click **Add** to insert it.
-4. **Caution:** Confirming a template will replace any existing configuration in that section for the current locale.
+1. **Open** the page or block editor.
+2. **Locate** the **Content Template** field.
+3. **Start Typing** the template name.\
+   An autocomplete dropdown will appear.
+4. **Select** the template and click **Add**.
 
-Once inserted, fill in the template’s fields and publish your page or block as usual.
+> ⚠️ **Important:**\
+> Inserting a content template will _replace_ any existing content configuration for the current locale.
+
+5. **Fill In** the fields defined by the template (e.g., media, text, taxon selections).
+6. **Publish** your page or block as usual.

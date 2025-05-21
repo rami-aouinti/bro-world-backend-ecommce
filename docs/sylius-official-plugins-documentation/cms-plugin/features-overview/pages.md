@@ -1,57 +1,79 @@
 # Pages
 
-**Pages** are full CMS-driven web pages (landing pages, informational pages, blog posts, etc.) that you can create and customize entirely from the Sylius admin.
+**Pages** are full-featured CMS-driven web pages that you can create and manage directly from the Sylius Admin Panel. They’re ideal for building landing pages, blog posts, static content (like FAQs or About pages), and more—without writing code.
 
-### Why Use Pages?
+## Why Use CMS Pages?
 
-* **Rich Content**\
-  Combine text, images, media, product lists and more to build engaging standalone pages.
+* **Rich Content Capabilities**\
+  Combine text, media, product listings, and reusable blocks to create dynamic and visually rich pages.
 * **SEO & Teasers**\
-  Configure slug, meta title, keywords, description and teaser (image + summary) for your page listings.
-* **Dynamic Layouts**\
-  Embed collections, blocks or content templates in any order to craft bespoke layouts.
+  Configure important SEO metadata such as:
+  * Slug (URL path)
+  * Meta Title
+  * Keywords
+  * Description\
+    Add a **Teaser** (image, title, and summary) to feature your page in listings or highlight areas.
+* **Flexible Layouts**\
+  Embed content elements, blocks, and collections in any order using the drag-and-drop editor or a predefined content template.
 
-> **Note:** Make sure you’ve wired up the CMS page rendering in your storefront. See the Pages technical guide for implementation details.
-
-***
-
-### Creating a Page
-
-1. **Open Admin** → go to **CMS → Pages**
-2. **Click** “Create New Page”
-3. **Fill in**:
-   * **Name** (internal label)
-   * **Code** (unique identifier)
-4. **(Optional)** Set SEO fields: Meta title, keywords, description
-5. **(Optional)** Set a **Slug** field to enable access to the page once it is created.
-6. **(Optional)** Add a **Teaser**: image, title & summary for listings
-7. **Save** your page
-8. If a slug is set, the page content will be available in the store at the following URL:
-
-`{store-hostname}/{locale}/pages/{slug}` .
+{% hint style="info" %}
+To display CMS pages on your storefront, make sure your project includes proper rendering support.\
+See the Pages Technical Guide for integration details.
+{% endhint %}
 
 ***
 
-### Adding Content Elements
+## How to Create a CMS Page
 
-In the page editor’s **Content** section:
+1. **Open the Sylius Admin Panel**
+2. **Navigate to**: `CMS → Pages`
+3. **Click**: `Create New Page`
+4. **Fill in the Form**:
+   * **Name**: Internal label used within the admin
+   * **Code**: Unique identifier (e.g., `home-promo-page`)
+   * **SEO Fields** _(optional)_:
+     * Meta title
+     * Keywords
+     * Description
+   * **Slug** _(optional but recommended)_:\
+     Defines the URL path (e.g., `promotions/summer-sale`)
+   * **Teaser** _(optional)_:\
+     Add an image, title, and summary for use in listings
+5. **Click Save**
 
-1. **Click** “Add Element”
-2. **Select** one of available content elements:
-   * Single media
-   * Multiple media
-   * Products carousel by Taxon
-   * Products grid by Taxon
-   * Pages collection
+📍 If you set a slug, your page will be publicly accessible at:
+
+```
+{your-store-hostname}/{locale}/pages/{slug}
+```
+
+Example:\
+`https://example.com/en_US/pages/promotions/summer-sale`&#x20;
+
+## Adding Content to a Page
+
+1. In the page editor, scroll to the **Content** section.
+2. Click **"Add Element"**
+3. Choose from the following **Content Elements**:
+   * Single Media
+   * Multiple Media
+   * Products Carousel (by or without Taxon)
+   * Products Grid (by or without Taxon)
+   * Pages Collection
    * Textarea
    * Heading
-   * Products carousel
-   * Products grid
-   * Taxons list
+   * Taxons List
    * Spacer
-3. **Fill in** each element’s fields (text, images, links…)
-4. **Save.**
+4. Fill in each element's configuration fields (e.g., images, product filters, text).
+5. Save your changes.
 
-### Publishing
+## Publishing Options
 
-You can choose whether the new page should be available immediately after creation or scheduled for a specific date.
+After saving, you can either:
+
+* **Publish Immediately**: Make the page live right away.
+* **Schedule for Later**: Choose a future date and time to automatically publish the page.
+
+<figure><img src="../../../.gitbook/assets/cms-pages-scheduling.png" alt=""><figcaption></figcaption></figure>
+
+***
