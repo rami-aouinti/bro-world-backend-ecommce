@@ -6,3 +6,6 @@
 
 1. The `sylius_admin.dashboard.index.content.latest_statistics.new_customers` hook has been deprecated and disabled. 
    It has been replaced by the `sylius_admin.dashboard.index.content.latest_statistics.pending_actions`.
+
+### Twig hooks
+1. The `history`, `cancel` and `resend_confirmation_email` hookables from `'sylius_admin.order.show.content.header.title_block.actions'` hook have been deprecated and disabled. Now these templates are located in `'sylius_admin.order.show.content.header.title_block.actions.list'` hook.
