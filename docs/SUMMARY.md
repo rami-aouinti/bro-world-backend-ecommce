@@ -114,6 +114,7 @@
   * [How to add a live form for a custom model?](the-customization-guide/customizing-forms/how-to-add-a-live-form-for-a-custom-model.md)
 * [Customizing Repositories](the-customization-guide/customizing-repositories.md)
 * [Customizing Factories](the-customization-guide/customizing-factories.md)
+* [Customizing Styles](the-customization-guide/customizing-styles.md)
 * [Customizing Controllers](the-customization-guide/customizing-controllers.md)
 * [Customizing Validation](the-customization-guide/customizing-validation.md)
 * [Customizing Menus](the-customization-guide/customizing-menus.md)
