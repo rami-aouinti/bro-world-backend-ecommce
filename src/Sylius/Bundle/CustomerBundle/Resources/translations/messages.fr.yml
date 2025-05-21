@@ -6,19 +6,19 @@ sylius:
         customer:
             first_name: Prénom
             group: Groupe
-            last_name: Nom de famille
-            email: Adresse électronique
-            phone_number: Numéro de téléphone
-            gender: Genre
-            birthday: Date d'anniversaire
+            last_name: Nom
+            email: Courriel
+            phone_number: Téléphone
+            gender: Sexe
+            birthday: Date de naissance
             billing_address: Adresse de facturation
             different_shipping_address: Utiliser une adresse différente pour la livraison ?
-            only_customer_registration: Enregistrer un compte ?
-            subscribed_to_newsletter: S’inscrire à la lettre d’information
+            only_customer_registration: Créer un compte ?
+            subscribed_to_newsletter: S'abonner à la newsletter
         customer_group:
             name: Nom du groupe
             roles: Rôles
     gender:
-        unknown: Inconnu(e)
+        unknown: Inconnu
         male: Homme
         female: Femme
