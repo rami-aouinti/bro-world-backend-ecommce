@@ -227,3 +227,19 @@ If you want to customize the grid system, spacing, or any other part of Sylius, 
 
 To limit changes to specific parts of your application, consider scoping your overrides more precisely—for example, by targeting only the components you want to customize.
 
+{% hint style="warning" %}
+**Clear Symfony and Browser Caches After Building Assets**
+
+If your style changes don’t appear after running `yarn build`, it’s likely due to caching. Symfony’s HTTP cache and your browser’s cache can both serve outdated assets.
+
+1. **Clear the Symfony cache**:
+
+```bash
+php bin/console cache:clear
+```
+
+1. **Clear your browser cache** (or try a hard refresh, typically `Ctrl + Shift + R` or `Cmd + Shift + R`).
+
+These steps help ensure you’re seeing the most recent version of your styles, especially in development environments.
+{% endhint %}
+
