@@ -238,7 +238,7 @@ If your style changes don’t appear after running `yarn build`, it’s likely d
 php bin/console cache:clear
 ```
 
-1. **Clear your browser cache** (or try a hard refresh, typically `Ctrl + Shift + R` or `Cmd + Shift + R`).
+2. **Clear your browser cache** (or try a hard refresh, typically `Ctrl + Shift + R` or `Cmd + Shift + R`).
 
 These steps help ensure you’re seeing the most recent version of your styles, especially in development environments.
 {% endhint %}
