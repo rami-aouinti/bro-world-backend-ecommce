@@ -31,8 +31,8 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-sodium": "*",
-        "api-platform/doctrine-orm": "^4.0.3",
-        "api-platform/symfony": "^4.0.3",
+        "api-platform/doctrine-orm": "^4.1.7",
+        "api-platform/symfony": "^4.1.7",
         "babdev/pagerfanta-bundle": "^4.4",
         "behat/transliterator": "^1.5",
         "doctrine/collections": "^2.2",
@@ -242,9 +242,6 @@
         "hwi/oauth-bundle": "If you want to use Facebook login (see https://docs.sylius.com/en/latest/cookbook/shop/facebook-login.html)",
         "winzou/state-machine": "If you want to use Winzou State Machine (^0.4)",
         "winzou/state-machine-bundle": "If you want to use Winzou State Machine (^0.6)"
-    },
-    "conflict": {
-        "api-platform/jsonld": "^4.1.1"
     },
     "config": {
         "preferred-install": {
