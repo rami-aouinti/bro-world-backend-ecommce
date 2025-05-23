@@ -18,6 +18,7 @@ parameters:
         - '**/Bundle/*/test/src/**.php'
         - '**/Bundle/*/tests/**.php'
         - '**/Bundle/*/Tests/**.php'
+        - '**/Component/*/tests/**.php'
         - 'src/Sylius/Behat/**.php'
         - '**/spec/**.php'
 
