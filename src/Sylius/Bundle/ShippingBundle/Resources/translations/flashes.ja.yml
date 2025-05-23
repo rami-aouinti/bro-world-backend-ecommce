@@ -2,6 +2,5 @@
 # (c) Sylius Sp. z o.o.
 
 sylius:
-    form:
-        locale:
-            name: 'ゾーン名'
+    shipment:
+        shipped: '出荷が正常に完了しました。'
