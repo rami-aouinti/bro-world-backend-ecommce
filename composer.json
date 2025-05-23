@@ -284,7 +284,7 @@
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Tests\\": "tests/",
-            "spec\\Sylius\\Behat\\": "src/Sylius/Behat/spec/",
+            "Tests\\Sylius\\Behat\\": "src/Sylius/Behat/tests/",
             "spec\\Sylius\\Component\\Addressing\\": "src/Sylius/Component/Addressing/spec/",
             "spec\\Sylius\\Component\\Attribute\\": "src/Sylius/Component/Attribute/spec/",
             "spec\\Sylius\\Component\\Channel\\": "src/Sylius/Component/Channel/spec/",
