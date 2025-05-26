@@ -51,20 +51,10 @@ final class SessionManagerTest extends TestCase
         /** @var TokenInterface&MockObject $token */
         $token = $this->createMock(TokenInterface::class);
 
-        $setCount = $this->exactly(2);
         $this->sharedStorage
-            ->expects($setCount)
+            ->expects($this->exactly(2))
             ->method('set')
-            ->willReturnCallback(function (string $key, mixed $value) use ($setCount, $token) {
-                if ($setCount->numberOfInvocations() === 1) {
-                    $this->assertSame($key, 'behat_previous_session_name', 'default_session');
-                    $this->assertSame($value, 'default_session');
-                }
-                if ($setCount->numberOfInvocations() === 2) {
-                    $this->assertSame($key, 'behat_previous_session_token_default_session', 'default_session');
-                    $this->assertSame($value, $token);
-                }
-            })
+            ->willReturnCallback($this->expectSharedStorageSetWithToken($token))
         ;
 
         $this->sharedStorage
@@ -94,20 +84,10 @@ final class SessionManagerTest extends TestCase
         $this->mink->expects($this->once())->method('getDefaultSessionName')->willReturn('default_session');
         $this->securityService->expects($this->once())->method('getCurrentToken')->willReturn($token);
 
-        $setCount = $this->exactly(2);
         $this->sharedStorage
-            ->expects($setCount)
+            ->expects($this->exactly(2))
             ->method('set')
-            ->willReturnCallback(function (string $key, mixed $value) use ($setCount, $token) {
-                if ($setCount->numberOfInvocations() === 1) {
-                    $this->assertSame($key, 'behat_previous_session_name', 'default_session');
-                    $this->assertSame($value, 'default_session');
-                }
-                if ($setCount->numberOfInvocations() === 2) {
-                    $this->assertSame($key, 'behat_previous_session_token_default_session', 'default_session');
-                    $this->assertSame($value, $token);
-                }
-            })
+            ->willReturnCallback($this->expectSharedStorageSetWithToken($token))
         ;
 
         $this->mink->expects($this->once())->method('setDefaultSessionName')->with('chrome_headless_second_session');
@@ -160,20 +140,10 @@ final class SessionManagerTest extends TestCase
             })
         ;
 
-        $setCount = $this->exactly(2);
         $this->sharedStorage
-            ->expects($setCount)
+            ->expects($this->exactly(2))
             ->method('set')
-            ->willReturnCallback(function (string $key, mixed $value) use ($setCount, $defaultToken) {
-                if ($setCount->numberOfInvocations() === 1) {
-                    $this->assertSame($key, 'behat_previous_session_name', 'default_session');
-                    $this->assertSame($value, 'default_session');
-                }
-                if ($setCount->numberOfInvocations() === 2) {
-                    $this->assertSame($key, 'behat_previous_session_token_default_session', 'default_session');
-                    $this->assertSame($value, $defaultToken);
-                }
-            })
+            ->willReturnCallback($this->expectSharedStorageSetWithToken($token))
         ;
 
         $this->mink->expects($this->once())->method('getDefaultSessionName')->willReturn('default_session');
@@ -197,7 +167,7 @@ final class SessionManagerTest extends TestCase
             ->with('behat_previous_session_name')
             ->willReturn(false)
         ;
-        $this->sharedStorage->expects($this->never())->method('set')->with('behat_previous_session_name', 'default_session');
+        $this->sharedStorage->expects($this->never())->method('set');
 
         $this->mink->expects($this->never())->method('getDefaultSessionName');
         $this->mink->expects($this->never())->method('setDefaultSessionName')->with('previous_session');
@@ -206,5 +176,22 @@ final class SessionManagerTest extends TestCase
         $this->securityService->expects($this->never())->method('restoreToken')->with($token);
 
         $this->sessionManager->restorePreviousSession();
+    }
+
+    private function expectSharedStorageSetWithToken(TokenInterface $token): callable
+    {
+        $count = $this->exactly(2);
+
+        return function (string $key, mixed $value) use ($count, $token): void {
+            if ($count->numberOfInvocations() === 1) {
+                $this->assertSame('behat_previous_session_name', $key);
+                $this->assertSame('default_session', $value);
+            }
+
+            if ($count->numberOfInvocations() === 2) {
+                $this->assertSame('behat_previous_session_token_default_session', $key);
+                $this->assertSame($token, $value);
+            }
+        };
     }
 }

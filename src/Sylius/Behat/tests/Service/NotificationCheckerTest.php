@@ -49,7 +49,7 @@ final class NotificationCheckerTest extends TestCase
 
         $this->notificationAccessor->expects($this->once())->method('getMessageElements')->willReturn([$firstMessage, $secondMessage]);
         $firstMessage->expects($this->once())->method('getText')->willReturn('Some resource has been successfully edited.');
-        $firstMessage->expects($this->never())->method('hasClass')->with('alert-success')->willReturn(true);
+        $firstMessage->expects($this->never())->method('hasClass');
         $secondMessage->expects($this->once())->method('getText')->willReturn('Some resource has been successfully deleted.');
         $secondMessage->expects($this->once())->method('hasClass')->with('alert-success')->willReturn(true);
 
@@ -65,7 +65,7 @@ final class NotificationCheckerTest extends TestCase
 
         $this->notificationAccessor->expects($this->once())->method('getMessageElements')->willReturn([$firstMessage, $secondMessage]);
         $firstMessage->expects($this->once())->method('getText')->willReturn('Some resource has been successfully edited.');
-        $firstMessage->expects($this->never())->method('hasClass')->with('negative')->willReturn(false);
+        $firstMessage->expects($this->never())->method('hasClass');
         $secondMessage->expects($this->once())->method('getText')->willReturn('Some resource could not be deleted.');
         $secondMessage->expects($this->once())->method('hasClass')->with('negative')->willReturn(true);
 
@@ -81,9 +81,9 @@ final class NotificationCheckerTest extends TestCase
 
         $this->notificationAccessor->expects($this->once())->method('getMessageElements')->willReturn([$firstMessage, $secondMessage]);
         $firstMessage->expects($this->once())->method('getText')->willReturn('Some resource has been successfully edited.');
-        $firstMessage->expects($this->never())->method('hasClass')->with('negative')->willReturn(false);
+        $firstMessage->expects($this->never())->method('hasClass');
         $secondMessage->expects($this->once())->method('getText')->willReturn('Some resource could not be deleted.');
-        $secondMessage->expects($this->never())->method('hasClass')->with('negative')->willReturn(true);
+        $secondMessage->expects($this->never())->method('hasClass');
         $this->expectException(NotificationExpectationMismatchException::class);
 
         $this->notificationChecker->checkNotification('Some resource has been successfully created.', NotificationType::failure());
