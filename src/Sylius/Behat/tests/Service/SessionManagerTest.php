@@ -26,9 +26,9 @@ final class SessionManagerTest extends TestCase
 {
     private Mink&MockObject $mink;
 
-    private SharedStorageInterface&MockObject $sharedStorage;
+    private MockObject&SharedStorageInterface $sharedStorage;
 
-    private SecurityServiceInterface&MockObject $securityService;
+    private MockObject&SecurityServiceInterface $securityService;
 
     private SessionManager $sessionManager;
 

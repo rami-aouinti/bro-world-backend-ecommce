@@ -28,13 +28,13 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SecurityServiceTest extends TestCase
 {
-    private RequestStack&MockObject $requestStack;
+    private MockObject&RequestStack $requestStack;
 
     private CookieSetterInterface&MockObject $cookieSetter;
 
-    private SessionFactoryInterface&MockObject $sessionFactory;
+    private MockObject&SessionFactoryInterface $sessionFactory;
 
-    private SessionInterface&MockObject $session;
+    private MockObject&SessionInterface $session;
 
     private SecurityService $securityService;
 

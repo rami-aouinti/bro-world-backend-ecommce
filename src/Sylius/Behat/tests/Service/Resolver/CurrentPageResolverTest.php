@@ -24,9 +24,9 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 final class CurrentPageResolverTest extends TestCase
 {
-    private Session&MockObject $session;
+    private MockObject&Session $session;
 
-    private UrlMatcherInterface&MockObject $urlMatcher;
+    private MockObject&UrlMatcherInterface $urlMatcher;
 
     private CurrentPageResolver $currentPageResolver;
 

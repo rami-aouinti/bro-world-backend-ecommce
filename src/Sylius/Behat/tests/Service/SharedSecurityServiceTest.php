@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 final class SharedSecurityServiceTest extends TestCase
 {
-    private SecurityServiceInterface&MockObject $adminSecurityService;
+    private MockObject&SecurityServiceInterface $adminSecurityService;
 
     private SharedSecurityService $sharedSecurityService;
 

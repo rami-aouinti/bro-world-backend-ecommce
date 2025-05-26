@@ -24,7 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 
 final class NotificationCheckerTest extends TestCase
 {
-    private NotificationAccessorInterface&MockObject $notificationAccessor;
+    private MockObject&NotificationAccessorInterface $notificationAccessor;
 
     private NotificationChecker $notificationChecker;
 

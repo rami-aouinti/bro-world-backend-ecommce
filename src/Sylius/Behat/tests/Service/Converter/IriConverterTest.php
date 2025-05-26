@@ -29,7 +29,7 @@ final class IriConverterTest extends TestCase
 {
     private BaseIriConverterInterface&MockObject $decoratedIriConverter;
 
-    private OperationResolverInterface&MockObject $operationResolver;
+    private MockObject&OperationResolverInterface $operationResolver;
 
     private IriConverter $iriConverter;
 
@@ -101,7 +101,8 @@ final class IriConverterTest extends TestCase
                 [
                     'force_resource_class' => Country::class,
                 ],
-            ))
+            ),
+        )
         ;
     }
 }
