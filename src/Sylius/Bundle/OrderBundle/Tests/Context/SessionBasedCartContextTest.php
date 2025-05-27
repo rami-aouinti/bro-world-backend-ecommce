@@ -24,11 +24,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 final class SessionBasedCartContextTest extends TestCase
 {
-    /** @var SessionInterface&MockObject */
-    private SessionInterface $session;
+    private SessionInterface&MockObject $session;
 
-    /** @var OrderRepositoryInterface&MockObject */
-    private OrderRepositoryInterface $orderRepository;
+    private OrderRepositoryInterface&MockObject $orderRepository;
 
     private SessionBasedCartContext $sessionBasedCartContext;
 
