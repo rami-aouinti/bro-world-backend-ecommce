@@ -155,7 +155,7 @@ Sylius\Component\Shipping\Model\ShippingMethodRule:
                                 amount:
                                     - range:
                                           groups: app_shipping_method_rule_order_grater_than_or_equal
-                                          min: 10
+                                          min: 1000
                                           max: 1000000
                   allowExtraFields: true
 ```
@@ -178,7 +178,7 @@ Sylius\Component\Shipping\Model\ShippingMethodRule:
                             <value key="amount">
                                 <constraint name="range">
                                     <option name="groups">app_shipping_method_rule_order_grater_than_or_equal</option>
-                                    <option name="min">10</option>
+                                    <option name="min">1000</option>
                                     <option name="max">1000000</option>
                                 </constraint>
                             </value>
