@@ -19,6 +19,7 @@
     "paymentState": "cart",
     "shippingState": "cart",
     "tokenValue": "@string@",
+    "checkoutCompletedAt": null,
     "number": null,
     "items": [],
     "itemsTotal": 0,

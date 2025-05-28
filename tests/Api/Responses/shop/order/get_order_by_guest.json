@@ -60,6 +60,7 @@
     "paymentState": "awaiting_payment",
     "shippingState": "ready",
     "tokenValue": "token",
+    "checkoutCompletedAt": null,
     "number": "000000001",
     "items": [
         {

@@ -45,6 +45,7 @@
     "paymentState": "paid",
     "shippingState": "shipped",
     "tokenValue": "token",
+    "checkoutCompletedAt": "@datetime@",
     "number": "000000001",
     "items": [
         {

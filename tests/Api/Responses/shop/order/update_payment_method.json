@@ -48,6 +48,7 @@
     "promotionCoupon": null,
     "checkoutState": "completed",
     "tokenValue": "token",
+    "checkoutCompletedAt": null,
     "number": "000000001",
     "items": [
         {
