@@ -325,7 +325,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
-    public function it_updates_cart_as_as_a_guest(): void
+    public function it_updates_cart_as_a_guest(): void
     {
         $this->setUpDefaultPutHeaders();
 
@@ -373,7 +373,7 @@ final class CartTest extends JsonApiTestCase
     }
 
     #[Test]
-    public function it_updates_addresses_as_a_shop_user(): void
+    public function it_updates_cart_as_a_shop_user(): void
     {
         $this->setUpDefaultPutHeaders();
         $this->setUpShopUserContext();
