@@ -24,6 +24,7 @@
     ],
     "currencyCode": "USD",
     "localeCode": "en_US",
+    "promotionCoupon": null,
     "state": "cart",
     "checkoutState": "cart",
     "paymentState": "cart",

@@ -45,6 +45,7 @@
         }
     ],
     "localeCode": "en_US",
+    "promotionCoupon": null,
     "checkoutState": "completed",
     "tokenValue": "token",
     "number": "000000001",
