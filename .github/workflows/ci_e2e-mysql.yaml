@@ -104,6 +104,11 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
 
+            -   name: Fix permissions for var/log
+                run: |
+                    mkdir -p var/log
+                    chmod -R 777 var/log
+
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
 
@@ -123,7 +128,7 @@ jobs:
                 uses: actions/upload-artifact@v4
                 if: failure()
                 with:
-                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony && matrix.symfony.replace('*', 'x') }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
+                    name: "Logs (non-JS, PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}, Twig ${{ matrix.twig }}, MySQL ${{ matrix.mysql }}) - ${{ github.run_id }}-${{ github.run_number }}"
                     path: |
                         etc/build/
                         var/log
