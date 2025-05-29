@@ -104,10 +104,11 @@ jobs:
                     symfony_version: ${{ matrix.symfony }}
                     node_version: "20.x"
 
-            -   name: Fix permissions for var/log
+            -   name: Fix permissions for Symfony logs directory
                 run: |
-                    mkdir -p var/log
-                    chmod -R 777 var/log
+                    LOGS_DIR=$(bin/console debug:container --parameter=kernel.logs_dir | grep 'kernel.logs_dir' | awk '{print $2}')
+                    mkdir -p "$LOGS_DIR"
+                    chmod -R 777 "$LOGS_DIR"
 
             -   name: Test installer
                 run: bin/console sylius:install --no-interaction -vvv
