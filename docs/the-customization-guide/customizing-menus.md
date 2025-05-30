@@ -27,6 +27,17 @@ Add new items or groups to the expandable navigation menu on the left side of th
 
 To add items to the Admin panel menu, use the `sylius.menu.admin.main` event.
 
+{% hint style="success" %}
+**🧠 Using Icons**\
+Sylius uses Symfony UX Icons to render scalable SVG icons from the Tabler Icons set. You’ll see these used in menu customization examples below via the `ux_icon()` Twig helper:
+
+```
+{{ ux_icon('tabler:plus', { class: 'icon' }) }}  
+```
+
+Icons can be styled using custom CSS or Tailwind utility classes and embedded in any Twig template to enhance admin or shop UI elements. For more details, see the [Symfony UX Icons documentation](https://ux.symfony.com/icons?set=tabler\&query=).
+{% endhint %}
+
 #### Step 1. Create a listener
 
 ```php
