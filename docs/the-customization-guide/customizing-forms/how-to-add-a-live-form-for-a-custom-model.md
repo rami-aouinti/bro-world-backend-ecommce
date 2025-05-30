@@ -100,7 +100,7 @@ sylius_resource:
 
 From now on, when you focus on a required field, dynamic validation will be triggered once the field loses focus, without the need to explicitly submit the form:
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Live collection
 

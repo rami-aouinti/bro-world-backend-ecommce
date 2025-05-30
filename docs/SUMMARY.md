@@ -139,6 +139,7 @@
 
 * [How to resize images?](how-to-resize-images.md)
 * [How to add one image to an entity?](how-to-add-one-image-to-an-entity.md)
+* [How to add multiple images to an entity?](how-to-add-multiple-images-to-an-entity.md)
 
 ## The Cookbook 2.0
 
@@ -173,7 +174,6 @@
 * [How to improve the performance of the catalog promotions?](the-cookbook-2.0/how-to-improve-the-performance-of-the-catalog-promotions.md)
 * [How to create a custom inventory sources filter?](the-cookbook-2.0/how-to-create-a-custom-inventory-sources-filter.md)
 * [How to add a custom shipping method rule?](the-cookbook-2.0/how-to-add-a-custom-shipping-method-rule.md)
-* [How to add multiple images to an entity?](the-cookbook-2.0/how-to-add-multiple-images-to-an-entity.md)
 * [How to automatically store images on AWS-S3?](the-cookbook-2.0/how-to-automatically-store-images-on-aws-s3.md)
 * [Introduction to Sylius Cloud by Platform.sh](the-cookbook-2.0/introduction-to-sylius-cloud-by-platform.sh.md)
 * [Advanced Sylius Cloud by Platform.sh configuration](the-cookbook-2.0/advanced-sylius-cloud-by-platform.sh-configuration.md)
