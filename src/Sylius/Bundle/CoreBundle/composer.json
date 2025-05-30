@@ -52,7 +52,7 @@
         "sylius/payment-bundle": "^2.0",
         "sylius/product-bundle": "^2.0",
         "sylius/promotion-bundle": "^2.0",
-        "sylius/resource-bundle": "^1.12",
+        "sylius/resource-bundle": "^1.12 || ^1.13@beta",
         "sylius/review-bundle": "^2.0",
         "sylius/shipping-bundle": "^2.0",
         "sylius/state-machine-abstraction": "^2.0",
@@ -73,6 +73,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^2.13",
+        "doctrine/orm": "^2.18 || ^3.3",
         "hwi/oauth-bundle": "^2.2",
         "matthiasnoback/symfony-config-test": "^5.1",
         "matthiasnoback/symfony-dependency-injection-test": "^5.1",
