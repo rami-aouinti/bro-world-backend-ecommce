@@ -133,29 +133,11 @@
   * [How to change a redirect after the add to cart action?](the-customization-guide/customizing-checkout/how-to-change-a-redirect-after-the-add-to-cart-action.md)
 * [Tips & Tricks](the-customization-guide/tips-and-tricks.md)
 
-## Sylius Official Plugins Documentation
+## 🧑‍🍳 The Cookbook
 
-* [CMS Plugin](sylius-official-plugins-documentation/cms-plugin/README.md)
-  * [Quick Start](sylius-official-plugins-documentation/cms-plugin/quick-start.md)
-  * [Installation](sylius-official-plugins-documentation/cms-plugin/installation.md)
-  * [Upgrading](sylius-official-plugins-documentation/cms-plugin/upgrading.md)
-  * [Features Overview](sylius-official-plugins-documentation/cms-plugin/features-overview/README.md)
-    * [Collections](sylius-official-plugins-documentation/cms-plugin/features-overview/collections.md)
-    * [Content Templates](sylius-official-plugins-documentation/cms-plugin/features-overview/content-templates.md)
-    * [Pages](sylius-official-plugins-documentation/cms-plugin/features-overview/pages.md)
-    * [Blocks](sylius-official-plugins-documentation/cms-plugin/features-overview/blocks.md)
-    * [Media](sylius-official-plugins-documentation/cms-plugin/features-overview/media.md)
-  * [Developer Reference](sylius-official-plugins-documentation/cms-plugin/developer-reference/README.md)
-    * [Collections](sylius-official-plugins-documentation/cms-plugin/developer-reference/collections.md)
-    * [Pages](sylius-official-plugins-documentation/cms-plugin/developer-reference/pages.md)
-    * [Blocks](sylius-official-plugins-documentation/cms-plugin/developer-reference/blocks.md)
-    * [Media](sylius-official-plugins-documentation/cms-plugin/developer-reference/media.md)
-    * [Content Element](sylius-official-plugins-documentation/cms-plugin/developer-reference/content-element.md)
-    * [Templates](sylius-official-plugins-documentation/cms-plugin/developer-reference/templates.md)
+***
 
-## Sylius 1.x Documentation
-
-* [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)
+* [How to resize images?](how-to-resize-images.md)
 
 ## The Cookbook 2.0
 
@@ -190,7 +172,6 @@
 * [How to improve the performance of the catalog promotions?](the-cookbook-2.0/how-to-improve-the-performance-of-the-catalog-promotions.md)
 * [How to create a custom inventory sources filter?](the-cookbook-2.0/how-to-create-a-custom-inventory-sources-filter.md)
 * [How to add a custom shipping method rule?](the-cookbook-2.0/how-to-add-a-custom-shipping-method-rule.md)
-* [How to resize images?](the-cookbook-2.0/how-to-resize-images.md)
 * [How to add one image to an entity?](the-cookbook-2.0/how-to-add-one-image-to-an-entity.md)
 * [How to add multiple images to an entity?](the-cookbook-2.0/how-to-add-multiple-images-to-an-entity.md)
 * [How to automatically store images on AWS-S3?](the-cookbook-2.0/how-to-automatically-store-images-on-aws-s3.md)
@@ -224,3 +205,7 @@
 * [Index](the-performance-guide/index.md)
 * [Database indexes](the-performance-guide/database-indexes.md)
 * [Query optimization](the-performance-guide/query-optimization.md)
+
+## Sylius 1.X Documentation
+
+* [📓 Sylius 1.x Documentation](https://old-docs.sylius.com/en/1.13/)
