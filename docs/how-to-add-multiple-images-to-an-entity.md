@@ -276,7 +276,7 @@ private Collection $images;
 
 Inspect the shipping method form, let's assume you want to add new new section `Images` that is between the general and configuration.
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
 
 1. Configure hooks for your new images section
 
@@ -374,6 +374,6 @@ sylius_twig_hooks:
 
 #### Step 9: Result <a href="#step-8-customize-the-shipping-method-twig-hooks" id="step-8-customize-the-shipping-method-twig-hooks"></a>
 
-<figure><img src=".gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (31) (1).png" alt=""><figcaption></figcaption></figure>
 
 The Shipping method has now collection of images :tada:!
