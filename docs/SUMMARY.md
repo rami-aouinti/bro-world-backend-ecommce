@@ -140,7 +140,8 @@
 * [How to resize images?](how-to-resize-images.md)
 * [How to add one image to an entity?](how-to-add-one-image-to-an-entity.md)
 * [How to add multiple images to an entity?](how-to-add-multiple-images-to-an-entity.md)
-* [How to add a custom cart promotion action?](how-to-add-a-custom-cart-promotion-action.md)
+* [How to add a custom cart promotion action?](the-cookbook-2.0/how-to-add-a-custom-cart-promotion-action.md)
+* [How to add a custom cart promotion rule?](how-to-add-a-custom-cart-promotion-rule.md)
 
 ## The Cookbook 2.0
 
@@ -167,7 +168,6 @@
 * [How to send a custom e-mail?](the-cookbook-2.0/how-to-send-a-custom-e-mail.md)
 * [How to customize email templates per channel?](the-cookbook-2.0/how-to-customize-email-templates-per-channel.md)
 * [How to disable the order confirmation email?](the-cookbook-2.0/how-to-disable-the-order-confirmation-email.md)
-* [How to add a custom cart promotion rule?](the-cookbook-2.0/how-to-add-a-custom-cart-promotion-rule.md)
 * [How to add a custom catalog promotion scope?](the-cookbook-2.0/how-to-add-a-custom-catalog-promotion-scope.md)
 * [How to add a custom catalog promotion action?](the-cookbook-2.0/how-to-add-a-custom-catalog-promotion-action.md)
 * [How to customize catalog promotion labels?](the-cookbook-2.0/how-to-customize-catalog-promotion-labels.md)

@@ -270,7 +270,7 @@ is necessary to disable the internal form rendering, giving us full control over
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (2).png" alt=""><figcaption></figcaption></figure>
 
 ## Live autocomplete
 
@@ -362,4 +362,4 @@ sylius_twig_hooks:
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>

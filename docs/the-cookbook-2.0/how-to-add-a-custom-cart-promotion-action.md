@@ -186,11 +186,11 @@ services:
 
 Go to your Sylius admin panel at `/admin/promotions/new`. While configuring a promotion, you should now see your new **"Cheapest product discount"** action available in the list.
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 This configuration above ensures that when a customer's cart total reaches **$10 or more**, the **cheapest product in the order** will be discounted.
 
-<figure><img src=".gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ***
 

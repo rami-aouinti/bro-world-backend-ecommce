@@ -338,6 +338,6 @@ php bin/console doctrine:migrations:migrate
 
 ### Step 11: Result
 
-<figure><img src=".gitbook/assets/image (32) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (32).png" alt=""><figcaption></figcaption></figure>
 
 The Payment method has now image field :tada:!
