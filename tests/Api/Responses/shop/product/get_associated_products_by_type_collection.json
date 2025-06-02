@@ -4,7 +4,7 @@
     "@type": "hydra:Collection",
     "hydra:member": [
         {
-            "@id": "\/api\/v2\/shop\/products\/MUG",
+            "@id": "\/api\/v2\/shop\/products\/HAT2",
             "@type": "Product",
             "productTaxons": [],
             "mainTaxon": null,
@@ -12,25 +12,24 @@
             "averageRating": "@integer@",
             "images": [],
             "id": "@integer@",
-            "code": "MUG",
-            "variants": [
-                "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
-                "\/api\/v2\/shop\/product-variants\/MUG_RED"
-            ],
-            "options": [
-                "\/api\/v2\/shop\/product-options\/COLOR"
-            ],
+            "code": "HAT2",
+            "variants": [],
+            "options": [],
+            "associations": [],
             "createdAt": "@date@",
             "updatedAt": "@date@",
-            "shortDescription": null,
-            "name": "Mug",
+            "shortDescription": "@string@",
+            "name": "Hat 2",
             "description": "@string@",
-            "slug": "mug",
-            "associations": [],
-            "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+            "slug": "Hat-2",
+            "defaultVariant": null
         }
     ],
     "hydra:totalItems": 1,
+    "hydra:view": {
+        "@id": "\/api\/v2\/shop\/products?association%5BtypeCode%5D=another_similar_products",
+        "@type": "hydra:PartialCollectionView"
+    },
     "hydra:search": {
         "@type": "hydra:IriTemplate",
         "hydra:template": "\/api\/v2\/shop\/products{?translations.name,productTaxons.taxon.code,productTaxons.taxon.code[],order[code],order[createdAt],order[price],order[translation.name],localeCode for order[translation.name],taxon,association[typeCode],association[ownerCode]}",
