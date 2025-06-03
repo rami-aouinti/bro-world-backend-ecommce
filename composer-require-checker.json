@@ -54,6 +54,7 @@
     "Behat\\Testwork\\Tester\\Setup\\Teardown",
     "Doctrine\\DBAL\\Platforms\\MySqlPlatform",
     "enshrined\\svgSanitize\\Sanitizer",
+    "FriendsOfBehat\\SymfonyExtension\\Mink\\Mink",
     "Http\\Client\\HttpClient",
     "HWI\\Bundle\\OAuthBundle\\Connect\\AccountConnectorInterface",
     "HWI\\Bundle\\OAuthBundle\\OAuth\\Response\\UserResponseInterface",
