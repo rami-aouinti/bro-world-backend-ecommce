@@ -1,27 +1,18 @@
 {
-  "controllers": {
-    "@symfony/ux-autocomplete": {
-      "autocomplete": {
-        "main": "dist/controller.js",
-        "webpackMode": "eager",
-        "fetch": "eager",
-        "enabled": true,
-        "autoimport": {
-          "tom-select/dist/css/tom-select.default.css": false,
-          "tom-select/dist/css/tom-select.bootstrap5.css": false
-        }
-      }
-    },
-    "@symfony/ux-live-component": {
-      "live": {
-        "enabled": true,
-        "fetch": "eager",
-        "autoimport": {
-          "@symfony/ux-live-component/dist/live.min.css": true
-        }
-      }
-    },
-    "@sylius/admin-bundle": {
+  "name": "@sylius/admin-bundle",
+  "license": "MIT",
+  "author": "Sylius Sp. z o.o.",
+  "version": "2.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sylius/SyliusAdminBundle.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "engineStrict": true,
+  "symfony": {
+    "controllers": {
       "slug": {
         "main": "controllers/SlugController.js",
         "webpackMode": "lazy",
@@ -84,5 +75,10 @@
       }
     }
   },
-  "entrypoints": []
+  "peerDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  },
+  "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0"
+  }
 }
