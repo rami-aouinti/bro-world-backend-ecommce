@@ -24,3 +24,86 @@
 
 1. The `price`, `original_price`, `minimum_price` hookables from `'sylius_admin.product.update.content.form.sections.channel_pricing'`
    hook have been deprecated and disabled. Now these templates are located in `'sylius_admin.product.create.content.form.sections.channel_pricing.info'`.
+
+### Assets
+
+#### Overview of Changes
+Sylius has modernized its asset management system with these key improvements:
+- Bundle-prefixed controller paths
+- JSON-based configuration
+- Flexible controller registration options
+
+#### Updated Controller Paths
+All core controllers now use standardized bundle prefixes:
+
+**Admin Controllers**  
+
+| Old Path                         | New Path                                              |
+|----------------------------------|-------------------------------------------------------|
+| `slug`                           | `@sylius/admin-bundle/slug`                           |
+| `taxon-slug`                     | `@sylius/admin-bundle/taxon-slug`                     |
+| `taxon-tree`                     | `@sylius/admin-bundle/taxon-tree`                     |
+| `delete-taxon`                   | `@sylius/admin-bundle/delete-taxon`                   |
+| `product-attribute-autocomplete` | `@sylius/admin-bundle/product-attribute-autocomplete` |
+| `product-taxon-tree`             | `@sylius/admin-bundle/product-taxon-tree`             |
+| `save-positions`                 | `@sylius/admin-bundle/save-positions`                 |
+| `compound-form-errors`           | `@sylius/admin-bundle/compound-form-errors`           |
+| `tabs-errors`                    | `@sylius/admin-bundle/tabs-errors`                    |
+
+**Shop Controller**  
+`api-login` → `@sylius/shop-bundle/api-login`
+
+#### New Configuration System
+
+**Configuration Files**
+```text
+assets/
+  admin/
+    controllers.json  # Admin controller configurations
+  shop/
+    controllers.json  # Shop controller configurations
+```
+
+**Example Configuration**:
+```json
+{
+  "@sylius/admin-bundle/slug": {
+    "enabled": true,
+    "fetch": "lazy"
+  }
+}
+```
+
+**Key Actions**:
+- Enable/disable controllers
+- Change loading behavior (lazy/eager)
+- Extend with custom controllers
+
+#### Controller Registration Methods
+
+1. **Automatic Discovery**
+    - Files in `./controllers/` directory
+    - Naming pattern: `[name]Controller.js`
+    - Auto-registered with Stimulus
+
+2. **JSON Configuration**
+    - Pre-configured bundle controllers
+    - Managed via `controllers.json` files
+    - Lazy-loaded by default
+
+3. **Manual Registration**
+   ```javascript
+   // In bootstrap.js:
+   import CustomController from './controllers/custom_controller';
+   app.register('custom', CustomController);
+   ```
+   Use for:
+    - Third-party controllers
+    - Non-standard locations
+    - Advanced initialization
+
+#### Migration Guide
+1. Update all controller references to use new prefixed paths
+2. Review [Sylius-Standard PR #1126](https://github.com/Sylius/Sylius-Standard/pull/1126) for implementation details
+
+**Note**: The old mechanism will remain functional until you actively migrate to the new system.
