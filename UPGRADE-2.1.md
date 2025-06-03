@@ -21,3 +21,6 @@
 
 1. `'sylius_shop.account.address_book.index.content.main.buttons.add_address'` hook has been deprecated and disabled. 
    Content of this hook has been moved to `'sylius_shop.account.address_book.index.content.main.header.buttons.add_address'` section.
+
+1. The `price`, `original_price`, `minimum_price` hookables from `'sylius_admin.product.update.content.form.sections.channel_pricing'`
+   hook have been deprecated and disabled. Now these templates are located in `'sylius_admin.product.create.content.form.sections.channel_pricing.info'`.
