@@ -71,11 +71,7 @@
       ]
     },
     "frontend": {
-      "include": [
-        {
-          "node": "20.x"
-        }
-      ]
+      "node": ["24.x"]
     },
     "packages": {
       "include": [
@@ -126,11 +122,7 @@
       "postgres": ["15.13", "16.9", "17.5"]
     },
     "frontend": {
-      "include": [
-        {
-          "node": "20.x"
-        }
-      ]
+      "node": ["22.x", "24.x"]
     },
     "packages": {
       "php": ["8.2", "8.3", "8.4"],
