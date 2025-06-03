@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ChannelBundle\Tests\Context\FakeChannel;
+namespace Tests\Sylius\Bundle\ChannelBundle\Context\FakeChannel;
 
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelCodeProvider;

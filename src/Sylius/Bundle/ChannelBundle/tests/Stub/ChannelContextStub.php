@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\Bundle\ChannelBundle\Tests\Stub;
+namespace Tests\Sylius\Bundle\ChannelBundle\Stub;
 
 use Sylius\Bundle\ChannelBundle\Attribute\AsChannelContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
