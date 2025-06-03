@@ -91,7 +91,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'back_button' => '[data-test-cancel-changes-button]',
-            'form' => 'form'
+            'form' => 'form',
         ]);
     }
 
