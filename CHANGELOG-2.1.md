@@ -1,5 +1,11 @@
 # CHANGELOG FOR `2.1.X`
 
+## v2.1.1 (2025-06-04)
+
+#### Details
+
+- [#18127](https://github.com/Sylius/Sylius/pull/18127) Fix en translations in Product and Taxonomy bundles ([@GSadee](https://github.com/GSadee))
+
 ## v2.1.0 (2025-06-04)
 
 #### Details
