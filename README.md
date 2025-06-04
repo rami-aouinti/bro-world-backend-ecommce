@@ -1,6 +1,6 @@
 <h1 align="center">
     <a href="https://sylius.com/github-readme/link/" target="_blank">
-        <img src="https://sylius.com/assets/github-readme.png?20" />
+        <img src="https://sylius.com/assets/github-readme.png?1" />
     </a>
 </h1>
 
@@ -9,7 +9,7 @@ Sylius is an Open Source eCommerce framework on top of [**Symfony**](https://sym
 The highest quality of code, strong testing culture, built-in Agile (BDD) workflow and exceptional flexibility make it the best solution for applications tailored to your business requirements. 
 Powerful REST API allows for easy integrations and creating unique customer experience on any device.
 
-We're using full-stack Behavior-Driven-Development, with [phpspec](https://phpspec.net) and [Behat](https://behat.org).
+We're using full-stack Behavior-Driven-Development, with [PHPUnit](https://phpunit.de) and [Behat](https://behat.org).
 
 Enjoy being an eCommerce Developer again!
 
