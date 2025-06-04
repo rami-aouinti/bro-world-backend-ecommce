@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Tests\Sylius\Bundle\ApiBundle\Serializer\Normalizer;
 
 use ApiPlatform\Metadata\IriConverterInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -104,48 +103,34 @@ final class ProductNormalizerTest extends TestCase
         /** @var ProductVariantInterface|MockObject $variantMock */
         $variantMock = $this->createMock(ProductVariantInterface::class);
 
-        $this->sectionProvider->expects(self::once())
-            ->method('getSection')
-            ->willReturn(new ShopApiSection());
+        $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
 
-        $this->normalizer->expects(self::once())
+        $this->normalizer
+            ->expects(self::once())
             ->method('normalize')
             ->with($productMock, null, [
                 'sylius_product_normalizer_already_called' => true,
                 'groups' => ['sylius:product:index'],
             ])
-            ->willReturn([]);
+            ->willReturn([])
+        ;
 
-        $productMock->expects(self::once())
-            ->method('getEnabledVariants')
-            ->willReturn(new ArrayCollection([$variantMock]));
-
-        $this->defaultProductVariantResolver->expects(self::once())
+        $this->defaultProductVariantResolver
+            ->expects(self::once())
             ->method('getVariant')
             ->with($productMock)
-            ->willReturn($variantMock);
+            ->willReturn($variantMock)
+        ;
 
-        $callCount = 0;
-        $this->iriConverter->expects($this->exactly(2))
+        $this->iriConverter
+            ->expects(self::once())
             ->method('getIriFromResource')
-            ->willReturnCallback(function ($variant) use ($variantMock, &$callCount) {
-                switch ($callCount++) {
-                    case 0:
-                        self::assertSame($variantMock, $variant);
-
-                        return '/api/v2/shop/product-variants/CODE';
-                    case 1:
-                        self::assertSame($variantMock, $variant);
-
-                        return '/api/v2/shop/product-variants/CODE';
-                }
-            });
+            ->with($variantMock)
+            ->willReturn('/api/v2/shop/product-variants/CODE')
+        ;
 
         self::assertSame(
-            [
-                'variants' => ['/api/v2/shop/product-variants/CODE'],
-                'defaultVariant' => '/api/v2/shop/product-variants/CODE',
-            ],
+            ['defaultVariant' => '/api/v2/shop/product-variants/CODE'],
             $this->productNormalizer->normalize($productMock, null, ['groups' => ['sylius:product:index']]),
         );
     }
@@ -159,32 +144,27 @@ final class ProductNormalizerTest extends TestCase
 
         $this->sectionProvider->expects(self::once())->method('getSection')->willReturn(new ShopApiSection());
 
-        $this->normalizer->expects(self::once())
+        $this->normalizer
+            ->expects(self::once())
             ->method('normalize')
             ->with($productMock, null, [
                 'sylius_product_normalizer_already_called' => true,
                 'groups' => ['sylius:product:index'],
-            ]
-            )->willReturn([]);
+            ])
+            ->willReturn([])
+        ;
 
-        $this->iriConverter->expects(self::once())
-            ->method('getIriFromResource')
-            ->with($variantMock)
-            ->willReturn('/api/v2/shop/product-variants/CODE');
-
-        $productMock->expects(self::once())
-            ->method('getEnabledVariants')
-            ->willReturn(new ArrayCollection([$variantMock]));
-
-        $this->defaultProductVariantResolver->expects(self::once())
+        $this->defaultProductVariantResolver
+            ->expects(self::once())
             ->method('getVariant')
             ->with($productMock)
-            ->willReturn(null);
+            ->willReturn(null)
+        ;
 
-        self::assertSame([
-            'variants' => ['/api/v2/shop/product-variants/CODE'],
-            'defaultVariant' => null,
-        ], $this->productNormalizer->normalize($productMock, null, ['groups' => ['sylius:product:index']]));
+        self::assertSame(
+            ['defaultVariant' => null],
+            $this->productNormalizer->normalize($productMock, null, ['groups' => ['sylius:product:index']])
+        );
     }
 
     public function testThrowsAnExceptionIfTheNormalizerHasBeenAlreadyCalled(): void
