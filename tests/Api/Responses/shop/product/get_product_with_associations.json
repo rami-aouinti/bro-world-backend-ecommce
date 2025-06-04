@@ -26,5 +26,15 @@
     "\/api\/v2\/shop\/product-associations\/@integer@",
     "\/api\/v2\/shop\/product-associations\/@integer@"
   ],
-  "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE"
+  "defaultVariant": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+  "defaultVariantData": {
+    "@context": "\/api\/v2\/contexts\/ProductVariant",
+    "@id": "\/api\/v2\/shop\/product-variants\/MUG_BLUE",
+    "@type": "ProductVariant",
+    "name": "Blue Mug",
+    "inStock": true,
+    "price": 2000,
+    "originalPrice": 3000,
+    "lowestPriceBeforeDiscount": null
+  }
 }

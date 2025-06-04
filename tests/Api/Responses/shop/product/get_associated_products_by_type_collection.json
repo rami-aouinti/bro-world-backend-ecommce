@@ -22,7 +22,8 @@
             "name": "Hat 2",
             "description": "@string@",
             "slug": "Hat-2",
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
         }
     ],
     "hydra:totalItems": 1,

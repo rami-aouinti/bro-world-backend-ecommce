@@ -22,7 +22,8 @@
             "name": "Cup",
             "description": "@string@",
             "slug": "Cup",
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
         },
         {
             "@id": "\/api\/v2\/shop\/products\/HAT2",
@@ -43,7 +44,8 @@
             "name": "Hat 2",
             "description": "@string@",
             "slug": "Hat-2",
-            "defaultVariant": null
+            "defaultVariant": null,
+            "defaultVariantData": null
         }
     ],
     "hydra:totalItems": 2,
