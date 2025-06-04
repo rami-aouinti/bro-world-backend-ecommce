@@ -101,12 +101,12 @@ class RoboFile extends Tasks
         ;
 
         if (in_array($package, ['Bundle/AdminBundle', 'Bundle/ApiBundle', 'Bundle/CoreBundle'])) {
-            $this->createTestAssets(sprintf('%s/Tests/Application', $packagePath));
+            $this->createTestAssets(sprintf('%s/tests/Application', $packagePath));
             $this->createTestAssets(sprintf('%s/test', $packagePath)); // Remove after all test apps have been moved
         }
 
         if ('Bundle/ApiBundle' === $package) {
-            $task->exec('Tests/Application/bin/console doctrine:schema:update --force');
+            $task->exec('tests/Application/bin/console doctrine:schema:update --force');
         }
 
         if (file_exists(sprintf('%s/phpunit.xml', $packagePath)) || file_exists(sprintf('%s/phpunit.xml.dist', $packagePath))) {
