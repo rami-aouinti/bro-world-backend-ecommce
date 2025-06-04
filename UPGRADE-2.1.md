@@ -62,6 +62,7 @@ assets/
     controllers.json  # Admin controller configurations
   shop/
     controllers.json  # Shop controller configurations
+  controllers.json # Shared controllers configurations imported via flex
 ```
 
 **Example Configuration**:
@@ -83,7 +84,7 @@ assets/
 
 1. **Automatic Discovery**
     - Files in `./controllers/` directory
-    - Naming pattern: `[name]Controller.js`
+    - Naming pattern: `[name]_controller.js`
     - Auto-registered with Stimulus
 
 2. **JSON Configuration**
@@ -94,7 +95,7 @@ assets/
 3. **Manual Registration**
    ```javascript
    // In bootstrap.js:
-   import CustomController from './controllers/custom_controller';
+   import CustomController from './custom_controller_dir/custom_controller';
    app.register('custom', CustomController);
    ```
    Use for:
