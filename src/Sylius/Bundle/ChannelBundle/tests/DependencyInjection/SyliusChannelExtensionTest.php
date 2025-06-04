@@ -18,9 +18,9 @@ use PHPUnit\Framework\Attributes\Test;
 use Sylius\Bundle\ChannelBundle\Attribute\AsChannelContext;
 use Sylius\Bundle\ChannelBundle\Attribute\AsRequestBasedChannelResolver;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\SyliusChannelExtension;
-use Sylius\Bundle\ChannelBundle\Tests\Stub\ChannelContextStub;
-use Sylius\Bundle\ChannelBundle\Tests\Stub\RequestBestChannelResolverStub;
 use Symfony\Component\DependencyInjection\Definition;
+use Tests\Sylius\Bundle\ChannelBundle\Stub\ChannelContextStub;
+use Tests\Sylius\Bundle\ChannelBundle\Stub\RequestBestChannelResolverStub;
 
 final class SyliusChannelExtensionTest extends AbstractExtensionTestCase
 {
