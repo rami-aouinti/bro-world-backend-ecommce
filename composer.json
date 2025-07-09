@@ -288,6 +288,12 @@
         ]
     },
     "scripts": {
+        "prepare": [
+            "php bin/console doctrine:database:drop --if-exists --force",
+            "php bin/console doctrine:database:create",
+            "php bin/console doctrine:schema:update --force --complete",
+            "php bin/console doctrine:fixtures:load -n"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],
