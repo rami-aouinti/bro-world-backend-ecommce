@@ -15,25 +15,26 @@ namespace Sylius\Component\Addressing\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Stringable;
 use Sylius\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Countries;
 
-class Country implements CountryInterface, \Stringable
+class Country implements CountryInterface, Stringable
 {
     use ToggleableTrait;
 
     /** @var mixed */
-    protected $id;
+    protected mixed $id;
 
     /**
      * Country code ISO 3166-1 alpha-2.
      *
      * @var string|null
      */
-    protected $code;
+    protected ?string $code;
 
-    /** @var Collection<array-key, ProvinceInterface> */
-    protected $provinces;
+    /** @var ArrayCollection|Collection<array-key, ProvinceInterface> */
+    protected Collection|ArrayCollection $provinces;
 
     public function __construct()
     {

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Component\Addressing\Model;
 
+use DateTime;
 use Sylius\Resource\Model\TimestampableTrait;
 
 class Address implements AddressInterface
@@ -20,41 +21,41 @@ class Address implements AddressInterface
     use TimestampableTrait;
 
     /** @var mixed */
-    protected $id;
+    protected mixed $id;
 
     /** @var string|null */
-    protected $firstName;
+    protected ?string $firstName;
 
     /** @var string|null */
-    protected $lastName;
+    protected ?string $lastName;
 
     /** @var string|null */
-    protected $phoneNumber;
+    protected ?string $phoneNumber;
 
     /** @var string|null */
-    protected $company;
+    protected ?string $company;
 
     /** @var string|null */
-    protected $countryCode;
+    protected ?string $countryCode;
 
     /** @var string|null */
-    protected $provinceCode;
+    protected ?string $provinceCode;
 
     /** @var string|null */
-    protected $provinceName;
+    protected ?string $provinceName;
 
     /** @var string|null */
-    protected $street;
+    protected ?string $street;
 
     /** @var string|null */
-    protected $city;
+    protected ?string $city;
 
     /** @var string|null */
-    protected $postcode;
+    protected ?string $postcode;
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
     }
 
     public function getId()
