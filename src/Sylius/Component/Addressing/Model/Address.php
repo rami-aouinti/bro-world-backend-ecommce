@@ -36,7 +36,7 @@ class Address implements AddressInterface
     protected ?string $company;
 
     /** @var string|null */
-    protected ?string $countryCode;
+    protected ?string $countryCode = '';
 
     /** @var string|null */
     protected ?string $provinceCode;
