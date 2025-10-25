@@ -1,7 +1,7 @@
 {# Rendered with \Sylius\Bundle\ShopBundle\Twig\Component\Common\CurrencySwitcherComponent #}
 
 {% if available_currencies|length > 1 %}
-    <div class="col-auto">
+    <div class="col-auto bro-top-bar-switcher">
         <div class="dropdown" {{ sylius_test_html_attribute('currency-selector') }}>
             <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('active-currency') }}>
                 {{ active_currency }}
