@@ -1,6 +1,6 @@
-<div class="w-100 border-bottom">
+<div class="w-100 bro-header-nav mt-3">
     {% if taxons|length > 0 %}
-        <nav class="navbar offcanvas-lg offcanvas-start offcanvas-wide p-0" id="navbarNav">
+        <nav class="navbar offcanvas-lg offcanvas-start offcanvas-wide p-0 bro-navbar-offcanvas" id="navbarNav">
             <div class="offcanvas-header w-full">
                 <h5 class="offcanvas-title">
                     {{ 'sylius.ui.taxons'|trans }}
@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#navbarNav" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body justify-content-lg-center w-full py-0">
-                <div class="navbar-nav my-2 flex-column flex-lg-row gap-lg-4" {{ sylius_test_html_attribute('menu') }}>
+                <div class="navbar-nav my-2 flex-column flex-lg-row" {{ sylius_test_html_attribute('menu') }}>
                     {% hook 'menu' with { taxons } %}
                 </div>
             </div>

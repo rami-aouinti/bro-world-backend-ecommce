@@ -3,7 +3,7 @@
 {% from '@SyliusShop/shared/macro/locales.html.twig' import locale %}
 
 {% if available_locales|length > 1 %}
-    <div class="col-auto">
+    <div class="col-auto bro-top-bar-switcher">
         <div class="dropdown" {{ sylius_test_html_attribute('locale-selector') }}>
             <button class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" {{ sylius_test_html_attribute('active-locale', active_locale) }}>
                 {{ locale(active_locale) }}
