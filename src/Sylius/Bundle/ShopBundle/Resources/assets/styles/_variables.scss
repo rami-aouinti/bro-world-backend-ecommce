@@ -13,7 +13,8 @@ $enable-cssgrid: true;
 
 // Color system
 
-$primary: #22B99A;
+$primary: #4f46e5;
+$secondary: #38bdf8;
 
 $gray-100: #f8f9fa;
 $gray-200: #e9ecef;
@@ -85,7 +86,7 @@ $nav-link-color: $body-color;
 
 $navbar-nav-link-padding-x: 1.7rem;
 $navbar-light-color: $body-color;
-$navbar-light-hover-color: $primary;
+$navbar-light-hover-color: darken($primary, 5%);
 $navbar-light-active-color: $primary;
 
 // Pagination

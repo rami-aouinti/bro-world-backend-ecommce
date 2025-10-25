@@ -37,7 +37,7 @@
         "behat/transliterator": "^1.5",
         "doctrine/collections": "^2.2",
         "doctrine/common": "^3.2",
-        "doctrine/dbal": "^3.9",
+        "doctrine/dbal": "^4.3",
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/event-manager": "^2.0",
@@ -85,7 +85,7 @@
         "sylius/resource-bundle": "^1.12",
         "sylius/theme-bundle": "^2.4",
         "sylius/twig-extra": "^0.8",
-        "sylius/twig-hooks": "^0.8",
+        "sylius/twig-hooks": "^0.9",
         "symfony/asset": "^6.4 || ^7.2",
         "symfony/cache-contracts": "^3.5",
         "symfony/clock": "^6.4 || ^7.2",
@@ -208,7 +208,7 @@
         "jangregor/phpstan-prophecy": "^2.0",
         "lchrusciel/api-test-case": "^5.3",
         "matthiasnoback/symfony-config-test": "^5.1",
-        "matthiasnoback/symfony-dependency-injection-test": "^5.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^6.1",
         "mikey179/vfsstream": "^1.6",
         "mockery/mockery": "^1.6",
         "nyholm/psr7": "^1.8",
@@ -231,7 +231,7 @@
         "symfony/flex": "^2.4",
         "symfony/runtime": "^6.4 || ^7.2",
         "symfony/web-profiler-bundle": "^6.4 || ^7.2",
-        "symplify/monorepo-builder": "^11.0"
+        "symplify/monorepo-builder": "^12.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component",
