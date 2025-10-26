@@ -37,46 +37,44 @@ final class CustomerStatisticsProvider implements CustomerStatisticsProviderInte
             return new CustomerStatistics([]);
         }
 
-        $perChannelCustomerStatisticsArray = [];
+        $perChannelCustomerStatistics = [];
 
-        $channels = $this->channelRepository->findAll();
-        foreach ($channels as $channel) {
-            $channelOrders = $this->filterOrdersByChannel($orders, $channel);
-            if (empty($channelOrders)) {
+        /** @var OrderInterface $order */
+        foreach ($orders as $order) {
+            $channel = $order->getChannel();
+            if (null === $channel) {
                 continue;
             }
 
-            $perChannelCustomerStatisticsArray[] = new PerChannelCustomerStatistics(
-                count($channelOrders),
-                $this->getOrdersSummedTotal($channelOrders),
-                $channel,
-            );
+            $channelKey = $channel->getCode();
+            if (null !== $channelKey) {
+                $channelKey = 'code_' . $channelKey;
+            } else {
+                $channelId = method_exists($channel, 'getId') ? $channel->getId() : null;
+                $channelKey = null !== $channelId ? 'id_' . (string) $channelId : spl_object_hash($channel);
+            }
+
+            if (!isset($perChannelCustomerStatistics[$channelKey])) {
+                $perChannelCustomerStatistics[$channelKey] = [
+                    'channel' => $channel,
+                    'orders_count' => 0,
+                    'orders_total' => 0,
+                ];
+            }
+
+            $perChannelCustomerStatistics[$channelKey]['orders_count'] += 1;
+            $perChannelCustomerStatistics[$channelKey]['orders_total'] += $order->getTotal();
         }
 
-        return new CustomerStatistics($perChannelCustomerStatisticsArray);
-    }
-
-    /**
-     * @param array|OrderInterface[] $orders
-     */
-    private function getOrdersSummedTotal(array $orders): int
-    {
-        return array_sum(
-            array_map(function (OrderInterface $order) {
-                return $order->getTotal();
-            }, $orders),
-        );
-    }
-
-    /**
-     * @param array|OrderInterface[] $orders
-     *
-     * @return array|OrderInterface[]
-     */
-    private function filterOrdersByChannel(array $orders, ChannelInterface $channel): array
-    {
-        return array_filter($orders, function (OrderInterface $order) use ($channel) {
-            return $order->getChannel() === $channel;
-        });
+        return new CustomerStatistics(array_map(
+            static function (array $data): PerChannelCustomerStatistics {
+                return new PerChannelCustomerStatistics(
+                    $data['orders_count'],
+                    $data['orders_total'],
+                    $data['channel'],
+                );
+            },
+            array_values($perChannelCustomerStatistics),
+        ));
     }
 }
