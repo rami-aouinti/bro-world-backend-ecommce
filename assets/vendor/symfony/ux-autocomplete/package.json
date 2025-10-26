@@ -1,0 +1,7 @@
+{
+  "name": "@symfony/ux-autocomplete",
+  "version": "0.0.0",
+  "main": "dist/controller.js",
+  "module": "dist/controller.js",
+  "license": "MIT"
+}
