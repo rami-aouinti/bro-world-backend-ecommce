@@ -71,16 +71,16 @@ final class CustomerStatisticsProviderTest extends TestCase
 
     public function testShouldObtainsCustomerStatisticsFromSingleChannel(): void
     {
-        $channelWithoutOrders = $this->createMock(ChannelInterface::class);
         $expectedStatistics = new CustomerStatistics([
             new PerChannelCustomerStatistics(2, 33000, $this->channel),
         ]);
 
-        $this->firstOrder->expects($this->exactly(2))->method('getChannel')->willReturn($this->channel);
-        $this->secondOrder->expects($this->exactly(2))->method('getChannel')->willReturn($this->channel);
+        $this->channel->expects($this->exactly(2))->method('getCode')->willReturn('CHANNEL_CODE');
+        $this->firstOrder->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->secondOrder->expects($this->once())->method('getChannel')->willReturn($this->channel);
         $this->firstOrder->expects($this->once())->method('getTotal')->willReturn(10000);
         $this->secondOrder->expects($this->once())->method('getTotal')->willReturn(23000);
-        $this->channelRepository->expects($this->once())->method('findAll')->willReturn([$this->channel, $channelWithoutOrders]);
+        $this->channelRepository->expects($this->never())->method('findAll');
         $this->orderRepository->expects($this->once())->method('findForCustomerStatistics')->with($this->customer)->willReturn([
             $this->firstOrder,
             $this->secondOrder,
@@ -103,20 +103,80 @@ final class CustomerStatisticsProviderTest extends TestCase
             new PerChannelCustomerStatistics(3, 11000, $secondChannel),
         ]);
 
-        $this->firstOrder->expects($this->exactly(2))->method('getChannel')->willReturn($this->channel);
-        $this->secondOrder->expects($this->exactly(2))->method('getChannel')->willReturn($this->channel);
+        $this->channel->expects($this->exactly(2))->method('getCode')->willReturn('FIRST_CHANNEL');
+        $secondChannel->expects($this->exactly(3))->method('getCode')->willReturn('SECOND_CHANNEL');
+        $this->firstOrder->expects($this->once())->method('getChannel')->willReturn($this->channel);
+        $this->secondOrder->expects($this->once())->method('getChannel')->willReturn($this->channel);
         $this->firstOrder->expects($this->once())->method('getTotal')->willReturn(10000);
         $this->secondOrder->expects($this->once())->method('getTotal')->willReturn(23000);
-        $thirdOrder->expects($this->exactly(2))->method('getChannel')->willReturn($secondChannel);
-        $fourthOrder->expects($this->exactly(2))->method('getChannel')->willReturn($secondChannel);
-        $fifthOrder->expects($this->exactly(2))->method('getChannel')->willReturn($secondChannel);
+        $thirdOrder->expects($this->once())->method('getChannel')->willReturn($secondChannel);
+        $fourthOrder->expects($this->once())->method('getChannel')->willReturn($secondChannel);
+        $fifthOrder->expects($this->once())->method('getChannel')->willReturn($secondChannel);
         $thirdOrder->expects($this->once())->method('getTotal')->willReturn(2000);
         $fourthOrder->expects($this->once())->method('getTotal')->willReturn(8000);
         $fifthOrder->expects($this->once())->method('getTotal')->willReturn(1000);
-        $this->channelRepository->expects($this->once())->method('findAll')->willReturn([$this->channel, $secondChannel]);
+        $this->channelRepository->expects($this->never())->method('findAll');
         $this->orderRepository->expects($this->once())->method('findForCustomerStatistics')->with($this->customer)->willReturn(
             [$this->firstOrder, $this->secondOrder, $thirdOrder, $fourthOrder, $fifthOrder],
         );
+
+        $this->assertEquals(
+            $expectedStatistics,
+            $this->provider->getCustomerStatistics($this->customer),
+        );
+    }
+
+    public function testItGroupsOrdersForChannelsWithTheSameCode(): void
+    {
+        $firstChannel = $this->createMock(ChannelInterface::class);
+        $secondChannel = $this->createMock(ChannelInterface::class);
+        $firstOrder = $this->createMock(OrderInterface::class);
+        $secondOrder = $this->createMock(OrderInterface::class);
+        $expectedStatistics = new CustomerStatistics([
+            new PerChannelCustomerStatistics(2, 42000, $firstChannel),
+        ]);
+
+        $firstChannel->expects($this->once())->method('getCode')->willReturn('WEB');
+        $secondChannel->expects($this->once())->method('getCode')->willReturn('WEB');
+        $firstOrder->expects($this->once())->method('getChannel')->willReturn($firstChannel);
+        $secondOrder->expects($this->once())->method('getChannel')->willReturn($secondChannel);
+        $firstOrder->expects($this->once())->method('getTotal')->willReturn(12000);
+        $secondOrder->expects($this->once())->method('getTotal')->willReturn(30000);
+        $this->channelRepository->expects($this->never())->method('findAll');
+        $this->orderRepository->expects($this->once())->method('findForCustomerStatistics')->with($this->customer)->willReturn([
+            $firstOrder,
+            $secondOrder,
+        ]);
+
+        $this->assertEquals(
+            $expectedStatistics,
+            $this->provider->getCustomerStatistics($this->customer),
+        );
+    }
+
+    public function testItGroupsOrdersForChannelsWithTheSameIdWhenCodeIsMissing(): void
+    {
+        $firstChannel = $this->createMock(ChannelInterface::class);
+        $secondChannel = $this->createMock(ChannelInterface::class);
+        $firstOrder = $this->createMock(OrderInterface::class);
+        $secondOrder = $this->createMock(OrderInterface::class);
+        $expectedStatistics = new CustomerStatistics([
+            new PerChannelCustomerStatistics(2, 17000, $firstChannel),
+        ]);
+
+        $firstChannel->expects($this->once())->method('getCode')->willReturn(null);
+        $secondChannel->expects($this->once())->method('getCode')->willReturn(null);
+        $firstChannel->expects($this->once())->method('getId')->willReturn(7);
+        $secondChannel->expects($this->once())->method('getId')->willReturn(7);
+        $firstOrder->expects($this->once())->method('getChannel')->willReturn($firstChannel);
+        $secondOrder->expects($this->once())->method('getChannel')->willReturn($secondChannel);
+        $firstOrder->expects($this->once())->method('getTotal')->willReturn(8000);
+        $secondOrder->expects($this->once())->method('getTotal')->willReturn(9000);
+        $this->channelRepository->expects($this->never())->method('findAll');
+        $this->orderRepository->expects($this->once())->method('findForCustomerStatistics')->with($this->customer)->willReturn([
+            $firstOrder,
+            $secondOrder,
+        ]);
 
         $this->assertEquals(
             $expectedStatistics,

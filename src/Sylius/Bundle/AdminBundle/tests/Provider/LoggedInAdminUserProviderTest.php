@@ -300,4 +300,48 @@ final class LoggedInAdminUserProviderTest extends TestCase
 
         $this->assertNull($this->loggedInAdminUserProvider->getUser());
     }
+
+    public function testReturnsNullWhenSessionTokenIsCorrupted(): void
+    {
+        $session = $this->createMock(Session::class);
+
+        $this->security->method('getUser')->willReturn(null);
+        $this->tokenStorage->method('getToken')->willReturn(null);
+        $this->requestStack->method('getMainRequest')->willReturn(null);
+
+        $this->requestStack->method('getSession')->willReturn($session);
+
+        $session
+            ->expects($this->once())
+            ->method('get')
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn('not-a-serialized-token')
+        ;
+
+        $this->adminUserRepository->expects($this->never())->method('find');
+
+        $this->assertNull($this->loggedInAdminUserProvider->getUser());
+    }
+
+    public function testReturnsNullWhenSessionTokenIsOfUnexpectedType(): void
+    {
+        $session = $this->createMock(Session::class);
+
+        $this->security->method('getUser')->willReturn(null);
+        $this->tokenStorage->method('getToken')->willReturn(null);
+        $this->requestStack->method('getMainRequest')->willReturn(null);
+
+        $this->requestStack->method('getSession')->willReturn($session);
+
+        $session
+            ->expects($this->once())
+            ->method('get')
+            ->with(self::SECURITY_SESSION_KEY)
+            ->willReturn(serialize('not-a-token'))
+        ;
+
+        $this->adminUserRepository->expects($this->never())->method('find');
+
+        $this->assertNull($this->loggedInAdminUserProvider->getUser());
+    }
 }

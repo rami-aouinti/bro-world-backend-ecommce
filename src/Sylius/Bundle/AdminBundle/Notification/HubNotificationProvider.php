@@ -75,6 +75,10 @@ final readonly class HubNotificationProvider implements NotificationProviderInte
     {
         $request = $this->requestStack->getCurrentRequest();
 
+        if ($request === null) {
+            return null;
+        }
+
         $content = json_encode([
             'version' => SyliusCoreBundle::VERSION,
             'hostname' => $request->getHost(),
