@@ -60,3 +60,7 @@ sylius:
                 order_history: 'Historique des commandes'
                 personal_information: 'Informations personnelles'
     top_bar: 'Inscrivez-vous à notre newsletter et bénéficiez de -20 % de réduction'
+
+bro_shop:
+    top_bar:
+        message: 'Bienvenue sur Bro Shop — Livraison offerte dès 50 €'
