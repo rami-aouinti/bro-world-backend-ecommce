@@ -4,8 +4,6 @@
     <option name="directories">
       <list>
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/CustomerBundle/tests" />
-        <option value="$PROJECT_DIR$/tests" />
-        <option value="$PROJECT_DIR$/src/Sylius/Behat/tests" />
         <option value="$PROJECT_DIR$/src/Sylius/Component/Currency/tests" />
         <option value="$PROJECT_DIR$/src/Sylius/Component/Product/tests" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/UserBundle/tests" />
@@ -46,6 +44,8 @@
         <option value="$PROJECT_DIR$/src/Sylius/Component/Customer/tests" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/AttributeBundle/tests" />
         <option value="$PROJECT_DIR$/src/Sylius/Bundle/PaymentBundle/tests" />
+        <option value="$PROJECT_DIR$/tests" />
+        <option value="$PROJECT_DIR$/src/Sylius/Behat/tests" />
       </list>
     </option>
   </component>

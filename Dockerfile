@@ -38,7 +38,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
       libxml2 \
       libxml2-dev \
       libreadline-dev \
-      libjpeg-dev \
+      libjpeg62-turbo-dev \
       libpng-dev \
       libfreetype6-dev \
       libwebp-dev \
@@ -55,19 +55,13 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
     && docker-php-ext-configure intl \
     && yes '' | pecl install -o -f redis && docker-php-ext-enable redis \
-    && docker-php-ext-install \
-      pdo_mysql \
-      sockets \
-      intl \
-      opcache \
-      zip \
-      gd \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
+    && docker-php-ext-install -j"$(nproc)" \
+         pdo_mysql sockets intl opcache zip gd \
     && docker-php-ext-enable amqp \
     && apt-get install --no-install-recommends -y \
         $(debsecan --suite bookworm --format packages --only-fixed) \
-    && rm -rf /tmp/* \
-    && rm -rf /var/list/apt/* \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* /var/list/apt/* /var/lib/apt/lists/* \
     && apt-get clean
 
 # create document root, fix permissions for www-data user and change owner to www-data

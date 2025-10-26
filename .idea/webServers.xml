@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="6607004d-0b19-4946-9940-89f269437df7" name="bro-world.eu" url="http://bro-world.eu">
-        <fileTransfer host="bro-world.eu" port="21">
+        <fileTransfer rootFolder="/ecommerce.bro-world.org" host="bro-world.eu" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
