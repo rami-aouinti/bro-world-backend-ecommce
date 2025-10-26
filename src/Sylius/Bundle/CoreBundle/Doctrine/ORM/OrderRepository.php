@@ -415,17 +415,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
     public function findCartForSummary($id): ?OrderInterface
     {
-        /** @var OrderInterface $order */
-        $order = $this->createQueryBuilder('o')
-            ->andWhere('o.id = :id')
-            ->andWhere('o.state = :state')
-            ->setParameter('id', $id)
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-
-        $this->associationHydrator->hydrateAssociations($order, [
+        return $this->findCartWithHydratedAssociations($id, [
             'adjustments',
             'items',
             'items.adjustments',
@@ -440,55 +430,39 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             'items.variant.product.options',
             'items.variant.product.options.translations',
         ]);
-
-        return $order;
     }
 
     public function findCartForAddressing($id): ?OrderInterface
     {
-        /** @var OrderInterface $order */
-        $order = $this->createQueryBuilder('o')
-            ->andWhere('o.id = :id')
-            ->andWhere('o.state = :state')
-            ->setParameter('id', $id)
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-
-        $this->associationHydrator->hydrateAssociations($order, [
+        return $this->findCartWithHydratedAssociations($id, [
             'items',
             'items.variant',
             'items.variant.product',
             'items.variant.product.translations',
         ]);
-
-        return $order;
     }
 
     public function findCartForSelectingShipping($id): ?OrderInterface
     {
-        /** @var OrderInterface $order */
-        $order = $this->createQueryBuilder('o')
-            ->andWhere('o.id = :id')
-            ->andWhere('o.state = :state')
-            ->setParameter('id', $id)
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-
-        $this->associationHydrator->hydrateAssociations($order, [
+        return $this->findCartWithHydratedAssociations($id, [
             'items',
             'items.variant',
             'items.variant.product',
             'items.variant.product.translations',
         ]);
-
-        return $order;
     }
 
     public function findCartForSelectingPayment($id): ?OrderInterface
+    {
+        return $this->findCartWithHydratedAssociations($id, [
+            'items',
+            'items.variant',
+            'items.variant.product',
+            'items.variant.product.translations',
+        ]);
+    }
+
+    private function findCartWithHydratedAssociations($id, array $associations): ?OrderInterface
     {
         /** @var OrderInterface $order */
         $order = $this->createQueryBuilder('o')
@@ -500,12 +474,9 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getOneOrNullResult()
         ;
 
-        $this->associationHydrator->hydrateAssociations($order, [
-            'items',
-            'items.variant',
-            'items.variant.product',
-            'items.variant.product.translations',
-        ]);
+        if ($order !== null) {
+            $this->associationHydrator->hydrateAssociations($order, $associations);
+        }
 
         return $order;
     }
