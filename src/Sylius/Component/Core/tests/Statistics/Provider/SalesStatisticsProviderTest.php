@@ -179,6 +179,68 @@ final class SalesStatisticsProviderTest extends TestCase
         ], $result);
     }
 
+    public function testMergesDataFromRegistriesWithUniquePeriodsWhilePreservingOrder(): void
+    {
+        $firstRegistry = $this->createMock(StatisticsProviderRegistryInterface::class);
+        $secondRegistry = $this->createMock(StatisticsProviderRegistryInterface::class);
+
+        $firstPeriod = new \DateTimeImmutable('2020-01-01');
+        $secondPeriod = new \DateTimeImmutable('2020-01-02');
+        $thirdPeriod = new \DateTimeImmutable('2020-01-03');
+
+        $firstProvider = [
+            ['period' => $firstPeriod, 'total' => 1000],
+            ['period' => $secondPeriod, 'total' => 2000],
+        ];
+        $secondProvider = [
+            ['period' => $firstPeriod, 'orders_count' => 5],
+            ['period' => $secondPeriod, 'orders_count' => 10],
+            ['period' => $thirdPeriod, 'orders_count' => 15],
+        ];
+
+        $firstRegistry->method('getByType')->willReturn(new class($firstProvider) implements SalesProviderInterface {
+            /** @param array<array{period: \DateTimeImmutable, ...}> $data */
+            public function __construct(private array $data)
+            {
+            }
+
+            public function provideForPeriodInChannel(\DatePeriod $period, ChannelInterface $channel): array
+            {
+                return $this->data;
+            }
+        });
+
+        $secondRegistry->method('getByType')->willReturn(new class($secondProvider) implements SalesProviderInterface {
+            /** @param array<array{period: \DateTimeImmutable, ...}> $data */
+            public function __construct(private array $data)
+            {
+            }
+
+            public function provideForPeriodInChannel(\DatePeriod $period, ChannelInterface $channel): array
+            {
+                return $this->data;
+            }
+        });
+
+        $provider = new SalesStatisticsProvider(
+            $this->ordersTotalsProviderRegistry,
+            ['day' => ['interval' => 'P1D', 'period_format' => 'Y-m-d']],
+            [$firstRegistry, $secondRegistry],
+        );
+
+        $result = $provider->provide(
+            'day',
+            new \DatePeriod(new \DateTimeImmutable(), new \DateInterval('P1D'), 3),
+            $this->channel,
+        );
+
+        $this->assertSame([
+            ['period' => '2020-01-01', 'total' => 1000, 'orders_count' => 5],
+            ['period' => '2020-01-02', 'total' => 2000, 'orders_count' => 10],
+            ['period' => '2020-01-03', 'orders_count' => 15],
+        ], $result);
+    }
+
     public function testUsesCacheWhenAvailable(): void
     {
         $salesData = [
