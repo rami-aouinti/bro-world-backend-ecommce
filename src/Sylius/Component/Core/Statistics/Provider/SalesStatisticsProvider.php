@@ -169,10 +169,7 @@ final class SalesStatisticsProvider implements SalesStatisticsProviderInterface
         [$indexedFirstArray, $firstArrayKeys] = $this->indexByPeriodWithKeys($firstArray);
         [$indexedSecondArray, $secondArrayKeys] = $this->indexByPeriodWithKeys($secondArray);
 
-        $allKeys = array_keys(array_merge(
-            array_fill_keys($firstArrayKeys, true),
-            array_fill_keys($secondArrayKeys, true),
-        ));
+        $allKeys = array_values(array_unique(array_merge($firstArrayKeys, $secondArrayKeys)));
 
         foreach ($allKeys as $key) {
             $itemFromFirstArray = $indexedFirstArray[$key] ?? [];
