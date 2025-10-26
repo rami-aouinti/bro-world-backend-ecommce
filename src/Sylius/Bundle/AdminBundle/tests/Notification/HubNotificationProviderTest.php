@@ -78,6 +78,17 @@ final class HubNotificationProviderTest extends TestCase
     }
 
     #[Test]
+    public function it_returns_an_empty_array_if_the_current_request_is_not_available(): void
+    {
+        $this->cache->get('latest_sylius_version', Argument::type('callable'))->will(fn ($args) => $args[1]());
+
+        $this->requestStack->getCurrentRequest()->willReturn(null);
+        $this->clock->now()->willReturn(new \DateTimeImmutable());
+
+        $this->assertEmpty($this->hubNotificationsProvider->getNotifications());
+    }
+
+    #[Test]
     public function it_returns_an_empty_array_if_client_exception_occurs(): void
     {
         $request = $this->prophesize(RequestInterface::class);
