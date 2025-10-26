@@ -15,11 +15,13 @@ namespace Sylius\Bundle\AdminBundle\Provider;
 
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Component\Core\Model\AdminUser;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Exception\SessionNotFoundException;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 final readonly class LoggedInAdminUserProvider implements LoggedInAdminUserProviderInterface
 {
@@ -75,7 +77,17 @@ final readonly class LoggedInAdminUserProvider implements LoggedInAdminUserProvi
             return null;
         }
 
-        $token = unserialize($serializedToken);
+        try {
+            $token = unserialize($serializedToken, ['allowed_classes' => [
+                TokenInterface::class,
+                UsernamePasswordToken::class,
+                AdminUserInterface::class,
+                AdminUser::class,
+            ]];
+        } catch (\Throwable) {
+            return null;
+        }
+
         if (!$token instanceof TokenInterface) {
             return null;
         }
