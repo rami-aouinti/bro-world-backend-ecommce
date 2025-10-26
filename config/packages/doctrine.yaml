@@ -8,3 +8,5 @@ parameters:
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        types:
+            object: Sylius\Bundle\CoreBundle\Doctrine\DBAL\Type\ObjectType
