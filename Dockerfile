@@ -52,24 +52,23 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
       debsecan \
       xalan \
     && pecl install amqp \
-    && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
-    && docker-php-ext-configure intl \
-    && yes '' | pecl install -o -f redis && docker-php-ext-enable redis \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
-    && docker-php-ext-install -j"$(nproc)" \
-         pdo_mysql sockets intl opcache zip gd \
-    && docker-php-ext-enable amqp \
-    && apt-get install --no-install-recommends -y \
-        $(debsecan --suite bookworm --format packages --only-fixed) \
-    && rm -rf /tmp/* /var/list/apt/* /var/lib/apt/lists/* \
-    && apt-get clean
+        && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
+        && docker-php-ext-configure intl \
+        && yes '' | pecl install -o -f redis && docker-php-ext-enable redis \
+        && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
+        && docker-php-ext-install -j"$(nproc)" \
+             pdo_mysql sockets intl opcache zip gd exif \
+        && docker-php-ext-enable amqp \
+        && rm -rf /tmp/* /var/lib/apt/lists/* && apt-get clean
 
 # create document root, fix permissions for www-data user and change owner to www-data
-RUN mkdir -p $APP_HOME/public && \
-    mkdir -p /home/$USERNAME && chown $USERNAME:$USERNAME /home/$USERNAME \
-    && usermod -o -u $HOST_UID $USERNAME -d /home/$USERNAME \
-    && groupmod -o -g $HOST_GID $USERNAME \
-    && chown -R ${USERNAME}:${USERNAME} $APP_HOME
+RUN if [ "$(id -u $USERNAME)" = "0" ]; then \
+        deluser $USERNAME; \
+        addgroup --system --gid 33 $USERNAME; \
+        adduser --system --uid 33 --ingroup $USERNAME $USERNAME; \
+    fi && \
+    mkdir -p $APP_HOME/public /home/$USERNAME && \
+    chown -R $USERNAME:$USERNAME /home/$USERNAME $APP_HOME
 
 # put php config for Symfony
 COPY ./docker/$BUILD_ARGUMENT_ENV/www.conf /usr/local/etc/php-fpm.d/www.conf
@@ -112,8 +111,8 @@ COPY --chown=${USERNAME}:${USERNAME} ./docker/fish/config.fish /home/${USERNAME}
 COPY --chown=${USERNAME}:${USERNAME} . $APP_HOME/
 
 # install all PHP dependencies
-RUN if [ "$BUILD_ARGUMENT_ENV" = "dev" ] || [ "$BUILD_ARGUMENT_ENV" = "test" ]; then COMPOSER_MEMORY_LIMIT=-1 composer install --ignore-platform-req=ext-vips --ignore-platform-req=ext-ffi --optimize-autoloader --no-interaction --no-progress; \
-    else export APP_ENV=$BUILD_ARGUMENT_ENV && COMPOSER_MEMORY_LIMIT=-1 composer install --ignore-platform-req=ext-vips --ignore-platform-req=ext-ffi --optimize-autoloader --no-interaction --no-progress --no-dev; \
+RUN if [ "$BUILD_ARGUMENT_ENV" = "dev" ] || [ "$BUILD_ARGUMENT_ENV" = "test" ]; then COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-interaction --no-progress; \
+    else export APP_ENV=$BUILD_ARGUMENT_ENV && COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-interaction --no-progress --no-dev; \
     fi
 
 # create cached config file .env.local.php in case staging/prod environment

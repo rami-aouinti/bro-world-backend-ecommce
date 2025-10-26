@@ -14,7 +14,7 @@ behat-js:
 	vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo" || vendor/bin/behat --colors --strict --no-interaction -vvv -f progress --tags="@javascript&&~@cli&&~@todo" --rerun
 
 install:
-	composer install --no-interaction --no-scripts
+	composer install --no-interaction --no-scripts --ignore-platform-req=ext-exif --ignore-platform-req=ext-gd
 
 backend:
 	bin/console doctrine:database:create --no-interaction
