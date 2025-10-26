@@ -60,6 +60,7 @@ sylius:
                 order_history: 'Order history'
                 personal_information: 'Personal information'
     top_bar: 'Sign up to our newsletter and grab -20% off'
+
 bro_shop:
     top_bar:
         message: 'Welcome to Bro Shop — Free shipping from €50'
