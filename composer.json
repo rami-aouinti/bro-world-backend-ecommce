@@ -265,6 +265,7 @@
     },
     "autoload": {
         "psr-4": {
+            "App\\\\": "src/",
             "Sylius\\Abstraction\\StateMachine\\": "src/Sylius/Abstraction/StateMachine/src",
             "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
@@ -289,8 +290,8 @@
     },
     "scripts": {
         "prepare": [
-            "php bin/console doctrine:database:drop --if-exists --force",
-            "php bin/console doctrine:database:create",
+            "php bin/console app:database:drop-if-exists --force",
+            "php bin/console doctrine:database:create --if-not-exists",
             "php bin/console doctrine:schema:update --force --complete",
             "php bin/console doctrine:fixtures:load -n"
         ],
