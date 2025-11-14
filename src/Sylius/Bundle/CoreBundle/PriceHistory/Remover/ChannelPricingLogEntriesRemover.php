@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PriceHistory\Remover;
 
+use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\PriceHistory\Event\OldChannelPricingLogEntriesEvents;
 use Sylius\Component\Core\Repository\ChannelPricingLogEntryRepositoryInterface;
@@ -58,7 +59,7 @@ final class ChannelPricingLogEntriesRemover implements ChannelPricingLogEntriesR
 
     private function getFromDate(int $fromDays): \DateTimeInterface
     {
-        $now = $this->clock->now();
+        $now = DateTime::createFromInterface($this->clock->now());
 
         return $now->modify(sprintf('-%d days', $fromDays));
     }

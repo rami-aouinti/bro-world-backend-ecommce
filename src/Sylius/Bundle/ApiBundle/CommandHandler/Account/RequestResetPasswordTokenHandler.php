@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use DateTime;
 use Sylius\Bundle\ApiBundle\Command\Account\RequestResetPasswordToken;
 use Sylius\Bundle\ApiBundle\Command\Account\SendResetPasswordEmail;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -41,7 +42,7 @@ final readonly class RequestResetPasswordTokenHandler
         }
 
         $user->setPasswordResetToken($this->generator->generate());
-        $user->setPasswordRequestedAt($this->clock->now());
+        $user->setPasswordRequestedAt(DateTime::createFromInterface($this->clock->now()));
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail(

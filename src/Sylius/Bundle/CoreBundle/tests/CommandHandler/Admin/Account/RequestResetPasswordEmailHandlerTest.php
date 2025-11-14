@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account;
 
+use DateTime;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
@@ -77,8 +78,10 @@ final class RequestResetPasswordEmailHandlerTest extends TestCase
 
         $adminUser->expects($this->once())->method('getEmail')->willReturn('admin@example.com');
         $adminUser->expects($this->once())->method('getLocaleCode')->willReturn('en_US');
+        $expectedDate = DateTime::createFromInterface($now);
+
         $adminUser->expects($this->once())->method('setPasswordResetToken')->with('sometoken');
-        $adminUser->expects($this->once())->method('setPasswordRequestedAt')->with($now);
+        $adminUser->expects($this->once())->method('setPasswordRequestedAt')->with($expectedDate);
 
         $expectedMessage = new SendResetPasswordEmail('admin@example.com', 'en_US');
 

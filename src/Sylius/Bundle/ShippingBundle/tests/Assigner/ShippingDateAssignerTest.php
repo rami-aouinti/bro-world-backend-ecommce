@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ShippingBundle\Assigner;
 
+use DateTime;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -43,8 +44,11 @@ final class ShippingDateAssignerTest extends TestCase
         /** @var ShipmentInterface&MockObject $shipment */
         $shipment = $this->createMock(ShipmentInterface::class);
 
-        $this->clock->expects($this->once())->method('now')->willReturn(new DateTimeImmutable('20-05-2019 20:20:20'));
-        $shipment->expects($this->once())->method('setShippedAt')->with(new DateTimeImmutable('20-05-2019 20:20:20'));
+        $now = new DateTimeImmutable('20-05-2019 20:20:20');
+        $this->clock->expects($this->once())->method('now')->willReturn($now);
+        $expectedDate = DateTime::createFromInterface($now);
+
+        $shipment->expects($this->once())->method('setShippedAt')->with($expectedDate);
 
         $this->shippingDateAssigner->assign($shipment);
     }

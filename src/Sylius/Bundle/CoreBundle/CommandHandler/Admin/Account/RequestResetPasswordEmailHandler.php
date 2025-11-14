@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\CommandHandler\Admin\Account;
 
+use DateTime;
 use Sylius\Bundle\CoreBundle\Command\Admin\Account\RequestResetPasswordEmail;
 use Sylius\Bundle\CoreBundle\Command\Admin\Account\SendResetPasswordEmail;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -44,7 +45,7 @@ final class RequestResetPasswordEmailHandler
         }
 
         $adminUser->setPasswordResetToken($this->generator->generate());
-        $adminUser->setPasswordRequestedAt($this->clock->now());
+        $adminUser->setPasswordRequestedAt(DateTime::createFromInterface($this->clock->now()));
 
         $this->commandBus->dispatch(
             new SendResetPasswordEmail($adminUser->getEmail(), $adminUser->getLocaleCode()),

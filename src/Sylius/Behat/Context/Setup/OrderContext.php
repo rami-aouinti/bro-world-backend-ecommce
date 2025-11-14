@@ -15,6 +15,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
+use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Abstraction\StateMachine\StateMachineInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -910,7 +911,7 @@ final readonly class OrderContext implements Context
             $customer->setFirstname('John');
             $customer->setLastname('Doe' . $i);
 
-            $customer->setCreatedAt($this->clock->now());
+            $customer->setCreatedAt(DateTime::createFromInterface($this->clock->now()));
 
             $customers[] = $customer;
 
@@ -1017,7 +1018,7 @@ final readonly class OrderContext implements Context
                 $this->shipOrder($order);
             }
 
-            $order->setCheckoutCompletedAt($this->clock->now());
+            $order->setCheckoutCompletedAt(DateTime::createFromInterface($this->clock->now()));
 
             $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\CoreBundle\PriceHistory\Logger;
 
+use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -73,10 +74,12 @@ final class PriceChangeLoggerTest extends TestCase
 
         $this->clock->expects($this->once())->method('now')->willReturn($now);
 
+        $expectedDate = DateTime::createFromInterface($now);
+
         $this->logEntryFactory
             ->expects($this->once())
             ->method('create')
-            ->with($channelPricing, $now, $price, $originalPrice)
+            ->with($channelPricing, $expectedDate, $price, $originalPrice)
             ->willReturn($logEntry)
         ;
 
