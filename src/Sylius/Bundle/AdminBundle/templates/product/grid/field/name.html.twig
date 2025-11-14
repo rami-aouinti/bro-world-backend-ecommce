@@ -1,5 +1,19 @@
-{% if data is not null %}
-    <div class="fw-medium">{{ data }}</div>
+{% set product = data %}
+{% set current_locale = sylius.localeCode %}
+{% set translation = product.getTranslation(current_locale) %}
+{% set product_name = translation.name %}
+
+{% if product_name is empty %}
+    {% for alternative_translation in product.translations if alternative_translation.locale != current_locale %}
+        {% if alternative_translation.name is not empty %}
+            {% set product_name = alternative_translation.name %}
+            {% break %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if product_name is not empty %}
+    <div class="fw-medium">{{ product_name }}</div>
 {% else %}
     <span class="text-danger" {{ sylius_test_html_attribute('missing-translation-paragraph') }}>
         {{ ux_icon('tabler:exclamation-circle') }} <i>{{ 'sylius.ui.missing_translation'|trans }}</i>

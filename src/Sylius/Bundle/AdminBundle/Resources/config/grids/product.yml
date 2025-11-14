@@ -22,6 +22,7 @@ sylius_grid:
                 name:
                     type: twig
                     label: sylius.ui.name
+                    path: .
                     sortable: translation.name
                     options:
                         template: "@SyliusAdmin/product/grid/field/name.html.twig"
