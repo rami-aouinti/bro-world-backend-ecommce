@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use DateTime;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -64,7 +65,7 @@ final class RequestResetPasswordTokenHandlerTest extends TestCase
         $this->clockMock->expects(self::once())->method('now')->willReturn(new DateTimeImmutable());
         $this->generatorMock->expects(self::once())->method('generate')->willReturn('TOKEN');
         $shopUserMock->expects(self::once())->method('setPasswordResetToken')->with('TOKEN');
-        $shopUserMock->setPasswordRequestedAt(Argument::type(DateTimeImmutable::class));
+        $shopUserMock->setPasswordRequestedAt(Argument::type(DateTime::class));
         $sendResetPasswordEmail = new SendResetPasswordEmail('test@email.com', 'WEB', 'en_US');
         $this->messageBusMock->expects(self::once())->method('dispatch')->with($sendResetPasswordEmail, [new DispatchAfterCurrentBusStamp()])->willReturn(new Envelope($sendResetPasswordEmail));
         $requestResetPasswordToken = new RequestResetPasswordToken(

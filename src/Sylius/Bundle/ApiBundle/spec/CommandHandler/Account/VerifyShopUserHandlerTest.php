@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use DateTime;
 use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -59,7 +60,7 @@ final class VerifyShopUserHandlerTest extends TestCase
         $this->shopUserRepositoryMock->expects(self::once())->method('findOneBy')->with(['emailVerificationToken' => 'ToKeN'])->willReturn($userMock);
         $this->clockMock->expects(self::once())->method('now')->willReturn(new DateTimeImmutable());
         $userMock->expects(self::once())->method('getEmail')->willReturn('shop@example.com');
-        $userMock->expects(self::once())->method('setVerifiedAt')->with($this->isInstanceOf(DateTimeImmutable::class));
+        $userMock->expects(self::once())->method('setVerifiedAt')->with($this->isInstanceOf(DateTime::class));
         $userMock->expects(self::once())->method('setEmailVerificationToken')->with(null);
         $userMock->expects(self::once())->method('enable');
         $this->commandBusMock->expects(self::once())->method('dispatch')->with(new SendAccountRegistrationEmail('shop@example.com', 'en_US', 'WEB'), [new DispatchAfterCurrentBusStamp()])->willReturn(new Envelope(new stdClass()));

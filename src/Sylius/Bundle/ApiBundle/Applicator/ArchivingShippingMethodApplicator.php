@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
+use DateTime;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Symfony\Component\Clock\ClockInterface;
 
@@ -24,7 +25,7 @@ final readonly class ArchivingShippingMethodApplicator implements ArchivingShipp
 
     public function archive(ShippingMethodInterface $data): ShippingMethodInterface
     {
-        $data->setArchivedAt($this->clock->now());
+        $data->setArchivedAt(DateTime::createFromInterface($this->clock->now()));
 
         return $data;
     }

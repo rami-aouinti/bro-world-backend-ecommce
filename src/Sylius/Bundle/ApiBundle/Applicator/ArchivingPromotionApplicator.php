@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\Applicator;
 
+use DateTime;
 use Psr\Clock\ClockInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 
@@ -24,7 +25,7 @@ final class ArchivingPromotionApplicator implements ArchivingPromotionApplicator
 
     public function archive(PromotionInterface $data): PromotionInterface
     {
-        $data->setArchivedAt($this->calendar->now());
+        $data->setArchivedAt(DateTime::createFromInterface($this->calendar->now()));
 
         return $data;
     }

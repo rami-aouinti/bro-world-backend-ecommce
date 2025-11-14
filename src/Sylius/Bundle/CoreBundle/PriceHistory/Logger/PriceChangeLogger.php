@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\PriceHistory\Logger;
 
+use DateTime;
 use Doctrine\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\ChannelPricingLogEntryFactoryInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -34,7 +35,7 @@ final class PriceChangeLogger implements PriceChangeLoggerInterface
 
         $logEntry = $this->logEntryFactory->create(
             $channelPricing,
-            $this->clock->now(),
+            DateTime::createFromInterface($this->clock->now()),
             $channelPricing->getPrice(),
             $channelPricing->getOriginalPrice(),
         );

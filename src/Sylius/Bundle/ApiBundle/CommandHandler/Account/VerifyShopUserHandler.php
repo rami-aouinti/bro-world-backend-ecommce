@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\CommandHandler\Account;
 
+use DateTime;
 use InvalidArgumentException;
 use Sylius\Bundle\ApiBundle\Command\Account\SendAccountRegistrationEmail;
 use Sylius\Bundle\ApiBundle\Command\Account\VerifyShopUser;
@@ -44,7 +45,7 @@ final readonly class VerifyShopUserHandler
             );
         }
 
-        $user->setVerifiedAt($this->clock->now());
+        $user->setVerifiedAt(DateTime::createFromInterface($this->clock->now()));
         $user->setEmailVerificationToken(null);
         $user->enable();
 
