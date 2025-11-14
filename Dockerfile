@@ -4,7 +4,7 @@ FROM php:8.4-fpm
 # set main params
 ARG BUILD_ARGUMENT_ENV=dev
 ENV ENV=$BUILD_ARGUMENT_ENV
-ENV APP_HOME /var/www/html
+ENV APP_HOME=/var/www/html
 ARG HOST_UID=1000
 ARG HOST_GID=1000
 ENV USERNAME=www-data
@@ -25,8 +25,9 @@ RUN if [ "$BUILD_ARGUMENT_ENV" = "default" ]; then echo "Set BUILD_ARGUMENT_ENV 
     else echo "Set correct BUILD_ARGUMENT_ENV in docker build-args like --build-arg BUILD_ARGUMENT_ENV=dev. Available choices are dev,test,staging,prod." && exit 2; \
     fi
 
-# install all the dependencies and enable PHP modules
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+# install system deps + PHP extensions (gd + exif inclus)
+RUN set -eux; \
+    apt-get update && apt-get upgrade -y && apt-get install -y \
       bash-completion \
       fish \
       procps \
@@ -51,72 +52,22 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
       librabbitmq-dev \
       debsecan \
       xalan \
-    && pecl install amqp \
-        && docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd \
-        && docker-php-ext-configure intl \
-        && yes '' | pecl install -o -f redis && docker-php-ext-enable redis \
-        && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm \
-        && docker-php-ext-install -j"$(nproc)" \
-             pdo_mysql sockets intl opcache zip gd exif \
-        && docker-php-ext-enable amqp \
-        && rm -rf /tmp/* /var/lib/apt/lists/* && apt-get clean
-
-# create document root, fix permissions for www-data user and change owner to www-data
-RUN if [ "$(id -u $USERNAME)" = "0" ]; then \
-        deluser $USERNAME; \
-        addgroup --system --gid 33 $USERNAME; \
-        adduser --system --uid 33 --ingroup $USERNAME $USERNAME; \
-    fi && \
-    mkdir -p $APP_HOME/public /home/$USERNAME && \
-    chown -R $USERNAME:$USERNAME /home/$USERNAME $APP_HOME
-
-# put php config for Symfony
-COPY ./docker/$BUILD_ARGUMENT_ENV/www.conf /usr/local/etc/php-fpm.d/www.conf
-COPY ./docker/$BUILD_ARGUMENT_ENV/php.ini /usr/local/etc/php/php.ini
-
-# install Xdebug in case dev/test environment
-COPY ./docker/general/do_we_need_xdebug.sh /tmp/
-COPY ./docker/dev/xdebug-${XDEBUG_CONFIG}.ini /tmp/xdebug.ini
-RUN chmod u+x /tmp/do_we_need_xdebug.sh && /tmp/do_we_need_xdebug.sh
-
-# install composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-RUN chmod +x /usr/bin/composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-# Enable Composer autocompletion
-RUN composer completion bash > /etc/bash_completion.d/composer
-
-# add supervisor
-RUN mkdir -p /var/log/supervisor
-COPY --chown=root:root ./docker/general/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY --chown=root:crontab ./docker/general/cron /var/spool/cron/crontabs/root
-RUN chmod 0600 /var/spool/cron/crontabs/root
-
-# set working directory
-WORKDIR $APP_HOME
-
-USER ${USERNAME}
-
-# Add necessary stuff to bash autocomplete
-RUN echo 'source /usr/share/bash-completion/bash_completion' >> /home/${USERNAME}/.bashrc \
-    && echo 'alias console="/var/www/html/bin/console"' >> /home/${USERNAME}/.bashrc
-
-# copy fish configs
-COPY --chown=${USERNAME}:${USERNAME} ./docker/fish/completions/ /home/${USERNAME}/.config/fish/completions/
-COPY --chown=${USERNAME}:${USERNAME} ./docker/fish/functions/ /home/${USERNAME}/.config/fish/functions/
-COPY --chown=${USERNAME}:${USERNAME} ./docker/fish/config.fish /home/${USERNAME}/.config/fish/config.fish
-
-# copy source files
-COPY --chown=${USERNAME}:${USERNAME} . $APP_HOME/
-
-# install all PHP dependencies
-RUN if [ "$BUILD_ARGUMENT_ENV" = "dev" ] || [ "$BUILD_ARGUMENT_ENV" = "test" ]; then COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-interaction --no-progress; \
-    else export APP_ENV=$BUILD_ARGUMENT_ENV && COMPOSER_MEMORY_LIMIT=-1 composer install --optimize-autoloader --no-interaction --no-progress --no-dev; \
-    fi
-
-# create cached config file .env.local.php in case staging/prod environment
-RUN if [ "$BUILD_ARGUMENT_ENV" = "staging" ] || [ "$BUILD_ARGUMENT_ENV" = "prod" ]; then composer dump-env $BUILD_ARGUMENT_ENV; \
-    fi
-
-USER root
+    ; \
+    pecl install amqp; \
+    docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd; \
+    docker-php-ext-configure intl; \
+    yes '' | pecl install -o -f redis; \
+    docker-php-ext-enable redis; \
+    docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp --with-xpm; \
+    docker-php-ext-install -j"$(nproc)" \
+      pdo_mysql \
+      sockets \
+      intl \
+      opcache \
+      zip \
+      gd \
+      exif \
+    ; \
+    docker-php-ext-enable amqp exif; \
+    rm -rf /tmp/* /var/lib/apt/lists/*; \
+    apt-get clean

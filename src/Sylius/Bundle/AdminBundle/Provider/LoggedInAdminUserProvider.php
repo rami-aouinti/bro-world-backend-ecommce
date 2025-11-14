@@ -83,7 +83,7 @@ final readonly class LoggedInAdminUserProvider implements LoggedInAdminUserProvi
                 UsernamePasswordToken::class,
                 AdminUserInterface::class,
                 AdminUser::class,
-            ]];
+            ]]);
         } catch (\Throwable) {
             return null;
         }
