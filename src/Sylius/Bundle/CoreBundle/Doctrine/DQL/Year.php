@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\DQL;
 
-use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
@@ -24,6 +23,8 @@ use Doctrine\ORM\Query\TokenType;
 
 final class Year extends FunctionNode
 {
+    use MySqlOrMariaDbPlatformAwareTrait;
+
     /** @var Node|string|null */
     public $date;
 
@@ -41,7 +42,7 @@ final class Year extends FunctionNode
     {
         $platform = $sqlWalker->getConnection()->getDatabasePlatform();
 
-        if (is_a($platform, MySQLPlatform::class, true)) {
+        if ($this->isMySqlOrMariaDbPlatform($platform)) {
             return sprintf('YEAR(%s)', $sqlWalker->walkArithmeticPrimary($this->date));
         }
 
