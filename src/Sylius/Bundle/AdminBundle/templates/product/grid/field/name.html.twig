@@ -4,10 +4,9 @@
 {% set product_name = translation.name %}
 
 {% if product_name is empty %}
-    {% for alternative_translation in product.translations if alternative_translation.locale != current_locale %}
-        {% if alternative_translation.name is not empty %}
+    {% for alternative_translation in product.translations %}
+        {% if alternative_translation.locale != current_locale and alternative_translation.name is not empty and product_name is empty %}
             {% set product_name = alternative_translation.name %}
-            {% break %}
         {% endif %}
     {% endfor %}
 {% endif %}
