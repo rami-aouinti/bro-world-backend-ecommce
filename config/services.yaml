@@ -1,5 +1,2 @@
 services:
     AutoMapperPlus\\AutoMapperInterface: '@mark_gerarts_auto_mapper_plus.auto_mapper'
-    Bro\\WorldCoreBundle\\Infrastructure\\ValueObject\\SymfonyUser:
-        tags:
-            - { name: controller.argument_value_resolver, priority: 150 }
