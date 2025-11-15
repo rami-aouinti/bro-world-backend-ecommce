@@ -10,7 +10,7 @@ doctrine:
         url: '%env(resolve:DATABASE_URL)%'
         types:
             object: Sylius\Bundle\CoreBundle\Doctrine\DBAL\Type\ObjectType
-            datetime: Bro\WorldCoreBundle\Domain\Doctrine\DBAL\Types\UTCDateTimeType
-            datetimetz: Bro\WorldCoreBundle\Domain\Doctrine\DBAL\Types\UTCDateTimeType
+            datetime: App\Doctrine\DBAL\Types\UTCDateTimeType
+            datetimetz: App\Doctrine\DBAL\Types\UTCDateTimeType
             EnumLanguage: Bro\WorldCoreBundle\Domain\Doctrine\DBAL\Types\EnumLanguageType
             EnumLocale: Bro\WorldCoreBundle\Domain\Doctrine\DBAL\Types\EnumLocaleType
