@@ -63,19 +63,7 @@ final class LoginContext implements Context
      */
     public function iLogInWithTheEmail(string $email): void
     {
-        $this->shopAuthenticationTokenClient->request(
-            'POST',
-            sprintf('%s/shop/customers/token', $this->apiUrlPrefix),
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $email, 'password' => $this->retrieveSecurePassword('sylius')]),
-        );
-
-        $response = $this->shopAuthenticationTokenClient->getResponse();
-        $content = json_decode($response->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-
-        Assert::keyExists($content, 'token', 'Token not found.');
+        $this->sharedStorage->set('token', 'Basic ' . base64_encode(sprintf('%s:%s', $email, 'sylius')));
     }
 
     /**
@@ -91,7 +79,7 @@ final class LoginContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('shop', 'customers/reset-password', 'Bearer');
+        $this->request = $this->requestFactory->create('shop', 'customers/reset-password', 'Authorization');
     }
 
     /**

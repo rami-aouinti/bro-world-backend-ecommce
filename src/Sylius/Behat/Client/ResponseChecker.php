@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Client;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Response\JWTAuthenticationFailureResponse;
 use Sylius\Behat\Service\SprintfResponseEscaper;
 use Symfony\Component\HttpFoundation\Response;
 use Webmozart\Assert\Assert;
@@ -84,13 +83,17 @@ final class ResponseChecker implements ResponseCheckerInterface
 
     public function hasAccessDenied(Response $response): bool
     {
-        if (!$response instanceof JWTAuthenticationFailureResponse) {
+        if ($response->getStatusCode() !== Response::HTTP_UNAUTHORIZED) {
             return false;
         }
 
-        return
-            $response->getMessage() === 'JWT Token not found' &&
-            $response->getStatusCode() === Response::HTTP_UNAUTHORIZED;
+        $decoded = json_decode($response->getContent(), true);
+
+        if (is_array($decoded) && isset($decoded['message'])) {
+            return $decoded['message'] === 'Invalid credentials.';
+        }
+
+        return true;
     }
 
     public function hasCollection(Response $response): bool

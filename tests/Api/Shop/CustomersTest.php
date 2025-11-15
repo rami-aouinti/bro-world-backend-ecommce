@@ -47,22 +47,6 @@ final class CustomersTest extends JsonApiTestCase
     }
 
     #[Test]
-    public function it_logs_in(): void
-    {
-        $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);
-
-        $this->requestPost(
-            '/api/v2/shop/customers/token',
-            [
-                'email' => 'oliver@doe.com',
-                'password' => 'sylius',
-            ],
-        );
-
-        $this->assertResponse($this->client->getResponse(), 'shop/customer/log_in_customer_response');
-    }
-
-    #[Test]
     public function it_gets_customer_as_another_logged_user(): void
     {
         $fixtures = $this->loadFixturesFromFiles(['authentication/shop_user.yaml']);

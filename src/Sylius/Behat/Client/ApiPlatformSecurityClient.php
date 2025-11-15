@@ -30,62 +30,62 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
         private readonly SharedStorageInterface $sharedStorage,
         private readonly string $apiUrlPrefix,
         private readonly string $section,
+        private readonly string $authorizationHeader,
     ) {
     }
 
     public function prepareLoginRequest(): void
     {
-        $this->request['url'] = sprintf(
-            '%s/%s',
-            $this->apiUrlPrefix,
-            $this->section,
-        );
-
-        $this->request['method'] = 'POST';
+        $this->request = [
+            'url' => sprintf('%s/%s', $this->apiUrlPrefix, $this->section),
+            'method' => 'GET',
+        ];
     }
 
     public function setEmail(string $email): void
     {
-        $this->request['body']['email'] = $email;
+        $this->request['email'] = $email;
     }
 
     public function setPassword(string $password): void
     {
-        $this->request['body']['password'] = $this->retrieveSecurePassword($password);
+        $this->request['password'] = $this->retrieveSecurePassword($password);
     }
 
     public function call(): void
     {
+        $authorizationHeader = $this->formatAuthorizationHeader();
+
         $this->client->request(
             $this->request['method'],
             $this->request['url'],
             [],
             [],
-            ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode($this->request['body']),
+            [
+                'HTTP_ACCEPT' => 'application/ld+json',
+                'CONTENT_TYPE' => 'application/ld+json',
+                $authorizationHeader => $this->buildBasicHeader(),
+            ],
         );
 
         $response = $this->client->getResponse();
-        $content = json_decode($response->getContent(), true);
-
-        if (isset($content['token'])) {
-            $this->sharedStorage->set('token', $content['token']);
+        if ($response->getStatusCode() !== Response::HTTP_UNAUTHORIZED) {
+            $this->sharedStorage->set('token', $this->buildBasicHeader());
+        } else {
+            $this->sharedStorage->set('token', null);
         }
     }
 
     public function isLoggedIn(): bool
     {
-        $response = $this->client->getResponse();
-
-        return
-            isset(json_decode($response->getContent(), true)['token']) &&
-            $response->getStatusCode() !== Response::HTTP_UNAUTHORIZED
-        ;
+        return $this->client->getResponse()->getStatusCode() !== Response::HTTP_UNAUTHORIZED;
     }
 
     public function getErrorMessage(): string
     {
-        return json_decode($this->client->getResponse()->getContent(), true)['message'];
+        $content = json_decode($this->client->getResponse()->getContent(), true);
+
+        return is_array($content) && isset($content['message']) ? (string) $content['message'] : 'Invalid credentials.';
     }
 
     public function logOut(): void
@@ -95,5 +95,15 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
         if ($this->sharedStorage->has('cart_token')) {
             $this->sharedStorage->set('previous_cart_token', $this->sharedStorage->get('cart_token'));
         }
+    }
+
+    private function buildBasicHeader(): string
+    {
+        return 'Basic ' . base64_encode(sprintf('%s:%s', $this->request['email'], $this->request['password']));
+    }
+
+    private function formatAuthorizationHeader(): string
+    {
+        return 'HTTP_' . strtoupper(str_replace('-', '_', $this->authorizationHeader));
     }
 }

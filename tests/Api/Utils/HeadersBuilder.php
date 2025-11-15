@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sylius\Tests\Api\Utils;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -29,7 +28,6 @@ class HeadersBuilder
      * @param UserRepositoryInterface<ShopUserInterface> $shopUserRepository
      */
     public function __construct(
-        private JWTTokenManagerInterface $jwtManager,
         private UserRepositoryInterface $adminUserRepository,
         private UserRepositoryInterface $shopUserRepository,
         private string $authorizationHeader,
@@ -78,7 +76,7 @@ class HeadersBuilder
         return $this;
     }
 
-    public function withShopUserAuthorization(string $email): self
+    public function withShopUserAuthorization(string $email, string $password = 'sylius'): self
     {
         $shopUser = $this->shopUserRepository->findOneByEmail($email);
 
@@ -86,12 +84,12 @@ class HeadersBuilder
             throw new \InvalidArgumentException(sprintf('Shop user with email "%s" does not exist.', $email));
         }
 
-        $this->headers['HTTP_' . $this->authorizationHeader] = 'Bearer ' . $this->jwtManager->create($shopUser);
+        $this->headers['HTTP_' . $this->authorizationHeader] = $this->buildBasicHeader($email, $password);
 
         return $this;
     }
 
-    public function withAdminUserAuthorization(string $email): self
+    public function withAdminUserAuthorization(string $email, string $password = 'sylius'): self
     {
         $adminUser = $this->adminUserRepository->findOneByEmail($email);
 
@@ -99,9 +97,14 @@ class HeadersBuilder
             throw new \InvalidArgumentException(sprintf('Admin user with email "%s" does not exist.', $email));
         }
 
-        $this->headers['HTTP_' . $this->authorizationHeader] = 'Bearer ' . $this->jwtManager->create($adminUser);
+        $this->headers['HTTP_' . $this->authorizationHeader] = $this->buildBasicHeader($email, $password);
 
         return $this;
+    }
+
+    private function buildBasicHeader(string $email, string $password): string
+    {
+        return 'Basic ' . base64_encode(sprintf('%s:%s', $email, $password));
     }
 
     /** @return array<string, string> */

@@ -14,7 +14,7 @@ layout:
 
 # Using API
 
-Log inSince Sylius 1.8, we have offered a new API based on ApiPlatform. Below are examples of how to use the API for basic shop operations. **Public API documentation is available** [**here**](https://v2.demo.sylius.com/api/v2/docs)**.**
+Since Sylius 1.8, we have offered a new API based on ApiPlatform. Below are examples of how to use the API for basic shop operations. **Public API documentation is available** [**here**](https://v2.demo.sylius.com/api/v2/docs)**.**
 
 ## Register a customer
 
@@ -38,42 +38,19 @@ If the response status is **204**, the customer was registered successfully.
 
 <figure><img src="../.gitbook/assets/Screenshot 2025-06-02 at 21.07.12.png" alt=""><figcaption></figcaption></figure>
 
-### Log in to the shop
+### Authenticate requests
 
-After registering a customer, you can log in to obtain an authentication token, which is required to access more shop endpoints.
-
-```bash
-curl -X 'POST' \
-    'https://v2.demo.sylius.com/api/v2/shop/customers/token' \
-    -H 'accept: application/json' \
-    -H 'Content-Type: application/json' \
-    -d '{
-        "email": "shop.user@example.com",
-        "password": "pa$$word"
-    }'
-```
-
-If successful, the response will have a **200** status code and include the token and customer IRI:
-
-```json
-{
-    "token": "string",
-    "customer": "iri"
-}
-```
-
-{% hint style="warning" %}
-If your shop requires email authentication, no token will be returned.
-{% endhint %}
-
-Use the token to authenticate subsequent API requests:
+The API uses HTTP Basic authentication. Build a Base64 string from `email:password` and send it with every request.
 
 ```bash
+AUTH=$(printf 'shop.user@example.com:pa$$word' | base64)
 curl -X 'METHOD' \
     'api-url' \
     -H 'accept: application/ld+json' \
-    -H 'Authorization: Bearer token'
+    -H "Authorization: Basic ${AUTH}"
 ```
+
+All further examples use `BASE64_CREDENTIALS` as a placeholder for that encoded value.
 
 ## Basic Operations: Products, Carts, and Orders
 
@@ -90,7 +67,7 @@ curl -X 'POST' \
   'https://v2.demo.sylius.com/api/v2/shop/orders' \
   -H 'accept: application/ld+json' \
   -H 'Content-Type: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -d '{
         # "localeCode": "string" (optional)
   }'
@@ -114,7 +91,7 @@ First, retrieve a product variant by sending a `GET` request:
 curl -X 'GET' \
   'https://v2.demo.sylius.com/api/v2/shop/product-variants?page=1&itemsPerPage=30' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token'
+  -H 'Authorization: Basic BASE64_CREDENTIALS'
 ```
 
 ```javascript
@@ -150,7 +127,7 @@ Use the `@id` of the desired variant, and add it to the cart:
 curl -X 'PATCH' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/items' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/merge-patch+json' \
   -d '{
     "productVariant": "/api/v2/shop/product-variants/Everyday_white_basic_T_Shirt-variant-0",
@@ -190,7 +167,7 @@ To change the quantity of a product already added to the cart, use the following
 curl -X 'PATCH' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/OPzFiAWefi/items/59782' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/merge-patch+json' \
   -d '{
     "quantity": 3
@@ -215,7 +192,7 @@ Add the customer's billing and shipping address by sending a `PATCH` request:
 curl -X 'PATCH' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/address' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/merge-patch+json' \
   -d '{
     "email": "shop.user@example.com",
@@ -246,7 +223,7 @@ First, get the available shipping and payment methods:
 curl -X 'GET' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token'
+  -H 'Authorization: Basic BASE64_CREDENTIALS'
 ```
 
 Use the methods' `@id` in the next steps.
@@ -276,7 +253,7 @@ Use the methods' `@id` in the next steps.
 curl -X 'PATCH' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/shipments/17768' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/merge-patch+json' \
   -d '{
     "shippingMethod": "/api/v2/shop/shipping-methods/ups"
@@ -291,7 +268,7 @@ curl -X 'PATCH' \
 curl -X 'PATCH' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/{cartToken}/payments/{paymentId}' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/merge-patch+json' \
   -d '{
     "paymentMethod": "/api/v2/shop/payment-methods/cash_on_delivery"
@@ -306,7 +283,7 @@ Finally, complete the order by sending the following request:
 curl -X 'PATCH' \
   'https://v2.demo.sylius.com/api/v2/shop/orders/rl1KwtiSLA/complete' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer token' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/merge-patch+json' \
   -d '{
     "notes": "your note"

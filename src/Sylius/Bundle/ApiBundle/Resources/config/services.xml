@@ -42,9 +42,6 @@
             <tag name="kernel.event_listener" event="Symfony\Component\Security\Http\Event\LoginSuccessEvent" method="onLoginSuccess" />
         </service>
 
-        <service id="sylius_api.listener.authentication_success" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
-            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
-        </service>
 
         <service id="sylius_api.converter.iri_to_identifier" class="Sylius\Bundle\ApiBundle\Converter\IriToIdentifierConverter">
             <argument type="service" id="api_platform.router" />
@@ -75,9 +72,6 @@
         </service>
         <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" alias="sylius_api.assigner.order_promotion_code" />
 
-        <service id="sylius_api.listener.admin_authentication_success" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
-            <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
-        </service>
 
         <service
             id="sylius_api.api_platform.routing.iri_converter"

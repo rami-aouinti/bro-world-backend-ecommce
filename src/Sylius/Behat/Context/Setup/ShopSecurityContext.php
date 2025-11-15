@@ -15,7 +15,6 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Step\Given;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
@@ -31,7 +30,6 @@ final readonly class ShopSecurityContext implements Context
         private SecurityServiceInterface $securityService,
         private ExampleFactoryInterface $userFactory,
         private UserRepositoryInterface $userRepository,
-        private JWTTokenManagerInterface $jwtTokenManager,
     ) {
     }
 
@@ -95,6 +93,6 @@ final readonly class ShopSecurityContext implements Context
     /** Set the token in the shared storage to have access both in UI and API to resources created in the setup context */
     private function storeUserToken(UserInterface $user): void
     {
-        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
+        $this->sharedStorage->set('token', 'Basic ' . base64_encode(sprintf('%s:%s', $user->getUserIdentifier(), 'sylius')));
     }
 }

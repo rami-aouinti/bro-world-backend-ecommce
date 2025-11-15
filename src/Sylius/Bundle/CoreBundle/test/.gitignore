@@ -40,7 +40,3 @@
 /.phpunit.result.cache
 ###< phpunit/phpunit ###
 
-###> lexik/jwt-authentication-bundle ###
-/Application/config/jwt/private.pem
-/Application/config/jwt/public.pem
-###< lexik/jwt-authentication-bundle ###

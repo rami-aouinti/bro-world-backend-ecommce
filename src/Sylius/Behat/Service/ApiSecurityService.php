@@ -13,23 +13,22 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Service;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\Token\JWTPostAuthenticationToken;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 final class ApiSecurityService implements SecurityServiceInterface
 {
     public function __construct(
         private SharedStorageInterface $sharedStorage,
-        private JWTTokenManagerInterface $jwtTokenManager,
         private string $firewallName,
+        private string $defaultPassword = 'sylius',
     ) {
     }
 
     public function logIn(UserInterface $user): void
     {
-        $this->sharedStorage->set('token', $this->jwtTokenManager->create($user));
+        $this->sharedStorage->set('token', $this->createAuthorizationHeader($user));
         $this->sharedStorage->set('user', $user);
     }
 
@@ -46,11 +45,16 @@ final class ApiSecurityService implements SecurityServiceInterface
         /** @var string $token */
         $token = $this->sharedStorage->get('token');
 
-        return new JWTPostAuthenticationToken($user, $this->firewallName, $user->getRoles(), $token);
+        return new UsernamePasswordToken($user, $token, $this->firewallName, $user->getRoles());
     }
 
     public function restoreToken(TokenInterface $token): void
     {
         $this->sharedStorage->set('token', (string) $token);
+    }
+
+    private function createAuthorizationHeader(UserInterface $user): string
+    {
+        return 'Basic ' . base64_encode(sprintf('%s:%s', $user->getUserIdentifier(), $this->defaultPassword));
     }
 }

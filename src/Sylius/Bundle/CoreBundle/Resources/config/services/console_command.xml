@@ -77,10 +77,6 @@
             <tag name="console.command" />
         </service>
 
-        <service id="sylius.console.command.jwt_configuration" class="Sylius\Bundle\CoreBundle\Console\Command\JwtConfigurationCommand">
-            <tag name="console.command" />
-        </service>
-
         <service id="sylius.console.command.show_plus_info" class="Sylius\Bundle\CoreBundle\Console\Command\ShowPlusInfoCommand">
             <tag name="console.command" />
         </service>

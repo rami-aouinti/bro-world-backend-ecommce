@@ -15,7 +15,6 @@ namespace Sylius\Bundle\ApiBundle\Application\Tests;
 
 use Fidry\AliceDataFixtures\LoaderInterface;
 use Fidry\AliceDataFixtures\Persistence\PurgeMode;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 trait SetUpTestsTrait
 {
@@ -45,14 +44,11 @@ trait SetUpTestsTrait
         /** @var LoaderInterface $loader */
         $loader = $container->get('fidry_alice_data_fixtures.loader.doctrine');
 
-        /** @var JWTTokenManagerInterface $JWTManager */
-        $JWTManager = $container->get('lexik_jwt_authentication.jwt_manager');
-
         $this->objects = $loader->load($this->fixturesFiles, [], [], PurgeMode::createDeleteMode());
 
         $adminUser = $this->objects['admin'];
 
-        $this->JWTAdminUserToken = $JWTManager->create($adminUser);
+        $this->JWTAdminUserToken = 'Basic ' . base64_encode(sprintf('%s:%s', $adminUser->getEmail(), 'sylius'));
 
         putenv('SYLIUS_API_ENABLED=true');
     }

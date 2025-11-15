@@ -35,7 +35,7 @@ final class DisablingApiTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/admin/channels',
-            ['auth_bearer' => $this->JWTAdminUserToken],
+            ['headers' => ['Authorization' => $this->JWTAdminUserToken]],
         );
 
         self::assertResponseIsSuccessful();
@@ -50,7 +50,7 @@ final class DisablingApiTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/admin/channels',
-            ['auth_bearer' => $this->JWTAdminUserToken],
+            ['headers' => ['Authorization' => $this->JWTAdminUserToken]],
         );
 
         self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);

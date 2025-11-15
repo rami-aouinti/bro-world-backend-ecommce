@@ -40,7 +40,7 @@ final class RequestFactory implements RequestFactoryInterface
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
         if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
+            $builder->withHeader('HTTP_' . $authorizationHeader, $token);
         }
 
         return $builder->build();
@@ -82,7 +82,7 @@ final class RequestFactory implements RequestFactoryInterface
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
         if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
+            $builder->withHeader('HTTP_' . $authorizationHeader, $token);
         }
 
         return $builder->build();
@@ -101,7 +101,7 @@ final class RequestFactory implements RequestFactoryInterface
         $builder->withHeader('CONTENT_TYPE', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
         if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
+            $builder->withHeader('HTTP_' . $authorizationHeader, $token);
         }
 
         return $builder->build();
@@ -119,7 +119,7 @@ final class RequestFactory implements RequestFactoryInterface
         ;
 
         if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
+            $builder->withHeader('HTTP_' . $authorizationHeader, $token);
         }
 
         return $builder->build();
@@ -138,7 +138,7 @@ final class RequestFactory implements RequestFactoryInterface
         $builder->withHeader('HTTP_ACCEPT', self::LINKED_DATA_JSON_CONTENT_TYPE);
 
         if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
+            $builder->withHeader('HTTP_' . $authorizationHeader, $token);
         }
 
         return $builder->build();
@@ -176,7 +176,7 @@ final class RequestFactory implements RequestFactoryInterface
         $builder->withHeader('CONTENT_TYPE', self::UPLOAD_FILE_CONTENT_TYPE);
 
         if ($token) {
-            $builder->withHeader('HTTP_' . $authorizationHeader, 'Bearer ' . $token);
+            $builder->withHeader('HTTP_' . $authorizationHeader, $token);
         }
 
         foreach ($files as $name => $value) {
@@ -193,7 +193,7 @@ final class RequestFactory implements RequestFactoryInterface
         $builder->withHeader('CONTENT_TYPE', $this->contentTypeGuide->guide($method));
 
         if ($token) {
-            $builder->withHeader('HTTP_Authorization', 'Bearer ' . $token);
+            $builder->withHeader('HTTP_Authorization', $token);
         }
 
         foreach ($additionalHeaders as $name => $value) {

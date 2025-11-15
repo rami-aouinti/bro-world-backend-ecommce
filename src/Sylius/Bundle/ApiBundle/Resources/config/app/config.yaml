@@ -40,9 +40,9 @@ api_platform:
     swagger:
         versions: [3]
         api_keys:
-            JWT:
-                name: "%sylius.api.authorization_header%"
-                type: header
+            basicAuth:
+                type: http
+                scheme: basic
     exception_to_status:
         # Default API Platform exception to status code mapping
         ApiPlatform\Exception\FilterValidationException: 400
@@ -82,8 +82,3 @@ api_platform:
             rfc_7807_compliant_errors: true
             standard_put: false
 
-lexik_jwt_authentication:
-    api_platform:
-        check_path: "%sylius.security.api_route%/administrators/token"
-        username_path: email
-        password_path: password

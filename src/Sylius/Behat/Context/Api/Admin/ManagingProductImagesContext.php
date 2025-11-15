@@ -106,7 +106,7 @@ final readonly class ManagingProductImagesContext implements Context
             sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
         );
         $builder->withContent(['type' => $type]);
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());
@@ -127,7 +127,7 @@ final readonly class ManagingProductImagesContext implements Context
             sprintf('/api/v2/admin/products/%s/images/%s', $product->getCode(), $productImage->getId()),
         );
         $builder->withContent(['productVariants' => [$this->iriConverter->getIriFromResourceInSection($productVariant, 'admin')]]);
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());
@@ -251,7 +251,7 @@ final readonly class ManagingProductImagesContext implements Context
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $path, basename($path)));
 
         if (null !== $type) {
@@ -274,7 +274,7 @@ final readonly class ManagingProductImagesContext implements Context
         $builder = RequestBuilder::createDelete(
             sprintf('/api/v2/admin/products/%s/images/%s', $productCode, $productImageId),
         );
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());

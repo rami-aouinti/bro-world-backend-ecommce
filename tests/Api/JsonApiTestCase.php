@@ -141,7 +141,6 @@ abstract class JsonApiTestCase extends BaseJsonApiTestCase
     protected function headerBuilder(): HeadersBuilder
     {
         return new HeadersBuilder(
-            $this->get('lexik_jwt_authentication.jwt_manager'),
             $this->get('sylius.repository.admin_user'),
             $this->get('sylius.repository.shop_user'),
             self::$kernel->getContainer()->getParameter('sylius.api.authorization_header'),

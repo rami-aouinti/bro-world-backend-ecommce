@@ -1,4 +1,4 @@
 {
   "code": 401,
-  "message": "JWT Token not found"
+  "message": "Invalid credentials."
 }

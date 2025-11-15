@@ -48,28 +48,16 @@ security:
             provider: sylius_api_admin_user_provider
             user_checker: security.user_checker.chain.api_admin
             stateless: true
-            entry_point: jwt
-            json_login:
-                check_path: "%sylius.security.api_admin_route%/administrators/token"
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            jwt: true
+            http_basic:
+                realm: "Sylius API Admin"
 
         api_shop:
             pattern: "%sylius.security.api_shop_regex%/.*"
             provider: sylius_api_shop_user_provider
             user_checker: security.user_checker.chain.api_shop
             stateless: true
-            entry_point: jwt
-            json_login:
-                check_path: "%sylius.security.api_shop_route%/customers/token"
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-            jwt: true
+            http_basic:
+                realm: "Sylius API Shop"
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
@@ -124,7 +112,5 @@ security:
 
         - { path: "%sylius.security.api_admin_route%/administrators/reset-password", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.api_admin_regex%/.*", role: ROLE_API_ACCESS }
-        - { path: "%sylius.security.api_admin_route%/administrators/token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.api_shop_account_regex%/.*", role: ROLE_USER }
-        - { path: "%sylius.security.api_shop_route%/customers/token", role: PUBLIC_ACCESS }
         - { path: "%sylius.security.api_shop_regex%/.*", role: PUBLIC_ACCESS }
