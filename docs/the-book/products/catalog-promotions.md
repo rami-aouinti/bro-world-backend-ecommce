@@ -149,7 +149,7 @@ First, authorize yourself as an admin (guests cannot create promotions), then ca
 curl -X 'POST' \
   'https://hostname/api/v2/admin/catalog-promotions' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer authorizationToken' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/ld+json' \
   -d '{
     "code": "t_shirt_promotion",
@@ -185,7 +185,7 @@ Extend the previous `POST` request to include scope, action, and translation con
 curl -X 'POST' \
   'https://hostname/api/v2/admin/catalog-promotions' \
   -H 'accept: application/ld+json' \
-  -H 'Authorization: Bearer authorizationToken' \
+  -H 'Authorization: Basic BASE64_CREDENTIALS' \
   -H 'Content-Type: application/ld+json' \
   -d '{
     "code": "t_shirt_promotion",

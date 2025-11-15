@@ -35,7 +35,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/foos',
-            ['auth_bearer' => $this->JWTAdminUserToken],
+            ['headers' => ['Authorization' => $this->JWTAdminUserToken]],
         );
 
         $this->assertResponseIsSuccessful();
@@ -116,7 +116,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             'api/v2/admin/foos/' . $foo->getId(),
-            ['auth_bearer' => $this->JWTAdminUserToken],
+            ['headers' => ['Authorization' => $this->JWTAdminUserToken]],
         );
 
         $this->assertResponseIsSuccessful();
@@ -140,7 +140,7 @@ final class FooTest extends ApiTestCase
         static::createClient()->request('GET', 'api/v2/admin/foos/' . $foo->getId());
 
         $this->assertResponseStatusCodeSame(401);
-        $this->assertJsonContains(['message' => 'JWT Token not found']);
+        $this->assertJsonContains(['message' => 'Invalid credentials.']);
     }
 
     #[Test]

@@ -46,7 +46,7 @@ final class ResettingPasswordContext implements Context
      */
     public function iWantToResetPassword(): void
     {
-        $this->request = $this->requestFactory->create('admin', 'administrators/reset-password', 'Bearer');
+        $this->request = $this->requestFactory->create('admin', 'administrators/reset-password', 'Authorization');
     }
 
     /**

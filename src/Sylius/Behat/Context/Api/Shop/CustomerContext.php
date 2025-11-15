@@ -566,7 +566,7 @@ final class CustomerContext implements Context
 
     private function resendVerificationEmail(string $email): void
     {
-        $request = $this->requestFactory->create('shop', 'customers/verify', 'Bearer');
+        $request = $this->requestFactory->create('shop', 'customers/verify', 'Authorization');
 
         $request->setContent(['email' => $email]);
 

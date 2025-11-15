@@ -163,7 +163,7 @@ final class ManagingAdministratorsContext implements Context
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $avatar, basename($avatar)));
 
         $response = $this->client->request($builder->build());

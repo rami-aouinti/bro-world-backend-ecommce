@@ -115,7 +115,7 @@ final class Request implements RequestInterface
     public function authorize(?string $token, string $authorizationHeader): self
     {
         if ($token !== null) {
-            $this->headers['HTTP_' . $authorizationHeader] = 'Bearer ' . $token;
+            $this->headers['HTTP_' . $authorizationHeader] = $token;
         }
 
         return $this;

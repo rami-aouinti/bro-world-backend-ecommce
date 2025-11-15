@@ -159,7 +159,7 @@
             const authorizeSubmitButton = document.querySelector("#swagger-ui > section > div.swagger-ui > div:nth-child(2) > div.scheme-container > section > div > div > div.modal-ux > div > div > div.modal-ux-content > div > form > div.auth-btn-wrapper > button.btn.modal-btn.auth.authorize.button");
 
             const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-            nativeInputValueSetter.call(authFormField, `Bearer ${tokenElement.token}`);
+            nativeInputValueSetter.call(authFormField, `Basic ${tokenElement.token}`);
 
             authFormField.dispatchEvent(new Event('input', { bubbles: true }));
 
@@ -180,6 +180,10 @@
         window.addEventListener('load', event => {
             credentialSelectors.forEach(selector => {
                 let tokenRequestContainer = document.querySelector(selector);
+                if (!tokenRequestContainer) {
+                    return;
+                }
+
                 new ClassWatcher(tokenRequestContainer, 'is-open', () => credentialsRequestReady(tokenRequestContainer, selector), function(){});
             });
         });

@@ -372,7 +372,7 @@ final readonly class ManagingProductsContext implements Context
             Request::METHOD_PUT,
         );
         $builder->withContent(['position' => $position]);
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());

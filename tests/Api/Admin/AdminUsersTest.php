@@ -25,23 +25,16 @@ final class AdminUsersTest extends JsonApiTestCase
     use AdminUserLoginTrait;
 
     #[Test]
-    public function it_allows_admin_users_to_log_in(): void
+    public function it_denies_access_for_invalid_basic_credentials(): void
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yaml');
 
-        $this->client->request(
-            method: 'POST',
-            uri: '/api/v2/admin/administrators/token',
-            server: self::CONTENT_TYPE_HEADER,
-            content: json_encode([
-                'email' => 'api@example.com',
-                'password' => 'sylius',
-            ], \JSON_THROW_ON_ERROR),
-        );
+        $headers = $this->headerBuilder()->withJsonLdAccept()->build();
+        $headers['HTTP_AUTHORIZATION'] = 'Basic ' . base64_encode('api@example.com:wrong');
 
-        $response = $this->client->getResponse();
+        $this->requestGet(uri: '/api/v2/admin/administrators', headers: $headers);
 
-        $this->assertResponse($response, 'admin/admin_user/log_in_admin_response', Response::HTTP_OK);
+        $this->assertResponseCode($this->client->getResponse(), Response::HTTP_UNAUTHORIZED);
     }
 
     #[Test]

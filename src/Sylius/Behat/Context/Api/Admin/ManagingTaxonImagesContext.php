@@ -44,7 +44,7 @@ final readonly class ManagingTaxonImagesContext implements Context
         );
         $builder->withHeader('CONTENT_TYPE', 'multipart/form-data');
         $builder->withHeader('HTTP_ACCEPT', 'application/ld+json');
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withFile('file', new UploadedFile($this->minkParameters['files_path'] . $path, basename($path)));
 
         if (null !== $type) {
@@ -107,7 +107,7 @@ final readonly class ManagingTaxonImagesContext implements Context
             sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
         );
         $builder->withContent(['type' => $type]);
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());
@@ -175,7 +175,7 @@ final readonly class ManagingTaxonImagesContext implements Context
         $builder = RequestBuilder::createDelete(
             sprintf('/api/v2/admin/taxons/%s/images/%s', $taxon->getCode(), $taxonImage->getId()),
         );
-        $builder->withHeader('HTTP_Authorization', 'Bearer ' . $this->sharedStorage->get('token'));
+        $builder->withHeader('HTTP_Authorization', $this->sharedStorage->get('token'));
         $builder->withHeader('CONTENT_TYPE', 'application/ld+json');
 
         $this->client->request($builder->build());
