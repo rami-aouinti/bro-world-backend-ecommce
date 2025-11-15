@@ -14,6 +14,12 @@ sylius_admin_login_check:
     defaults:
         _controller: sylius.controller.security::checkAction
 
+sylius_admin_json_login_check:
+    path: /json-login-check
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.security::jsonLoginCheck
+
 sylius_admin_logout:
     path: /logout
     methods: [GET]

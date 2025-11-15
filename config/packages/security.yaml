@@ -33,6 +33,12 @@ security:
                 enable_csrf: true
                 csrf_parameter: _csrf_admin_security_token
                 csrf_token_id: admin_authenticate
+            json_login:
+                check_path: sylius_admin_json_login_check
+                username_path: _username
+                password_path: _password
+                success_handler: sylius.authentication.success_handler
+                failure_handler: sylius.authentication.failure_handler
             remember_me:
                 secret: "%env(APP_SECRET)%"
                 path: "/%sylius_admin.path_name%"
