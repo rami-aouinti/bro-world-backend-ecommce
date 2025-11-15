@@ -62,4 +62,5 @@ return [
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     Sylius\TwigExtra\Symfony\SyliusTwigExtraBundle::class => ['all' => true],
     HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
+    Bro\WorldCoreBundle\BroWorldCoreBundle::class => ['all' => true],
 ];
