@@ -273,6 +273,7 @@
             "Sylius\\Component\\": "src/Sylius/Component/"
         },
         "files": [
+            "src/BroWorldCoreBundle/Domain/Doctrine/DBAL/Types/UTCDateTimeType.php",
             "src/Doctrine/DBAL/Types/utc_datetime_type_alias.php"
         ],
         "exclude-from-classmap": [
