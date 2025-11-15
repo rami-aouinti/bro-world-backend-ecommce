@@ -43,7 +43,6 @@
         </service>
 
         <service id="sylius_api.listener.authentication_success" class="Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener">
-            <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 
@@ -77,7 +76,6 @@
         <service id="Sylius\Bundle\ApiBundle\Assigner\OrderPromotionCodeAssignerInterface" alias="sylius_api.assigner.order_promotion_code" />
 
         <service id="sylius_api.listener.admin_authentication_success" class="Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener">
-            <argument type="service" id="api_platform.symfony.iri_converter" />
             <tag name="kernel.event_listener" event="lexik_jwt_authentication.on_authentication_success" method="onAuthenticationSuccessResponse" />
         </service>
 

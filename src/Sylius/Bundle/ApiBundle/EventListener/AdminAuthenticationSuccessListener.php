@@ -13,27 +13,34 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Metadata\IriConverterInterface;
+use Bro\WorldCoreBundle\Infrastructure\ValueObject\SymfonyUser;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
-use Sylius\Component\Core\Model\AdminUserInterface;
 
-final readonly class AdminAuthenticationSuccessListener
+final class AdminAuthenticationSuccessListener
 {
-    public function __construct(private IriConverterInterface $iriConverter)
-    {
-    }
-
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event): void
     {
-        $data = $event->getData();
-        $adminUser = $event->getUser();
+        $user = $event->getUser();
 
-        if (!$adminUser instanceof AdminUserInterface) {
+        if (!$user instanceof SymfonyUser) {
             return;
         }
 
-        $data['adminUser'] = $this->iriConverter->getIriFromResource($adminUser);
+        $event->setData($this->appendUserData($event->getData(), $user));
+    }
 
-        $event->setData($data);
+    /**
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
+     */
+    private function appendUserData(array $data, SymfonyUser $user): array
+    {
+        $data['user'] = [
+            'identifier' => $user->getUserIdentifier(),
+            'roles' => $user->getRoles(),
+        ];
+
+        return $data;
     }
 }
