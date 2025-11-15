@@ -7,6 +7,7 @@ sylius_shop_homepage:
     controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
     defaults:
         template: "@SyliusShop/homepage/index.html.twig"
+        context: {  }
 
 sylius_shop_live_component:
     path: '/_components/{_live_component}/{_live_action}'
