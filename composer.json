@@ -59,6 +59,7 @@
         "laminas/laminas-stdlib": "^3.19",
         "mark-gerarts/automapper-plus-bundle": "1.5.0 as 2.4.0",
         "league/flysystem-bundle": "^3.3",
+        "lexik/jwt-authentication-bundle": "^3.0",
         "liip/imagine-bundle": "^2.13",
         "pagerfanta/pagerfanta": "^4.0",
         "paragonie/halite": "^5.0",
