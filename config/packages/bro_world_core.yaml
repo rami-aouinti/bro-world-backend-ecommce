@@ -1,0 +1,7 @@
+bro_world_core:
+    security:
+        secured_path_regex: '^/api/(?!.*(security)|(test)|(doc)).*$'
+    messenger:
+        failed_retry:
+            is_retryable: false
+            waiting_time: 0
