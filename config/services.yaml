@@ -1,1 +1,2 @@
-
+services:
+    AutoMapperPlus\\AutoMapperInterface: '@mark_gerarts_auto_mapper_plus.auto_mapper'
