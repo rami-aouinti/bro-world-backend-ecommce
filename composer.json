@@ -35,7 +35,7 @@
         "api-platform/symfony": "^4.1.7",
         "babdev/pagerfanta-bundle": "^4.4",
         "behat/transliterator": "^1.5",
-        "bro-world/core-bundle": "^0.1.7",
+        "bro-world/core-bundle": "^0.2.3",
         "doctrine/collections": "^2.2",
         "doctrine/common": "^3.2",
         "doctrine/dbal": "^4.3",
