@@ -13,49 +13,51 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Metadata\IriConverterInterface;
+use Bro\WorldCoreBundle\Infrastructure\ValueObject\SymfonyUser;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\EventListener\AdminAuthenticationSuccessListener;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AdminAuthenticationSuccessListenerTest extends TestCase
 {
-    private IriConverterInterface&MockObject $iriConverter;
-
-    private AdminUserInterface&MockObject $adminUser;
-
     private AdminAuthenticationSuccessListener $adminAuthenticationSuccessListener;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->iriConverter = $this->createMock(IriConverterInterface::class);
-        $this->adminAuthenticationSuccessListener = new AdminAuthenticationSuccessListener($this->iriConverter);
-        $this->adminUser = $this->createMock(AdminUserInterface::class);
+        $this->adminAuthenticationSuccessListener = new AdminAuthenticationSuccessListener();
     }
 
-    public function testAddsAdminsToAdminAuthenticationTokenResponse(): void
+    public function testAddsSymfonyUserDataToAdminAuthenticationTokenResponse(): void
     {
-        $event = new AuthenticationSuccessEvent([], $this->adminUser, new Response());
+        /** @var SymfonyUser&MockObject $symfonyUser */
+        $symfonyUser = $this->createMock(SymfonyUser::class);
+        $event = new AuthenticationSuccessEvent([], $symfonyUser, new Response());
 
-        $this->iriConverter->expects(self::once())->method('getIriFromResource')->with($this->adminUser);
+        $symfonyUser->expects(self::once())->method('getUserIdentifier')->willReturn('admin-identifier');
+        $symfonyUser->expects(self::once())->method('getRoles')->willReturn(['ROLE_ADMIN']);
 
         $this->adminAuthenticationSuccessListener->onAuthenticationSuccessResponse($event);
+
+        self::assertSame([
+            'user' => [
+                'identifier' => 'admin-identifier',
+                'roles' => ['ROLE_ADMIN'],
+            ],
+        ], $event->getData());
     }
 
-    public function testDoesNotAddAnythingToShopAuthenticationTokenResponse(): void
+    public function testDoesNotAddAnythingWhenUserIsNotSymfonyUser(): void
     {
-        /** @var ShopUserInterface&MockObject $shopUser */
-        $shopUser = $this->createMock(ShopUserInterface::class);
-
-        $event = new AuthenticationSuccessEvent([], $shopUser, new Response());
-
-        $this->iriConverter->expects(self::never())->method('getIriFromResource')->with($this->adminUser);
+        /** @var UserInterface&MockObject $user */
+        $user = $this->createMock(UserInterface::class);
+        $event = new AuthenticationSuccessEvent([], $user, new Response());
 
         $this->adminAuthenticationSuccessListener->onAuthenticationSuccessResponse($event);
+
+        self::assertSame([], $event->getData());
     }
 }

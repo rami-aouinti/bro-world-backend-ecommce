@@ -13,56 +13,51 @@ declare(strict_types=1);
 
 namespace Tests\Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Metadata\IriConverterInterface;
+use Bro\WorldCoreBundle\Infrastructure\ValueObject\SymfonyUser;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Bundle\ApiBundle\EventListener\AuthenticationSuccessListener;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 final class AuthenticationSuccessListenerTest extends TestCase
 {
-    private IriConverterInterface&MockObject $iriConverter;
-
     private AuthenticationSuccessListener $authenticationSuccessListener;
 
     protected function setUp(): void
     {
         parent::setUp();
-        $this->iriConverter = $this->createMock(IriConverterInterface::class);
-        $this->authenticationSuccessListener = new AuthenticationSuccessListener($this->iriConverter);
+        $this->authenticationSuccessListener = new AuthenticationSuccessListener();
     }
 
-    public function testAddsCustomersToShopAuthenticationTokenResponse(): void
+    public function testAddsSymfonyUserDataToAuthenticationTokenResponse(): void
     {
-        /** @var ShopUserInterface|MockObject $shopUserMock */
-        $shopUserMock = $this->createMock(ShopUserInterface::class);
-        /** @var CustomerInterface|MockObject $customerMock */
-        $customerMock = $this->createMock(CustomerInterface::class);
+        /** @var SymfonyUser&MockObject $symfonyUser */
+        $symfonyUser = $this->createMock(SymfonyUser::class);
+        $event = new AuthenticationSuccessEvent([], $symfonyUser, new Response());
 
-        $event = new AuthenticationSuccessEvent([], $shopUserMock, new Response());
-
-        $shopUserMock->expects(self::once())->method('getCustomer')->willReturn($customerMock);
-
-        $this->iriConverter->expects(self::once())->method('getIriFromResource')->with($customerMock);
+        $symfonyUser->expects(self::once())->method('getUserIdentifier')->willReturn('user-identifier');
+        $symfonyUser->expects(self::once())->method('getRoles')->willReturn(['ROLE_USER']);
 
         $this->authenticationSuccessListener->onAuthenticationSuccessResponse($event);
+
+        self::assertSame([
+            'user' => [
+                'identifier' => 'user-identifier',
+                'roles' => ['ROLE_USER'],
+            ],
+        ], $event->getData());
     }
 
-    public function testDoesNotAddAnythingToAdminAuthenticationTokenResponse(): void
+    public function testDoesNotAddAnythingWhenUserIsNotSymfonyUser(): void
     {
-        /** @var AdminUserInterface|MockObject $adminUserMock */
-        $adminUserMock = $this->createMock(AdminUserInterface::class);
-        /** @var CustomerInterface|MockObject $customerMock */
-        $customerMock = $this->createMock(CustomerInterface::class);
-
-        $event = new AuthenticationSuccessEvent([], $adminUserMock, new Response());
-
-        $this->iriConverter->expects(self::never())->method('getIriFromResource')->with($customerMock);
+        /** @var UserInterface&MockObject $user */
+        $user = $this->createMock(UserInterface::class);
+        $event = new AuthenticationSuccessEvent([], $user, new Response());
 
         $this->authenticationSuccessListener->onAuthenticationSuccessResponse($event);
+
+        self::assertSame([], $event->getData());
     }
 }

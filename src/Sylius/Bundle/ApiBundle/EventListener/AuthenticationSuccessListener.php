@@ -13,31 +13,34 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\ApiBundle\EventListener;
 
-use ApiPlatform\Metadata\IriConverterInterface;
+use Bro\WorldCoreBundle\Infrastructure\ValueObject\SymfonyUser;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 
-final readonly class AuthenticationSuccessListener
+final class AuthenticationSuccessListener
 {
-    public function __construct(private IriConverterInterface $iriConverter)
-    {
-    }
-
     public function onAuthenticationSuccessResponse(AuthenticationSuccessEvent $event): void
     {
-        $data = $event->getData();
         $user = $event->getUser();
 
-        if (!$user instanceof ShopUserInterface) {
+        if (!$user instanceof SymfonyUser) {
             return;
         }
 
-        /** @var CustomerInterface $customer */
-        $customer = $user->getCustomer();
+        $event->setData($this->appendUserData($event->getData(), $user));
+    }
 
-        $data['customer'] = $this->iriConverter->getIriFromResource($customer);
+    /**
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
+     */
+    private function appendUserData(array $data, SymfonyUser $user): array
+    {
+        $data['user'] = [
+            'identifier' => $user->getUserIdentifier(),
+            'roles' => $user->getRoles(),
+        ];
 
-        $event->setData($data);
+        return $data;
     }
 }
