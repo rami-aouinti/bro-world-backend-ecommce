@@ -41,8 +41,8 @@ api_platform:
         versions: [3]
         api_keys:
             basicAuth:
-                type: http
-                scheme: basic
+                name: '%sylius.api.authorization_header%'
+                type: header
     exception_to_status:
         # Default API Platform exception to status code mapping
         ApiPlatform\Exception\FilterValidationException: 400
