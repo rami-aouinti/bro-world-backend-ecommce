@@ -18,7 +18,7 @@ class UTCDateTimeType extends DateTimeType
 {
     private static ?DateTimeZone $utcTimezone = null;
 
-    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): mixed
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         if ($value instanceof DateTimeInterface) {
             if (!$value instanceof DateTimeImmutable) {
