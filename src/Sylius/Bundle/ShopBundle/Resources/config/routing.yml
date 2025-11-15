@@ -8,6 +8,7 @@ sylius_shop_homepage:
     defaults:
         template: "@SyliusShop/homepage/index.html.twig"
         context: {  }
+        statusCode: 200
 
 sylius_shop_live_component:
     path: '/_components/{_live_component}/{_live_action}'
