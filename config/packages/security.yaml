@@ -1,4 +1,7 @@
 security:
+    role_hierarchy:
+        ROLE_ROOT: ['ROLE_ADMINISTRATION_ACCESS', 'ROLE_API_ACCESS']
+        ROLE_ADMIN: ['ROLE_ADMINISTRATION_ACCESS', 'ROLE_API_ACCESS']
     providers:
         sylius_admin_user_provider:
             id: sylius.admin_user_provider.email_or_name_based
